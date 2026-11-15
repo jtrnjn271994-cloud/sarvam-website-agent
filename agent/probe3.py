@@ -166,6 +166,8 @@ def main():
     ap.add_argument("--goal", required=True, help="goal id from rules/goals.json")
     ap.add_argument("--no-png", action="store_true")
     args = ap.parse_args()
+    if os.environ.get("AGENT_HOSTED"):
+        args.no_png = True   # the website never loads sarvam.ai: no screenshots there
     D = load(args.page, args.persona, args.goal)
     th = jk.thresholds()
     Q, audit_q, g2_q = jk.questions()
@@ -176,7 +178,8 @@ def main():
            "roles": llm.roles(), "knowledge_version": __import__("knowledge").version(), "live_capture": os.path.relpath(D["live_path"], PROJECT), "skills": {},
            "page": args.page, "persona": {"key": D["persona_key"], "buyer": D["buyer"], "label": D["persona"]["label"]},
            "goal": {"id": D["goal"]["id"], "label": D["goal"]["label"], "kind": D["goal"]["kind"]},
-           "destinations": D["dests"], "baseline_destination": D["cta_dest"], "main_cta_index": D["main_index"]}
+           "destinations": D["dests"], "baseline_destination": D["cta_dest"], "main_cta_index": D["main_index"],
+           "screenshots": "not taken (website run)" if os.environ.get("AGENT_HOSTED") else ("not taken (--no-png)" if args.no_png else "taken")}
     h1, sub, cta = D["hero"]["h1"], D["hero"]["sub"], D["cta"]
     base_dest_txt = D["cta_dest"]["what_it_is"] if D["cta_dest"] else "unknown"
     print("LIVE BASELINE\n  H1 : %s\n  SUB: %s\n  BTN: %s -> %s" % (h1, sub, cta, base_dest_txt))
@@ -300,9 +303,11 @@ Reply with JSON only:
     out["variants"], out["gate1_rounds"] = variants, rounds
     passed1 = [v for v in variants if not rounds[-1].get(v["name"])]
 
-    # 8 Gate 2: both judges, calibrated lines
+    # 8 Gate 2: both judges, calibrated lines. Variants are scored in parallel; the baseline is audited once per judge.
     res = {}
-    for v in passed1:
+    a_base2 = audit(D, "judge2", h1, sub, cta, base_dest_txt, aq, "audit live baseline judge2") if passed1 else {}
+
+    def score(v):
         dtxt = D["dests"][v["cta_destination"]]["what_it_is"]
         r = {}
         for role in ("judge1", "judge2"):
@@ -316,7 +321,7 @@ Reply with JSON only:
                            {"G3-banned": g2_q["G3-banned"]["text"]}, "gate2 banned " + v["name"])
             pb = b["answers"]["G3-banned"]["p"]
             av = audit(D, role, v["h1"], v["subline"], v["cta"], dtxt, aq, "audit variant %s" % v["name"])
-            ab = a_base if role == "judge1" else audit(D, role, h1, sub, cta, base_dest_txt, aq, "audit live baseline judge2")
+            ab = a_base if role == "judge1" else a_base2
             sign = lambda k: -1 if jk.is_bad(k) else 1
             delta = {k: round(sign(k) * (av[k] - ab[k]), 2) for k in aq}
             targeted = gaps + ([lead_item] if lead_item else []) + (["A8-objection"] if obj_gap else [])
@@ -330,7 +335,13 @@ Reply with JSON only:
                        "variant_verdicts": {k: jk.verdict(th, role, k, p) for k, p in av.items()}}
         r["pass"] = not r["judge1"]["hard_fail"] and not r["judge2"]["hard_fail"] and r["judge1"]["better"] and r["judge2"]["better"]
         r["disagree"] = r["judge1"]["better"] != r["judge2"]["better"] or r["judge1"]["hard_fail"] != r["judge2"]["hard_fail"]
-        res[v["name"]] = r
+        return v["name"], r
+
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=max(1, len(passed1))) as ex:
+        for name, r in ex.map(score, passed1):
+            res[name] = r
+    res = {v["name"]: res[v["name"]] for v in passed1}   # keep the variant order
     out["gate2"] = res
 
     print("\nVARIANTS")

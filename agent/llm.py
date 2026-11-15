@@ -11,6 +11,7 @@ MODEL_WRITER, MODEL_JUDGE1 and MODEL_JUDGE2 override them.
 """
 import json
 import os
+import threading
 import time
 
 import envload  # noqa: F401  (loads .env before the settings below are read)
@@ -49,17 +50,19 @@ class LLMError(Exception):
 LOG_PATH = None  # set by the caller: llm.LOG_PATH = ".../run-log.jsonl"
 MAX_RUN_USD = float(os.environ.get("MAX_RUN_USD", "1.00"))  # spend cap per process
 SPENT = {"usd": 0.0, "calls": 0}
+_LOCK = threading.Lock()   # Gate 2 scores variants in parallel threads
 
 
 def _charge(cost):
-    SPENT["usd"] += float(cost or 0)
-    SPENT["calls"] += 1
+    with _LOCK:
+        SPENT["usd"] += float(cost or 0)
+        SPENT["calls"] += 1
 
 
 def _log(rec):
     if LOG_PATH:
         os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
-        with open(LOG_PATH, "a", encoding="utf-8") as f:
+        with _LOCK, open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
 

@@ -10,10 +10,10 @@ A model drafts. Code checks. A person approves. Every fact comes from a quote on
 
 | | What you get | What you need |
 |---|---|---|
-| **A. The website** | Every finished run, audit, variant, judge score, finding and the architecture. Read only. | A browser. Open **https://sarvam-website-agent.vercel.app** |
-| **B. This repo, in a terminal** | The full agent. You can start runs, approve variants and run the sandbox on your own machine. | Python 3.9+, and an OpenRouter key for runs that call models |
+| **A. The website** | Every saved run, plus the agent itself: pick a page, industry, buyer and goal, start a run, approve a variant and run the sandbox. | A browser. Open **https://sarvam-website-agent.vercel.app** |
+| **B. This repo, in a terminal** | The full agent with screenshots and the 20-session browser sandbox. | Python 3.9+, and an OpenRouter key for runs that call models |
 
-The website cannot start a run. A run needs a browser engine and a long-running process, and the website is a static copy. Option B is how you run the agent.
+**What the website does differently.** It runs the same code with no browser on the server. So a website run takes no screenshots and never loads sarvam.ai. Its sandbox reads the saved page's HTML once per arm instead of 20 browser sessions, and the findings say so. Runs, approvals and job logs are saved in Supabase. One run goes at a time. The site caps spend at $3 a day and 3 runs a day per visitor. Page setup (positioning and claims) needs the owner code. Runs saved from the owner's machine are read-only on the website.
 
 ## Get the code from GitHub
 
@@ -27,16 +27,25 @@ The repo is **https://github.com/jtrnjn271994-cloud/sarvam-website-agent**. It i
 
 **For the person given access:** accept the invite, then either run `git clone` (below) or click **Code > Download ZIP** on the repo page.
 
-## Add the OpenRouter key to Vercel (owner only)
+## Give the website its keys (owner only)
 
-The website does not need a key today, because it only shows finished runs. The key is needed when the website gets a Run button. Never put the key in a file in the repo.
+The keys live in your local `.env` (never committed) and in the Vercel project settings. They are never in a deployed file. The deploy script stops if it finds a key-like string in the files it is about to deploy.
 
-1. At **openrouter.ai**, open **Keys > Create key**. Name it `sarvam-website-agent` and set a **credit limit** (for example $10). This caps what anyone can spend.
-2. Copy the key once.
-3. At **vercel.com**, open the project **sarvam-website-agent**.
-4. Click **Settings > Environment Variables**.
-5. Key: `OPENROUTER_API_KEY`. Value: paste the key. Environments: tick **Production** and **Preview**. Tick **Sensitive**.
-6. Click **Save**. Then open **Deployments**, click the three dots on the latest one and choose **Redeploy**, so the new value is used.
+`.env` holds these names (see `.env.example`): `OPENROUTER_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `OWNER_TOKEN`, and optional limits.
+
+**The quick way (terminal):**
+```
+./scripts/deploy_live.sh        # builds the site and deploys a preview link (links the Vercel project the first time)
+./scripts/push_env.sh           # copies each key from .env to Vercel (Production and Preview, marked sensitive); prints no values
+./scripts/deploy_live.sh        # deploy again so the keys are used; test the preview link
+./scripts/deploy_live.sh --prod # then publish to sarvam-website-agent.vercel.app
+```
+
+**The dashboard way:** at vercel.com, open the project **sarvam-website-agent** > **Settings > Environment Variables**. Add each name and value, tick **Production** and **Preview** and **Sensitive**, and save. Then redeploy.
+
+**Before you publish:** at openrouter.ai, set a **credit limit** on the key (for example $10). The site's own caps are a second line of defence.
+
+**Database:** Supabase project Red Zebra holds two tables, `sarvam_agent_files` (runs, approvals, setup files) and `sarvam_agent_jobs` (job log, the one-job lock, spend). Row level security is on with no policies, so only the server key can read or write them.
 
 ## Run it from the terminal
 
@@ -143,10 +152,6 @@ Read `docs/architecture.html` for the whole flow, the three layers, deployment, 
 - One job at a time, on one machine. There is no login.
 - Saved pages are dated. Capture again before a new run if a page changed.
 
-## Publish the read-only site yourself
+## Publish the site yourself
 
-```
-./scripts/deploy_static.sh
-```
-
-This writes a static copy to `dist/` (finished runs only, approver names replaced with "a person") and deploys it with the Vercel CLI. The site holds no key and no run button.
+Use `./scripts/deploy_live.sh` (see "Give the website its keys"). The older `./scripts/deploy_static.sh` still publishes a read-only copy with no run button.

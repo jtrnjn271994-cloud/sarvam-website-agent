@@ -94,7 +94,9 @@ def load(page, run):
     png = os.path.join(rd, "pair-%s.png" % ap["variant"])
     if not v or shortlist.variant_hash(v) != ap["variant_hash"]:
         sys.exit("REFUSED: the variant changed after approval (hash mismatch).")
-    if not os.path.isfile(png) or shortlist.file_hash(png) != ap["png_hash"]:
+    if ap.get("png_hash") is None and probe.get("screenshots") == "not taken (website run)":
+        pass   # a website run has no PNG pair; the variant hash above is the check
+    elif not os.path.isfile(png) or shortlist.file_hash(png) != ap["png_hash"]:
         sys.exit("REFUSED: the PNG pair changed after approval (hash mismatch).")
     groups = {x["name"]: x for x in shortlist.classify(probe)}
     if groups[v["name"]]["group"] == "failed_gate1":
@@ -191,6 +193,58 @@ GOAL_WATCH = {
 }
 SCENARIO_NAME = {"enough": "Test 1: the lift we expect, enough visitors", "too_few": "Test 2: the same lift, too few visitors",
                  "clear": "Test 1: big lift, many visitors", "inconclusive": "Test 2: small lift, few visitors", "A/A check": "Test 3: no difference (control)"}
+HOSTED = bool(os.environ.get("AGENT_HOSTED"))   # set on the website: no browser on the server
+
+
+def static_sessions(path, arms, events_path, main_index):
+    """Website mode (no browser on the server): one structural check per arm on the saved page's HTML.
+    It confirms the hero markers exist and reads the hero text and the button link. For the variant arm it applies
+    the same four values the browser swap sets. It runs no scripts and clicks nothing. The findings say so."""
+    from html.parser import HTMLParser
+    src = open(path, encoding="utf-8").read()
+    voids = ("area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr")
+
+    class P(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.stack, self.text, self.href = [], {"h1": [], "sub": [], "cta": []}, None
+
+        def handle_starttag(self, tag, attrs):
+            if tag in voids:
+                return
+            a = dict(attrs)
+            key = {"h1": "h1", "sub": "sub", "cta-%d" % main_index: "cta"}.get(a.get("data-hero"))
+            if key == "cta":
+                self.href = a.get("href")
+            self.stack.append(key)
+
+        def handle_endtag(self, tag):
+            if tag not in voids and self.stack:
+                self.stack.pop()
+
+        def handle_data(self, d):
+            for k in set(x for x in self.stack if x):
+                self.text[k].append(d)
+
+    p = P()
+    p.feed(src)
+    seen = {k: norm(" ".join(v)) for k, v in p.text.items()}
+    rows = []
+    for arm in arms:
+        got = dict(seen, href=p.href)
+        if arm["swap"]:
+            got = {"h1": arm["swap"][0], "sub": arm["swap"][1], "cta": arm["swap"][2], "href": arm["swap"][3]}
+        markers = bool(seen["h1"] and seen["cta"])
+        rows.append({"label": LABEL, "arm": arm["name"], "session": 1, "mode": "static HTML check (no browser on the website)",
+                     "h1_ok": markers and norm(got["h1"]) == norm(arm["expect"]["h1"]),
+                     "sub_ok": norm(got["sub"]) == norm(arm["expect"]["sub"]),
+                     "button_ok": markers and norm(got["cta"]) == norm(arm["expect"]["cta"]),
+                     "click_href": got["href"], "href_ok": (got["href"] or "").rstrip("/") == (arm["expect"]["href"] or "").rstrip("/"),
+                     "left_local_page": False})
+    with open(events_path, "w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    return rows, {"count": 0, "hosts": []}
 
 
 def simulate(cfg, segs, lift, n, salt):
@@ -264,14 +318,19 @@ def findings(D, sims, sessions, blocked, plan, narrative, narrative_by):
     if plan and t1["result"] != "clear" and not plan.get("capped"):
         L += ["", "**Test 1 came out inconclusive even though its sample was sized to see this lift.** That can happen: a test sized for 80 to 90 percent power still misses about 1 time in 6 or 10 by chance. It is not a fault in the method. It shows why a small lift can hide in a real test."]
     L += ["", "Test 3 runs the baseline against itself. It should be inconclusive; if it ever says clear, the test set-up is wrong.", "",
+          ] + ([
+          "## 2. Page check (saved page, no browser)", "",
+          "This run was made on the website, which has no browser on the server. So no browser sessions ran. Instead, code read the saved copy of the page once per arm: it checked that the hero H1 and main button markers exist, applied the variant's words and link, and read back the text and where the button would go. It ran no page scripts and clicked nothing. To run the full browser check (%d sessions per arm), run the sandbox on your own machine." % SESSIONS_PER_ARM, ""]
+          if HOSTED else [
           "## 2. Browser sessions (local saved page, scripted)", "",
-          "%d sessions per arm on the saved copy of the page. Each session loads the page, checks the hero text, clicks the main button and records where it would go. The click is stopped before it leaves." % SESSIONS_PER_ARM, "",
+          "%d sessions per arm on the saved copy of the page. Each session loads the page, checks the hero text, clicks the main button and records where it would go. The click is stopped before it leaves." % SESSIONS_PER_ARM, ""]) + [
           "| Arm | Sessions | All checks passed | Button would go to |", "|---|---|---|---|"]
     for arm in ("baseline", "variant"):
         hrefs = sorted({str(r["click_href"]) for r in sessions if r["arm"] == arm})
         L.append("| %s | %d | %d | %s |" % (arm, sum(r["arm"] == arm for r in sessions), ok(arm), ", ".join(hrefs)))
-    L += ["", "Requests to other hosts that the sandbox blocked: %d (hosts: %s). Nothing left the machine. The sessions check structure and links, not looks." % (
-              blocked["count"], ", ".join(blocked["hosts"]) or "none"), "",
+    L += ["", ("No page was loaded, so no request could leave. The check covers structure and links, not looks." if HOSTED else
+               "Requests to other hosts that the sandbox blocked: %d (hosts: %s). Nothing left the machine. The sessions check structure and links, not looks." % (
+              blocked["count"], ", ".join(blocked["hosts"]) or "none")), "",
           "## 3. What a real test would need", "",
           "Base click rate assumed %s. Visitors per arm needed to see a lift reliably (alpha 0.05, power 80%%, calculated, not simulated):" % pct(D["cfg"]["base_rate"]), "",
           "| Lift you hope to detect | Visitors per arm | Visitors in both arms |", "|---|---|---|"] + [
@@ -279,7 +338,8 @@ def findings(D, sims, sessions, blocked, plan, narrative, narrative_by):
           "", "## Limits", "",
           "- The visitors are simulated. The result does not predict what real buyers do.",
           "- The lift is set from the judges' scores by a rule. It is an assumption. The simulation returns it with chance noise; it does not discover it.",
-          "- The browser sessions prove the variant page loads and its button points to the right place. They say nothing about whether people would click.",
+          ("- The page check shows the hero markers exist and the variant's button points to the right place. No browser ran, so it does not prove the page renders. It says nothing about whether people would click."
+           if HOSTED else "- The browser sessions prove the variant page loads and its button points to the right place. They say nothing about whether people would click."),
           "- The judges (Jev and Judge 2) are general decision models, not trained for this work. Their scores chose the variant to test; they are not evidence of a lift.",
           "- A real test needs live traffic, an agreed sample size and a stopping rule fixed before the start.", ""]
     return "\n".join(L)
@@ -314,11 +374,12 @@ def main(page, run):
              "expect": {"h1": D["hero"]["h1"], "sub": D["hero"]["sub"], "cta": D["main"]["text"], "href": D["main"]["href"]}},
             {"name": "variant", "swap": [v["h1"], v["subline"], v["cta"], dest],
              "expect": {"h1": v["h1"], "sub": v["subline"], "cta": v["cta"], "href": dest}}]
-    sessions, blocked = browser_sessions(local_copy(D["cap_dir"], out, D["main"]["index"]), arms, os.path.join(out, "events.jsonl"), D["main"]["index"])
+    sessions, blocked = (static_sessions if HOSTED else browser_sessions)(local_copy(D["cap_dir"], out, D["main"]["index"]), arms, os.path.join(out, "events.jsonl"), D["main"]["index"])
     res = {"label": LABEL, "made": datetime.datetime.now().isoformat(timespec="seconds"), "run": run, "variant": v["name"],
            "approval": {k: D["ap"][k] for k in ("name", "at", "override", "reason", "variant_hash", "png_hash")},
            "group_at_approval": D["group"]["group"], "simulated": sims, "plan": plan, "plan_explained_by": narrative_by,
-           "browser": {"sessions_per_arm": SESSIONS_PER_ARM, "passed": {a: sum(r["h1_ok"] and r["sub_ok"] and r["button_ok"] and r["href_ok"] and not r["left_local_page"] for r in sessions if r["arm"] == a) for a in ("baseline", "variant")},
+           "browser": {"mode": "static HTML check, no browser (website run)" if HOSTED else "Playwright browser sessions",
+                       "sessions_per_arm": 1 if HOSTED else SESSIONS_PER_ARM, "passed": {a: sum(r["h1_ok"] and r["sub_ok"] and r["button_ok"] and r["href_ok"] and not r["left_local_page"] for r in sessions if r["arm"] == a) for a in ("baseline", "variant")},
                        "blocked_requests": blocked},
            "config": {k: cfg[k] for k in ("seed", "alpha", "min_visitors_per_arm", "base_rate")}}
     json.dump(res, open(os.path.join(out, "sandbox-results.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)

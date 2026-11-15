@@ -144,10 +144,27 @@ function band(b) {
 function bandKey(k) { return k.startsWith("A7") ? "A7-checklist-item" : k; }
 function runTime(r) { const m = r.match(/(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})/); return m ? `${m[3]}/${m[2]} ${m[4]}:${m[5]}` : r; }
 
+function ownerCode(ask) {
+  let t = ""; try { t = sessionStorage.getItem("ownerCode") || ""; } catch (e) {}
+  if (!t && ask && S.hosted) { t = (prompt("Page setup on the website needs the owner code. Enter it (it stays in this browser tab only):") || "").trim(); try { if (t) sessionStorage.setItem("ownerCode", t); } catch (e) {} }
+  return t;
+}
+function postHeaders(owner) { const h = {"Content-Type": "application/json", "X-Agent-Console": "1"}; const t = ownerCode(owner); if (t) h["X-Owner-Token"] = t; return h; }
+async function postJob(url, body) {
+  // A website job runs inside the request (about 3 minutes), so watch the log while it works.
+  const req = fetch(url, {method: "POST", headers: postHeaders(url.startsWith("/api/setup")), body: JSON.stringify(body)});
+  if (S.hosted) { S.tab = "log"; render(); S.wasRunning = true; setTimeout(pollStatus, 2500); }
+  const r = await req; let j = {}; try { j = await r.json(); } catch (e) { j = {error: "The website stopped the request (time limit or network). Check the log."}; }
+  if (!r.ok) { if (S.hosted && r.status === 403) { try { sessionStorage.setItem("ownerCode", ""); } catch (e) {} } alert(j.error); }
+  else if (!S.hosted) { S.tab = "log"; render(); }
+  pollStatus();
+}
+
 async function init() {
   let p;
   const local = ["127.0.0.1", "localhost"].includes(location.hostname);
-  if (!local) S.mode = "static";
+  if (!local) { S.mode = "static"; try { const r = await fetch("/api/live", {cache: "no-store"}); if (r.ok) { S.hosted = await r.json(); S.mode = "live"; } } catch (e) {} }
+  if (local && location.port === "8790") { try { const r = await fetch("/api/live"); if (r.ok) S.hosted = await r.json(); } catch (e) {} }
   try { p = await api("/api/pages"); } catch (e) { S.mode = "static"; p = await api("/api/pages"); }
   S.mode = p.mode; S.pages = p.pages; S.models = p.models;
   if (S.mode === "static") { $("#go").style.display = "none"; $("#persona").parentElement.style.display = "none"; $("#industry").parentElement.style.display = "none"; $("#goal").parentElement.style.display = "none"; $("#status").textContent = "read-only copy"; $("#runnote").innerHTML = 'Read-only copy of finished runs. <a href="https://github.com/jtrnjn271994-cloud/sarvam-website-agent" target="_blank" rel="noopener">Run the agent yourself (GitHub)</a>'; }
@@ -159,6 +176,7 @@ async function init() {
   $("#industry").onchange = async () => { fillRoles(); suggestGoal(); remember(); await refreshSetup(); render(); };
   $("#persona").onchange = async () => { suggestGoal(); remember(); await refreshSetup(); render(); };
   $("#goal").onchange = () => { remember(); updateGo(); };
+  if (S.hosted) $("#runnote").textContent = "Website mode: one run at a time, up to $" + S.hosted.max_run_usd.toFixed(2) + " a run, " + S.hosted.runs_per_visitor_per_day + " runs a day per visitor. No screenshots; sarvam.ai is never loaded.";
   await loadPage(S.pages[0]?.slug);
   if (S.mode === "live") pollStatus();
 }
@@ -425,16 +443,14 @@ function wireApprove() {
     const box = b.closest(".decide");
     const body = {page: S.page, run: S.run, variant: box.dataset.v, decision: b.dataset.d,
       name: box.querySelector(".nm").value, reason: box.querySelector(".rs").value, note: box.querySelector(".nt").value};
-    const r = await fetch("/api/approve", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify(body)});
+    const r = await fetch("/api/approve", {method: "POST", headers: postHeaders(), body: JSON.stringify(body)});
     const j = await r.json();
     if (!r.ok) { box.querySelector(".msg").textContent = j.error; box.querySelector(".msg").style.color = "var(--fail)"; return; }
     await selectRun(S.run);
   });
   const sbx = document.getElementById("sbx");
   if (sbx) sbx.onclick = async () => {
-    const r = await fetch("/api/sandbox", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify({page: S.page, run: S.run})});
-    const j = await r.json(); if (!r.ok) return alert(j.error);
-    S.tab = "log"; render(); pollStatus();
+    await postJob("/api/sandbox", {page: S.page, run: S.run});
   };
 }
 
@@ -529,14 +545,12 @@ function viewSetup() {
 function wireSetup() {
   const d = document.getElementById("sdraft");
   if (d) d.onclick = async () => {
-    const r = await fetch("/api/setup/draft", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify({page: S.page, persona: $("#persona").value})});
-    const j = await r.json(); if (!r.ok) return alert(j.error);
-    S.tab = "log"; render(); pollStatus();
+    await postJob("/api/setup/draft", {page: S.page, persona: $("#persona").value});
   };
   document.querySelectorAll(".sdec button").forEach(b => b.onclick = async () => {
     const box = b.closest(".sdec");
     const body = {page: S.page, persona: $("#persona").value, part: box.dataset.part, decision: b.dataset.d, name: $("#sname").value, note: box.querySelector(".snote").value};
-    const r = await fetch("/api/setup/approve", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify(body)});
+    const r = await fetch("/api/setup/approve", {method: "POST", headers: postHeaders(true), body: JSON.stringify(body)});
     const j = await r.json();
     if (!r.ok) { box.querySelector(".smsg").textContent = j.error; box.querySelector(".smsg").style.color = "var(--fail)"; alert(j.error); return; }
     const nm = $("#sname").value; await refreshSetup();
@@ -641,10 +655,10 @@ function wireFindings() {
 }
 
 async function startRun() {
-  if (!confirm(`Start a live run on "${S.page}"? It calls the writer and both judges through OpenRouter (the last run cost about ${$("#runnote").textContent.split("·")[0].replace("last run", "").trim() || "$0.20"}). The live page is loaded once for the PNGs.`)) return;
-  const r = await fetch("/api/start", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify({page: S.page, persona: $("#persona").value, goal: $("#goal").value})});
-  const j = await r.json(); if (!r.ok) return alert(j.error);
-  S.tab = "log"; render(); pollStatus();
+  const msg = S.hosted ? "Start a run on " + S.page + "? It calls the writer and both judges through OpenRouter (about $0.25 to $0.50, capped at $" + S.hosted.max_run_usd.toFixed(2) + "). It takes about 3 minutes; keep this tab open. No screenshots are taken on the website."
+    : "Start a live run on " + S.page + "? It calls the writer and both judges through OpenRouter. The live page is loaded once for the PNGs.";
+  if (!confirm(msg)) return;
+  await postJob("/api/start", {page: S.page, persona: $("#persona").value, goal: $("#goal").value});
 }
 async function pollStatus() {
   clearTimeout(S.poll);

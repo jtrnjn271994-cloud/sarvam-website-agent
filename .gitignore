@@ -11,3 +11,4 @@ logs/
 dist/
 node_modules/
 *.log
+.vercel-stage/

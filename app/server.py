@@ -237,13 +237,14 @@ def approve(body):
     if decision == "revise" and len(note) < 5:
         raise ValueError("type what the writer should change")
     png = os.path.join(d, "pair-%s.png" % v["name"])
-    if decision == "approve" and not os.path.isfile(png):
+    hosted = p.get("screenshots") == "not taken (website run)"   # the website takes no screenshots; the variant hash is the check
+    if decision == "approve" and not hosted and not os.path.isfile(png):
         raise ValueError("no PNG pair for this variant, so it cannot be approved")
     entry = {"decision": decision, "variant": v["name"], "group_at_decision": g["group"], "reasons_shown": g["reasons"],
              "override": decision == "approve" and g["group"] != "passed", "name": name, "reason": reason, "note": note,
              "at": datetime.datetime.now().isoformat(timespec="seconds"),
              "variant_hash": shortlist.variant_hash(v), "png_hash": shortlist.file_hash(png) if os.path.isfile(png) else None,
-             "made_by": "a person, in the local console"}
+             "made_by": "a person, on the website (no screenshot: website runs take none)" if hosted else "a person, in the local console"}
     path = os.path.join(d, "approval.json")
     with LOCK:
         data = read_json(path, {"note": "Append-only. The latest entry counts. Written only when a person clicks in the console.", "entries": []})
