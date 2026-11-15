@@ -149,7 +149,8 @@ Read `docs/architecture.html` for the whole flow, the three layers, deployment, 
 - The hero only, on desktop. No page body, no mobile view.
 - Judge scores are an audit signal, not proof. The calibration set is small and written by us.
 - Persona and goal suggestions are analyst proposals, not buyer research.
-- One job at a time, on one machine. There is no login.
+- One job at a time, locally and on the website. There is no login: the website uses spend caps and an owner code instead.
+- Website runs take no screenshots, and their sandbox reads the saved page's HTML instead of running 20 browser sessions. Run locally for the full checks.
 - Saved pages are dated. Capture again before a new run if a page changed.
 
 ## Publish the site yourself

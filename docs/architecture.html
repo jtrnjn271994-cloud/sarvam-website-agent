@@ -93,18 +93,20 @@ td code,li code,p code{background:var(--card);border-radius:4px;padding:1px 5px;
 <tr><td><strong>4. Checks on each variant (Gate 2)</strong></td><td>G1 support, G2 overreach, G3 banned, then A1 to A8 again</td><td>Stop the writer from over-claiming. G1 asks if the evidence says what the line says. G2 asks if the line says more. G3 asks if it makes a banned claim in other words. Asking the audit questions again of the variant shows whether it beats the live hero.</td></tr>
 </tbody></table></div>
 <h2>4. Deployment</h2><div class='mm'><pre class='mermaid'>flowchart LR
-    U["Person"] --> L["Local machine<br/>./run-ui.sh: the full agent<br/>Playwright, model calls, approvals"]
-    L --> OR["OpenRouter<br/>one key, four models"]
-    L --> X["Static export<br/>finished runs, names removed"]
-    X --> V["Vercel<br/>public read-only site"]
+    U["Visitor"] --> V["Vercel website<br/>pages + one Python function<br/>runs, approvals, sandbox"]
+    V --> OR["OpenRouter<br/>one key, four models"]
+    V <--> SB["Supabase (Red Zebra)<br/>runs, approvals, job log, spend"]
+    O["Owner"] -->|owner code| V
+    L["Local machine<br/>./run-ui.sh: full agent<br/>Playwright screenshots + browser sandbox"] --> OR
+    L -->|scripts/deploy_live.sh| V
     L -->|code only, never the key| GH["GitHub repo, private"]
 </pre></div>
 <div class="tw"><table class=""><thead><tr><th>What</th><th>Where it works</th><th>Why</th></tr></thead><tbody>
-<tr><td>Capture with Playwright and Chromium</td><td>Local machine</td><td>Vercel functions cannot run a full browser.</td></tr>
-<tr><td>Model calls (Gemini, Opus, Jev, Judge 2)</td><td>Local machine</td><td>The key lives in <code>.env</code> or the environment. It is never in the repo or the export.</td></tr>
-<tr><td>Page setup, approvals, Start a run, Run the sandbox</td><td>Local console</td><td>A person clicks. The console accepts only requests from its own page.</td></tr>
-<tr><td>Reading runs, audits, variants, scores, findings, docs</td><td>Local console or the Vercel read-only copy</td><td>The copy is static files. Approver names become "a person".</td></tr>
-<tr><td>Live runs for other people</td><td>Their own machine, using the README</td><td>A hosted version would need a container host for the browser and a key per user. Not built.</td></tr>
+<tr><td>Capture, PNG pairs, 20-session browser sandbox (Playwright)</td><td>Local machine</td><td>Vercel functions cannot run a full browser. Website runs take no screenshots and never load sarvam.ai.</td></tr>
+<tr><td>Model calls (Gemini, Opus, Jev, Judge 2)</td><td>Local machine or the website function</td><td>The key lives in <code>.env</code> locally and in Vercel's settings online. It is never in the repo or a deployed file.</td></tr>
+<tr><td>Start a run, approve a variant, run the sandbox</td><td>Local console or the website</td><td>A person clicks. The website runs one job at a time (about 3 minutes, inside a 5-minute limit), caps spend at $3 a day and 3 runs a day per visitor, and saves runs to Supabase.</td></tr>
+<tr><td>Page setup (positioning, claims, checklist)</td><td>Local console, or the website with the owner code</td><td>Only the owner approves what the agent may say about a page.</td></tr>
+<tr><td>Reading runs, audits, variants, scores, findings, docs</td><td>Local console or the website</td><td>Visitor names are never stored on the website: approvals record "a person".</td></tr>
 </tbody></table></div>
 <h2>5. What it uses</h2>
 <div class="tw"><table class=""><thead><tr><th>Role</th><th>Model id</th><th>Endpoint</th><th>Returns</th><th>Used in</th></tr></thead><tbody>

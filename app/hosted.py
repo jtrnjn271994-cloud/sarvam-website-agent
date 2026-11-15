@@ -206,7 +206,7 @@ def hosted_start_job(slug, cmd, kind, run):
     before = snapshot(slug)
     runs_before = set(os.listdir(os.path.join(WORK, "pages", slug, "runs")))
     proc = subprocess.Popen(cmd, cwd=WORK, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
-                            env=dict(os.environ, PYTHONUNBUFFERED="1"))
+                            env=dict(os.environ, PYTHONUNBUFFERED="1", TZ="Asia/Kolkata"))   # run names in India time, like local runs
     lines = []
     reader = threading.Thread(target=lambda: [lines.append(x) for x in proc.stdout], daemon=True)
     reader.start()

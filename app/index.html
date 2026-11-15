@@ -154,8 +154,11 @@ async function postJob(url, body) {
   // A website job runs inside the request (about 3 minutes), so watch the log while it works.
   const req = fetch(url, {method: "POST", headers: postHeaders(url.startsWith("/api/setup")), body: JSON.stringify(body)});
   if (S.hosted) { S.tab = "log"; render(); S.wasRunning = true; setTimeout(pollStatus, 2500); }
-  const r = await req; let j = {}; try { j = await r.json(); } catch (e) { j = {error: "The website stopped the request (time limit or network). Check the log."}; }
-  if (!r.ok) { if (S.hosted && r.status === 403) { try { sessionStorage.setItem("ownerCode", ""); } catch (e) {} } alert(j.error); }
+  let r = null, j = null;
+  try { r = await req; j = await r.json(); } catch (e) { j = null; }
+  // On the website the connection can close before a long job ends; the job keeps running and the log keeps updating.
+  if (!r || j === null || r.status >= 500) { if (!S.hosted) alert("The request failed. Check the log."); pollStatus(); return; }
+  if (!r.ok) { if (S.hosted && r.status === 403) { try { sessionStorage.setItem("ownerCode", ""); } catch (e) {} } S.wasRunning = false; alert(j.error); }
   else if (!S.hosted) { S.tab = "log"; render(); }
   pollStatus();
 }
@@ -176,8 +179,8 @@ async function init() {
   $("#industry").onchange = async () => { fillRoles(); suggestGoal(); remember(); await refreshSetup(); render(); };
   $("#persona").onchange = async () => { suggestGoal(); remember(); await refreshSetup(); render(); };
   $("#goal").onchange = () => { remember(); updateGo(); };
-  if (S.hosted) $("#runnote").textContent = "Website mode: one run at a time, up to $" + S.hosted.max_run_usd.toFixed(2) + " a run, " + S.hosted.runs_per_visitor_per_day + " runs a day per visitor. No screenshots; sarvam.ai is never loaded.";
   await loadPage(S.pages[0]?.slug);
+  if (S.hosted) $("#runnote").textContent = "Website mode: one run at a time, up to $" + S.hosted.max_run_usd.toFixed(2) + " a run, " + S.hosted.runs_per_visitor_per_day + " runs a day per visitor. No screenshots; sarvam.ai is never loaded.";
   if (S.mode === "live") pollStatus();
 }
 async function loadPage(slug, pick) {

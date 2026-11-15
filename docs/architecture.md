@@ -85,20 +85,22 @@ Jev answers yes/no questions with a probability. It gives no reason. Pass and fa
 
 ```mermaid
 flowchart LR
-    U["Person"] --> L["Local machine<br/>./run-ui.sh: the full agent<br/>Playwright, model calls, approvals"]
-    L --> OR["OpenRouter<br/>one key, four models"]
-    L --> X["Static export<br/>finished runs, names removed"]
-    X --> V["Vercel<br/>public read-only site"]
+    U["Visitor"] --> V["Vercel website<br/>pages + one Python function<br/>runs, approvals, sandbox"]
+    V --> OR["OpenRouter<br/>one key, four models"]
+    V <--> SB["Supabase (Red Zebra)<br/>runs, approvals, job log, spend"]
+    O["Owner"] -->|owner code| V
+    L["Local machine<br/>./run-ui.sh: full agent<br/>Playwright screenshots + browser sandbox"] --> OR
+    L -->|scripts/deploy_live.sh| V
     L -->|code only, never the key| GH["GitHub repo, private"]
 ```
 
 | What | Where it works | Why |
 |---|---|---|
-| Capture with Playwright and Chromium | Local machine | Vercel functions cannot run a full browser. |
-| Model calls (Gemini, Opus, Jev, Judge 2) | Local machine | The key lives in `.env` or the environment. It is never in the repo or the export. |
-| Page setup, approvals, Start a run, Run the sandbox | Local console | A person clicks. The console accepts only requests from its own page. |
-| Reading runs, audits, variants, scores, findings, docs | Local console or the Vercel read-only copy | The copy is static files. Approver names become "a person". |
-| Live runs for other people | Their own machine, using the README | A hosted version would need a container host for the browser and a key per user. Not built. |
+| Capture, PNG pairs, 20-session browser sandbox (Playwright) | Local machine | Vercel functions cannot run a full browser. Website runs take no screenshots and never load sarvam.ai. |
+| Model calls (Gemini, Opus, Jev, Judge 2) | Local machine or the website function | The key lives in `.env` locally and in Vercel's settings online. It is never in the repo or a deployed file. |
+| Start a run, approve a variant, run the sandbox | Local console or the website | A person clicks. The website runs one job at a time (about 3 minutes, inside a 5-minute limit), caps spend at $3 a day and 3 runs a day per visitor, and saves runs to Supabase. |
+| Page setup (positioning, claims, checklist) | Local console, or the website with the owner code | Only the owner approves what the agent may say about a page. |
+| Reading runs, audits, variants, scores, findings, docs | Local console or the website | Visitor names are never stored on the website: approvals record "a person". |
 
 ## 5. What it uses
 
