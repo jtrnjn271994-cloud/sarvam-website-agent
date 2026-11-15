@@ -184,11 +184,24 @@ def guard(kind):
         raise RuntimeError("you have started %d runs today, the daily limit per visitor. Browse the saved runs, or run the agent on your own machine." % per)
 
 
-def run_cost(paths):
+def log_lengths(page):
+    """Lines already in each run log, so a job counts only the model calls it made itself."""
+    out = {}
+    for d, _, files in os.walk(os.path.join(WORK, "pages", page)):
+        for f in files:
+            if f == "run-log.jsonl":
+                p = os.path.join(d, f)
+                out[os.path.relpath(p, WORK)] = sum(1 for _ in open(p, encoding="utf-8", errors="replace"))
+    return out
+
+
+def run_cost(paths, skip=None):
     usd = 0.0
     for rel in paths:
         if rel.endswith("run-log.jsonl"):
-            for line in open(os.path.join(WORK, rel), encoding="utf-8", errors="replace"):
+            for i, line in enumerate(open(os.path.join(WORK, rel), encoding="utf-8", errors="replace")):
+                if i < (skip or {}).get(rel, 0):
+                    continue
                 try:
                     usd += float(json.loads(line).get("cost") or 0)
                 except ValueError:
@@ -205,6 +218,7 @@ def hosted_start_job(slug, cmd, kind, run):
                                            "goal": CTX.body.get("goal"), "ip_hash": CTX.ip}, prefer="return=representation")[0]
     before = snapshot(slug)
     runs_before = set(os.listdir(os.path.join(WORK, "pages", slug, "runs")))
+    lines_before = log_lengths(slug)
     proc = subprocess.Popen(cmd, cwd=WORK, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
                             env=dict(os.environ, PYTHONUNBUFFERED="1", TZ="Asia/Kolkata"))   # run names in India time, like local runs
     lines = []
@@ -230,7 +244,7 @@ def hosted_start_job(slug, cmd, kind, run):
     ok = proc.returncode == 0 and not timed_out
     sb("PATCH", "sarvam_agent_jobs?id=eq.%d" % job["id"],
        {"status": "done" if ok else "failed", "finished_at": utcnow().isoformat(), "log": log[-20000:],
-        "run": fresh[-1] if fresh else run, "cost_usd": run_cost(saved), "error": None if ok else "exit %s" % proc.returncode},
+        "run": fresh[-1] if fresh else run, "cost_usd": run_cost(saved, lines_before), "error": None if ok else "exit %s" % proc.returncode},
        prefer="return=minimal")
     return hosted_status()
 
