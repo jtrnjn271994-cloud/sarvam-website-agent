@@ -10,7 +10,7 @@ A model drafts. Code checks. A person approves. Every fact comes from a quote on
 
 | | What you get | What you need |
 |---|---|---|
-| **A. The website** | Every finished run, audit, variant, judge score, finding and the architecture. Read only. | A browser. Open **VERCEL_URL_HERE** |
+| **A. The website** | Every finished run, audit, variant, judge score, finding and the architecture. Read only. | A browser. Open **https://sarvam-website-agent.vercel.app** |
 | **B. This repo, in a terminal** | The full agent. You can start runs, approve variants and run the sandbox on your own machine. | Python 3.9+, and an OpenRouter key for runs that call models |
 
 The website cannot start a run. A run needs a browser engine and a long-running process, and the website is a static copy. Option B is how you run the agent.

@@ -8,6 +8,7 @@ python3 app/server.py --export dist
 cat > dist/vercel.json <<'JSON'
 {"headers": [{"source": "/(.*)", "headers": [{"key": "X-Robots-Tag", "value": "noindex"}]}]}
 JSON
+printf '.env*\n.vercel\n' > dist/.vercelignore
 cd dist
 vercel link --yes --project sarvam-website-agent > /dev/null
 vercel deploy --prod --yes

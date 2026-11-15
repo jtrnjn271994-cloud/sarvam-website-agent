@@ -146,6 +146,8 @@ function runTime(r) { const m = r.match(/(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})/);
 
 async function init() {
   let p;
+  const local = ["127.0.0.1", "localhost"].includes(location.hostname);
+  if (!local) S.mode = "static";
   try { p = await api("/api/pages"); } catch (e) { S.mode = "static"; p = await api("/api/pages"); }
   S.mode = p.mode; S.pages = p.pages; S.models = p.models;
   if (S.mode === "static") { $("#go").style.display = "none"; $("#persona").parentElement.style.display = "none"; $("#industry").parentElement.style.display = "none"; $("#goal").parentElement.style.display = "none"; $("#status").textContent = "read-only copy"; $("#runnote").innerHTML = 'Read-only copy of finished runs. <a href="https://github.com/jtrnjn271994-cloud/sarvam-website-agent" target="_blank" rel="noopener">Run the agent yourself (GitHub)</a>'; }
