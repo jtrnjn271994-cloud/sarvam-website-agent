@@ -11,4 +11,7 @@ JSON
 printf '.env*\n.vercel\n' > dist/.vercelignore
 cd dist
 vercel link --yes --project sarvam-website-agent > /dev/null
+# Linking from inside the git repo connects the project to GitHub, and a push would then deploy the whole repo.
+# Only the read-only copy may be public, so always disconnect git.
+vercel git disconnect --yes > /dev/null 2>&1 || true
 vercel deploy --prod --yes
