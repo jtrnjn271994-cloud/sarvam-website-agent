@@ -8,7 +8,7 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 TITLE = "Sarvam website agent: architecture"
-VERSION = "v8, 15 Nov 2026, PROPOSED (as built after Decisions Log row 40)"
+VERSION = "v9, 15 Nov 2026, as built (Decisions Log row 41)"
 
 ROLES = {  # key: (label, hex fill, hex stroke)
     "person": ("Person", "#FFF4D6", "#C9A227"),
@@ -30,120 +30,82 @@ CLASSES = """    classDef person fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
     classDef gate3 fill:#FFF4D6,stroke:#C9A227,stroke-width:3px,color:#3b2f00
 """
 
-FLOW = "flowchart TD\n" + CLASSES + """
-    S1["1 Start (person), in the console<br/>page, industry, buyer persona, goal<br/>the goal list changes with the buyer<br/>pick and click: no context to type"]:::person
-    SU{"Page set up?"}:::rules
-    SD["Page setup, once per page<br/>needs positioning and claims approved; the buyer checklist is optional<br/>Gemini drafts claims: every quote checked word for word<br/>then a 12-section positioning pack: structure checked by code<br/>and a buyer checklist from the persona research"]:::reasoning
-    SP["Person clicks Approve on each part<br/>approvals.json keeps a hash of each file<br/>an edited file needs a fresh approval"]:::person
-    S2["2 Capture the hero once with Playwright<br/>H1, sub-line, main CTA, desktop screenshot<br/>the rest of the page is stored, never audited<br/>the live site is not called again<br/>mobile view: not built"]:::rules
-    S4["3 AUDIT the hero: JEV only<br/>A1 audience, A2 value, A3 proof, A4 button, A5 positioning<br/>A6 rival swap, only if rival heroes are saved<br/>A7 buyer questions and A8 main objection, if the checklist is approved<br/>pass and fail lines come from calibration<br/>a gap = a required question A1 to A4 fails or holds"]:::jev
-    D{"Gap found?"}:::rules
-    N["Stop: report no gap<br/>nothing is written"]:::stop
-    S5["4 GAP DOSSIER<br/>Gemini writes it, code checks every number, id and quote<br/>what the hero says now, which buyer question fails and why<br/>hypothesis, what we do not know (no internal analytics)<br/>what would prove it wrong"]:::reasoning
-    S6["5 TEST PLAN: partly built<br/>the goal and its real link, the thresholds and the rules are saved with the run<br/>a separate hashed plan file is not written yet"]:::rules
-    S7["6 WRITER: Opus 5.5 drafts 3 variants<br/>one angle each, a claim map for every sentence<br/>told the gaps, the buyer's objection and the positioning promise<br/>told which buyer questions the live hero already answers: keep them"]:::writer
-    G1["Gate 1: RULES<br/>claim id and quote, banned words, no new number<br/>the button goes to a real link for the goal<br/>only the hero changes"]:::gate
-    R{"Rounds left?<br/>max 2"}:::rules
-    X["Stop: show the failures to the person"]:::stop
-    G2["Gate 2: JEV + JUDGE 2 (GPT-6 Luna decisions)<br/>supports the claim, overreach, better than the live hero<br/>better = gain of 0.10 or more on the gaps, no other question down over 0.05<br/>both scores are recorded for every question<br/>no loop after Gate 2"]:::gate2
-    SL["Shortlist: nothing is hidden<br/>passed, held (judges disagree or a banned flag code cannot confirm)<br/>failed Gate 2, marked NEAR MISS if only a held-out question fell<br/>failed Gate 1 is counted, not selectable"]:::rules
-    S9["7 Apply the words to the saved page<br/>text swap only, layout and styles unchanged<br/>hero PNG pair: live and variant<br/>check that the button goes to the real link"]:::rules
-    AP["8 HUMAN approval, in the console<br/>PNGs side by side, word diff, both judges' scores per question, the dossier<br/>a person may pick any variant that passed Gate 1, even a Gate 2 failure, with a typed reason<br/>approval.json is append-only, with hashes of the variant and the PNG"]:::gate3
-    RJ["Reject: the variant stays inactive<br/>no exposure"]:::stop
-    S11["9 SANDBOX PLAN, built for each run<br/>visitor groups: the buyer plus the other roles of the industry<br/>reaction strength: how well the goal fits each role<br/>lift: 0.5 x the judges' average gain, floor 2%, cap 50%<br/>visitors per arm: the sample a real test needs<br/>Gemini explains it, code checks its numbers"]:::reasoning
-    S12["10 SIMULATE and CLICK: no model<br/>Test 1 expected lift, big sample. Test 2 same lift, too few visitors. Test 3 page against itself<br/>20 scripted Playwright sessions per arm on a local copy<br/>every outside request is blocked"]:::rules
-    FD["11 FINDINGS, built from the data<br/>plain words, the set-up, rates with intervals<br/>the sample a real test needs, limits<br/>all SYNTHETIC. Status: NOT rolled out, rollout needs approval"]:::rules
-    DOC["12 Submission and docs, in the console<br/>README, architecture, Jev note, tick list for the run"]:::rules
-    S1 --> SU
-    SU -- no --> SD --> SP --> S2
-    SU -- yes --> S2
-    S2 --> S4 --> D
-    D -- no --> N
-    D -- yes --> S5 --> S6 --> S7 --> G1
-    G1 -- fail --> R
-    R -- yes --> S7
-    R -- no --> X
-    G1 -- pass --> G2
-    G2 -- pass --> SL
-    G2 -- fail --> SL
-    SL --> S9 --> AP
-    AP -- reject --> RJ
-    AP -- "revise: start a new run" --> S7
-    AP -- approve --> S11 --> S12 --> FD --> DOC
+FLOW = """flowchart TD
+    S["1 Start (person)<br/>page, industry, buyer persona, goal<br/>picked from drop-downs in the console"] --> C["2 Capture the page once with Playwright<br/>keep the hero only: H1, sub-line, main CTA text<br/>plus a hero screenshot (desktop)<br/>the rest of the page is stored, never audited"]
+    C --> P{"3 Saved positioning<br/>for this page?"}
+    P -- yes --> L["Load positioning and approved claims"]
+    P -- no --> G["Reasoning model (Gemini) drafts it<br/>with the positioning skills, 12 sections<br/>from the page text and knowledge/ only, labelled PROPOSED"]
+    G --> GC["Rules check claim quotes, knowledge ids and numbers"] --> GP["Person approves, once per page"]
+    GP --> L
+    L --> A["4 AUDIT the hero: JEV only<br/>yes/no questions on the buyer, value, proof, CTA,<br/>positioning, and the buyer's own checklist"]
+    A --> D{"Gap found?<br/>a required question fails"}
+    D -- no --> N["Stop: report 'no gap'<br/>nothing is written"]
+    D -- yes --> H["5 GAP DOSSIER (written out in full)<br/>Gemini writes it, rules check every number and quote<br/>what the hero says now, exact text<br/>which question fails and why it matters to this buyer<br/>hypothesis: if we change X for buyer Y, the click rises, because E<br/>what we do not know: no internal analytics<br/>what would prove it wrong"]
+    H --> T["6 TEST PLAN<br/>action: a click on the main CTA, to the real link for the goal<br/>pass bars and rules saved with the run<br/>(a separate hashed plan file is not built yet)"]
+    T --> W["7 Writer (Opus) drafts 3 hero variants<br/>each line lists the claim ids it relies on<br/>keeps what the live hero already answers"]
+    W --> G1{"Gate 1: RULES<br/>claim id, quote, banned word<br/>only the hero changed<br/>no new number or comparison<br/>CTA goes to a real link for the goal"}
+    G1 -- fail --> R{"Rounds left? max 2"}
+    R -- yes --> W
+    R -- no --> X["Stop: show failures to the person"]
+    G1 -- pass --> G2{"Gate 2: DOUBLE CHECK<br/>JEV + JUDGE 2 (OpenAI Decisions)<br/>claim supports the line, no overreach, beats the baseline<br/>disagreement = HOLD; near miss is flagged"}
+    G2 -- every variant, with its result --> PX["8 Apply the words to the captured page<br/>text swap only, layout and styles unchanged<br/>screenshot the hero of each arm"]
+    PX --> F["Functional check<br/>the CTA of each arm points to the right link"]
+    F --> AP{"9 HUMAN approval<br/>PNG side by side: baseline and variant<br/>both judges' scores, the dossier, the claim map<br/>person picks one variant<br/>a Gate 2 failure needs a typed reason"}
+    AP -- reject --> RJ["Variant stays inactive<br/>no exposure"]
+    AP -- revise --> W
+    AP -- approve --> SB["10 Sandbox<br/>simulated visitors: this buyer plus the other roles in the industry<br/>lift set from the judges' scores, visitors from a real-test calculation<br/>Playwright bots click the CTA in each arm on a local copy<br/>3 tests: expected lift, too few visitors, A/A"]
+    SB --> FD["11 Findings report built from the data<br/>plain words first, then the set-up<br/>rates, intervals, the sample a real test needs<br/>all SYNTHETIC<br/>status line: NOT rolled out, rollout needs approval"]
+    FD --> DOC["12 Submission files<br/>README, architecture note, Jev note,<br/>real versus simulated, limitations"]
 """
 
 LAYERS = """flowchart TB
-    classDef a fill:#EEF0F3,stroke:#8A94A3,color:#1f2933
-    classDef b fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
-    classDef c fill:#DCEBFF,stroke:#3B82C4,color:#0b2a4a
-    classDef u fill:#EADFFF,stroke:#7A4DD8,color:#2a1260
-    subgraph UI["Console: app/ (local, 127.0.0.1)"]
-        U1["server.py: standard library only<br/>one job at a time, spend cap per run"]:::u
-        U2["index.html: page, industry, buyer, goal<br/>tabs: setup, pipeline, audit, dossier, variants,<br/>approve and test, sandbox and findings, submission and docs"]:::u
-        U3["--export: read-only static copy"]:::u
+    subgraph ENG["Layer A: Engine. The code that does the work. It knows no page."]
+        E1["probe3.py: the run, one linear flow"]
+        E2["capture_hero.py: Playwright capture"]
+        E3["gate1.py: rule checks"]
+        E4["llm.py: model clients (Gemini, Opus, Jev, OpenAI Decisions)"]
+        E5["app/: console and approval page"]
+        E6["sandbox_plan.py, sandbox_hero.py: plan, bots, stats"]
+        E7["report builder: FINDINGS.md"]
     end
-    subgraph ENG["Layer A: Engine (generic code, no page names)"]
-        E1["probe3.py: the run, one linear flow"]:::a
-        E2["capture_hero.py, pages_registry.py<br/>Playwright capture"]:::a
-        E3["gate1.py, quote_match.py, check_claims.py<br/>rule checks"]:::a
-        E4["llm.py: OpenRouter chat and decisions clients<br/>every call logged with cost"]:::a
-        E5["judgekit.py, calibrate.py<br/>audit and Gate 2 questions"]:::a
-        E6["shortlist.py: groups, approval hashes"]:::a
-        E7["page_setup.py, destinations.py<br/>setup drafts, goal to real link"]:::a
-        E8["sandbox_plan.py, sandbox.py, sandbox_hero.py<br/>plan, simulation, browser sessions"]:::a
+    subgraph POL["Layer B: Policy. The rules every page shares."]
+        P1["evidence labels and do-not-claim list"]
+        P2["banned-phrase patterns and hero policy"]
+        P3["skills: positioning, copy, audit prompts"]
+        P4["judge questions, pass bars, goals, positioning structure"]
     end
-    subgraph POL["Layer B: Policy (shared by every page)"]
-        P1["rules/: do-not-claim, hero-policy, goals,<br/>judge-questions, judge-thresholds,<br/>positioning-structure"]:::b
-        P2["skills/: positioning, copy, CRO, dossier,<br/>editing, plain writing"]:::b
-        P3["library/personas.json<br/>8 industries, 60 buyer roles"]:::b
-        P4["agent/models.json<br/>four model roles"]:::b
+    subgraph PACK["Layer C: Page pack. The facts about one page, one folder each."]
+        K1["saved hero: text and screenshot"]
+        K2["claims linked to evidence quotes"]
+        K3["buyer checklist and personas"]
+        K4["positioning"]
+        K5["runs, approvals, findings"]
     end
-    subgraph PACK["Layer C: Page pack (data, one folder per page)"]
-        K1["capture/: saved hero text and PNG"]:::c
-        K2["claims/ and evidence/<br/>each claim has a quote found on the page"]:::c
-        K3["setup/: positioning, buyer checklists,<br/>approvals.json"]:::c
-        K4["runs/: every run, approval.json, sandbox/"]:::c
-    end
-    REG["pages/registry.json<br/>13 pages, layer, search visits"]:::c
-    NEW["pages_registry.py --capture<br/>add a page and capture it"]:::c
-    LAB["Research lab: sarvam-positioning-agent<br/>read-only source of evidence"]:::c
-    CAL["calibrate.py: 60 test cases for Jev<br/>run separately, not every run"]:::a
-    UI --> ENG
     PACK --> ENG
     POL --> ENG
-    REG --> PACK
-    NEW --> PACK
-    LAB -.copy a few notes.-> PACK
-    CAL --> E5
+    NEW["pages_registry.py --capture<br/>add a page: save its hero once"] --> PACK
+    KB["knowledge/: fixed research snapshot<br/>checked rows only, versioned"] -.cited by id.-> PACK
+    CAL["calibrate.py: Jev test cases<br/>run separately, not every run"] --> E4
 """
 
 LATER = """flowchart LR
-    classDef p fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
-    classDef s fill:#EEF0F3,stroke:#8A94A3,color:#1f2933
-    classDef m fill:#DCEBFF,stroke:#3B82C4,color:#0b2a4a
-    classDef later fill:#fff,stroke:#8A94A3,stroke-dasharray:4 3,color:#5b6472
-    U["Person in a browser"]:::p
-    subgraph LOCAL["Local machine: the runnable agent (built)"]
-        L1["run-ui.sh starts the console<br/>127.0.0.1:8765<br/>stops any older copy first"]:::s
-        L2["Playwright and Chromium<br/>capture, PNGs, sandbox browser sessions"]:::s
-        L3[".env: one OpenRouter key<br/>never committed"]:::s
-        L4["pages/ folders<br/>runs, approvals, findings"]:::s
-    end
-    OR["OpenRouter<br/>Gemini, Opus, Jev, GPT-6 Luna decisions<br/>one key"]:::m
-    EXP["python3 app/server.py --export<br/>static copy: approver names removed,<br/>no run or approve buttons (built)"]:::s
-    GH["GitHub repo, private<br/>code, rules, skills, page packs, docs<br/>no .env (not pushed yet)"]:::later
-    V["Vercel: read-only viewer of the export<br/>runs, audits, variants, findings, docs<br/>(not deployed)"]:::later
-    DB[("Supabase<br/>shared approvals and run state<br/>(not built, optional later)")]:::later
-    U --> L1
-    L1 --> L2
-    L1 --> L4
-    L1 --> OR
-    L3 -.-> L1
-    L4 --> EXP --> V
-    L4 -.code and rules only.-> GH
-    GH -.later.-> V
-    DB -.-> L1
+    U["Person"] --> L["Local machine<br/>./run-ui.sh: the full agent<br/>Playwright, model calls, approvals"]
+    L --> OR["OpenRouter<br/>one key, four models"]
+    L --> X["Static export<br/>finished runs, names removed"]
+    X --> V["Vercel<br/>public read-only site"]
+    L -->|code only, never the key| GH["GitHub repo, private"]
 """
+
+QUESTIONS = [
+    ("1. The hero basics (required)", "A1 audience, A2 value, A3 proof, A4 CTA",
+     "Every buyer page must say who it is for, what the buyer gets, why to believe it and what happens on click. A fail or hold here is a gap, and only these four can start a rewrite."),
+    ("2. Positioning fit (advisory)", "A5 positioning, A6 rival swap",
+     "A good hero says what this product promises, in words a rival could not print as is. A5 checks the approved promise is there. A6 asks if a rival could reuse the hero unchanged (only when rival heroes are saved). They inform the person but never block."),
+    ("3. The buyer's own questions (advisory, per page)", "A7 checklist items, A8 main objection",
+     "Generic questions miss what a specific buyer asks. These come from the approved buyer checklist for this page and buyer, so they change with every page and persona."),
+    ("4. Checks on each variant (Gate 2)", "G1 support, G2 overreach, G3 banned, then A1 to A8 again",
+     "Stop the writer from over-claiming. G1 asks if the evidence says what the line says. G2 asks if the line says more. G3 asks if it makes a banned claim in other words. Asking the audit questions again of the variant shows whether it beats the live hero."),
+]
 
 STEPS = [
     # n, step, role keys, model text, reads, output
@@ -325,42 +287,29 @@ LIMITS_LIST = [
 def build_md():
     o = []
     o.append("# %s\n" % TITLE)
-    o.append("%s. Written for: the project owner and any reviewer. One document. Open `architecture.html` for the styled version.\n" % VERSION)
-    o.append("## At a glance\n")
-    o += ["- " + g for g in GLANCE]
-    o.append("\n**Status.**\n")
-    o += ["- **%s.** %s" % (a, b) for a, b in STATUS]
-    o.append("\n## 1. The run: audit first, write only if there is a gap\n")
-    o.append("Colours: " + ", ".join("%s" % v[0] for v in ROLES.values()) + ". Red boxes stop the run.\n")
+    o.append("%s. Written for: the project owner and any reviewer. One document.\n" % VERSION)
+    o.append("## 1. The run: audit first, write only if there is a gap\n")
     o.append("```mermaid\n" + FLOW + "```\n")
-    o.append("The writer never sees judge probabilities, pass lines or calibration cases. The judges never see the writer's reasoning or each other's answers. Step by step detail: who does it, what it reads, what it makes.\n")
-    o.append(md_table(["#", "Step", "Who", "Model", "Reads", "Makes"], [(n, s_, chips_md(r), m, rd, out) for n, s_, r, m, rd, out in STEPS]))
-    o.append("\n## 2. The three layers\n")
+    o.append("## 2. The three layers\n")
+    o.append("- **Layer A, Engine:** the code that does the work. It holds no page names, so one engine serves every page.")
+    o.append("- **Layer B, Policy:** the rules every page shares. Change a rule once and it applies to all pages.")
+    o.append("- **Layer C, Page pack:** the facts about one page, one folder each. A new page is a new folder.\n")
     o.append("```mermaid\n" + LAYERS + "```\n")
-    o.append("A new page is a new folder in layer C. Layer A holds no page names. Layer B is shared by every page, so one rule change reaches all pages.\n")
-    o.append("## 3. Deployment: local, GitHub, Vercel\n")
+    o.append("## 3. The questions Jev asks, and why\n")
+    o.append("Jev answers yes/no questions with a probability. It gives no reason. Pass and fail lines come from 60 test cases we wrote (`calibrate.py`).\n")
+    o.append(md_table(["Group", "Questions", "Why we ask them"], QUESTIONS))
+    o.append("\n## 4. Deployment\n")
     o.append("```mermaid\n" + LATER + "```\n")
     o.append(md_table(["What", "Where it works", "Why"], WHERE_WORKS))
-    o.append("\nOnly the read-only copy can go on Vercel. Nothing is pushed or deployed yet. Keep the GitHub repo private: it holds buyer research. Vercel and GitHub both need the owner's explicit go-ahead.\n")
-    o.append("## 4. What it uses\n")
-    o.append("### Models\n")
+    o.append("\n## 5. What it uses\n")
     o.append(md_table(["Role", "Model id", "Endpoint", "Returns", "Used in"], MODELS))
     o.append("")
     o += ["- " + n for n in NOTES_MODELS]
-    o.append("\n### Tools\n")
+    o.append("")
     o.append(md_table(["Tool", "Used for"], TOOLS))
-    o.append("\n### Rules and settings\n")
-    o.append(md_table(["File", "Holds"], RULE_FILES))
-    o.append("\n### Skills and data\n")
-    o.append("Skills are Markdown files the models read before they write (`skills/`, mapped to steps in `skills/step-skills.json`): seven-page positioning, product marketing, copywriting, copy editing, CRO, plain writing, no-AI-slop, claim-evidence check, Jev decision test, message house, buyer words, test design, sandbox A/B report.\n")
-    o.append(md_table(["File", "Holds"], DATA))
-    o.append("\n## 5. Where Jev fits (assignment question)\n")
-    o.append(md_table(["Yes/no decision", "Who decides", "Why"], JEV_DECISIONS))
-    o.append("\nRules decide what is exact: ids, quotes, banned words, scope, statistics. The writer writes. The decision models answer fuzzy yes/no questions. A person approves. Full note: `submission/JEV-NOTE.md`.\n")
-    o.append("## 6. What the assignment asks for, and where it sits\n")
-    o.append(md_table(["Assignment line", "Step", "Proof file"], COVERAGE))
-    o.append("\nThe console's Submission and docs tab ticks each line for the selected run from its own files. Deleting a file turns its tick off.\n")
-    o.append("## 7. Limits\n")
+    o.append("")
+    o.append(md_table(["Rule file", "Holds"], RULE_FILES))
+    o.append("\n## 6. Limits\n")
     o += ["- " + x for x in LIMITS_LIST]
     return "\n".join(o) + "\n"
 
@@ -405,46 +354,28 @@ def inline(t):
 
 
 def build_html():
-    legend = " ".join('<span class="chip" style="background:%s;border-color:%s">%s</span>' % (f, st, l) for l, f, st in ROLES.values())
-    legend += ' <span class="chip stop">Stop</span>'
-    steps_rows = [(n, "<strong>%s</strong>" % esc(s_), chips_html(r), esc(m), esc(rd), "<code>%s</code>" % esc(out)) for n, s_, r, m, rd, out in STEPS]
     model_rows = [(esc(a), "<code>%s</code>" % esc(b), esc(c), esc(d), esc(e)) for a, b, c, d, e in MODELS]
-    jev_rows = [(esc(a), esc(b), esc(c)) for a, b, c in JEV_DECISIONS]
-    cov_rows = [(esc(a), esc(b), "<code>%s</code>" % esc(c)) for a, b, c in COVERAGE]
+    q_rows = [("<strong>%s</strong>" % esc(a), esc(b), esc(c)) for a, b, c in QUESTIONS]
     where_rows = [(esc(a), esc(b), inline(c)) for a, b, c in WHERE_WORKS]
     tool_rows = [(esc(a), inline(b)) for a, b in TOOLS]
     rule_rows = [("<code>%s</code>" % esc(a), inline(b)) for a, b in RULE_FILES]
-    data_rows = [("<code>%s</code>" % esc(a), inline(b)) for a, b in DATA]
-    h = []
-    h.append('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">')
-    h.append("<title>Website Agent Architecture</title><style>%s</style></head><body><div class='wrap'>" % CSS)
-    h.append("<h1>%s</h1><p class='ver'>%s. One document.</p>" % (esc(TITLE), esc(VERSION)))
-    h.append("<div class='glance'>" + "".join("<div>%s</div>" % inline(g) for g in GLANCE) + "</div>")
-    h.append("<div class='glance'>" + "".join("<div><strong>%s</strong><br>%s</div>" % (esc(a), esc(b)) for a, b in STATUS) + "</div>")
-    h.append("<h2>1. The run: audit first, write only if there is a gap</h2><div class='legend'>%s</div>" % legend)
-    h.append("<div class='mm'><pre class='mermaid'>%s</pre></div>" % FLOW)
-    h.append("<p class='note'>The writer never sees judge probabilities, pass lines or calibration cases. The judges never see the writer's reasoning or each other's answers.</p>")
-    h.append("<details><summary>Step by step: who does it, what it reads, what it makes</summary>%s</details>" % html_table(["#", "Step", "Who", "Model", "Reads", "Makes"], steps_rows))
-    h.append("<h2>2. The three layers</h2><div class='mm'><pre class='mermaid'>%s</pre></div>" % LAYERS)
-    h.append("<p>A new page is a new folder in layer C. Layer A holds no page names. Layer B is shared by every page, so one rule change reaches all pages.</p>")
-    h.append("<h2>3. Deployment: local, GitHub, Vercel</h2><div class='mm'><pre class='mermaid'>%s</pre></div>" % LATER)
-    h.append(html_table(["What", "Where it works", "Why"], where_rows))
-    h.append("<p class='note'>Only the read-only copy can go on Vercel. Nothing is pushed or deployed yet. Keep the GitHub repo private: it holds buyer research. Vercel and GitHub both need the owner's explicit go-ahead.</p>")
-    h.append("<h2>4. What it uses</h2><h3>Models</h3>")
-    h.append(html_table(["Role", "Model id", "Endpoint", "Returns", "Used in"], model_rows))
-    h.append("<ul>" + "".join("<li>%s</li>" % inline(n) for n in NOTES_MODELS) + "</ul>")
-    h.append("<h3>Tools</h3>" + html_table(["Tool", "Used for"], tool_rows))
-    h.append("<h3>Rules and settings</h3>" + html_table(["File", "Holds"], rule_rows))
-    h.append("<h3>Skills and data</h3><p>Skills are Markdown files the models read before they write (<code>skills/</code>, mapped to steps in <code>skills/step-skills.json</code>): seven-page positioning, product marketing, copywriting, copy editing, CRO, plain writing, no-AI-slop, claim-evidence check, Jev decision test, message house, buyer words, test design, sandbox A/B report.</p>")
-    h.append(html_table(["File", "Holds"], data_rows))
-    h.append("<h2>5. Where Jev fits (assignment question)</h2>" + html_table(["Yes/no decision", "Who decides", "Why"], jev_rows))
-    h.append("<p>Rules decide what is exact: ids, quotes, banned words, scope, statistics. The writer writes. The decision models answer fuzzy yes/no questions. A person approves. Full note: <code>submission/JEV-NOTE.md</code>.</p>")
-    h.append("<h2>6. What the assignment asks for, and where it sits</h2>" + html_table(["Assignment line", "Step", "Proof file"], cov_rows, "tick"))
-    h.append("<p class='note'>The console's Submission and docs tab ticks each line for the selected run from its own files. Deleting a file turns its tick off.</p>")
-    h.append("<h2>7. Limits</h2><ul>" + "".join("<li>%s</li>" % inline(x) for x in LIMITS_LIST) + "</ul>")
-    h.append('</div><script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>'
-             '<script>mermaid.initialize({startOnLoad:true,securityLevel:"loose",theme:"base",flowchart:{curve:"basis",htmlLabels:true,nodeSpacing:34,rankSpacing:42},'
-             'themeVariables:{fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif",fontSize:"14px",lineColor:"#8A94A3"}});</script></body></html>')
+    h = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
+         "<title>Sarvam agent architecture</title><style>%s</style></head><body><div class='wrap'>" % CSS,
+         "<h1>%s</h1><p class='ver'>%s. One document.</p>" % (esc(TITLE), esc(VERSION)),
+         "<h2>1. The run: audit first, write only if there is a gap</h2><div class='mm'><pre class='mermaid'>%s</pre></div>" % FLOW,
+         "<h2>2. The three layers</h2><ul><li><strong>Layer A, Engine:</strong> the code that does the work. It holds no page names, so one engine serves every page.</li>"
+         "<li><strong>Layer B, Policy:</strong> the rules every page shares. Change a rule once and it applies to all pages.</li>"
+         "<li><strong>Layer C, Page pack:</strong> the facts about one page, one folder each. A new page is a new folder.</li></ul>",
+         "<div class='mm'><pre class='mermaid'>%s</pre></div>" % LAYERS,
+         "<h2>3. The questions Jev asks, and why</h2><p>Jev answers yes/no questions with a probability. It gives no reason. Pass and fail lines come from 60 test cases we wrote (<code>calibrate.py</code>).</p>",
+         html_table(["Group", "Questions", "Why we ask them"], q_rows),
+         "<h2>4. Deployment</h2><div class='mm'><pre class='mermaid'>%s</pre></div>" % LATER,
+         html_table(["What", "Where it works", "Why"], where_rows),
+         "<h2>5. What it uses</h2>", html_table(["Role", "Model id", "Endpoint", "Returns", "Used in"], model_rows),
+         "<ul>" + "".join("<li>%s</li>" % inline(n) for n in NOTES_MODELS) + "</ul>",
+         html_table(["Tool", "Used for"], tool_rows), html_table(["Rule file", "Holds"], rule_rows),
+         "<h2>6. Limits</h2><ul>" + "".join("<li>%s</li>" % inline(x) for x in LIMITS_LIST) + "</ul>",
+         '</div><script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,securityLevel:"loose"});</script></body></html>']
     return "\n".join(h)
 
 

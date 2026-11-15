@@ -15,6 +15,29 @@ A model drafts. Code checks. A person approves. Every fact comes from a quote on
 
 The website cannot start a run. A run needs a browser engine and a long-running process, and the website is a static copy. Option B is how you run the agent.
 
+## Get the code from GitHub
+
+The repo is **https://github.com/jtrnjn271994-cloud/sarvam-website-agent**. It is private.
+
+**For the owner, to give someone access:**
+1. Open the repo on GitHub and click **Settings**.
+2. Click **Collaborators** in the left menu, then **Add people**.
+3. Type the person's GitHub username or email and choose **Read**. They get an email invite.
+4. To share with anyone instead, go to **Settings > General > Danger Zone > Change visibility > Public**. The repo holds buyer research, so decide this on purpose.
+
+**For the person given access:** accept the invite, then either run `git clone` (below) or click **Code > Download ZIP** on the repo page.
+
+## Add the OpenRouter key to Vercel (owner only)
+
+The website does not need a key today, because it only shows finished runs. The key is needed when the website gets a Run button. Never put the key in a file in the repo.
+
+1. At **openrouter.ai**, open **Keys > Create key**. Name it `sarvam-website-agent` and set a **credit limit** (for example $10). This caps what anyone can spend.
+2. Copy the key once.
+3. At **vercel.com**, open the project **sarvam-website-agent**.
+4. Click **Settings > Environment Variables**.
+5. Key: `OPENROUTER_API_KEY`. Value: paste the key. Environments: tick **Production** and **Preview**. Tick **Sensitive**.
+6. Click **Save**. Then open **Deployments**, click the three dots on the latest one and choose **Redeploy**, so the new value is used.
+
 ## Run it from the terminal
 
 ```

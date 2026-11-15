@@ -198,7 +198,7 @@ function render() {
   if (S.tab === "setup") wireSetup();
   if (S.tab === "submission") wireSubmission();
   if (S.tab === "approve" && S.info) wireApprove();
-  if (S.tab === "findings" && S.info) wireFindings();
+  if (S.tab === "findings" && S.info) { wireFindings(); drawRunFlow(); }
   const gb = document.getElementById("guidego"); if (gb) gb.onclick = () => { S.tab = gb.dataset.tab; render(); };
 }
 
@@ -581,11 +581,58 @@ function scoreTable(name) {
     <tr><td>Banned-phrase check</td><td>flag</td><td>${g3("judge1")}</td><td>${g3("judge2")}</td></tr>
     <tr><td><b>Better than the live hero?</b></td><td></td><td>${r.judge1.better ? pill("pass") : pill("fail")}</td><td>${r.judge2.better ? pill("pass") : pill("fail")}</td></tr></table></div></details>`;
 }
+
+function mmEsc(t, n) { t = String(t ?? "").replace(/["<>{}\[\]|#;]/g, " ").replace(/\s+/g, " ").trim(); return n && t.length > n ? t.slice(0, n - 1) + "…" : t; }
+function runFlowText() {
+  const p = S.info.probe || {}, sl = S.info.shortlist || [], C = S.info.current_approval, sb = S.info.sandbox, cap = S.capture || {};
+  const a = p.audit || {}, v = a.verdict || {};
+  const passed = Object.keys(v).filter(k => /pass/.test(v[k]));
+  const g1 = (p.gate1_rounds || []).slice(-1)[0] || {};
+  const GW = {passed: "passed", held: "held", failed_gate2: "failed Gate 2", failed_gate1: "failed Gate 1"};
+  const L = [];
+  const node = (id, lines, done) => L.push(`    ${id}["${lines.map(x => mmEsc(x, 90)).join("<br/>")}"]${done ? "" : ":::todo"}`);
+  node("S", ["1 Start (person)", "page: " + (S.pageInfo?.name || S.page), "buyer: " + (p.persona?.buyer || "not recorded"), "goal: " + (p.goal?.label || "not recorded")], true);
+  node("C", ["2 Hero captured " + (cap.captured_at || cap.folder || "").slice(0, 10), "H1: " + (cap.h1 || ""), "CTA: " + ((cap.ctas || []).find(x => x.href)?.text || "")], !!S.capture);
+  node("P", ["3 Positioning and claims", "approved for this page before the run"], true);
+  node("A", ["4 Audit (Jev)", "gaps: " + ((a.gaps || []).join(", ") || "none"), "already answered: " + (passed.join(", ") || "none")], !!p.audit);
+  node("H", ["5 Gap dossier", (p.dossier?.text ? p.dossier.text.split(/\s+/).length + " words, numbers checked by code" : "not written")], !!p.dossier);
+  node("T", ["6 Test plan", "action: click the main CTA", "goal link: " + (p.goal?.kind || "")], !!p.goal);
+  node("W", ["7 Writer (Opus): " + (p.variants || []).length + " variants"].concat((p.variants || []).map(x => x.name + ": " + x.h1)), (p.variants || []).length > 0);
+  node("G1", ["Gate 1: rules, " + (p.gate1_rounds || []).length + " round(s)"].concat(Object.entries(g1).map(([k, pr]) => k + ": " + (pr.length ? pr.length + " problem(s)" : "ok"))), !!p.gate1_rounds);
+  node("G2", ["Gate 2: Jev + Judge 2"].concat(sl.map(x => x.name + ": " + GW[x.group] + (x.near_miss ? " (near miss)" : "") + (x.gains ? ", gain " + Object.values(x.gains).map(g => (g >= 0 ? "+" : "") + g.toFixed(2)).join(" / ") : ""))), sl.length > 0);
+  node("PX", ["8 PNG pairs and CTA check", (S.info.files || []).filter(f => f.startsWith("pair-") && f.endsWith(".png")).length + " pairs made"], (S.info.files || []).some(f => f.startsWith("pair-")));
+  node("AP", C ? ["9 Human approval", "approved: variant " + C.variant + (C.override ? " (against Gate 2, reason given)" : "")] : ["9 Human approval", "waiting for a person"], !!C);
+  if (sb && sb.plan) {
+    const pl = sb.plan, sim = sb.simulated || {};
+    node("SB", ["10 Sandbox", pl.segments.length + " visitor groups, lift " + (100 * pl.declared_lift).toFixed(1) + "%, effective " + (100 * pl.effective_lift).toFixed(1) + "%"].concat(Object.entries(sim).map(([k, r]) => (k === "enough" ? "Test 1" : k === "too_few" ? "Test 2" : k === "A/A check" ? "Test 3 (A/A)" : k) + ": " + r.result)).concat(["bots: baseline " + sb.browser.passed.baseline + "/" + sb.browser.sessions_per_arm + ", variant " + sb.browser.passed.variant + "/" + sb.browser.sessions_per_arm]), true);
+    node("FD", ["11 Findings (SYNTHETIC)", pl.visitors_needed_for_effective_lift ? "a real test needs " + pl.visitors_needed_for_effective_lift.toLocaleString() + " visitors per arm" : "no lift to detect", "NOT rolled out"], true);
+  } else if (sb) {
+    node("SB", ["10 Sandbox", "run with typed scenarios (older run)"], true);
+    node("FD", ["11 Findings (SYNTHETIC)", "NOT rolled out"], true);
+  } else {
+    node("SB", ["10 Sandbox", "not run yet"], false);
+    node("FD", ["11 Findings", "not written yet"], false);
+  }
+  return "flowchart TD\n    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778\n" + L.join("\n") + "\n    S --> C --> P --> A --> H --> T --> W --> G1 --> G2 --> PX --> AP --> SB --> FD\n";
+}
+function loadMermaid() {
+  if (window.mermaid) return Promise.resolve(window.mermaid);
+  if (S.mmP) return S.mmP;
+  S.mmP = new Promise((ok, no) => { const sc = document.createElement("script"); sc.src = "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js";
+    sc.onload = () => { window.mermaid.initialize({startOnLoad: false, securityLevel: "strict"}); ok(window.mermaid); }; sc.onerror = no; document.head.appendChild(sc); });
+  return S.mmP;
+}
+function drawRunFlow() {
+  const el = document.getElementById("runflow"); if (!el || !S.info) return;
+  loadMermaid().then(m => m.render("rf" + Date.now(), runFlowText())).then(r => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = r.svg; })
+    .catch(() => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = '<p class="small muted">The diagram needs the internet to load its drawing library.</p>'; });
+}
+const RUNFLOW_CARD = `<div class="card"><b>This run, step by step</b> <span class="small muted">same 12 steps as the architecture; grey dashed = not reached yet</span><div id="runflow" style="overflow-x:auto;margin-top:8px"><p class="small muted">Drawing…</p></div></div>`;
 function viewFindings() {
   const sb = S.info.sandbox, C = S.info.current_approval;
-  if (!sb) return `<div class="card"><b>No sandbox result for this run yet.</b><p class="small">${C ? `Variant ${esc(C.variant)} is approved. Open “Approve and test” and click “Run the sandbox”.` : "No variant of this run has been approved. Open “Approve and test”, pick a variant and approve it, then run the sandbox."} The sandbox and findings exist only for runs where a person approved a variant.</p>
+  if (!sb) return RUNFLOW_CARD + `<div class="card"><b>No sandbox result for this run yet.</b><p class="small">${C ? `Variant ${esc(C.variant)} is approved. Open “Approve and test” and click “Run the sandbox”.` : "No variant of this run has been approved. Open “Approve and test”, pick a variant and approve it, then run the sandbox."} The sandbox and findings exist only for runs where a person approved a variant.</p>
     <p class="small muted">Submission files: README.md, docs/architecture.md and submission/JEV-NOTE.md in the project folder.</p></div>`;
-  return `<div class="card"><b>Sandbox</b> <span class="pill p-off">SYNTHETIC</span> · variant ${esc(sb.variant)} · approved by ${esc(sb.approval.name)} ${sb.approval.override ? "(chosen against a Gate 2 result)" : ""}${sandboxTable(sb)}</div>
+  return RUNFLOW_CARD + `<div class="card"><b>Sandbox</b> <span class="pill p-off">SYNTHETIC</span> · variant ${esc(sb.variant)} · approved by ${esc(sb.approval.name)} ${sb.approval.override ? "(chosen against a Gate 2 result)" : ""}${sandboxTable(sb)}</div>
     <div class="card md" id="fnd2">Loading findings…</div>
     <div class="card small muted">Submission files: README.md, docs/architecture.md and submission/JEV-NOTE.md in the project folder.</div>`;
 }
