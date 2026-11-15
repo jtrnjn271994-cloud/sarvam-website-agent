@@ -1,0 +1,33 @@
+# Voice Agents: run probe3-20261115-202053, step by step
+
+Same steps as docs/architecture.html. Grey dashed = not reached yet.
+
+```mermaid
+flowchart TD
+    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778
+    classDef gate stroke-width:3px
+    classDef stop fill:#FDE2E2,stroke:#D14B4B,color:#5a1010
+    S["1 Start (person)<br/>page: Voice Agents<br/>buyer: Business owner (Chief Credit Officer Head of Collections Chief Credit and Collecti…<br/>goal: More visitors start building (self-serve)<br/>started in the local console"]
+    C["2 Hero captured 2026-11-15<br/>H1: Voice agents that sound human and deliver results<br/>runs read this saved copy sarvam.ai is not loaded again"]
+    P["3 Page set up and approved<br/>positioning and claims approved by the owner<br/>buyer checklist approved: A7 and A8 asked"]
+    A["4 AUDIT the live hero (Jev)<br/>gaps: A3-proof, A4-cta, A1-audience, A2-value<br/>already answered: none"]
+    D{"Gap found?"}
+    H["5 GAP DOSSIER<br/>203 words numbers, ids and quotes checked by code"]
+    T["6 TEST PLAN<br/>action: one click on the main button<br/>goal link: console"]
+    W["7 WRITER (Opus): 3 variants<br/>A: Lenders: describe the borrower call in plain language and go live in minutes<br/>B: A phone agent for your lending team that updates records during the call<br/>C: Credit and collections teams: launch an Indian-language phone agent in minutes"]
+    G1["Gate 1: RULES, 1 round(s)<br/>A: ok<br/>B: ok<br/>C: ok"]:::gate
+    G2["Gate 2: JEV + JUDGE 2<br/>B: gain +0.12 / +0.15<br/>C: gain +0.33 / +0.38<br/>A: gain +0.14 / +0.15"]:::gate
+    SL["Shortlist<br/>B: passed<br/>C: held<br/>A: held"]
+    PX["8 Apply the words, check the button link<br/>3 PNG pair(s) made"]
+    AP["9 HUMAN approval<br/>approved: variant B"]:::gate
+    SP["10 SANDBOX PLAN<br/>8 visitor groups, lift 6.8%, effective 1.8%"]
+    SB["Simulate and check<br/>Test 1: inconclusive<br/>Test 2: inconclusive<br/>Test 3 (A/A): inconclusive<br/>browser sessions: baseline 20/20, variant 20/20"]
+    FD["11 FINDINGS (SYNTHETIC)<br/>a real test needs 1,104,873 visitors per arm<br/>NOT rolled out"]
+    DOC["12 Submission and docs<br/>README, architecture, Jev note"]
+    S --> C --> P --> A --> D
+    D -- yes --> H --> T --> W --> G1
+    G1 -- fail, max 2 rounds --> W
+    G1 -- pass --> G2 --> SL
+    SL --> PX --> AP
+    AP -- approve --> SP --> SB --> FD --> DOC
+```

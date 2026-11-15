@@ -200,6 +200,7 @@ async function loadPage(slug, pick) {
   await selectRun(pick || S.runs[0]?.run);
 }
 async function selectRun(run) {
+  if (run && !(S.runs || []).some(x => x.run === run)) run = S.runs?.[0]?.run;   // a run from a page that is no longer selected
   S.run = run;
   document.querySelectorAll(".run").forEach(b => b.classList.toggle("sel", b.dataset.r === run));
   S.info = run ? await api("/api/run", {page: S.page, run}) : null;
@@ -394,7 +395,22 @@ function viewLog() {
   return `<div class="card"><div id="logmeta" class="small muted">Checking…</div><pre id="logbox">${esc(S.lastLog || "No run started from this console yet.")}</pre></div>`;
 }
 
-const GROUPS = {passed: ["Passed both gates", "p-pass"], held: ["Held for you", "p-hold"], failed_gate2: ["Failed Gate 2 (judges)", "p-fail"]};
+const GROUPS = {passed: ["Passed both gates", "p-pass"], held: ["Held for you", "p-hold"], failed_gate2: ["Failed Gate 2 (judges)", "p-fail"], failed_gate1: ["Failed Gate 1 (rules): edit it to use it", "p-fail"]};
+const FIELD = "font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)";
+function editBox(x) {
+  if (S.mode !== "live") return "";
+  const n = (S.info.probe?.edits || []).length;
+  return `<details class="editbox" style="margin-top:10px"><summary class="small"><b>Edit and re-check</b>${x.group === "failed_gate1" ? " (the way to use this variant)" : ""}</summary>
+    <div class="ed" data-v="${esc(x.name)}" style="display:grid;gap:6px;max-width:640px;margin-top:6px">
+      <div class="small muted">Change the words yourself, or write a note and the writer rewrites it. Either way the new version goes through Gate 1 and Gate 2 again and appears as a new variant. ${n}/5 edits used in this run.</div>
+      <input class="eh1" value="${esc(x.h1 || "")}" maxlength="400" style="${FIELD}" aria-label="H1">
+      <textarea class="esub" rows="2" maxlength="400" style="${FIELD}" aria-label="Sub-line">${esc(x.subline || "")}</textarea>
+      <input class="ecta" value="${esc(x.cta || "")}" maxlength="400" style="${FIELD}" aria-label="Button">
+      <button class="primary" data-k="words">Re-check my words</button>
+      <textarea class="enote" rows="2" maxlength="400" placeholder="Or a note for the writer, for example: name the buyer in the headline" style="${FIELD}"></textarea>
+      <button data-k="note">Ask the writer to revise</button>
+    </div></details>`;
+}
 function latestEntry() { const e = S.info?.approval?.entries || []; return e[e.length - 1]; }
 function viewApprove() {
   const sl = S.info.shortlist || [];
@@ -410,19 +426,20 @@ function viewApprove() {
       <ul class="small">${x.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
       ${scoreTable(x.name)}
       ${png ? `<img class="pair" loading="lazy" alt="Baseline and variant ${esc(x.name)}" src="${fileUrl(`pair-${x.name}.png`)}">` : ""}
-      ${S.mode === "live" ? `<div class="decide" data-v="${esc(x.name)}" data-g="${esc(x.group)}" style="margin-top:10px;display:grid;gap:6px;max-width:640px">
+      ${editBox(x)}
+      ${S.mode === "live" && x.group !== "failed_gate1" ? `<div class="decide" data-v="${esc(x.name)}" data-g="${esc(x.group)}" style="margin-top:10px;display:grid;gap:6px;max-width:640px">
         <input class="nm" placeholder="Name (optional)" maxlength="80" style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)">
         <textarea class="rs" rows="2" placeholder="${x.group === "passed" ? "Reason (optional)" : "Why you choose it despite the gate result (required to approve)"}" style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)"></textarea>
-        <textarea class="nt" rows="2" placeholder="For Revise: what the writer should change (recorded for you; the next run does not read it yet)" style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)"></textarea>
+        <textarea class="nt" rows="2" placeholder="Note for the record (optional). To change the words, use Edit and re-check above." style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)"></textarea>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" data-d="approve">Approve for the sandbox</button><button data-d="reject">Reject</button><button data-d="revise">Revise</button></div>
         <div class="msg small"></div></div>` : ""}
     </details>`;
   };
-  const order = ["passed", "held", "failed_gate2"];
-  return `<div class="card small">Pick one variant for the sandbox. Passed and held variants are open; Gate 2 failures are folded but can be chosen with a reason. Gate 1 (rules) failures cannot be chosen: their text is not true or not allowed (Decisions Log row 33).</div>
+  const order = ["passed", "held", "failed_gate2", "failed_gate1"];
+  return `<div class="card small">Pick one variant for the sandbox. Passed and held variants are open; Gate 2 failures are folded but can be chosen with a reason. Gate 1 (rules) failures cannot be chosen as they stand: their text is not true or not allowed. Any variant can be edited and checked again.</div>
     <div class="banner ${C ? "p-pass" : "p-off"}">${C ? `Approved for the sandbox: <b>variant ${esc(C.variant)}</b> by ${esc(C.name)} at ${esc(C.at)}${C.override ? ` · chosen against a Gate 2 result: “${esc(C.reason)}”` : ""}. A reject or revise on this same variant withdraws it; approving another variant replaces it.` : "No variant is approved for the sandbox yet."}</div>
     ${order.map(g => sl.filter(x => x.group === g).map(card).join("")).join("")}
-    ${g1.length ? `<div class="card small muted">${g1.length} variant(s) stopped at Gate 1 (rules) and cannot be chosen: ${g1.map(x => `${esc(x.name)} (${esc(x.reasons.join("; "))})`).join("; ")}</div>` : ""}
+
     <div class="card"><b>Sandbox</b> <span class="pill p-off">SYNTHETIC</span>
       <p class="small">Tests the latest approved variant against the live hero: a seeded simulation with click rates we declare (clear and inconclusive scenarios, plus an A/A check), and 20 scripted browser sessions per arm on the saved local copy of the page. Nothing is sent to sarvam.ai. No model calls.</p>
       ${S.mode === "live" ? `<button id="sbx" class="primary" ${C ? "" : "disabled"}>${sb ? "Run the sandbox again" : "Run the sandbox"}</button> <span class="small muted">${C ? `on variant ${esc(C.variant)}` : "approve a variant first"}</span>` : ""}
@@ -450,6 +467,14 @@ function wireApprove() {
     const j = await r.json();
     if (!r.ok) { box.querySelector(".msg").textContent = j.error; box.querySelector(".msg").style.color = "var(--fail)"; return; }
     await selectRun(S.run);
+  });
+  document.querySelectorAll(".ed button").forEach(b => b.onclick = async () => {
+    const box = b.closest(".ed"), words = b.dataset.k === "words";
+    const body = {page: S.page, run: S.run, variant: box.dataset.v};
+    if (words) Object.assign(body, {h1: box.querySelector(".eh1").value, sub: box.querySelector(".esub").value, cta: box.querySelector(".ecta").value});
+    else { body.note = box.querySelector(".enote").value.trim(); if (body.note.length < 5) return alert("Write a short note for the writer first."); }
+    if (!confirm("Check this edit with Gate 1 and both judges? It costs about $0.05 to $0.15 and takes about a minute.")) return;
+    await postJob("/api/edit", body);
   });
   const sbx = document.getElementById("sbx");
   if (sbx) sbx.onclick = async () => {
@@ -600,37 +625,12 @@ function scoreTable(name) {
 }
 
 function mmEsc(t, n) { t = String(t ?? "").replace(/["<>{}\[\]|#;]/g, " ").replace(/\s+/g, " ").trim(); return n && t.length > n ? t.slice(0, n - 1) + "…" : t; }
-function runFlowText() {
-  const p = S.info.probe || {}, sl = S.info.shortlist || [], C = S.info.current_approval, sb = S.info.sandbox, cap = S.capture || {};
-  const a = p.audit || {}, v = a.verdict || {};
-  const passed = Object.keys(v).filter(k => /pass/.test(v[k]));
-  const g1 = (p.gate1_rounds || []).slice(-1)[0] || {};
-  const GW = {passed: "passed", held: "held", failed_gate2: "failed Gate 2", failed_gate1: "failed Gate 1"};
-  const L = [];
-  const node = (id, lines, done) => L.push(`    ${id}["${lines.map(x => mmEsc(x, 90)).join("<br/>")}"]${done ? "" : ":::todo"}`);
-  node("S", ["1 Start (person)", "page: " + (S.pageInfo?.name || S.page), "buyer: " + (p.persona?.buyer || "not recorded"), "goal: " + (p.goal?.label || "not recorded")], true);
-  node("C", ["2 Hero captured " + (cap.captured_at || cap.folder || "").slice(0, 10), "H1: " + (cap.h1 || ""), "CTA: " + ((cap.ctas || []).find(x => x.href)?.text || "")], !!S.capture);
-  node("P", ["3 Positioning and claims", "approved for this page before the run"], true);
-  node("A", ["4 Audit (Jev)", "gaps: " + ((a.gaps || []).join(", ") || "none"), "already answered: " + (passed.join(", ") || "none")], !!p.audit);
-  node("H", ["5 Gap dossier", (p.dossier?.text ? p.dossier.text.split(/\s+/).length + " words, numbers checked by code" : "not written")], !!p.dossier);
-  node("T", ["6 Test plan", "action: click the main CTA", "goal link: " + (p.goal?.kind || "")], !!p.goal);
-  node("W", ["7 Writer (Opus): " + (p.variants || []).length + " variants"].concat((p.variants || []).map(x => x.name + ": " + x.h1)), (p.variants || []).length > 0);
-  node("G1", ["Gate 1: rules, " + (p.gate1_rounds || []).length + " round(s)"].concat(Object.entries(g1).map(([k, pr]) => k + ": " + (pr.length ? pr.length + " problem(s)" : "ok"))), !!p.gate1_rounds);
-  node("G2", ["Gate 2: Jev + Judge 2"].concat(sl.map(x => x.name + ": " + GW[x.group] + (x.near_miss ? " (near miss)" : "") + (x.gains ? ", gain " + Object.values(x.gains).map(g => (g >= 0 ? "+" : "") + g.toFixed(2)).join(" / ") : ""))), sl.length > 0);
-  node("PX", ["8 PNG pairs and CTA check", (S.info.files || []).filter(f => f.startsWith("pair-") && f.endsWith(".png")).length + " pairs made"], (S.info.files || []).some(f => f.startsWith("pair-")));
-  node("AP", C ? ["9 Human approval", "approved: variant " + C.variant + (C.override ? " (against Gate 2, reason given)" : "")] : ["9 Human approval", "waiting for a person"], !!C);
-  if (sb && sb.plan) {
-    const pl = sb.plan, sim = sb.simulated || {};
-    node("SB", ["10 Sandbox", pl.segments.length + " visitor groups, lift " + (100 * pl.declared_lift).toFixed(1) + "%, effective " + (100 * pl.effective_lift).toFixed(1) + "%"].concat(Object.entries(sim).map(([k, r]) => (k === "enough" ? "Test 1" : k === "too_few" ? "Test 2" : k === "A/A check" ? "Test 3 (A/A)" : k) + ": " + r.result)).concat(["bots: baseline " + sb.browser.passed.baseline + "/" + sb.browser.sessions_per_arm + ", variant " + sb.browser.passed.variant + "/" + sb.browser.sessions_per_arm]), true);
-    node("FD", ["11 Findings (SYNTHETIC)", pl.visitors_needed_for_effective_lift ? "a real test needs " + pl.visitors_needed_for_effective_lift.toLocaleString() + " visitors per arm" : "no lift to detect", "NOT rolled out"], true);
-  } else if (sb) {
-    node("SB", ["10 Sandbox", "run with typed scenarios (older run)"], true);
-    node("FD", ["11 Findings (SYNTHETIC)", "NOT rolled out"], true);
-  } else {
-    node("SB", ["10 Sandbox", "not run yet"], false);
-    node("FD", ["11 Findings", "not written yet"], false);
-  }
-  return "flowchart TD\n    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778\n" + L.join("\n") + "\n    S --> C --> P --> A --> H --> T --> W --> G1 --> G2 --> PX --> AP --> SB --> FD\n";
+async function runFlowText() {
+  // Built by agent/run_flow.py from the run's own files: one script for every run, same steps as the architecture.
+  if (S.mode === "static") { const t = await (await fetch(fileUrl("RUN-FLOW.md"))).text(); const m = t.match(/```mermaid\n([\s\S]*?)```/); if (!m) throw new Error("no diagram for this run"); return m[1]; }
+  const r = await fetch("/api/runflow?" + new URLSearchParams({page: S.page, run: S.run}), {cache: "no-store"});
+  if (!r.ok) throw new Error("diagram not available");
+  return await r.text();
 }
 function loadMermaid() {
   if (window.mermaid) return Promise.resolve(window.mermaid);
@@ -641,8 +641,8 @@ function loadMermaid() {
 }
 function drawRunFlow() {
   const el = document.getElementById("runflow"); if (!el || !S.info) return;
-  loadMermaid().then(m => m.render("rf" + Date.now(), runFlowText())).then(r => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = r.svg; })
-    .catch(() => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = '<p class="small muted">The diagram needs the internet to load its drawing library.</p>'; });
+  Promise.all([loadMermaid(), runFlowText()]).then(([m, t]) => m.render("rf" + Date.now(), t)).then(r => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = r.svg; })
+    .catch(e => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = '<p class="small muted">The diagram could not be drawn (' + esc(e.message || "no network") + ').</p>'; });
 }
 const RUNFLOW_CARD = `<div class="card"><b>This run, step by step</b> <span class="small muted">same 12 steps as the architecture; grey dashed = not reached yet</span><div id="runflow" style="overflow-x:auto;margin-top:8px"><p class="small muted">Drawing…</p></div></div>`;
 function viewFindings() {
@@ -675,7 +675,7 @@ async function pollStatus() {
     document.getElementById("logmeta").textContent = st.started ? `Run on ${st.page} started ${st.started}. Spend cap per run: $${st.spend_cap_usd.toFixed(2)}.` : `Spend cap per run: $${st.spend_cap_usd.toFixed(2)}.`; }
   updateGo(st.running);
   if (st.running) S.poll = setTimeout(pollStatus, 2000);
-  else if (S.wasRunning) { S.wasRunning = false; if (st.kind === "sandbox") S.tab = "approve"; if (st.kind === "setup") S.tab = "setup"; await loadPage(st.page || S.page, st.kind === "setup" ? S.run : st.new_run); }
+  else if (S.wasRunning) { S.wasRunning = false; if (st.kind === "sandbox" || st.kind === "edit") S.tab = "approve"; if (st.kind === "setup") S.tab = "setup"; await loadPage(st.page || S.page, st.kind === "setup" ? S.run : st.new_run); }
   if (st.running) S.wasRunning = true;
 }
 init().catch(e => { $("#view").innerHTML = `<div class="card">Could not load: ${esc(e.message)}</div>`; });

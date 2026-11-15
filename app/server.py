@@ -50,6 +50,7 @@ sys.path.insert(0, os.path.join(PROJECT, "agent"))
 import shortlist  # noqa: E402
 import page_setup as setup  # noqa: E402
 import destinations as dst  # noqa: E402
+import run_flow  # noqa: E402
 
 STATE = {"proc": None, "page": None, "log": None, "started": None, "run_before": None}
 LOCK = threading.Lock()
@@ -205,7 +206,7 @@ def status():
             now = [os.path.basename(x) for x in glob.glob(os.path.join(PAGES, STATE["page"], "runs", "probe3-*"))]
             fresh = sorted(set(now) - set(STATE["run_before"] or []))
             new_run = fresh[-1] if fresh else None
-        if STATE.get("kind") == "sandbox":
+        if STATE.get("kind") in ("sandbox", "edit"):
             new_run = STATE.get("job_run")
         return {"running": running, "page": STATE["page"], "started": STATE["started"], "kind": STATE.get("kind"),
                 "exit_code": None if (proc is None or running) else proc.returncode,
@@ -356,6 +357,23 @@ def start_sandbox(slug, run):
     return start_job(slug, [sys.executable, os.path.join(PROJECT, "agent", "sandbox_hero.py"), "--page", slug, "--run", run], "sandbox", run)
 
 
+def start_edit(slug, run, body):
+    """Step 9, edit and re-check: a person's own words, or a note the writer rewrites from. Gates 1 and 2 run again."""
+    run_dir(slug, run)
+    src = body.get("variant") or ""
+    if not re.match(r"^[A-Z](-edit\d+)?$", src):
+        raise ValueError("pick a variant to edit")
+    note = (body.get("note") or "").strip()
+    h1, sub, cta = [(body.get(k) or "").strip() for k in ("h1", "sub", "cta")]
+    if not note and not (h1 or sub or cta):
+        raise ValueError("change the H1, sub-line or button, or write a note for the writer")
+    if any(len(x) > 400 for x in (note, h1, sub, cta)):
+        raise ValueError("too long (400 characters at most per field)")
+    cmd = [sys.executable, os.path.join(PROJECT, "agent", "edit_variant.py"), "--page", slug, "--run", run, "--from", src]
+    cmd += ["--note", note] if note else ["--h1", h1, "--sub", sub, "--cta", cta]
+    return start_job(slug, cmd, "edit", run)
+
+
 def start_run(slug, key, goal):
     page_dir(slug)
     if not setup.persona(key or ""):
@@ -426,6 +444,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200, questions(q.get("page"), q.get("persona")))
             if u.path == "/api/status":
                 return self.send(200, status())
+            if u.path == "/api/runflow":
+                run_dir(q.get("page"), q.get("run"))
+                return self.send(200, run_flow.mermaid(run_flow.gather(q.get("page"), q.get("run"), PROJECT)).encode("utf-8"), "text/plain; charset=utf-8")
             if u.path == "/api/doc":
                 f = DOCS.get(q.get("name", ""))
                 if not f or not os.path.isfile(os.path.join(PROJECT, f)):
@@ -470,6 +491,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200, approve(body))
             if u.path == "/api/sandbox":
                 return self.send(200, start_sandbox(body.get("page"), body.get("run")))
+            if u.path == "/api/edit":
+                return self.send(200, start_edit(body.get("page"), body.get("run"), body))
             return self.send(404, {"error": "not found"})
         except (ValueError, RuntimeError) as e:
             return self.send(409, {"error": str(e)})

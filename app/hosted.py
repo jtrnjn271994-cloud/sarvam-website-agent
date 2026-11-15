@@ -316,12 +316,14 @@ class handler(server.Handler):   # Vercel looks for a class named `handler`
             hydrate()
             if path in ("/api/setup/draft", "/api/setup/approve") and not CTX.owner:
                 return self.send(403, {"error": "page setup needs the owner code. Runs, approvals and the sandbox do not."})
-            if path in ("/api/approve", "/api/sandbox") and read_only_run(page, body.get("run")):
+            if path in ("/api/approve", "/api/sandbox", "/api/edit") and read_only_run(page, body.get("run")):
                 raise ValueError("this run was made on the owner's machine and is read-only on the website. Start a new run to approve and test a variant.")
             if path == "/api/start":
                 return self.send(200, server.start_run(page, body.get("persona"), body.get("goal")))
             if path == "/api/sandbox":
                 return self.send(200, server.start_sandbox(page, body.get("run")))
+            if path == "/api/edit":
+                return self.send(200, server.start_edit(page, body.get("run"), body))
             if path == "/api/setup/draft":
                 return self.send(200, server.start_setup(page, body.get("persona")))
             before = snapshot(page)

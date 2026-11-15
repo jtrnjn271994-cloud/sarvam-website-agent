@@ -1,0 +1,33 @@
+# Coding Agents: run probe3-20261115-204455, step by step
+
+Same steps as docs/architecture.html. Grey dashed = not reached yet.
+
+```mermaid
+flowchart TD
+    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778
+    classDef gate stroke-width:3px
+    classDef stop fill:#FDE2E2,stroke:#D14B4B,color:#5a1010
+    S["1 Start (person)<br/>page: Coding Agents<br/>buyer: Technical evaluator (Head of AI Head of Engineering India Chief Technology Officer…<br/>goal: More developers open the API docs<br/>started in the local console"]
+    C["2 Hero captured 2026-11-15<br/>H1: Better code in the long run<br/>runs read this saved copy sarvam.ai is not loaded again"]
+    P["3 Page set up and approved<br/>positioning and claims approved by the owner<br/>buyer checklist approved: A7 and A8 asked"]
+    A["4 AUDIT the live hero (Jev)<br/>gaps: A3-proof, A4-cta, A1-audience, A2-value<br/>already answered: A7-checklist-item-1"]
+    D{"Gap found?"}
+    H["5 GAP DOSSIER<br/>209 words numbers, ids and quotes checked by code"]
+    T["6 TEST PLAN<br/>action: one click on the main button<br/>goal link: docs"]
+    W["7 WRITER (Opus): 3 variants<br/>A: Multi-step refactors for GCC teams, with your code in Indian jurisdiction<br/>B: India-centre refactors that test each change and retry from a checkpoint<br/>C: Steer multi-step refactors live, with different tasks sent to different models"]
+    G1["Gate 1: RULES, 1 round(s)<br/>A: ok<br/>B: ok<br/>C: ok"]:::gate
+    G2["Gate 2: JEV + JUDGE 2<br/>A: gain +0.24 / +0.25<br/>B: gain +0.20 / +0.28<br/>C: gain +0.23 / +0.18"]:::gate
+    SL["Shortlist<br/>A: failed Gate 2 (near miss)<br/>B: failed Gate 2 (near miss)<br/>C: failed Gate 2 (near miss)"]
+    PX["8 Apply the words, check the button link<br/>3 PNG pair(s) made"]
+    AP["9 HUMAN approval<br/>approved: variant B (against Gate 2, reason given)"]:::gate
+    SP["10 SANDBOX PLAN<br/>8 visitor groups, lift 12.1%, effective 7.1%"]
+    SB["Simulate and check<br/>Test 1: inconclusive<br/>Test 2: inconclusive<br/>Test 3 (A/A): inconclusive<br/>browser sessions: baseline 20/20, variant 20/20"]
+    FD["11 FINDINGS (SYNTHETIC)<br/>a real test needs 77,548 visitors per arm<br/>NOT rolled out"]
+    DOC["12 Submission and docs<br/>README, architecture, Jev note"]
+    S --> C --> P --> A --> D
+    D -- yes --> H --> T --> W --> G1
+    G1 -- fail, max 2 rounds --> W
+    G1 -- pass --> G2 --> SL
+    SL --> PX --> AP
+    AP -- approve --> SP --> SB --> FD --> DOC
+```

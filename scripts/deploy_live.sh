@@ -24,6 +24,7 @@ for n in os.listdir(s):
 PY
 mkdir -p "$STAGE/api" "$STAGE/bundle"
 python3 app/server.py --export "$STAGE/public"
+cp docs/architecture.html "$STAGE/public/architecture.html"   # the one to share: /architecture.html
 for x in agent app rules knowledge library skills templates schemas docs submission tests pages README.md; do
   [ -e "$x" ] && rsync -a --exclude '__pycache__' --exclude '*.pyc' --exclude '.env*' "$x" "$STAGE/bundle/"
 done

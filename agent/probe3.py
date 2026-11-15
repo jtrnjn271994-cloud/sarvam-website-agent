@@ -113,6 +113,57 @@ def audit(D, role, h1, sub, cta, dest_txt, aq, purpose):
     return {k: r["answers"][k]["p"] for k in aq}
 
 
+def audit_questions(D, Q):
+    """The audit questions for this page and buyer: A1 to A6, plus A7 and A8 once the buyer checklist is approved."""
+    aq, skipped = {}, []
+    for qd in Q["audit"]["questions"]:
+        if qd["id"] == "A6-swap" and not D["rivals"]:
+            skipped.append("A6-swap (no rival heroes saved for this page)")
+            continue
+        if qd.get("fill") and not D["q_approved"]:
+            skipped.append(qd["id"])   # page-specific questions wait for a person to approve them
+            continue
+        if qd.get("fill") == "item":
+            for i, it in enumerate(D["items"]):
+                aq["%s-%d" % (qd["id"], i + 1)] = qd["text"].replace("{item}", it)
+        elif qd.get("fill") == "objection":
+            if D["objection"]:
+                aq[qd["id"]] = qd["text"].replace("{objection}", D["objection"].rstrip("."))
+        else:
+            aq[qd["id"]] = qd["text"]
+    return aq, skipped
+
+
+def gate2_score(D, v, aq, th, Q, g2_q, a_base, a_base2, targeted):
+    """Gate 2 for one variant: both judges, the same rules for a first draft and for a person's edit."""
+    dtxt = D["dests"][v["cta_destination"]]["what_it_is"]
+    r = {}
+    for role in ("judge1", "judge2"):
+        fr = []
+        for m in v["map"]:
+            a = llm.decide(role, jk.fragment_state(m["fragment"], m["claim"], D["claims"][m["claim"]]["text"], quote_of(D, m["claim"])),
+                           {k: g2_q[k]["text"] for k in ("G1-support", "G2-overreach")}, "gate2 %s %s" % (v["name"], m["claim"]))
+            ps = {k: a["answers"][k]["p"] for k in ("G1-support", "G2-overreach")}
+            fr.append({"fragment": m["fragment"], "claim": m["claim"], "p": ps, "verdict": {k: jk.verdict(th, role, k, p) for k, p in ps.items()}})
+        b = llm.decide(role, ["HERO TEXT: " + jk.norm(v["h1"] + " " + v["subline"]), "DO-NOT-CLAIM LIST: " + "; ".join(D["banned"])],
+                       {"G3-banned": g2_q["G3-banned"]["text"]}, "gate2 banned " + v["name"])
+        pb = b["answers"]["G3-banned"]["p"]
+        av = audit(D, role, v["h1"], v["subline"], v["cta"], dtxt, aq, "audit variant %s" % v["name"])
+        ab = a_base if role == "judge1" else a_base2
+        sign = lambda k: -1 if jk.is_bad(k) else 1
+        delta = {k: round(sign(k) * (av[k] - ab[k]), 2) for k in aq}
+        held = [k for k in aq if k not in targeted]
+        hard_fail = [f for f in fr if f["verdict"]["G2-overreach"] == "fail"] + ([1] if jk.verdict(th, role, "G3-banned", pb) == "fail" else [])
+        rule = Q["gate2"]["better_than_baseline"]
+        better = sum(delta[k] for k in targeted) / len(targeted) >= rule["min_gain"] and all(delta[k] >= -rule["max_drop"] for k in held)
+        r[role] = {"fragments": fr, "G3": pb, "G3_verdict": jk.verdict(th, role, "G3-banned", pb), "audit_variant": av, "audit_baseline": ab,
+                   "delta": delta, "targeted": targeted, "held_out": held, "better": better, "hard_fail": bool(hard_fail),
+                   "variant_verdicts": {k: jk.verdict(th, role, k, p) for k, p in av.items()}}
+    r["pass"] = not r["judge1"]["hard_fail"] and not r["judge2"]["hard_fail"] and r["judge1"]["better"] and r["judge2"]["better"]
+    r["disagree"] = r["judge1"]["better"] != r["judge2"]["better"] or r["judge1"]["hard_fail"] != r["judge2"]["hard_fail"]
+    return r
+
+
 def parse_json(text):
     """Take the first complete JSON object in the reply. Tolerates code fences and prose before or after it."""
     t = re.sub(r"```(?:json)?", "", text or "")
@@ -185,23 +236,7 @@ def main():
     print("LIVE BASELINE\n  H1 : %s\n  SUB: %s\n  BTN: %s -> %s" % (h1, sub, cta, base_dest_txt))
 
     # 4 audit (Jev only)
-    aq = {}
-    skipped = []
-    for qd in Q["audit"]["questions"]:
-        if qd["id"] == "A6-swap" and not D["rivals"]:
-            skipped.append("A6-swap (no rival heroes saved for this page)")
-            continue
-        if qd.get("fill") and not D["q_approved"]:
-            skipped.append(qd["id"])   # page-specific questions wait for a person to approve them
-            continue
-        if qd.get("fill") == "item":
-            for i, it in enumerate(D["items"]):
-                aq["%s-%d" % (qd["id"], i + 1)] = qd["text"].replace("{item}", it)
-        elif qd.get("fill") == "objection":
-            if D["objection"]:
-                aq[qd["id"]] = qd["text"].replace("{objection}", D["objection"].rstrip("."))
-        else:
-            aq[qd["id"]] = qd["text"]
+    aq, skipped = audit_questions(D, Q)
     out["page_questions"] = {"approved": D["q_approved"], "approved_by_on": D["q_approval"], "hero_items": D["items"],
                              "page_items_out_of_hero_scope": D["items_page"], "main_objection": D["objection"], "skipped": skipped}
     if skipped:
@@ -222,6 +257,7 @@ def main():
     if not gaps:
         print("NO GAP on the required questions. Stop: nothing is written.", "Unclear:", unclear)
         json.dump(out, open(os.path.join(run, "probe3.json"), "w"), indent=1)
+        __import__("run_flow").write(args.page, os.path.basename(run))
         return
     lead_item = sorted(items_fail, key=lambda k: a_base[k])[0] if items_fail else None
     lead_txt = D["items"][int(lead_item.split("-")[-1]) - 1] if lead_item else None
@@ -307,35 +343,10 @@ Reply with JSON only:
     res = {}
     a_base2 = audit(D, "judge2", h1, sub, cta, base_dest_txt, aq, "audit live baseline judge2") if passed1 else {}
 
+    targeted = gaps + ([lead_item] if lead_item else []) + (["A8-objection"] if obj_gap else [])
+
     def score(v):
-        dtxt = D["dests"][v["cta_destination"]]["what_it_is"]
-        r = {}
-        for role in ("judge1", "judge2"):
-            fr = []
-            for m in v["map"]:
-                a = llm.decide(role, jk.fragment_state(m["fragment"], m["claim"], D["claims"][m["claim"]]["text"], quote_of(D, m["claim"])),
-                               {k: g2_q[k]["text"] for k in ("G1-support", "G2-overreach")}, "gate2 %s %s" % (v["name"], m["claim"]))
-                ps = {k: a["answers"][k]["p"] for k in ("G1-support", "G2-overreach")}
-                fr.append({"fragment": m["fragment"], "claim": m["claim"], "p": ps, "verdict": {k: jk.verdict(th, role, k, p) for k, p in ps.items()}})
-            b = llm.decide(role, ["HERO TEXT: " + jk.norm(v["h1"] + " " + v["subline"]), "DO-NOT-CLAIM LIST: " + "; ".join(D["banned"])],
-                           {"G3-banned": g2_q["G3-banned"]["text"]}, "gate2 banned " + v["name"])
-            pb = b["answers"]["G3-banned"]["p"]
-            av = audit(D, role, v["h1"], v["subline"], v["cta"], dtxt, aq, "audit variant %s" % v["name"])
-            ab = a_base if role == "judge1" else a_base2
-            sign = lambda k: -1 if jk.is_bad(k) else 1
-            delta = {k: round(sign(k) * (av[k] - ab[k]), 2) for k in aq}
-            targeted = gaps + ([lead_item] if lead_item else []) + (["A8-objection"] if obj_gap else [])
-            held = [k for k in aq if k not in targeted]
-            hard_fail = [f for f in fr if f["verdict"]["G2-overreach"] == "fail"] + ([1] if jk.verdict(th, role, "G3-banned", pb) == "fail" else [])
-            better = (min(delta[k] for k in targeted) >= Q["gate2"]["better_than_baseline"]["min_gain"] if False else
-                      sum(delta[k] for k in targeted) / len(targeted) >= Q["gate2"]["better_than_baseline"]["min_gain"]) and \
-                all(delta[k] >= -Q["gate2"]["better_than_baseline"]["max_drop"] for k in held)
-            r[role] = {"fragments": fr, "G3": pb, "G3_verdict": jk.verdict(th, role, "G3-banned", pb), "audit_variant": av, "audit_baseline": ab,
-                       "delta": delta, "targeted": targeted, "held_out": held, "better": better, "hard_fail": bool(hard_fail),
-                       "variant_verdicts": {k: jk.verdict(th, role, k, p) for k, p in av.items()}}
-        r["pass"] = not r["judge1"]["hard_fail"] and not r["judge2"]["hard_fail"] and r["judge1"]["better"] and r["judge2"]["better"]
-        r["disagree"] = r["judge1"]["better"] != r["judge2"]["better"] or r["judge1"]["hard_fail"] != r["judge2"]["hard_fail"]
-        return v["name"], r
+        return v["name"], gate2_score(D, v, aq, th, Q, g2_q, a_base, a_base2, targeted)
 
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=max(1, len(passed1))) as ex:
@@ -426,6 +437,7 @@ Reply with JSON only:
     out["cost_usd"] = round(llm.SPENT["usd"], 4)
     out["calls"] = llm.SPENT["calls"]
     json.dump(out, open(os.path.join(run, "probe3.json"), "w"), indent=1, ensure_ascii=False)
+    __import__("run_flow").write(args.page, os.path.basename(run))   # this run's diagram, same steps as the architecture
     print("\nrun folder: %s | %d calls | cost $%.4f" % (os.path.relpath(run, PROJECT), llm.SPENT["calls"], llm.SPENT["usd"]))
 
 

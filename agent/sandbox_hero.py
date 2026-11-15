@@ -388,6 +388,7 @@ def main(page, run):
         print("%-12s n=%5d  baseline %.2f%%  variant %.2f%%  p=%.4f  %s" % (name, r["visitors_per_arm"], 100 * r["baseline"]["rate"], 100 * r["variant"]["rate"], r["p"], r["result"]))
     print("page checks passed:" if HOSTED else "browser checks passed:", res["browser"]["passed"], "of", 1 if HOSTED else SESSIONS_PER_ARM, "per arm | blocked requests:", blocked["count"])
     print("wrote", os.path.relpath(out, PROJECT))
+    __import__("run_flow").write(page, run)
     if sims["A/A check"]["result"] != "inconclusive":
         sys.exit("A/A CHECK FAILED: the set-up shows a lift where none was declared")
 
