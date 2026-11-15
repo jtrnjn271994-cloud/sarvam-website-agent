@@ -79,7 +79,7 @@ def mermaid(info):
     pq = p.get("page_questions") or {}
     node("S", ["1 Start (person)", "page: " + info["page_name"], "buyer: " + ((p.get("persona") or {}).get("buyer") or "not recorded"),
                "goal: " + ((p.get("goal") or {}).get("label") or "not recorded"), "started on the website" if web else "started in the local console"], True)
-    node("C", ["2 Hero captured " + str(hero.get("captured_at") or "")[:10], "H1: " + (hero.get("h1") or ""), "runs read this saved copy; sarvam.ai is not loaded again"], bool(hero))
+    node("C", ["2 Hero captured " + str(hero.get("captured_at") or "")[:10], "H1: " + (hero.get("h1") or ""), "the audit, writer and gates read this saved copy"], bool(hero))
     node("P", ["3 Page set up and approved", "positioning and claims approved by the owner",
                "buyer checklist approved: A7 and A8 asked" if pq.get("approved") else "buyer checklist not approved: A7 and A8 skipped"], bool(p))
     passed = [k for k, x in v.items() if "pass" in str(x)]

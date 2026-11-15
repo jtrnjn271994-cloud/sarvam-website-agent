@@ -154,44 +154,53 @@ def main():
 
 
 def pngs(rd, D, v, probe, grp):
-    """PNG pair from the SAVED page (never the live site): swap the hero text in the saved copy and screenshot it."""
-    import glob
+    """PNG pair on the owner's machine, made the same way as in a run: one read-only load of the live page
+    (no clicks), the variant's words swapped into the hero, one screenshot. The saved copy cannot be used here:
+    its styles do not load offline, so it would draw unstyled. The website never does this (HOSTED)."""
     from playwright.sync_api import sync_playwright
-    cap = os.path.dirname(D["live_path"])
-    html = re.sub(r"<base [^>]*>", "", open(os.path.join(cap, "snapshot.html"), encoding="utf-8").read(), count=1)
-    local = os.path.join(rd, "edit-snapshot.html")
-    open(local, "w", encoding="utf-8").write(html)
     clip = dict(D["hero"]["hero_clip"]); clip["height"] = min(clip["height"] + 220, 1400)
     with sync_playwright() as pw:
         br = pw.chromium.launch()
-        ctx = br.new_context(viewport={"width": 1280, "height": 900})
-        ctx.route("**/*", lambda r: r.continue_() if r.request.url.startswith("file://") else r.abort())
-        pg = ctx.new_page()
-        pg.goto("file://" + local, wait_until="load")
-        pg.wait_for_timeout(800)
+        pg = br.new_page(viewport={"width": 1280, "height": 900})
+        try:
+            pg.goto(D["hero"]["url"], wait_until="networkidle", timeout=45000)
+        except Exception:   # pages with live demos never go quiet: read once loaded
+            pg.wait_for_load_state("load", timeout=30000)
+            pg.wait_for_timeout(4000)
+        pg.wait_for_timeout(1200)
+        pg.evaluate("""() => { document.querySelectorAll('body *').forEach(e => { const s = getComputedStyle(e);
+            if ((s.position === 'fixed' || s.position === 'sticky') && /cookie|privacy|consent/i.test(e.innerText || '') && e.getBoundingClientRect().top > 200) e.style.display = 'none'; }); }""")
+        pg.evaluate("""() => { const h1=[...document.querySelectorAll('h1')].find(e=>e.getBoundingClientRect().height>0); h1.setAttribute('data-hero','h1');
+            let box=h1.parentElement; for(let i=0;i<6&&box;i++){ if([...box.querySelectorAll('a,button')].some(b=>b.innerText.trim())) break; box=box.parentElement;}
+            const p=[...box.querySelectorAll('p')].find(p=>p.innerText.trim() && (h1.compareDocumentPosition(p)&4)); if(p) p.setAttribute('data-hero','sub');
+            const a=[...box.querySelectorAll('a')].find(a=>a.innerText.trim()); if(a) a.setAttribute('data-hero','cta'); }""")
         if not os.path.isfile(os.path.join(rd, "hero-baseline.png")):
             pg.screenshot(path=os.path.join(rd, "hero-baseline.png"), clip=clip)
         pg.evaluate("""(t) => { const set=(sel,txt)=>{const e=document.querySelector(sel); if(!e) return;
             const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT); let n; const ns=[]; while(n=w.nextNode()) if(n.nodeValue.trim()) ns.push(n);
             if(ns.length){ ns[0].nodeValue=txt; ns.slice(1).forEach(x=>x.nodeValue=''); } else e.textContent=txt; };
-            set('[data-hero=h1]', t.h1); set('[data-hero=sub]', t.sub); set('[data-hero="cta-' + t.i + '"]', t.cta); }""",
-                    {"h1": v["h1"], "sub": v["subline"], "cta": v["cta"], "i": D["main_index"]})
+            set('[data-hero=h1]', t.h1); set('[data-hero=sub]', t.sub); set('[data-hero=cta]', t.cta); }""",
+                    {"h1": v["h1"], "sub": v["subline"], "cta": v["cta"]})
         pg.wait_for_timeout(150)
         pg.screenshot(path=os.path.join(rd, "hero-variant-%s.png" % v["name"]), clip=clip)
         sheet = os.path.join(rd, "pair-%s.html" % v["name"])
         open(sheet, "w", encoding="utf-8").write(
             """<html><body style="margin:0;font:14px system-ui;background:#f4f5f8;color:#1a1d26"><div style="padding:18px 22px">
-            <div style="font-size:18px;font-weight:700">Baseline vs variant %s (edited from %s; drawn on the saved page)</div>
+            <div style="font-size:18px;font-weight:700">Baseline vs variant %s (edited from %s)</div>
             <div style="color:#5b6472;margin:4px 0 14px">Buyer: %s. Goal: %s. Group: %s.</div>
-            <div style="display:flex;gap:16px"><div style="flex:1"><div style="font-weight:600;margin-bottom:6px">Baseline</div><img src="hero-baseline.png" style="width:100%%;border:1px solid #ccd"></div>
+            <div style="display:flex;gap:16px"><div style="flex:1"><div style="font-weight:600;margin-bottom:6px">Baseline (live)</div><img src="hero-baseline.png" style="width:100%%;border:1px solid #ccd"></div>
             <div style="flex:1"><div style="font-weight:600;margin-bottom:6px">Variant %s</div><img src="hero-variant-%s.png" style="width:100%%;border:1px solid #ccd"></div></div>
-            </div></body></html>""" % (v["name"], v["edited_from"], D["buyer"], D["goal"]["label"], grp["group"], v["name"], v["name"]))
+            <table style="margin-top:14px;border-collapse:collapse;background:#fff;width:100%%"><tr><th style="text-align:left;padding:6px;border:1px solid #dde">Part</th><th style="text-align:left;padding:6px;border:1px solid #dde">Baseline</th><th style="text-align:left;padding:6px;border:1px solid #dde">Variant</th></tr>
+            <tr><td style="padding:6px;border:1px solid #dde">H1</td><td style="padding:6px;border:1px solid #dde">%s</td><td style="padding:6px;border:1px solid #dde">%s</td></tr>
+            <tr><td style="padding:6px;border:1px solid #dde">Sub-line</td><td style="padding:6px;border:1px solid #dde">%s</td><td style="padding:6px;border:1px solid #dde">%s</td></tr>
+            <tr><td style="padding:6px;border:1px solid #dde">Button</td><td style="padding:6px;border:1px solid #dde">%s</td><td style="padding:6px;border:1px solid #dde">%s</td></tr></table>
+            </div></body></html>""" % (v["name"], v["edited_from"], D["buyer"], D["goal"]["label"], grp["group"], v["name"], v["name"],
+                                       D["hero"]["h1"], v["h1"], D["hero"]["sub"], v["subline"], D["cta"], v["cta"]))
         p2 = br.new_page(viewport={"width": 1600, "height": 900})
         p2.goto("file://" + sheet)
         p2.wait_for_timeout(300)
         p2.screenshot(path=os.path.join(rd, "pair-%s.png" % v["name"]), full_page=True)
         br.close()
-    os.remove(local)
     print("  PNG pair:", "pair-%s.png" % v["name"])
 
 

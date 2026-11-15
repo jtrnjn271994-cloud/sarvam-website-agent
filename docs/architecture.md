@@ -1,6 +1,6 @@
 # Sarvam website agent: architecture
 
-v10, 16 Nov 2026, as built. Written for: the project owner and any reviewer. One document.
+v10, 15 Nov 2026, as built. Written for: the project owner and any reviewer. One document.
 
 - **What it does.** One run audits the hero of a Sarvam page for one buyer and one goal. It writes better heroes only if the audit finds a gap. A person approves one, or edits one and has it checked again. A sandbox then tests the approved hero against the baseline.
 - **Where it runs.** On the owner's machine (full agent, with screenshots and browser checks) and on the website, where anyone can start a run. Website runs are saved in Supabase.
@@ -12,7 +12,7 @@ v10, 16 Nov 2026, as built. Written for: the project owner and any reviewer. One
 
 ```mermaid
 flowchart TD
-    S["1 Start (person)<br/>page, industry, buyer persona, goal<br/>picked from drop-downs, in the local console or on the website<br/>the goal list changes with the buyer; the first goal is the suggestion"] --> C["2 Capture the page once with Playwright (owner's machine)<br/>keep the hero only: H1, sub-line, main CTA text and link<br/>plus a hero screenshot (desktop) and a saved copy of the page<br/>the rest of the page is stored, never audited<br/>runs never load sarvam.ai again"]
+    S["1 Start (person)<br/>page, industry, buyer persona, goal<br/>picked from drop-downs, in the local console or on the website<br/>the goal list changes with the buyer; the first goal is the suggestion"] --> C["2 Capture the page once with Playwright (owner's machine)<br/>keep the hero only: H1, sub-line, main CTA text and link<br/>plus a hero screenshot (desktop) and a saved copy of the page<br/>the rest of the page is stored, never audited<br/>the audit, writer and gates read this saved copy"]
     C --> P{"3 Page set up<br/>and approved?"}
     P -- yes --> L["Load the approved positioning, claims and buyer checklist<br/>(the checklist is optional: it adds questions A7 and A8)"]
     P -- no --> G["Reasoning model (Gemini) drafts the page setup<br/>claims: each tied to a quote found word for word on the saved page<br/>positioning: 12 sections, every bullet sourced and labelled<br/>sources: the saved page and knowledge/ only, cited as KB ids<br/>buyer checklist: questions this buyer asks, tagged hero or page"]
@@ -31,7 +31,7 @@ flowchart TD
     G1 -- pass --> G2["Gate 2: DOUBLE CHECK<br/>JEV + JUDGE 2 (OpenAI decisions), each variant in parallel<br/>G1 the evidence supports the line, G2 no overreach, G3 no banned claim in other words<br/>then A1 to A8 again on the variant<br/>better = average gain of 0.10 or more on the gaps,<br/>and no other question down by more than 0.05"]:::gate
     G2 --> SL["Shortlist: nothing is hidden<br/>passed: both judges say better<br/>held: the judges disagree, or a banned flag that code cannot confirm<br/>failed Gate 2: marked NEAR MISS when only a kept question fell<br/>failed Gate 1: shown, not approvable as it stands"]
     X --> SL
-    SL --> PX["8 Apply the words to the saved page<br/>text swap only, layout and styles unchanged<br/>PNG pair: baseline and variant (owner's machine)<br/>website runs take no screenshots: the variant text and its hash are shown"]
+    SL --> PX["8 Apply the words to the saved page<br/>text swap only, layout and styles unchanged<br/>owner's machine: one read-only load of the live page (no clicks)<br/>for the PNG pair, baseline and variant<br/>website: no screenshots and no live load; the variant text and its hash are shown"]
     PX --> F["Functional check<br/>the button of each arm points to the real link for the goal"]
     F --> AP["9 HUMAN approval<br/>the person sees each variant, both judges' scores per question,<br/>the dossier, the claim map and the PNG pair<br/>a variant that failed Gate 2 can be approved with a typed reason"]:::gate
     AP -- edit --> E["Edit and re-check<br/>the person changes the H1, sub-line or button,<br/>or writes a note and the writer (Opus) rewrites that one variant<br/>the new version goes through Gate 1 and Gate 2 again<br/>and comes back as a new variant, for example B-edit1"]
@@ -168,7 +168,7 @@ flowchart LR
 - **One job at a time.** The local console and the website each run one job at a time. On the website the lock lives in Supabase, so it holds across servers.
 - **Who may do what.** Anyone may start a run, edit or approve a variant, and run the sandbox. Only the owner (owner code) may draft or approve a page's positioning and claims. Runs made on the owner's machine are read-only on the website.
 - **No names stored.** An approval on the website records "a person". It never stores a visitor's name.
-- **No bot traffic.** Runs read the saved page. Neither the website nor the sandbox loads sarvam.ai.
+- **No bot traffic.** The website and the sandbox never load sarvam.ai. On the owner's machine, the PNG step loads the live page once per run or edit, read only, with no clicks.
 
 ## 5. Models
 

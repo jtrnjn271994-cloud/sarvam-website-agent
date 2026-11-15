@@ -1,0 +1,1192 @@
+{
+ "label": "PROBE v3 on the live baseline. Calibrated lines from rules/judge-thresholds.json (small self-written case set).",
+ "roles": {
+  "reasoning": "google/gemini-3.8-flash",
+  "writer": "anthropic/claude-opus-5.5",
+  "judge1": "typesafe/jev-1.14",
+  "judge2": "openai/gpt-6-luna-decisions"
+ },
+ "knowledge_version": "2026-11-15-941591e526ba",
+ "live_capture": "pages/voice-agents/capture/2026-11-15-live/hero.json",
+ "skills": {
+  "dossier": [
+   {
+    "skill": "cro",
+    "sha256": "c9bcd125a883bc6a",
+    "chars": 6972
+   },
+   {
+    "skill": "buyer-profile-validation",
+    "sha256": "438204d6978d78dc",
+    "chars": 1962
+   },
+   {
+    "skill": "claim-evidence-check",
+    "sha256": "41eb161a53f6efe2",
+    "chars": 2126
+   },
+   {
+    "skill": "marketing-plain-writing",
+    "sha256": "8347ff7b098959a8",
+    "chars": 3550
+   }
+  ],
+  "writer_draft": [
+   {
+    "skill": "copywriting-marketingskills",
+    "sha256": "4e754d587b7472a7",
+    "chars": 15209
+   },
+   {
+    "skill": "cro",
+    "sha256": "c9bcd125a883bc6a",
+    "chars": 6972
+   },
+   {
+    "skill": "page-copy-draft",
+    "sha256": "7cd9314a529acba0",
+    "chars": 2210
+   }
+  ],
+  "writer_edit": [
+   {
+    "skill": "copy-editing",
+    "sha256": "1bff8ad92989988e",
+    "chars": 18109
+   },
+   {
+    "skill": "no-ai-slop",
+    "sha256": "418975d103483f7c",
+    "chars": 11013
+   },
+   {
+    "skill": "marketing-plain-writing",
+    "sha256": "8347ff7b098959a8",
+    "chars": 3550
+   }
+  ]
+ },
+ "page": "voice-agents",
+ "persona": {
+  "key": "bfsi:business-owner",
+  "buyer": "Business owner (Chief Credit Officer; Head of Collections; Chief Credit and Collections Officer) in Banks & lenders",
+  "label": "INFERENCE"
+ },
+ "goal": {
+  "id": "start-building",
+  "label": "More visitors start building (self-serve)",
+  "kind": "console"
+ },
+ "destinations": {
+  "console": {
+   "id": "console",
+   "kind": "console",
+   "url": "https://indus.sarvam.ai/agents",
+   "live_label": "Start building",
+   "in_hero": true,
+   "what_it_is": "A link found on the saved page, labelled 'Start building'. What the visitor sees there is not checked."
+  }
+ },
+ "baseline_destination": {
+  "id": "console",
+  "kind": "console",
+  "url": "https://indus.sarvam.ai/agents",
+  "live_label": "Start building",
+  "in_hero": true,
+  "what_it_is": "A link found on the saved page, labelled 'Start building'. What the visitor sees there is not checked."
+ },
+ "main_cta_index": 0,
+ "screenshots": "taken",
+ "page_questions": {
+  "approved": true,
+  "approved_by_on": [
+   "Console user",
+   "2026-11-15T20:19:37"
+  ],
+  "hero_items": [
+   "Does the page say these voice agents are built for collecting overdue loan payments"
+  ],
+  "page_items_out_of_hero_scope": [
+   "Does the page say the agent can capture a customer's promise to pay and record it in our systems",
+   "Does the page show how a hard or disputed case is handed off to a human agent",
+   "Does the page show collections results such as collection efficiency, bounce rate or flow rates from a real lender",
+   "Does the page say we can run a small pilot and compare repayment rates against our current calling team",
+   "Does the page say we can set different call rules or goals for each overdue bucket"
+  ],
+  "main_objection": "The bot cannot capture a promise to pay or route a hard case to a human",
+  "skipped": [
+   "A6-swap (no rival heroes saved for this page)"
+  ]
+ },
+ "audit": {
+  "p": {
+   "A1-audience": 0.61,
+   "A2-value": 0.36,
+   "A3-proof": 0.04,
+   "A4-cta": 0.25,
+   "A5-positioning": 0.4,
+   "A7-checklist-item-1": 0.1,
+   "A8-objection": 0.14
+  },
+  "verdict": {
+   "A1-audience": "hold",
+   "A2-value": "hold",
+   "A3-proof": "fail",
+   "A4-cta": "fail",
+   "A5-positioning": "advisory-hold",
+   "A7-checklist-item-1": "fail",
+   "A8-objection": "fail"
+  },
+  "gaps": [
+   "A3-proof",
+   "A4-cta",
+   "A1-audience",
+   "A2-value"
+  ],
+  "unclear": [
+   "A1-audience",
+   "A2-value"
+  ],
+  "lead_item": "A7-checklist-item-1",
+  "lead_txt": "Does the page say these voice agents are built for collecting overdue loan payments",
+  "objection_gap": true
+ },
+ "thresholds_used": {
+  "date": "2026-11-15",
+  "gray_zone": null,
+  "judges": {
+   "judge1": {
+    "model": "typesafe/jev-1.14",
+    "A1-audience": {
+     "polarity": "good",
+     "pass_at": 0.69,
+     "fail_at": 0.17,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A2-value": {
+     "polarity": "good",
+     "pass_at": 0.5,
+     "fail_at": 0.09,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A3-proof": {
+     "polarity": "good",
+     "pass_at": 0.74,
+     "fail_at": 0.04,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A4-cta": {
+     "polarity": "good",
+     "pass_at": 0.64,
+     "fail_at": 0.48,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A7-checklist-item": {
+     "polarity": "good",
+     "pass_at": 0.82,
+     "fail_at": 0.23,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "A8-objection": {
+     "polarity": "good",
+     "pass_at": 0.44,
+     "fail_at": 0.37,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "G1-support": {
+     "polarity": "good",
+     "pass_at": 0.14,
+     "fail_at": 0.69,
+     "advisory": true,
+     "n_fit": 9
+    },
+    "G2-overreach": {
+     "polarity": "bad",
+     "flag_at": 0.16,
+     "clean_at": 0.23,
+     "advisory": true,
+     "n_fit": 11
+    },
+    "G3-banned": {
+     "polarity": "bad",
+     "flag_at": 0.31,
+     "clean_at": 0.22,
+     "advisory": false,
+     "n_fit": 6
+    }
+   },
+   "judge2": {
+    "model": "openai/gpt-6-luna-decisions",
+    "A1-audience": {
+     "polarity": "good",
+     "pass_at": 0.83,
+     "fail_at": 0.24,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A2-value": {
+     "polarity": "good",
+     "pass_at": 0.76,
+     "fail_at": 0.11,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A3-proof": {
+     "polarity": "good",
+     "pass_at": 0.94,
+     "fail_at": 0.0,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A4-cta": {
+     "polarity": "good",
+     "pass_at": 1.0,
+     "fail_at": 0.42,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A7-checklist-item": {
+     "polarity": "good",
+     "pass_at": 0.99,
+     "fail_at": 0.01,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "A8-objection": {
+     "polarity": "good",
+     "pass_at": 0.7,
+     "fail_at": 0.09,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "G1-support": {
+     "polarity": "good",
+     "pass_at": 0.64,
+     "fail_at": 0.96,
+     "advisory": true,
+     "n_fit": 9
+    },
+    "G2-overreach": {
+     "polarity": "bad",
+     "flag_at": 0.0,
+     "clean_at": 0.46,
+     "advisory": true,
+     "n_fit": 11
+    },
+    "G3-banned": {
+     "polarity": "bad",
+     "flag_at": 0.0,
+     "clean_at": 0.01,
+     "advisory": true,
+     "n_fit": 6
+    }
+   }
+  },
+  "method": "Bands: the hold band lies between the highest failure case and the lowest good case (fit cases only). Advisory when they overlap.",
+  "note": "Set by agent/calibrate.py from tests/calibration/cases.json. Small, self-written case set: an audit signal, not an assurance."
+ },
+ "dossier": {
+  "text": "The hero headline states, \"Voice agents that sound human and deliver results.\" The sub-line states, \"One platform to build, launch and scale voice agents that carry your customer context into every call and work each conversation toward your business outcomes.\" The button reads, \"Start building.\"\n\nThis copy fails collections leaders in banks and lending institutions. It does not name their industry or their daily work. The hero answers this buyer question worst: \"Does the page say these voice agents are built for collecting overdue loan payments\" Credit officers worry that voice bots cannot capture promises to pay or route complex cases to a human.\n\nWe hold evidence that the platform connects to business systems, updates records, and integrates with customer management tools (CL-008, CL-009). We also hold evidence that teams can inspect transcripts and call analytics (CL-010). The current hero hides these capabilities behind generic statements.\n\nIf we change the hero messaging and action button to focus on loan recovery for collections leaders in banks and lending firms, more of them click the hero's main button, because the copy addresses overdue payments and system updates.\n\nWe have no internal analytics, so the real click rate is unknown. A flat or lower click rate on the variant among lending visitors would prove this hypothesis wrong.",
+  "prose_problems_left": []
+ },
+ "variants": [
+  {
+   "name": "A",
+   "angle": "Speed to live: plain-language setup in Indian languages",
+   "h1": "Describe the call in plain language. Your Indian-language phone agent launches in minutes.",
+   "subline": "You build it without complex coding. It fetches information and updates records in your systems while the borrower is on the line.",
+   "cta": "Start building your agent",
+   "cta_destination": "console",
+   "map": [
+    {
+     "fragment": "Describe the call in plain language",
+     "claim": "CL-013"
+    },
+    {
+     "fragment": "Your Indian-language phone agent",
+     "claim": "CL-003"
+    },
+    {
+     "fragment": "launches in minutes",
+     "claim": "CL-006"
+    },
+    {
+     "fragment": "You build it without complex coding.",
+     "claim": "CL-014"
+    },
+    {
+     "fragment": "It fetches information and updates records in your systems while the borrower is on the line.",
+     "claim": "CL-008"
+    }
+   ],
+   "why": "It leads with the promise of fast, plain-language setup. The sub-line answers the record-keeping worry with a backed fact."
+  },
+  {
+   "name": "B",
+   "angle": "System connection: the call writes back to your records",
+   "h1": "Your collections agent updates records while the borrower is still talking.",
+   "subline": "It connects to your telephony, CRM and databases. Set it up in plain language and go live in minutes. Review transcripts and call analytics to see how it performs and improve it.",
+   "cta": "Start building your agent",
+   "cta_destination": "console",
+   "map": [
+    {
+     "fragment": "Your collections agent updates records while the borrower is still talking.",
+     "claim": "CL-008"
+    },
+    {
+     "fragment": "It connects to your telephony, CRM and databases.",
+     "claim": "CL-009"
+    },
+    {
+     "fragment": "Set it up in plain language",
+     "claim": "CL-013"
+    },
+    {
+     "fragment": "go live in minutes",
+     "claim": "CL-006"
+    },
+    {
+     "fragment": "Review transcripts and call analytics to see how it performs and improve it.",
+     "claim": "CL-010"
+    }
+   ],
+   "why": "It speaks to the fear that the bot loses what the borrower agreed to. Records update during the call, and transcripts stay reviewable."
+  },
+  {
+   "name": "C",
+   "angle": "Trust and control: named security standards plus tested flows",
+   "h1": "Run lending calls on ISO 27001:2022 certified, SOC 2 Type II attested infrastructure.",
+   "subline": "Describe your goal in plain language and go live in minutes. Agents speak Hindi, Tamil, Marathi and more, nudge quiet callers and detect voicemail. Genie stress tests your conversation flows before launch.",
+   "cta": "Start building your agent",
+   "cta_destination": "console",
+   "map": [
+    {
+     "fragment": "Run lending calls on ISO 27001:2022 certified, SOC 2 Type II attested infrastructure.",
+     "claim": "CL-004"
+    },
+    {
+     "fragment": "Describe your goal in plain language",
+     "claim": "CL-013"
+    },
+    {
+     "fragment": "go live in minutes",
+     "claim": "CL-006"
+    },
+    {
+     "fragment": "Agents speak Hindi, Tamil, Marathi and more",
+     "claim": "CL-003"
+    },
+    {
+     "fragment": "nudge quiet callers and detect voicemail",
+     "claim": "CL-007"
+    },
+    {
+     "fragment": "Genie stress tests your conversation flows before launch.",
+     "claim": "CL-005"
+    }
+   ],
+   "why": "It gives a credit chief the named standards the audit asks for. The first sub-line sentence keeps the plain-language, minutes-to-live promise."
+  }
+ ],
+ "gate1_rounds": [
+  {
+   "A": [],
+   "B": [],
+   "C": []
+  }
+ ],
+ "gate2": {
+  "A": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Describe the call in plain language",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.48,
+       "G2-overreach": 0.24
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Your Indian-language phone agent",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.2,
+       "G2-overreach": 0.17
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "launches in minutes",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.6,
+       "G2-overreach": 0.11
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "You build it without complex coding.",
+      "claim": "CL-014",
+      "p": {
+       "G1-support": 0.75,
+       "G2-overreach": 0.21
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "It fetches information and updates records in your systems while the borrower is on the line.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.46,
+       "G2-overreach": 0.31
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     }
+    ],
+    "G3": 0.54,
+    "G3_verdict": "fail",
+    "audit_variant": {
+     "A1-audience": 0.71,
+     "A2-value": 0.59,
+     "A3-proof": 0.05,
+     "A4-cta": 0.37,
+     "A5-positioning": 0.9,
+     "A7-checklist-item-1": 0.19,
+     "A8-objection": 0.08
+    },
+    "audit_baseline": {
+     "A1-audience": 0.61,
+     "A2-value": 0.36,
+     "A3-proof": 0.04,
+     "A4-cta": 0.25,
+     "A5-positioning": 0.4,
+     "A7-checklist-item-1": 0.1,
+     "A8-objection": 0.14
+    },
+    "delta": {
+     "A1-audience": 0.1,
+     "A2-value": 0.23,
+     "A3-proof": 0.01,
+     "A4-cta": 0.12,
+     "A5-positioning": 0.5,
+     "A7-checklist-item-1": 0.09,
+     "A8-objection": -0.06
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A7-checklist-item-1",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning"
+    ],
+    "better": false,
+    "hard_fail": true,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "pass",
+     "A3-proof": "hold",
+     "A4-cta": "fail",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "fail",
+     "A8-objection": "fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Describe the call in plain language",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.12,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Your Indian-language phone agent",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.99,
+       "G2-overreach": 0.01
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "launches in minutes",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.99,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "You build it without complex coding.",
+      "claim": "CL-014",
+      "p": {
+       "G1-support": 0.85,
+       "G2-overreach": 0.01
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "It fetches information and updates records in your systems while the borrower is on the line.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.92,
+       "G2-overreach": 0.02
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.22,
+    "G3_verdict": "advisory-fail",
+    "audit_variant": {
+     "A1-audience": 0.54,
+     "A2-value": 0.73,
+     "A3-proof": 0.0,
+     "A4-cta": 0.17,
+     "A5-positioning": 0.83,
+     "A7-checklist-item-1": 0.12,
+     "A8-objection": 0.12
+    },
+    "audit_baseline": {
+     "A1-audience": 0.44,
+     "A2-value": 0.52,
+     "A3-proof": 0.0,
+     "A4-cta": 0.18,
+     "A5-positioning": 0.49,
+     "A7-checklist-item-1": 0.03,
+     "A8-objection": 0.11
+    },
+    "delta": {
+     "A1-audience": 0.1,
+     "A2-value": 0.21,
+     "A3-proof": 0.0,
+     "A4-cta": -0.01,
+     "A5-positioning": 0.34,
+     "A7-checklist-item-1": 0.09,
+     "A8-objection": 0.01
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A7-checklist-item-1",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "fail",
+     "A4-cta": "fail",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "hold"
+    }
+   },
+   "pass": false,
+   "disagree": true
+  },
+  "B": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Your collections agent updates records while the borrower is still talking.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.38,
+       "G2-overreach": 0.26
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "It connects to your telephony, CRM and databases.",
+      "claim": "CL-009",
+      "p": {
+       "G1-support": 0.1,
+       "G2-overreach": 0.08
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Set it up in plain language",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.64,
+       "G2-overreach": 0.22
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "go live in minutes",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.71,
+       "G2-overreach": 0.13
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Review transcripts and call analytics to see how it performs and improve it.",
+      "claim": "CL-010",
+      "p": {
+       "G1-support": 0.11,
+       "G2-overreach": 0.09
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-pass"
+      }
+     }
+    ],
+    "G3": 0.14,
+    "G3_verdict": "pass",
+    "audit_variant": {
+     "A1-audience": 0.85,
+     "A2-value": 0.61,
+     "A3-proof": 0.04,
+     "A4-cta": 0.48,
+     "A5-positioning": 0.72,
+     "A7-checklist-item-1": 0.74,
+     "A8-objection": 0.09
+    },
+    "audit_baseline": {
+     "A1-audience": 0.61,
+     "A2-value": 0.36,
+     "A3-proof": 0.04,
+     "A4-cta": 0.25,
+     "A5-positioning": 0.4,
+     "A7-checklist-item-1": 0.1,
+     "A8-objection": 0.14
+    },
+    "delta": {
+     "A1-audience": 0.24,
+     "A2-value": 0.25,
+     "A3-proof": 0.0,
+     "A4-cta": 0.23,
+     "A5-positioning": 0.32,
+     "A7-checklist-item-1": 0.64,
+     "A8-objection": -0.05
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A7-checklist-item-1",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning"
+    ],
+    "better": true,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "pass",
+     "A3-proof": "fail",
+     "A4-cta": "fail",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Your collections agent updates records while the borrower is still talking.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.9,
+       "G2-overreach": 0.23
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "It connects to your telephony, CRM and databases.",
+      "claim": "CL-009",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Set it up in plain language",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.56,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "go live in minutes",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Review transcripts and call analytics to see how it performs and improve it.",
+      "claim": "CL-010",
+      "p": {
+       "G1-support": 0.92,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.0,
+    "G3_verdict": "advisory-hold",
+    "audit_variant": {
+     "A1-audience": 0.8,
+     "A2-value": 0.71,
+     "A3-proof": 0.0,
+     "A4-cta": 0.21,
+     "A5-positioning": 0.66,
+     "A7-checklist-item-1": 0.74,
+     "A8-objection": 0.15
+    },
+    "audit_baseline": {
+     "A1-audience": 0.44,
+     "A2-value": 0.52,
+     "A3-proof": 0.0,
+     "A4-cta": 0.18,
+     "A5-positioning": 0.49,
+     "A7-checklist-item-1": 0.03,
+     "A8-objection": 0.11
+    },
+    "delta": {
+     "A1-audience": 0.36,
+     "A2-value": 0.19,
+     "A3-proof": 0.0,
+     "A4-cta": 0.03,
+     "A5-positioning": 0.17,
+     "A7-checklist-item-1": 0.71,
+     "A8-objection": 0.04
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A7-checklist-item-1",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning"
+    ],
+    "better": true,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "fail",
+     "A4-cta": "fail",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "hold"
+    }
+   },
+   "pass": true,
+   "disagree": false
+  },
+  "C": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Run lending calls on ISO 27001:2022 certified, SOC 2 Type II attested infrastructure.",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.57,
+       "G2-overreach": 0.26
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Describe your goal in plain language",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.68,
+       "G2-overreach": 0.22
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "go live in minutes",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.7,
+       "G2-overreach": 0.13
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Agents speak Hindi, Tamil, Marathi and more",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.1,
+       "G2-overreach": 0.09
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "nudge quiet callers and detect voicemail",
+      "claim": "CL-007",
+      "p": {
+       "G1-support": 0.74,
+       "G2-overreach": 0.09
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Genie stress tests your conversation flows before launch.",
+      "claim": "CL-005",
+      "p": {
+       "G1-support": 0.13,
+       "G2-overreach": 0.11
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-pass"
+      }
+     }
+    ],
+    "G3": 0.64,
+    "G3_verdict": "fail",
+    "audit_variant": {
+     "A1-audience": 0.75,
+     "A2-value": 0.33,
+     "A3-proof": 0.97,
+     "A4-cta": 0.41,
+     "A5-positioning": 0.61,
+     "A7-checklist-item-1": 0.2,
+     "A8-objection": 0.09
+    },
+    "audit_baseline": {
+     "A1-audience": 0.61,
+     "A2-value": 0.36,
+     "A3-proof": 0.04,
+     "A4-cta": 0.25,
+     "A5-positioning": 0.4,
+     "A7-checklist-item-1": 0.1,
+     "A8-objection": 0.14
+    },
+    "delta": {
+     "A1-audience": 0.14,
+     "A2-value": -0.03,
+     "A3-proof": 0.93,
+     "A4-cta": 0.16,
+     "A5-positioning": 0.21,
+     "A7-checklist-item-1": 0.1,
+     "A8-objection": -0.05
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A7-checklist-item-1",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning"
+    ],
+    "better": true,
+    "hard_fail": true,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "hold",
+     "A3-proof": "pass",
+     "A4-cta": "fail",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "fail",
+     "A8-objection": "fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Run lending calls on ISO 27001:2022 certified, SOC 2 Type II attested infrastructure.",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.72,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Describe your goal in plain language",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.76,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "go live in minutes",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Agents speak Hindi, Tamil, Marathi and more",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.93,
+       "G2-overreach": 0.01
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "nudge quiet callers and detect voicemail",
+      "claim": "CL-007",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Genie stress tests your conversation flows before launch.",
+      "claim": "CL-005",
+      "p": {
+       "G1-support": 0.37,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.19,
+    "G3_verdict": "advisory-fail",
+    "audit_variant": {
+     "A1-audience": 0.43,
+     "A2-value": 0.18,
+     "A3-proof": 1.0,
+     "A4-cta": 0.26,
+     "A5-positioning": 0.35,
+     "A7-checklist-item-1": 0.29,
+     "A8-objection": 0.07
+    },
+    "audit_baseline": {
+     "A1-audience": 0.44,
+     "A2-value": 0.52,
+     "A3-proof": 0.0,
+     "A4-cta": 0.18,
+     "A5-positioning": 0.49,
+     "A7-checklist-item-1": 0.03,
+     "A8-objection": 0.11
+    },
+    "delta": {
+     "A1-audience": -0.01,
+     "A2-value": -0.34,
+     "A3-proof": 1.0,
+     "A4-cta": 0.08,
+     "A5-positioning": -0.14,
+     "A7-checklist-item-1": 0.26,
+     "A8-objection": -0.04
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A7-checklist-item-1",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "pass",
+     "A4-cta": "fail",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "pass": false,
+   "disagree": true
+  }
+ },
+ "shortlist": [
+  {
+   "name": "B",
+   "angle": "System connection: the call writes back to your records",
+   "h1": "Your collections agent updates records while the borrower is still talking.",
+   "subline": "It connects to your telephony, CRM and databases. Set it up in plain language and go live in minutes. Review transcripts and call analytics to see how it performs and improve it.",
+   "cta": "Start building your agent",
+   "cta_destination": "console",
+   "reasons": [
+    "Jev says better (average gain on the targeted gaps +0.22); Judge 2 says better (average gain on the targeted gaps +0.22)."
+   ],
+   "score": 0.22,
+   "gains": {
+    "Jev": 0.22,
+    "Judge 2": 0.22
+   },
+   "group": "passed",
+   "near_miss": false
+  },
+  {
+   "name": "C",
+   "angle": "Trust and control: named security standards plus tested flows",
+   "h1": "Run lending calls on ISO 27001:2022 certified, SOC 2 Type II attested infrastructure.",
+   "subline": "Describe your goal in plain language and go live in minutes. Agents speak Hindi, Tamil, Marathi and more, nudge quiet callers and detect voicemail. Genie stress tests your conversation flows before launch.",
+   "cta": "Start building your agent",
+   "cta_destination": "console",
+   "reasons": [
+    "Jev says better (average gain on the targeted gaps +0.21); Judge 2 says not better (targeted gain +0.16, but other questions dropped more than 0.05: A5-positioning -0.14).",
+    "The judges disagree on whether it beats the live hero.",
+    "Jev flagged a banned phrase, but Gate 1 found no item from the do-not-claim list. Held for a person instead of blocked (Decisions Log row 34)."
+   ],
+   "score": 0.183,
+   "gains": {
+    "Jev": 0.21,
+    "Judge 2": 0.16
+   },
+   "group": "held",
+   "near_miss": false
+  },
+  {
+   "name": "A",
+   "angle": "Speed to live: plain-language setup in Indian languages",
+   "h1": "Describe the call in plain language. Your Indian-language phone agent launches in minutes.",
+   "subline": "You build it without complex coding. It fetches information and updates records in your systems while the borrower is on the line.",
+   "cta": "Start building your agent",
+   "cta_destination": "console",
+   "reasons": [
+    "Jev says not better (average gain on the targeted gaps +0.08, below the 0.10 needed); Judge 2 says not better (average gain on the targeted gaps +0.07, below the 0.10 needed)."
+   ],
+   "score": 0.074,
+   "gains": {
+    "Jev": 0.08,
+    "Judge 2": 0.07
+   },
+   "group": "failed_gate2",
+   "near_miss": false
+  }
+ ],
+ "cost_usd": 0.4097,
+ "calls": 51
+}

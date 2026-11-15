@@ -45,7 +45,7 @@ Open http://127.0.0.1:8765. The steps are the same as on the website, plus one m
 
 - **Page setup, once per page.** A page can run only after its positioning and claims are approved. Voice Agents, Coding Agents and Token Factory are already approved. For any other page (for example Document AI), open **Page setup**. Draft the positioning, claims and buyer checklist, read them, and click **Approve** on each. The buyer checklist is optional. It adds the buyer's own questions (A7 and A8) to the audit.
 
-On your machine the agent also takes screenshots (a PNG pair for each variant) and runs 20 browser sessions per arm in the sandbox. A run costs about $0.25 to $0.55.
+On your machine the agent also takes screenshots: it loads the live page once, read only with no clicks, to draw a PNG pair for each variant. The sandbox runs 20 browser sessions per arm on the saved page, with every outside request blocked. A run costs about $0.25 to $0.55.
 
 You can browse every saved run without a key. You need the key only to start a run, edit a variant or draft a page setup.
 
@@ -64,7 +64,7 @@ If the audit finds **no gap**, the hero already answers the buyer's basic questi
 ## 4. The same steps without the UI
 
 ```
-python3 agent/pages_registry.py --capture --page coding-agents        # save the live hero once (the only call to sarvam.ai)
+python3 agent/pages_registry.py --capture --page coding-agents        # save the live hero once
 python3 agent/page_setup.py --page coding-agents --persona gcc:technical-evaluator   # draft claims, positioning and checklist
 python3 agent/probe3.py --page coding-agents --persona gcc:technical-evaluator --goal read-docs   # one run
 python3 agent/edit_variant.py --page coding-agents --run probe3-YYYYMMDD-HHMMSS --from B --note "name the buyer"   # edit and re-check
