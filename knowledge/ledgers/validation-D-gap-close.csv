@@ -1,0 +1,10 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+D-2,Caller.Digital,Outcome price upper bound per resolved contact (INR),25,per resolved contact,https://caller.digital/compare,VENDOR,2026-11-10,PASS,2026-11-10,
+D-4,AWS Textract,Analyze Document with Tables first 1M pages (USD per page),0.015,one million pages with tables is,https://aws.amazon.com/textract/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+D-7,Google Document AI,Form Parser first 1M pages (USD per 1000 pages),30,Form Parser,https://docs.cloud.google.com/document-ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+D-8,AWS Bedrock,Claude Opus 5 / Sonnet 5 served in India via Mumbai and Hyderabad,Mumbai and Hyderabad,regional endpoint is served through geographic cross-Region inference across the,https://aws.amazon.com/about-aws/whats-new/2026/09/claude-region-expansion-in-sk/,VENDOR,2026-11-10,PASS,2026-11-10,
+D-9,AWS Bedrock,OpenAI GPT-5.6 India geo inference,GPT-5.6,now supports the OpenAI,https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-bedrock-openai-india-v1/,VENDOR,2026-11-10,PASS,2026-11-10,
+D-10,OpenRouter,Standard plan platform fee,5.5%,Platform fees,https://openrouter.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+D-11,OpenRouter,Business plan platform fee,8%,Platform fees,https://openrouter.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+D-12,Nasscom-Zinnov,India GCCs FY26,2117,FY2026 data on India,https://media.zinnov.com/wp-content/uploads/2026/05/zinnov-nasscom-india-gcc-landscape-2026-report.pdf,PUBLISHED,2026-11-10,PASS,2026-11-10,
+D-13,STPI,STP units supported 2024-25,5168,more than,https://patna.stpi.in/about-stpi-patna,PUBLISHED,2026-11-10,PASS,2026-11-10,

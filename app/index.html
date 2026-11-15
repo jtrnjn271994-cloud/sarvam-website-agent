@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Agent Console</title>
+<style>
+:root{
+  --bg:#f6f7f9;--panel:#ffffff;--ink:#16181d;--muted:#5c6370;--line:#e2e5ea;--soft:#eef1f5;
+  --accent:#2f5bd3;--pass:#1d7a46;--pass-bg:#e5f4ec;--fail:#b42318;--fail-bg:#fdecea;--hold:#9a6700;--hold-bg:#fff4d6;
+  --off:#8a919c;--off-bg:#f0f1f3;
+  --person:#7a3fb5;--rules:#3c4656;--writer:#c2410c;--gem:#2f6fd0;--jev:#2f5bd3;--judge2:#0f766e;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111317;--panel:#1a1d23;--ink:#e8eaee;--muted:#a0a7b3;--line:#2c3038;--soft:#22262d;
+  --accent:#7d9cff;--pass:#5fd394;--pass-bg:#173326;--fail:#ff8a7a;--fail-bg:#3a1c19;--hold:#f2c14e;--hold-bg:#3a3018;
+  --off:#7f8693;--off-bg:#23262c;--person:#c79bf0;--rules:#b7c0ce;--writer:#ff9b66;--jev:#7d9cff;--judge2:#4fd1bf;}}
+:root[data-theme="dark"]{
+  --bg:#111317;--panel:#1a1d23;--ink:#e8eaee;--muted:#a0a7b3;--line:#2c3038;--soft:#22262d;
+  --accent:#7d9cff;--pass:#5fd394;--pass-bg:#173326;--fail:#ff8a7a;--fail-bg:#3a1c19;--hold:#f2c14e;--hold-bg:#3a3018;
+  --off:#7f8693;--off-bg:#23262c;--person:#c79bf0;--rules:#b7c0ce;--writer:#ff9b66;--jev:#7d9cff;--judge2:#4fd1bf;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif}
+header{display:flex;flex-direction:column;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5}
+header h1{font-size:16px;margin:0 8px 0 0}
+.hrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+select,button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+button{cursor:pointer}button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button:disabled,button.primary:disabled{background:var(--soft);border-color:var(--line);color:var(--muted);opacity:1;cursor:not-allowed}
+.spacer{flex:1}.muted{color:var(--muted)}.small{font-size:12px}
+.layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 58px)}
+aside{border-right:1px solid var(--line);background:var(--panel);padding:12px;overflow:auto}
+aside h2{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:4px 0 8px}
+.run{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;background:var(--panel)}
+.run.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+main{padding:16px;overflow:auto;min-width:0}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.tab{border:none;border-bottom:2px solid transparent;border-radius:0;background:none;padding:8px 12px;color:var(--muted)}
+.tab.on{color:var(--ink);border-bottom-color:var(--accent)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.p-pass{color:var(--pass);background:var(--pass-bg)}.p-fail{color:var(--fail);background:var(--fail-bg)}
+.p-hold{color:var(--hold);background:var(--hold-bg)}.p-off{color:var(--off);background:var(--off-bg)}
+.chip{display:inline-block;font-size:11px;padding:1px 7px;border-radius:4px;border:1px solid currentColor;margin-right:4px}
+.c-reasoning{color:var(--writer)}.c-person{color:var(--person)}.c-rules{color:var(--rules)}.c-writer{color:var(--gem)}.c-jev{color:var(--jev)}.c-judge2{color:var(--judge2)}
+.step{display:grid;grid-template-columns:36px 1fr;gap:12px;position:relative}
+.step .num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:13px;background:var(--soft);border:1px solid var(--line)}
+.step.done .num{background:var(--pass-bg);color:var(--pass);border-color:var(--pass)}
+.step.nb .num{color:var(--off)}.step.nb .card{opacity:.6;border-style:dashed}
+.step:not(:last-child)::before{content:"";position:absolute;left:14px;top:30px;bottom:-12px;border-left:2px solid var(--line)}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:2px 10px;font-size:13px}
+.kv div:nth-child(odd){color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;background:var(--soft)}
+.tablewrap{overflow-x:auto}
+.bar{height:6px;background:var(--soft);border-radius:3px;position:relative;min-width:80px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+.hero{border-left:3px solid var(--line);padding-left:10px;margin:6px 0}
+.hero .h{display:block;font-weight:600;font-size:15px}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--soft);padding:12px;border-radius:8px;font:12px/1.45 ui-monospace,Menlo,monospace;max-height:70vh;overflow:auto}
+img.pair{width:100%;border:1px solid var(--line);border-radius:8px;margin-top:8px}
+.banner{padding:10px 12px;border-radius:8px;margin-bottom:12px}
+.md h1{font-size:20px}.md h2{font-size:16px;margin-top:20px}.md p{max-width:80ch}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}aside{border-right:none;border-bottom:1px solid var(--line);max-height:220px}.grid2{grid-template-columns:1fr}}
+@media (max-width:480px){header{padding:10px 16px}main{padding:16px}.kv{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>Website agent console</h1>
+    <label class="small muted">Page <select id="page"></select></label>
+    <label class="small muted">Industry <select id="industry" style="max-width:240px"></select></label>
+    <label class="small muted">Buyer <select id="persona" style="max-width:260px"></select></label>
+    <span class="spacer"></span>
+    <span id="status" class="pill p-off">idle</span>
+    <button id="theme" title="Switch light or dark">◐</button>
+  </div>
+  <div class="hrow">
+    <label class="small muted">Goal <select id="goal" style="max-width:300px"></select></label>
+    <button id="go" class="primary">Start a run</button>
+    <span id="runnote" class="small muted"></span>
+  </div>
+  <div id="setupnote" class="banner small" style="display:none;margin:0"></div>
+</header>
+<div class="layout">
+  <aside>
+    <h2>Runs</h2>
+    <div id="runs"><p class="muted small">Loading…</p></div>
+  </aside>
+  <main>
+    <div class="tabs" id="tabs"></div>
+    <div id="view"></div>
+  </main>
+</div>
+<script>
+"use strict";
+const S = {mode: "live", page: null, run: null, tab: "setup", pages: null, models: [], runs: [], capture: null, info: null, qs: null, poll: null, lastLog: ""};
+const TABS = [["setup","Page setup"],["pipeline","Pipeline"],["audit","Audit"],["dossier","Gap dossier"],["variants","Variants"],["approve","Approve and test"],["findings","Sandbox and findings"],["submission","Submission and docs"],["questions","Judge questions"],["log","Run log"]];
+const WHO = {person:"Person", rules:"Rules", reasoning:"Reasoning (Gemini)", writer:"Writer (Opus)", jev:"Jev", judge2:"Judge 2"};
+const $ = s => document.querySelector(s);
+const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+$("#theme").onclick = () => {
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = document.documentElement.dataset.theme || (dark ? "dark" : "light");
+  const nxt = cur === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = nxt;
+  try { localStorage.setItem("theme", nxt); } catch (e) {}
+};
+
+function staticUrl(path, q) {
+  if (path === "/api/pages") return "data/pages.json";
+  if (path === "/api/runs") return `data/runs__${q.page}.json`;
+  if (path === "/api/run") return `data/run__${q.page}__${q.run}.json`;
+  if (path === "/api/questions") return `data/questions__${q.page}.json`;
+  return null;
+}
+async function api(path, q = {}) {
+  let url = S.mode === "static" ? staticUrl(path, q) : path + "?" + new URLSearchParams(q);
+  const r = await fetch(url, {cache: "no-store"});
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || r.status);
+  return r.json();
+}
+function fileUrl(name, opts = {}) {
+  if (S.mode === "static") return opts.capture ? `files/${S.page}/${opts.capture}/${name}` : `files/${S.page}/${S.run}/${opts.sub ? opts.sub + "/" : ""}${name}`;
+  const q = {page: S.page, name}; if (opts.capture) q.capture = opts.capture; else q.run = S.run; if (opts.sub) q.sub = opts.sub;
+  return "/api/file?" + new URLSearchParams(q);
+}
+function pill(v) {
+  v = String(v || "");
+  const base = v.replace("advisory-", "");
+  const cls = base === "pass" ? "p-pass" : base === "fail" ? "p-fail" : base === "hold" ? "p-hold" : "p-off";
+  return `<span class="pill ${cls}" title="${v.startsWith("advisory") ? "Advisory: informs, never blocks" : ""}">${esc(v || "n/a")}</span>`;
+}
+function band(b) {
+  if (!b) return '<span class="muted">no band (advisory)</span>';
+  const a = b.advisory ? ' <span class="muted">advisory</span>' : "";
+  return b.polarity === "bad" ? `flag ≥ ${b.flag_at?.toFixed(2)}, clean ≤ ${b.clean_at?.toFixed(2)}${a}` : `pass ≥ ${b.pass_at?.toFixed(2)}, fail ≤ ${b.fail_at?.toFixed(2)}${a}`;
+}
+function bandKey(k) { return k.startsWith("A7") ? "A7-checklist-item" : k; }
+function runTime(r) { const m = r.match(/(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})/); return m ? `${m[3]}/${m[2]} ${m[4]}:${m[5]}` : r; }
+
+async function init() {
+  let p;
+  try { p = await api("/api/pages"); } catch (e) { S.mode = "static"; p = await api("/api/pages"); }
+  S.mode = p.mode; S.pages = p.pages; S.models = p.models;
+  if (S.mode === "static") { $("#go").style.display = "none"; $("#persona").parentElement.style.display = "none"; $("#industry").parentElement.style.display = "none"; $("#goal").parentElement.style.display = "none"; $("#status").textContent = "read-only copy"; $("#runnote").innerHTML = 'Read-only copy of finished runs. <a href="https://github.com/jtrnjn271994-cloud/sarvam-website-agent" target="_blank" rel="noopener">Run the agent yourself (GitHub)</a>'; }
+  $("#page").innerHTML = S.pages.map(x => `<option value="${esc(x.slug)}">${esc(x.name)}</option>`).join("");
+  $("#page").onchange = () => loadPage($("#page").value);
+  $("#tabs").innerHTML = TABS.map(([k, l]) => `<button class="tab" data-k="${k}">${l}</button>`).join("");
+  $("#tabs").onclick = e => { const k = e.target.dataset.k; if (k) { S.tab = k; render(); } };
+  $("#go").onclick = startRun;
+  $("#industry").onchange = async () => { fillRoles(); suggestGoal(); remember(); await refreshSetup(); render(); };
+  $("#persona").onchange = async () => { suggestGoal(); remember(); await refreshSetup(); render(); };
+  $("#goal").onchange = () => { remember(); updateGo(); };
+  await loadPage(S.pages[0]?.slug);
+  if (S.mode === "live") pollStatus();
+}
+async function loadPage(slug, pick) {
+  S.page = slug; S.pageInfo = S.pages.find(x => x.slug === slug) || {};
+  const r = await api("/api/runs", {page: slug});
+  S.runs = r.runs; S.capture = r.capture;
+  if (S.mode === "live") { S.opts = await api("/api/options", {page: slug}); fillSelectors(); }
+  await refreshSetup();
+  const last = S.runs.find(x => x.complete);
+  $("#runnote").textContent = last ? `last run $${(last.cost_usd || 0).toFixed(2)} · ${last.calls} calls` : "";
+  $("#runs").innerHTML = S.runs.length ? S.runs.map(x => `<button class="run" data-r="${esc(x.run)}">
+      <div><b>${esc(runTime(x.run))}</b> <span class="muted small">${esc(x.run)}</span></div>
+      <div class="small muted">${x.complete ? `$${(x.cost_usd || 0).toFixed(3)} · ${x.calls} calls · ${x.variants} variants` : "stopped early or running"}</div>
+      <div class="small">${x.passed.length ? `passed: <b>${esc(x.passed.join(", "))}</b>` : '<span class="muted">no variant passed</span>'}</div>
+      <div class="small muted">${esc((x.writer || "").split("/").pop())}${x.persona ? " · " + esc(x.persona) : ""}${x.goal ? " · " + esc(x.goal) : ""}</div></button>`).join("") : '<p class="muted small">No runs yet.</p>';
+  $("#runs").onclick = e => { const b = e.target.closest(".run"); if (b) selectRun(b.dataset.r); };
+  await selectRun(pick || S.runs[0]?.run);
+}
+async function selectRun(run) {
+  S.run = run;
+  document.querySelectorAll(".run").forEach(b => b.classList.toggle("sel", b.dataset.r === run));
+  S.info = run ? await api("/api/run", {page: S.page, run}) : null;
+  render();
+}
+function render() {
+  document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.k === S.tab));
+  const v = $("#view");
+  let body;
+  if (S.tab === "submission") body = viewSubmission();
+  else if (S.tab === "questions") body = viewQuestions();
+  else if (S.tab === "setup") body = viewSetup();
+  else if (S.tab === "log") body = viewLog();
+  else if (!S.info) body = pageCard();
+  else body = {pipeline: viewPipeline, audit: viewAudit, dossier: viewDossier, variants: viewVariants, approve: viewApprove, findings: viewFindings}[S.tab]();
+  v.innerHTML = guide() + body;
+  if (S.tab === "setup") wireSetup();
+  if (S.tab === "submission") wireSubmission();
+  if (S.tab === "approve" && S.info) wireApprove();
+  if (S.tab === "findings" && S.info) wireFindings();
+  const gb = document.getElementById("guidego"); if (gb) gb.onclick = () => { S.tab = gb.dataset.tab; render(); };
+}
+
+function docUrl(k) { return S.mode === "static" ? `files/_docs/${k}${k === "architecture-html" ? ".html" : ".md"}` : "/api/doc?name=" + k; }
+function tick(ok, label, where) { return `<tr><td>${ok ? '<span class="pill p-pass">done</span>' : '<span class="pill p-off">not yet</span>'}</td><td>${label}</td><td class="small muted">${where}</td></tr>`; }
+function viewSubmission() {
+  const p = S.info?.probe || {}, f = S.info?.files || [], sb = S.info?.sandbox, C = S.info?.current_approval;
+  const rows = S.info ? [
+    tick(!!S.capture, "The live hero was captured once (text and screenshot)", "Audit tab"),
+    tick(!!p.audit, "The hero was audited with Jev, question by question", "Audit tab"),
+    tick(f.includes("GAP-DOSSIER.md"), "The gaps were explained for this buyer", "Gap dossier tab"),
+    tick((p.variants || []).length > 0, "Three variants were written, with a claim map", "Variants tab"),
+    tick(!!p.gate1_rounds, "Gate 1 (rules) checked every variant", "Variants tab"),
+    tick(!!p.gate2 && Object.keys(p.gate2).length > 0, "Gate 2: Jev and Judge 2 scored every variant that passed Gate 1", "Variants tab"),
+    tick(f.some(x => x.startsWith("pair-")), "Side-by-side screenshots of live and variant", "Approve and test tab"),
+    tick(!!C, "A person approved one variant", "Approve and test tab"),
+    tick(!!sb, "The sandbox ran on the approved variant", "Approve and test tab"),
+    tick(!!sb, "The findings were written, with the set-up of the simulation", "Sandbox and findings tab"),
+  ].join("") : "";
+  return `<div class="card"><b>${S.info ? "This run's deliverables" : "No run selected"}</b>
+      ${S.info ? `<div class="tablewrap"><table><tr><th>Status</th><th>Step</th><th>Where</th></tr>${rows}</table></div>` : '<p class="small muted">Pick a run on the left to see what it produced. The project documents below do not depend on a run.</p>'}</div>
+    <div class="card md" id="doc-readme"><b>README</b><p class="muted small">Loading…</p></div>
+    <div class="card"><b>Architecture</b> <a class="small" href="${docUrl("architecture-html")}" target="_blank" rel="noopener">open in a new tab</a>
+      <iframe src="${docUrl("architecture-html")}" title="Architecture" style="width:100%;height:720px;border:1px solid var(--line);border-radius:8px;margin-top:8px;background:#fff"></iframe></div>
+    <div class="card md" id="doc-jev"><b>Where Jev fits</b><p class="muted small">Loading…</p></div>`;
+}
+function wireSubmission() {
+  [["readme", "doc-readme"], ["jev", "doc-jev"]].forEach(([k, id]) => fetch(docUrl(k)).then(r => r.ok ? r.text() : "Not available.").then(t => { const el = document.getElementById(id); if (el) el.innerHTML = mdToHtml(t); }));
+}
+function pageCard() {
+  const P = S.pageInfo || {}, c = S.capture;
+  return `<div class="card"><b>${esc(P.name)}</b> <span class="pill ${P.ready ? "p-pass" : "p-hold"}">${P.ready ? "setup approved" : "setup not approved"}</span>
+    <div class="kv" style="margin-top:8px"><div>Address</div><div>${esc(P.url)}</div><div>Layer</div><div>${esc(P.layer || "")}</div>
+    <div>Search visits</div><div>${esc(P.traffic_in || "n/a")} <span class="muted small">(Semrush, Google India, estimated monthly)</span></div><div>Status</div><div>${esc(P.status || "")}</div></div>
+    ${c ? `<div class="hero" style="margin-top:10px"><span class="h">${esc(c.h1)}</span>${esc(c.sub)}<div class="small">Main button: <b>${esc((c.ctas || []).find(x => x.href)?.text)}</b> → ${esc((c.ctas || []).find(x => x.href)?.href)}</div></div>
+      <img class="pair" alt="Saved hero of ${esc(P.name)}" src="${fileUrl("hero-desktop.png", {capture: c.folder})}"><p class="small muted">Saved ${esc(c.captured_at)}. Loaded once; runs use this saved copy.</p>` : '<p class="muted">Not captured yet.</p>'}
+    ${P.ready ? '<p class="small">No run selected. Start a run, or pick one on the left.</p>' : '<p class="small">A run needs the page setup approved first: open the Page setup tab.</p>'}</div>`;
+}
+function stepResult(n, p) {
+  const a = p.audit || {}, g = p.gate2 || {}, vs = p.variants || [];
+  const files = S.info.files;
+  switch (n) {
+    case "1": return `Page folder <b>${esc(S.page)}</b>. Buyer, goal and test type come from brief.json.`;
+    case "2": return S.capture ? `Live hero captured ${esc(S.capture.captured_at || S.capture.folder)}. Loaded once; no bot traffic to the live site.<div class="hero"><span class="h">${esc(S.capture.h1)}</span>${esc(S.capture.sub)}</div>` : "No capture found.";
+    case "3": return "Saved positioning used. No model call in this run.";
+    case "4": return a.p ? `Gaps: ${(a.gaps || []).length ? a.gaps.map(k => `<b>${esc(k)}</b>`).join(", ") : "none"}. ` +
+      (a.lead_txt ? `Buyer question answered worst: “${esc(a.lead_txt)}”. ` : "") +
+      (p.page_questions && !p.page_questions.approved ? `<span class="pill p-hold">page questions not approved: A7 and A8 skipped</span>` : "") : "Not reached.";
+    case "5": return p.dossier ? `${p.dossier.text.split(/\s+/).length} words. Prose check problems left: ${p.dossier.prose_problems_left?.length ? esc(p.dossier.prose_problems_left.join("; ")) : "none"}.` : "Not reached.";
+    case "6": return "Not built yet: the test plan is not locked with a hash.";
+    case "7": return vs.length ? `${vs.length} variants. Gate 1 rounds: ${(p.gate1_rounds || []).length}.` : "Not reached.";
+    case "8": { const sl = S.info.shortlist || []; const by = k => sl.filter(x => x.group === k).map(x => x.name).join(", ") || "none";
+      return sl.length ? `Passed: <b>${by("passed")}</b> · held for you: <b>${by("held")}</b> · failed Gate 2: ${by("failed_gate2")} · failed Gate 1: ${by("failed_gate1")}.` : "Not reached."; }
+    case "9": { const n2 = files.filter(f => /^pair-.*\.png$/.test(f)).length; return n2 ? `${n2} side-by-side PNGs. Functional button check on the local snapshot: not built yet.` : "No PNGs."; }
+    case "10": { const C = S.info.current_approval, L = latestEntry(); return C ? `Approved for the sandbox: <b>variant ${esc(C.variant)}</b> by ${esc(C.name)} (${esc(C.at)})${C.override ? " · chosen against a Gate 2 result" : ""}.` : L ? `No variant is approved right now. Latest decision: ${esc(L.decision)} ${esc(L.variant)}.` : "No decision yet. Open “Approve and test”. The console never approves on its own."; }
+    case "11": { const sb = S.info.sandbox; return sb ? `SYNTHETIC. Variant ${esc(sb.variant)}: ${Object.entries(sb.simulated).map(([k, r]) => `${esc(k)} ${esc(r.result)}`).join(" · ")}. Browser checks passed ${sb.browser.passed.baseline}/${sb.browser.sessions_per_arm} and ${sb.browser.passed.variant}/${sb.browser.sessions_per_arm}.` : "Not run for this run yet."; }
+    case "12": return S.info.sandbox ? "FINDINGS.md written by code from the sandbox results. COVERAGE.md and the submission files: not built yet." : "FINDINGS.md comes after the sandbox. COVERAGE.md and the submission files: not built yet.";
+  }
+}
+function viewPipeline() {
+  const p = S.info.probe;
+  const total = S.info.steps.reduce((s, x) => s + x.cost, 0);
+  return `<div class="card"><div class="grid2"><div><b>Run ${esc(S.run)}</b><div class="small muted">${esc(p.label || "")}</div></div>
+    <div class="small">Total ${p.calls ?? "?"} model calls, $${(p.cost_usd ?? total).toFixed(4)}.<br>Writer: ${esc(p.roles?.writer)} · Jev: ${esc(p.roles?.judge1)} · Judge 2: ${esc(p.roles?.judge2)}</div></div></div>` +
+    S.info.steps.map(s => {
+      const nb = s.built === "not built", done = !nb && (s.calls || ["1","2","3","9"].includes(s.n) || (s.n === "10" && S.info.current_approval) || (["11","12"].includes(s.n) && S.info.sandbox));
+      return `<div class="step ${nb ? "nb" : done ? "done" : ""}"><div class="num">${s.n}</div><div class="card">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px"><b>${esc(s.name)}</b>
+          ${s.who.map(w => `<span class="chip c-${w}">${WHO[w] || w}</span>`).join("")}
+          <span class="spacer"></span><span class="pill ${nb ? "p-off" : s.built === "partly built" ? "p-hold" : "p-pass"}">${esc(s.built)}</span></div>
+        <div style="margin-bottom:8px">${stepResult(s.n, p)}</div>
+        <div class="kv"><div>Model plan</div><div>${esc(s.model_plan)}</div>
+          <div>This run</div><div>${s.calls ? `${s.calls} calls · $${s.cost.toFixed(4)} · ${s.seconds}s · ${esc(s.models.join(", "))}` : '<span class="muted">no model calls</span>'}</div>
+          <div>Reads</div><div class="muted">${esc(s.reads)}</div><div>Makes</div><div class="muted">${esc(s.makes)}</div></div>
+      </div></div>`;
+    }).join("");
+}
+function auditText(k) {
+  const q = S.qs; const p = S.info.probe;
+  const u = [...q.universal, ...q.page_templates].find(x => x.id === k);
+  if (u) return u.text.replace("{objection}", p.page_questions?.main_objection || "{objection}");
+  const m = k.match(/^A7-checklist-item-(\d+)$/);
+  const items = p.page_questions?.hero_items;
+  if (m && items) return "Buyer question: " + items[+m[1] - 1];
+  return m ? "Buyer checklist item " + m[1] + " (older run: item text not saved)" : k;
+}
+function viewAudit() {
+  const p = S.info.probe, a = p.audit; if (!a) return '<div class="card muted">The audit did not run.</div>';
+  const own = p.thresholds_used?.judges?.judge1;
+  const th = own || S.qs.thresholds?.judges?.judge1 || {};
+  const pq = p.page_questions;
+  return (pq ? `<div class="banner ${pq.approved ? "p-pass" : "p-hold"}">${pq.approved ? `Page questions approved by ${esc(pq.approved_by_on[0])} on ${esc(pq.approved_by_on[1])}.` : `Page questions were not approved, so ${esc(pq.skipped.join(" and "))} were not asked. Only the universal questions ran.`}
+      ${pq.page_items_out_of_hero_scope?.length ? `<div class="small">Out of hero scope (the page body must answer): ${esc(pq.page_items_out_of_hero_scope.join("; "))}</div>` : ""}</div>` :
+      `<div class="banner p-off small">Older run: made before scope tags and question approval existed. Every checklist item was asked of the hero.</div>`) +
+    `<div class="card"><b>Live hero (baseline)</b><div class="hero"><span class="h">${esc(S.capture?.h1)}</span>${esc(S.capture?.sub)}<div class="small muted">Button: ${esc((S.capture?.ctas || [])[0]?.text)}</div></div>
+     ${S.capture ? `<img class="pair" alt="Live hero" src="${fileUrl("hero-desktop.png", {capture: S.capture.folder})}">` : ""}</div>
+    <div class="card tablewrap"><b>Jev audit of the live hero</b> <span class="small muted">Gaps: ${esc((a.gaps || []).join(", ") || "none")}</span>
+    <table><tr><th>Question</th><th>Asked</th><th>p</th><th></th><th>${own ? "Band used in this run" : "Band today (this older run used an earlier one)"}</th><th>Result</th></tr>
+    ${Object.entries(a.p).map(([k, v]) => `<tr><td><b>${esc(k)}</b></td><td>${esc(auditText(k))}</td><td>${v.toFixed(2)}</td>
+      <td><div class="bar"><i style="width:${Math.round(v * 100)}%"></i></div></td><td class="small">${band(th[bandKey(k)])}</td><td>${pill(a.verdict[k])}</td></tr>`).join("")}</table>
+    <p class="small muted">Jev returns a probability only, never a reason. The bands come from agent/calibrate.py and a small case set we wrote: an audit signal, not an assurance.</p></div>`;
+}
+function mdToHtml(md) {
+  const lines = md.split("\n"); let out = "", tbl = [];
+  const inl = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`(.+?)`/g, "<code>$1</code>");
+  const flush = () => { if (!tbl.length) return; const rows = tbl.filter(r => !/^\|[\s|:-]+\|$/.test(r)).map(r => r.slice(1, -1).split("|").map(c => c.trim()));
+    out += `<div class="tablewrap"><table><tr>${rows[0].map(c => `<th>${inl(c)}</th>`).join("")}</tr>${rows.slice(1).map(r => `<tr>${r.map(c => `<td>${inl(c)}</td>`).join("")}</tr>`).join("")}</table></div>`; tbl = []; };
+  let code = null;
+  for (const l of lines) {
+    if (l.startsWith("```")) { if (code === null) { flush(); code = []; } else { out += `<pre>${esc(code.join("\n"))}</pre>`; code = null; } continue; }
+    if (code !== null) { code.push(l); continue; }
+    if (l.startsWith("|")) { tbl.push(l.trim()); continue; } flush();
+    if (/^### /.test(l)) out += `<h3>${inl(l.slice(4))}</h3>`; else if (/^## /.test(l)) out += `<h2>${inl(l.slice(3))}</h2>`;
+    else if (/^# /.test(l)) out += `<h1>${inl(l.slice(2))}</h1>`; else if (/^- /.test(l)) out += `<li>${inl(l.slice(2))}</li>`; else if (/^\d+\. /.test(l)) out += `<li>${inl(l.replace(/^\d+\. /, ""))}</li>`;
+    else if (l.trim()) out += `<p>${inl(l)}</p>`;
+  }
+  flush(); return out;
+}
+function viewDossier() {
+  if (!S.info.files.includes("GAP-DOSSIER.md")) return '<div class="card muted">No dossier in this run.</div>';
+  const id = "dz" + Date.now();
+  fetch(fileUrl("GAP-DOSSIER.md")).then(r => r.text()).then(t => { const el = document.getElementById(id); if (el) el.innerHTML = mdToHtml(t); });
+  return `<div class="card md" id="${id}">Loading…</div>`;
+}
+function delta(o) { return Object.entries(o || {}).map(([k, v]) => `<span class="pill ${v >= 0.1 ? "p-pass" : v < -0.05 ? "p-fail" : "p-off"}">${esc(k)} ${v >= 0 ? "+" : ""}${v.toFixed(2)}</span>`).join(" "); }
+function viewVariants() {
+  const p = S.info.probe, vs = p.variants || [], g = p.gate2 || {}, g1 = (p.gate1_rounds || []).slice(-1)[0] || {};
+  if (!vs.length) return '<div class="card muted">No variants in this run.</div>';
+  const grp = Object.fromEntries((S.info.shortlist || []).map(x => [x.name, x.group]));
+  const GL = {passed: ["passed", "p-pass"], held: ["held for you", "p-hold"], failed_gate2: ["failed Gate 2", "p-fail"], failed_gate1: ["failed Gate 1", "p-fail"]};
+  return vs.map(v => {
+    const r = g[v.name], issues = g1[v.name] || [], G = GL[grp[v.name]] || ["n/a", "p-off"];
+    const judge = (role, label) => { const j = r?.[role]; if (!j) return ""; const t = {}, h = {};
+      (j.targeted || []).forEach(k => t[k] = j.delta[k]); (j.held_out || []).forEach(k => h[k] = j.delta[k]);
+      return `<div class="card" style="margin:8px 0 0"><b>${label}</b> ${j.better ? pill("pass") : pill("fail")} <span class="small muted">better than baseline</span>
+        ${j.hard_fail ? pill("fail") + ' <span class="small muted">hard fail</span>' : ""}
+        <div class="small" style="margin-top:6px">Banned-phrase check: ${pill(j.G3_verdict)}</div>
+        <div class="small" style="margin-top:6px">Targeted change: ${delta(t) || "none"}</div>
+        <div class="small" style="margin-top:4px">Held-out change: ${delta(h) || "none"}</div>
+        <div class="small" style="margin-top:4px">Claim fragments: ${(j.fragments || []).map(f => `${pill(f.verdict["G2-overreach"])}`).join(" ")} <span class="muted">(overreach, per fragment)</span></div></div>`; };
+    const png = S.info.files.includes(`pair-${v.name}.png`);
+    return `<div class="card"><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b>Variant ${esc(v.name)}</b>
+      <span class="pill ${G[1]}">${G[0]}</span> <span class="small muted">${r?.disagree ? "judges disagree · " : ""}reasons on the “Approve and test” tab</span></div>
+      <div class="small muted">${esc(v.angle)}</div>
+      <div class="hero"><span class="h">${esc(v.h1)}</span>${esc(v.subline)}<div class="small">Button: <b>${esc(v.cta)}</b> → ${esc(v.cta_destination)}</div></div>
+      <div class="small"><b>Gate 1 (rules):</b> ${issues.length ? esc(issues.join("; ")) : "no problems"}</div>
+      <details><summary class="small">Claim map (${(v.map || []).length} fragments)</summary><table>${(v.map || []).map(m => `<tr><td>${esc(m.fragment)}</td><td>${esc(m.claim)}</td></tr>`).join("")}</table></details>
+      <div class="grid2">${judge("judge1", "Jev")}${judge("judge2", "Judge 2")}</div>
+      ${png ? `<img class="pair" loading="lazy" alt="Baseline and variant ${esc(v.name)} side by side" src="${fileUrl(`pair-${v.name}.png`)}">` : ""}</div>`;
+  }).join("");
+}
+function viewQuestions() {
+  const q = S.qs; if (!q) return "";
+  const th = q.thresholds?.judges || {};
+  const row = x => `<tr><td><b>${esc(x.id)}</b></td><td>${esc(x.text)}</td><td>${x.required ? "yes" : '<span title="Advisory: the judge still answers it, and its change counts in better-than-baseline, but a fail alone does not block">no (advisory)</span>'}</td><td class="small">${band(th.judge1?.[x.id])}</td><td class="small">${band(th.judge2?.[x.id])}</td></tr>`;
+  return `<div class="card"><b>How the questions work</b><p class="small">${esc(q.note || "")}</p></div>
+    <div class="card tablewrap"><b>Universal questions</b> <span class="small muted">same text on every page; the page context reaches the judge as state</span>
+      <table><tr><th>Id</th><th>Question</th><th>Must pass?</th><th>Jev band</th><th>Judge 2 band</th></tr>${q.universal.map(row).join("")}</table></div>
+    <div class="card tablewrap"><b>Page questions</b> <span class="small muted">fixed wording, filled from the page's buyer checklist</span>
+      <table><tr><th>Id</th><th>Question</th><th>Must pass?</th><th>Jev band</th><th>Judge 2 band</th></tr>${q.page_templates.map(x => row(Object.assign({}, x, {id: x.id}))).join("")}</table>
+      <div class="banner ${q.approved_by && q.approved_on ? "p-pass" : "p-hold"}" style="margin-top:10px">${q.approved_by && q.approved_on ? `Approved by ${esc(q.approved_by)} on ${esc(q.approved_on)}.` :
+        `Not approved yet for this buyer, so the audit skips A7 and A8 (the buyer's own questions). Fix: open the Page setup tab and click Approve under "3. Buyer checklist".`}</div>
+      <div class="small"><b>Checklist:</b> ${esc(q.checklist_title)} <span class="pill p-off">${esc(q.checklist_label)}</span></div>
+      <table><tr><th>Scope</th><th>Buyer question</th></tr>${q.items.map(i => `<tr><td><span class="pill ${i.scope === "hero" ? "p-pass" : "p-off"}">${esc(i.scope)}</span></td><td>${esc(i.text)}</td></tr>`).join("")}
+        <tr><td><span class="pill p-pass">objection</span></td><td>${esc(q.main_objection || "none set")}</td></tr></table></div>
+    <div class="card tablewrap"><b>Gate 2 questions</b> <span class="small muted">asked of each variant by both judges</span>
+      <table><tr><th>Id</th><th>Question</th><th></th><th>Jev band</th><th>Judge 2 band</th></tr>${q.gate2.map(x => row(Object.assign({}, x, {required: false}))).join("")}</table>
+      <p class="small muted">Better than baseline: average gain on the targeted questions at least ${q.better_than_baseline?.min_gain}, and no held-out question drops more than ${q.better_than_baseline?.max_drop}.</p></div>`;
+}
+function viewLog() {
+  if (S.mode === "static") return '<div class="card muted">Read-only copy: runs start only in the local console.</div>';
+  return `<div class="card"><div id="logmeta" class="small muted">Checking…</div><pre id="logbox">${esc(S.lastLog || "No run started from this console yet.")}</pre></div>`;
+}
+
+const GROUPS = {passed: ["Passed both gates", "p-pass"], held: ["Held for you", "p-hold"], failed_gate2: ["Failed Gate 2 (judges)", "p-fail"]};
+function latestEntry() { const e = S.info?.approval?.entries || []; return e[e.length - 1]; }
+function viewApprove() {
+  const sl = S.info.shortlist || [];
+  if (!sl.length) return '<div class="card muted">No variants in this run.</div>';
+  const g1 = sl.filter(x => x.group === "failed_gate1");
+  const C = S.info.current_approval, sb = S.info.sandbox;
+  const card = x => {
+    const png = S.info.files.includes(`pair-${x.name}.png`);
+    const open = x.group !== "failed_gate2" || x.near_miss;
+    return `<details class="card" ${open ? "open" : ""}><summary><b>Variant ${esc(x.name)}</b> <span class="pill ${GROUPS[x.group][1]}">${GROUPS[x.group][0]}</span>${x.near_miss ? ' <span class="pill p-hold">near miss: worth a look</span>' : ""}
+      ${x.score !== null ? `<span class="small muted">rank score ${x.score.toFixed(2)}</span>` : ""}</summary>
+      <div class="hero"><span class="h">${esc(x.h1)}</span>${esc(x.subline)}<div class="small">Button: <b>${esc(x.cta)}</b> → ${esc(x.cta_destination)}</div></div>
+      <ul class="small">${x.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+      ${scoreTable(x.name)}
+      ${png ? `<img class="pair" loading="lazy" alt="Baseline and variant ${esc(x.name)}" src="${fileUrl(`pair-${x.name}.png`)}">` : ""}
+      ${S.mode === "live" ? `<div class="decide" data-v="${esc(x.name)}" data-g="${esc(x.group)}" style="margin-top:10px;display:grid;gap:6px;max-width:640px">
+        <input class="nm" placeholder="Name (optional)" maxlength="80" style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)">
+        <textarea class="rs" rows="2" placeholder="${x.group === "passed" ? "Reason (optional)" : "Why you choose it despite the gate result (required to approve)"}" style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)"></textarea>
+        <textarea class="nt" rows="2" placeholder="For Revise: what the writer should change (recorded for you; the next run does not read it yet)" style="font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" data-d="approve">Approve for the sandbox</button><button data-d="reject">Reject</button><button data-d="revise">Revise</button></div>
+        <div class="msg small"></div></div>` : ""}
+    </details>`;
+  };
+  const order = ["passed", "held", "failed_gate2"];
+  return `<div class="card small">Pick one variant for the sandbox. Passed and held variants are open; Gate 2 failures are folded but can be chosen with a reason. Gate 1 (rules) failures cannot be chosen: their text is not true or not allowed (Decisions Log row 33).</div>
+    <div class="banner ${C ? "p-pass" : "p-off"}">${C ? `Approved for the sandbox: <b>variant ${esc(C.variant)}</b> by ${esc(C.name)} at ${esc(C.at)}${C.override ? ` · chosen against a Gate 2 result: “${esc(C.reason)}”` : ""}. A reject or revise on this same variant withdraws it; approving another variant replaces it.` : "No variant is approved for the sandbox yet."}</div>
+    ${order.map(g => sl.filter(x => x.group === g).map(card).join("")).join("")}
+    ${g1.length ? `<div class="card small muted">${g1.length} variant(s) stopped at Gate 1 (rules) and cannot be chosen: ${g1.map(x => `${esc(x.name)} (${esc(x.reasons.join("; "))})`).join("; ")}</div>` : ""}
+    <div class="card"><b>Sandbox</b> <span class="pill p-off">SYNTHETIC</span>
+      <p class="small">Tests the latest approved variant against the live hero: a seeded simulation with click rates we declare (clear and inconclusive scenarios, plus an A/A check), and 20 scripted browser sessions per arm on the saved local copy of the page. Nothing is sent to sarvam.ai. No model calls.</p>
+      ${S.mode === "live" ? `<button id="sbx" class="primary" ${C ? "" : "disabled"}>${sb ? "Run the sandbox again" : "Run the sandbox"}</button> <span class="small muted">${C ? `on variant ${esc(C.variant)}` : "approve a variant first"}</span>` : ""}
+      ${sb ? sandboxTable(sb) : ""}</div>
+    ${sb ? `<div class="card md" id="fnd">Loading findings…</div>` : ""}
+    ${(S.info.approval?.entries || []).length ? `<details class="card"><summary class="small">Decision history (${S.info.approval.entries.length})</summary><div class="tablewrap"><table><tr><th>When</th><th>Who</th><th>Decision</th><th>Variant</th><th>Group then</th><th>Reason or note</th></tr>
+      ${S.info.approval.entries.slice().reverse().map(e => `<tr><td>${esc(e.at)}</td><td>${esc(e.name)}</td><td>${esc(e.decision)}</td><td>${esc(e.variant)}</td><td>${esc(e.group_at_decision)}</td><td>${esc(e.reason || e.note)}</td></tr>`).join("")}</table></div></details>` : ""}`;
+}
+function sandboxTable(sb) {
+  const pc = x => (100 * x).toFixed(2) + "%";
+  const NM = {"enough": "Test 1: the lift we expect, most visitors we allow", "too_few": "Test 2: the same lift, too few visitors", "clear": "Test 1: big lift, many visitors", "inconclusive": "Test 2: small lift, few visitors", "A/A check": "Test 3: no difference (control)"};
+  return `<p class="small" style="margin-top:10px"><b>These are three checks of the measuring method, not three results for this variant.</b> The lift is a number we typed in, so the simulation cannot tell you whether the variant wins. Test 1 uses the lift we expect with the biggest sample allowed; if that lift is tiny, inconclusive is the right answer. Test 2 uses too few visitors, so inconclusive. Test 3 (page against itself) must say inconclusive. The visitor groups and the lift are built from this run's buyer, goal and judge scores; the full set-up is in the findings below.</p><div class="tablewrap" style="margin-top:10px"><table><tr><th>Test</th><th>Visitors per arm</th><th>Baseline rate (95%)</th><th>Variant rate (95%)</th><th>Difference (95%)</th><th>p</th><th>Result</th></tr>
+    ${Object.entries(sb.simulated).map(([k, r]) => `<tr><td>${esc(NM[k] || k)}</td><td>${r.visitors_per_arm}</td><td>${pc(r.baseline.rate)} (${pc(r.baseline.ci95[0])}–${pc(r.baseline.ci95[1])})</td>
+      <td>${pc(r.variant.rate)} (${pc(r.variant.ci95[0])}–${pc(r.variant.ci95[1])})</td><td>${(100 * r.diff).toFixed(2)} pts (${(100 * r.diff_ci95[0]).toFixed(2)} to ${(100 * r.diff_ci95[1]).toFixed(2)})</td>
+      <td>${r.p < 0.0001 ? "<0.0001" : r.p.toFixed(4)}</td><td>${pill(r.result === "clear" ? "pass" : "hold").replace(/>(pass|hold)</, `>${esc(r.result)}<`)}</td></tr>`).join("")}</table></div>
+    <p class="small">Browser sessions: baseline ${sb.browser.passed.baseline}/${sb.browser.sessions_per_arm}, variant ${sb.browser.passed.variant}/${sb.browser.sessions_per_arm} passed every check. Outside requests blocked: ${sb.browser.blocked_requests.count}.</p>`;
+}
+function wireApprove() {
+  if (S.info.sandbox) fetch(fileUrl("FINDINGS.md", {sub: "sandbox"})).then(r => r.text()).then(t => { const el = document.getElementById("fnd"); if (el) el.innerHTML = mdToHtml(t); });
+  document.querySelectorAll(".decide button").forEach(b => b.onclick = async () => {
+    const box = b.closest(".decide");
+    const body = {page: S.page, run: S.run, variant: box.dataset.v, decision: b.dataset.d,
+      name: box.querySelector(".nm").value, reason: box.querySelector(".rs").value, note: box.querySelector(".nt").value};
+    const r = await fetch("/api/approve", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify(body)});
+    const j = await r.json();
+    if (!r.ok) { box.querySelector(".msg").textContent = j.error; box.querySelector(".msg").style.color = "var(--fail)"; return; }
+    await selectRun(S.run);
+  });
+  const sbx = document.getElementById("sbx");
+  if (sbx) sbx.onclick = async () => {
+    const r = await fetch("/api/sandbox", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify({page: S.page, run: S.run})});
+    const j = await r.json(); if (!r.ok) return alert(j.error);
+    S.tab = "log"; render(); pollStatus();
+  };
+}
+
+
+function remember() { try { localStorage.setItem("sel:" + S.page, JSON.stringify({persona: $("#persona").value, goal: $("#goal").value})); } catch (e) {} }
+function fillSelectors() {
+  const o = S.opts; let saved = {}; try { saved = JSON.parse(localStorage.getItem("sel:" + S.page) || "{}"); } catch (e) {}
+  $("#industry").innerHTML = o.industries.map(i => `<option value="${esc(i.id)}">${esc(i.name)}</option>`).join("");
+  // default: the saved choice, else the first buyer that already has a checklist, else the best-fit industry
+  const all = o.industries.flatMap(i => i.roles.map(r => Object.assign({ind: i.id}, r)));
+  const pick = all.find(r => r.key === saved.persona) || all.find(r => r.checklist === "approved") || all.find(r => r.checklist !== "missing") || all[0];
+  if (pick) $("#industry").value = pick.ind;
+  fillRoles(pick && pick.key);
+  suggestGoal();
+  if (saved.goal && [...$("#goal").options].some(x => x.value === saved.goal && !x.disabled)) $("#goal").value = saved.goal;
+}
+function suggestedGoal() {
+  const ind = (S.opts?.industries || []).find(i => i.id === $("#industry").value);
+  return ind?.roles.find(r => r.key === $("#persona").value)?.suggested_goal || null;
+}
+function suggestGoal() {   // the goal list is built for the chosen buyer; the first one is the suggestion
+  const ind = (S.opts?.industries || []).find(i => i.id === $("#industry").value);
+  const r = ind?.roles.find(x => x.key === $("#persona").value);
+  const goals = r?.goals || S.opts.goals;
+  $("#goal").innerHTML = goals.map((g, i) => `<option value="${esc(g.id)}" ${g.available ? "" : "disabled"}>${esc(g.label)}${g.available ? "" : " (no link on this page)"}${i === 0 && r?.suggested_goal ? "  ← suggested" : ""}</option>`).join("");
+  const first = goals.find(g => g.available); if (first) $("#goal").value = first.id;
+}
+function markGoal() {}
+const CHK_WORD = {approved: " · checklist approved", draft: " · checklist drafted", changed: " · checklist changed", missing: ""};
+function fillRoles(key) {
+  const ind = (S.opts.industries || []).find(i => i.id === $("#industry").value) || {roles: []};
+  $("#persona").innerHTML = ind.roles.map(r => `<option value="${esc(r.key)}">${esc(r.role)}</option>`).join("");
+  if (key && ind.roles.some(r => r.key === key)) $("#persona").value = key;
+}
+async function refreshSetup() {
+  const key = S.mode === "live" ? $("#persona").value : "";
+  S.qs = await api("/api/questions", Object.assign({page: S.page}, key ? {persona: key} : {}));
+  if (S.mode === "live") S.setup = await api("/api/setup", {page: S.page, persona: key});
+  updateGo();
+}
+function updateGo(running) {
+  if (S.mode !== "live") return;
+  const st = S.setup?.status, g = (S.opts?.goals || []).find(x => x.id === $("#goal").value);
+  const ok = st?.ready && g?.available && !running;
+  $("#go").disabled = !ok;
+  $("#go").title = !st?.ready ? "Approve the page setup first (Page setup tab)" : !g?.available ? "Pick a goal with a real link" : "";
+  const n = $("#setupnote"), parts = st?.parts || {}, ck = parts["checklist:" + $("#persona").value];
+  const need = ["positioning", "claims"].filter(k => parts[k] !== "approved").map(k => PART_LABEL[k]);
+  if (!st) { n.style.display = "none"; return; }
+  if (!st.ready) {
+    n.style.display = ""; n.style.background = "var(--soft)"; n.style.borderLeft = "4px solid var(--hold, #c58a00)";
+    n.innerHTML = `<b>${esc(S.pageInfo?.name || "This page")} is not set up yet.</b> Approve ${esc(need.join(" and "))} once in Page setup; after that anyone can run it for any buyer. <button id="setupgo">Open Page setup</button>`;
+    document.getElementById("setupgo").onclick = () => { S.tab = "setup"; render(); };
+  } else if (ck !== "approved") {
+    n.style.display = ""; n.style.background = "var(--soft)"; n.style.borderLeft = "4px solid var(--line)";
+    n.innerHTML = `Ready to run. This buyer's checklist is ${ck === "missing" ? "not drafted" : "not approved"}, so the run skips the two buyer questions (A7, A8). <button id="setupgo">Open Page setup</button>`;
+    document.getElementById("setupgo").onclick = () => { S.tab = "setup"; render(); };
+  } else n.style.display = "none";
+}
+const PART_LABEL = {positioning: "Positioning", claims: "Claims", checklist: "Buyer checklist"};
+function stPill(v) {
+  const c = v === "approved" ? "p-pass" : v === "missing" ? "p-off" : v === "changed" ? "p-fail" : "p-hold";
+  return `<span class="pill ${c}">${esc(v === "draft" ? "waiting for approval" : v === "changed" ? "changed after approval" : v || "missing")}</span>`;
+}
+function decideBox(part) {
+  return `<div class="sdec" data-part="${esc(part)}" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px">
+    <input class="snote" placeholder="Only if rejecting: what should change? The agent uses this to redraft." style="flex:1;min-width:200px;font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)">
+    <button class="primary" data-d="approve">Approve</button><button data-d="reject">Reject</button><span class="smsg small"></span></div>`;
+}
+function viewSetup() {
+  if (S.mode !== "live") return '<div class="card muted">Page setup is done in the local console.</div>';
+  const X = S.setup, key = $("#persona").value, parts = X.status.parts;
+  const P = S.pageInfo || {}, missing = Object.values(parts).some(v => v === "missing");
+  const hist = X.history.slice().reverse();
+  const objection = X.checklist.text ? ((X.checklist.text.match(/main_objection: "(.*)"/) || [])[1] || "none") : "";
+  return `<div class="card"><b>${esc(P.name)}</b> · buyer: <b>${esc($("#persona").selectedOptions[0]?.text || "")}</b> · goal: <b>${esc($("#goal").selectedOptions[0]?.text || "")}</b>
+      <p class="small">A run needs the positioning and the claims approved. The buyer checklist turns on the buyer questions (A7) and the objection question (A8). The reasoning model drafts; code checks every quote word for word against the saved page; you approve.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">${Object.entries(parts).map(([k, v]) => `<span class="small">${esc(PART_LABEL[k.split(":")[0]])}</span> ${stPill(v)}`).join(" ")}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center"><input id="sname" placeholder="Name (optional, kept in the record)" maxlength="80" style="min-width:260px;font:inherit;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)">
+      ${missing ? `<button id="sdraft" class="primary">Let the agent draft ${esc(Object.entries(parts).filter(([k, v]) => v === "missing").map(([k]) => PART_LABEL[k.split(":")[0]].toLowerCase()).join(" and "))}</button><span class="small muted">The reasoning model writes it from the saved page and the buyer research (about a minute, about $0.05). Then you read it and click Approve.</span>` : ""}</div>
+      ${S.setupFlash ? `<p class="small" style="margin-top:8px;color:var(--pass)"><b>${esc(S.setupFlash)}</b></p>` : ""}</div>
+    <div class="card md"><div style="display:flex;gap:8px;align-items:center"><b>1. Positioning</b> ${stPill(parts.positioning)}</div>
+      ${X.positioning.text ? `<div class="small muted">${esc(X.positioning.file)}</div>${(X.positioning.check || []).length ? `<div class="banner p-fail small"><b>Structure check: ${X.positioning.check.length} problem(s).</b> It cannot be approved until it follows the 12-section rule.<ul>${X.positioning.check.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : `<div class="small" style="color:var(--pass)">Structure check passed: all 12 sections, every bullet sourced and labelled.</div>`}${mdToHtml(X.positioning.text.replace(/^---[\s\S]*?---\n/, ""))}${decideBox("positioning")}` : '<p class="muted">Not drafted yet.</p>'}</div>
+    <div class="card"><div style="display:flex;gap:8px;align-items:center"><b>2. Claims</b> ${stPill(parts.claims)} <span class="small muted">the writer may use only these</span></div>
+      ${X.claims.length ? `<div class="tablewrap"><table><tr><th>Id</th><th>Claim</th><th>Exact words on the page</th><th>Keep</th></tr>${X.claims.map(c => `<tr><td>${esc(c.id)}</td><td>${esc(c.text)}</td><td class="small">“${esc(c.quotes.join(" | "))}”</td><td class="small">${esc(c.keep)}</td></tr>`).join("")}</table></div>
+        ${X.claims_check?.dropped?.length ? `<details><summary class="small">${X.claims_check.dropped.length} draft claims dropped by the quote check</summary><ul class="small">${X.claims_check.dropped.map(d => `<li>${esc(d.text)}: ${esc(d.why.join("; "))}</li>`).join("")}</ul></details>` : `<p class="small muted">${X.claims_check ? "No draft claim was dropped by the quote check." : ""}</p>`}
+        ${decideBox("claims")}` : '<p class="muted">Not drafted yet.</p>'}</div>
+    <div class="card md"><div style="display:flex;gap:8px;align-items:center"><b>3. Buyer checklist</b> ${stPill(parts["checklist:" + key])}</div>
+      ${X.checklist.text ? `<div class="small muted">${esc(X.checklist.file)}</div>${mdToHtml(X.checklist.text.replace(/^---[\s\S]*?---\n/, ""))}<p class="small">Main objection: <b>${esc(objection)}</b></p>${decideBox("checklist:" + key)}` : '<p class="muted">Not drafted yet for this buyer.</p>'}</div>
+    ${hist.length ? `<details class="card"><summary class="small">Setup decisions (${hist.length})</summary><div class="tablewrap"><table><tr><th>When</th><th>Who</th><th>Part</th><th>Decision</th><th>Note</th></tr>${hist.map(e => `<tr><td>${esc(e.at)}</td><td>${esc(e.name)}</td><td>${esc(e.part)}</td><td>${esc(e.decision)}</td><td>${esc(e.note)}</td></tr>`).join("")}</table></div></details>` : ""}`;
+}
+function wireSetup() {
+  const d = document.getElementById("sdraft");
+  if (d) d.onclick = async () => {
+    const r = await fetch("/api/setup/draft", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify({page: S.page, persona: $("#persona").value})});
+    const j = await r.json(); if (!r.ok) return alert(j.error);
+    S.tab = "log"; render(); pollStatus();
+  };
+  document.querySelectorAll(".sdec button").forEach(b => b.onclick = async () => {
+    const box = b.closest(".sdec");
+    const body = {page: S.page, persona: $("#persona").value, part: box.dataset.part, decision: b.dataset.d, name: $("#sname").value, note: box.querySelector(".snote").value};
+    const r = await fetch("/api/setup/approve", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify(body)});
+    const j = await r.json();
+    if (!r.ok) { box.querySelector(".smsg").textContent = j.error; box.querySelector(".smsg").style.color = "var(--fail)"; alert(j.error); return; }
+    const nm = $("#sname").value; await refreshSetup();
+    const left = Object.entries(S.setup.status.parts).filter(([k, v]) => v !== "approved").map(([k]) => PART_LABEL[k.split(":")[0]]);
+    S.setupFlash = (b.dataset.d === "approve" ? "Approved: " : "Rejected: ") + PART_LABEL[box.dataset.part.split(":")[0]] + ". " +
+      (S.setup.status.ready ? (left.length ? "Runs are now unlocked. Still open (optional): " + left.join(", ") + "." : "All three parts approved. Click Start a run at the top.") : "Still needed before a run: " + left.join(", ") + ".");
+    render(); const n = document.getElementById("sname"); if (n) n.value = nm;
+  });
+}
+
+
+function guide() {
+  if (S.mode !== "live") return "";
+  const st = S.setup?.status, C = S.info?.current_approval, sb = S.info?.sandbox;
+  const step = (n, text, tab, label) => `<div class="banner p-hold" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><b>Next step ${n} of 5.</b> <span>${text}</span>${tab && S.tab !== tab ? `<button id="guidego" data-tab="${tab}">${label}</button>` : ""}</div>`;
+  if (S.info && S.tab !== "setup") {   // a saved run is open: its own next step, whatever the setup state
+    if (!C) return step(3, "Read the variants and their scores, then pick one and click “Approve for the sandbox”. (A new run on this page needs the page setup approved first.)", "approve", "Open Approve and test");
+    if (!sb) return step(4, `Variant ${esc(C.variant)} is approved. Click “Run the sandbox” (no model cost, about a minute).`, "approve", "Open Approve and test");
+    return `<div class="banner p-pass small">Done for this run: variant ${esc(sb.variant)} was approved and tested. Results are in “Sandbox and findings”.${S.tab !== "findings" ? ' <button id="guidego" data-tab="findings">Open Sandbox and findings</button>' : ""}</div>`;
+  }
+  if (!st?.ready) return step(1, "Approve Positioning and Claims once for this page (read each, click Approve). The buyer checklist is optional: it adds two buyer questions. After this, any buyer can be run without setup.", "setup", "Open Page setup");
+  if (!S.info) return step(2, "Setup is approved. Click “Start a run” at the top right (about $0.20 and 3 to 5 minutes). The run log shows progress.", null);
+  if (!C) return step(3, "Read the variants and their scores, then pick one and click “Approve for the sandbox”.", "approve", "Open Approve and test");
+  if (!sb) return step(4, `Variant ${esc(C.variant)} is approved. Click “Run the sandbox” (no model cost, about a minute).`, "approve", "Open Approve and test");
+  return `<div class="banner p-pass small">Done for this run: variant ${esc(sb.variant)} was approved and tested. Results are in “Sandbox and findings”.${S.tab !== "findings" ? ' <button id="guidego" data-tab="findings">Open Sandbox and findings</button>' : ""}</div>`;
+}
+function scoreTable(name) {
+  const r = (S.info.probe.gate2 || {})[name];
+  if (!r || !r.judge1) return "";
+  const qs = Object.keys(r.judge1.audit_variant || {});
+  const cell = (j, k) => { const J = r[j]; if (!J || J.audit_variant?.[k] === undefined) return "<td>-</td>";
+    const b = J.audit_baseline[k], v = J.audit_variant[k], d = J.delta[k];
+    return `<td>${b.toFixed(2)} → <b>${v.toFixed(2)}</b> <span class="pill ${d >= 0.1 ? "p-pass" : d < -0.05 ? "p-fail" : "p-off"}">${d >= 0 ? "+" : ""}${d.toFixed(2)}</span></td>`; };
+  const kind = k => (r.judge1.targeted || []).includes(k) ? "gap" : "other";
+  const g3 = j => r[j] ? `${r[j].G3?.toFixed(2)} (${esc(r[j].G3_verdict)})` : "-";
+  const rule = S.qs?.better_than_baseline || {};
+  return `<details class="card" style="margin:8px 0" open><summary class="small"><b>How it was scored</b>: Gate 1 rules, then both judges</summary>
+    <p class="small">Gate 1 (rules, no model): ${(((S.info.probe.gate1_rounds || []).slice(-1)[0] || {})[name] || []).length ? "failed" : "passed"}. Gate 2: each judge answered every audit question for the live hero and for this variant. A higher number means “more yes”; for A6 (rival could copy it) lower is better, so its change is shown with the sign flipped.
+    Rule: average change on the “gap” rows must be at least +${rule.min_gain}, and no “other” row may drop more than ${rule.max_drop}.</p>
+    <div class="tablewrap"><table><tr><th>Question</th><th>Row</th><th>Jev: live → variant (change)</th><th>Judge 2: live → variant (change)</th></tr>
+    ${qs.map(k => `<tr><td>${esc(k)}</td><td>${kind(k)}</td>${cell("judge1", k)}${cell("judge2", k)}</tr>`).join("")}
+    <tr><td>Banned-phrase check</td><td>flag</td><td>${g3("judge1")}</td><td>${g3("judge2")}</td></tr>
+    <tr><td><b>Better than the live hero?</b></td><td></td><td>${r.judge1.better ? pill("pass") : pill("fail")}</td><td>${r.judge2.better ? pill("pass") : pill("fail")}</td></tr></table></div></details>`;
+}
+function viewFindings() {
+  const sb = S.info.sandbox, C = S.info.current_approval;
+  if (!sb) return `<div class="card"><b>No sandbox result for this run yet.</b><p class="small">${C ? `Variant ${esc(C.variant)} is approved. Open “Approve and test” and click “Run the sandbox”.` : "No variant of this run has been approved. Open “Approve and test”, pick a variant and approve it, then run the sandbox."} The sandbox and findings exist only for runs where a person approved a variant.</p>
+    <p class="small muted">Submission files: README.md, docs/architecture.md and submission/JEV-NOTE.md in the project folder.</p></div>`;
+  return `<div class="card"><b>Sandbox</b> <span class="pill p-off">SYNTHETIC</span> · variant ${esc(sb.variant)} · approved by ${esc(sb.approval.name)} ${sb.approval.override ? "(chosen against a Gate 2 result)" : ""}${sandboxTable(sb)}</div>
+    <div class="card md" id="fnd2">Loading findings…</div>
+    <div class="card small muted">Submission files: README.md, docs/architecture.md and submission/JEV-NOTE.md in the project folder.</div>`;
+}
+function wireFindings() {
+  if (S.info.sandbox) fetch(fileUrl("FINDINGS.md", {sub: "sandbox"})).then(r => r.text()).then(t => { const el = document.getElementById("fnd2"); if (el) el.innerHTML = mdToHtml(t); });
+}
+
+async function startRun() {
+  if (!confirm(`Start a live run on "${S.page}"? It calls the writer and both judges through OpenRouter (the last run cost about ${$("#runnote").textContent.split("·")[0].replace("last run", "").trim() || "$0.20"}). The live page is loaded once for the PNGs.`)) return;
+  const r = await fetch("/api/start", {method: "POST", headers: {"Content-Type": "application/json", "X-Agent-Console": "1"}, body: JSON.stringify({page: S.page, persona: $("#persona").value, goal: $("#goal").value})});
+  const j = await r.json(); if (!r.ok) return alert(j.error);
+  S.tab = "log"; render(); pollStatus();
+}
+async function pollStatus() {
+  clearTimeout(S.poll);
+  let st; try { st = await api("/api/status"); } catch (e) { return; }
+  S.lastLog = st.log || S.lastLog;
+  updateGo(st.running);
+  $("#status").className = "pill " + (st.running ? "p-hold" : st.exit_code === 0 ? "p-pass" : st.exit_code ? "p-fail" : "p-off");
+  $("#status").textContent = st.running ? "running…" : st.exit_code === 0 ? "last run finished" : st.exit_code ? `last run failed (${st.exit_code})` : "idle";
+  const box = document.getElementById("logbox");
+  if (box) { const atEnd = box.scrollTop + box.clientHeight >= box.scrollHeight - 20; box.textContent = S.lastLog || "No run started from this console yet."; if (atEnd) box.scrollTop = box.scrollHeight;
+    document.getElementById("logmeta").textContent = st.started ? `Run on ${st.page} started ${st.started}. Spend cap per run: $${st.spend_cap_usd.toFixed(2)}.` : `Spend cap per run: $${st.spend_cap_usd.toFixed(2)}.`; }
+  updateGo(st.running);
+  if (st.running) S.poll = setTimeout(pollStatus, 2000);
+  else if (S.wasRunning) { S.wasRunning = false; if (st.kind === "sandbox") S.tab = "approve"; if (st.kind === "setup") S.tab = "setup"; await loadPage(st.page || S.page, st.kind === "setup" ? S.run : st.new_run); }
+  if (st.running) S.wasRunning = true;
+}
+init().catch(e => { $("#view").innerHTML = `<div class="card">Could not load: ${esc(e.message)}</div>`; });
+</script>
+</body>
+</html>

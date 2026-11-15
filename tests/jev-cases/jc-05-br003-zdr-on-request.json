@@ -1,0 +1,14 @@
+{
+  "id": "jc-05",
+  "question": "BR-003 asks 'Does the page say zero data retention is available on request?' Does evidence EV-011 support this exact line: 'Zero data retention is available on request, under an agreed arrangement.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-004-zero-data-retention-on-request.md",
+    "pages/token-factory/evidence/ev-011-tf-zero-data-retention.md",
+    "pages/token-factory/buyer-and-wedge/checklists/risk-and-compliance.md"
+  ],
+  "expected": "yes",
+  "kind": "normal",
+  "why": "EV-011 quotes the FAQ with the same words: available on request, under an agreed ZDR arrangement.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-003"
+}

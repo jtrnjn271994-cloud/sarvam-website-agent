@@ -1,0 +1,256 @@
+{
+ "label": "SYNTHETIC",
+ "made": "2026-11-15T20:55:28",
+ "run": "probe3-20261115-202053",
+ "variant": "B",
+ "approval": {
+  "name": "Console user",
+  "at": "2026-11-15T20:30:49",
+  "override": false,
+  "reason": "",
+  "variant_hash": "5eb6d37241f77682d58980697c8f16cd0d0eb9d21800c99c0a77d7a268f0eca9",
+  "png_hash": "e219004e408528794e115d39c8e572ccb758a4e5bb0755c2b8d80c596e866af3"
+ },
+ "group_at_approval": "passed",
+ "simulated": {
+  "enough": {
+   "visitors_per_arm": 100000,
+   "declared_lift_relative": 0.06833333333333333,
+   "label": "SYNTHETIC",
+   "baseline": {
+    "visitors": 100000,
+    "clicks": 4099,
+    "rate": 0.04099,
+    "ci95": [
+     0.03977865789885522,
+     0.042236607402712956
+    ]
+   },
+   "variant": {
+    "visitors": 100000,
+    "clicks": 3936,
+    "rate": 0.03936,
+    "ci95": [
+     0.03817237512315466,
+     0.04058301540976263
+    ]
+   },
+   "diff": -0.0016299999999999995,
+   "diff_ci95": [
+    -0.0033512394851631768,
+    9.123948516317777e-05
+   ],
+   "relative_lift": -0.039765796535740416,
+   "z": -1.8560883082774497,
+   "p": 0.0634409719625447,
+   "result": "inconclusive"
+  },
+  "too_few": {
+   "visitors_per_arm": 20000,
+   "declared_lift_relative": 0.06833333333333333,
+   "label": "SYNTHETIC",
+   "baseline": {
+    "visitors": 20000,
+    "clicks": 798,
+    "rate": 0.0399,
+    "ci95": [
+     0.03727458068339297,
+     0.042702137388599765
+    ]
+   },
+   "variant": {
+    "visitors": 20000,
+    "clicks": 768,
+    "rate": 0.0384,
+    "ci95": [
+     0.03582422695149905,
+     0.041153067249830755
+    ]
+   },
+   "diff": -0.0015000000000000013,
+   "diff_ci95": [
+    -0.005301425684450507,
+    0.0023014256844505043
+   ],
+   "relative_lift": -0.03759398496240605,
+   "z": -0.7733882660623367,
+   "p": 0.4392926322178415,
+   "result": "inconclusive"
+  },
+  "A/A check": {
+   "visitors_per_arm": 100000,
+   "declared_lift_relative": 0.0,
+   "label": "SYNTHETIC",
+   "baseline": {
+    "visitors": 100000,
+    "clicks": 4058,
+    "rate": 0.04058,
+    "ci95": [
+     0.03937457266088107,
+     0.041820724140596996
+    ]
+   },
+   "variant": {
+    "visitors": 100000,
+    "clicks": 3970,
+    "rate": 0.0397,
+    "ci95": [
+     0.0385073828515322,
+     0.04092798155950858
+    ]
+   },
+   "diff": -0.0008799999999999988,
+   "diff_ci95": [
+    -0.0026005314240134052,
+    0.0008405314240134075
+   ],
+   "relative_lift": -0.02168555938886148,
+   "z": -1.0024784450438011,
+   "p": 0.3161125719266441,
+   "result": "inconclusive"
+  }
+ },
+ "plan": {
+  "segments": [
+   {
+    "name": "Business owner",
+    "industry": "Banks & lenders",
+    "role": "targeted",
+    "weight": 0.5,
+    "goal_fit": 0.3,
+    "strength": 1.0,
+    "sensitivity": 0.3
+   },
+   {
+    "name": "Economic buyer",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Operations user",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.6,
+    "strength": 0.5,
+    "sensitivity": 0.3
+   },
+   {
+    "name": "Technical evaluator",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.6,
+    "strength": 0.5,
+    "sensitivity": 0.3
+   },
+   {
+    "name": "Risk and compliance",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Risk and compliance (grievance and vendor risk)",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Procurement",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Champion",
+    "industry": "Banks & lenders",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 1.0,
+    "strength": 0.5,
+    "sensitivity": 0.5
+   }
+  ],
+  "judge_gains": {
+   "Jev": 0.122,
+   "Judge 2": 0.152
+  },
+  "avg_gain": 0.137,
+  "lift_rule": {
+   "lift_per_gain": 0.5,
+   "floor": 0.02,
+   "cap": 0.5
+  },
+  "declared_lift": 0.0683,
+  "effective_lift": 0.0185,
+  "base_rate": 0.04,
+  "visitors_needed_for_effective_lift": 1104873,
+  "capped": true,
+  "goal": {
+   "id": "start-building",
+   "label": "More visitors start building (self-serve)",
+   "kind": "console"
+  },
+  "persona": "Business owner (Chief Credit Officer; Head of Collections; Chief Credit and Collections Officer) in Banks & lenders",
+  "scenarios": [
+   {
+    "name": "enough",
+    "visitors_per_arm": 100000,
+    "lift_relative": 0.06833333333333333
+   },
+   {
+    "name": "too_few",
+    "visitors_per_arm": 20000,
+    "lift_relative": 0.06833333333333333
+   }
+  ]
+ },
+ "plan_explained_by": "reasoning model",
+ "browser": {
+  "sessions_per_arm": 20,
+  "passed": {
+   "baseline": 20,
+   "variant": 20
+  },
+  "blocked_requests": {
+   "count": 2166,
+   "hosts": [
+    "assets.sarvam.ai",
+    "cdn.claydar.com",
+    "connect.facebook.net",
+    "googleads.g.doubleclick.net",
+    "js-eu1.hs-analytics.net",
+    "js-eu1.hs-banner.com",
+    "js-eu1.hs-scripts.com",
+    "js-eu1.hsadspixel.net",
+    "js-eu1.hscollectedforms.net",
+    "k.sarvam.ai",
+    "snap.licdn.com",
+    "static.claydar.com",
+    "static.cloudflareinsights.com",
+    "www.googletagmanager.com",
+    "www.sarvam.ai"
+   ]
+  }
+ },
+ "config": {
+  "seed": 20261115,
+  "alpha": 0.05,
+  "min_visitors_per_arm": 1000,
+  "base_rate": 0.04
+ }
+}

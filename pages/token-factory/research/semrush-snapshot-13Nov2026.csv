@@ -1,0 +1,32 @@
+table,database,item,organic_keywords,est_monthly_organic_traffic_or_volume,note
+domain,in,sarvam.ai,6695,5023355,SEMRUSH estimate; mostly translation queries; not Token Factory demand
+domain,in,tata communications,6142,42140,SEMRUSH estimate; pasted session
+domain,in,esds,2345,24324,SEMRUSH estimate; pasted session
+domain,in,krutrim,242,18726,SEMRUSH estimate; pasted session
+domain,in,e2enetworks.com,436,16931,SEMRUSH estimate; RE-PULLED 13 Nov 2026 and matched (rank 40809)
+domain,in,together ai,745,4953,SEMRUSH estimate; pasted session
+domain,in,nebius,249,4794,SEMRUSH estimate; pasted session
+domain,in,nxtgen,167,3428,SEMRUSH estimate; pasted session
+domain,in,fireworks ai,124,1802,SEMRUSH estimate; pasted session
+domain,in,cloudpe,161,378,SEMRUSH estimate; pasted session
+domain,in,yotta,12,351,SEMRUSH estimate; pasted session
+domain,us,openrouter,,196000,SEMRUSH estimate; pasted session; rounded
+domain,us,fireworks,,41300,SEMRUSH estimate; pasted session; rounded
+domain,us,nebius,,31400,SEMRUSH estimate; pasted session; rounded
+domain,us,together,,28200,SEMRUSH estimate; pasted session; rounded
+keyword,in,token factory,,20,SEMRUSH estimate; RE-PULLED 13 Nov 2026 and matched; CPC 0.32
+keyword,in,inference as a service,,40,SEMRUSH estimate; RE-PULLED 13 Nov 2026 and matched; CPC 0.57
+keyword,in,model serving,,20,SEMRUSH estimate; pasted session
+keyword,in,deepseek api,,9900,SEMRUSH estimate; pasted session
+keyword,in,llm inference,,no data,Semrush returned no row; not the same as zero
+keyword,in,ai inference platform,,no data,Semrush returned no row; not the same as zero
+keyword,in,serverless inference,,no data,Semrush returned no row; not the same as zero
+keyword,in,openai-compatible api,,no data,Semrush returned no row; not the same as zero
+keyword,us,token factory,,90,SEMRUSH estimate; pasted session
+keyword,us,inference as a service,,210,SEMRUSH estimate; pasted session
+keyword,us,llm inference,,720,SEMRUSH estimate; pasted session
+keyword,us,ai inference platform,,480,SEMRUSH estimate; pasted session
+keyword,us,serverless inference,,260,SEMRUSH estimate; pasted session
+keyword,us,model serving,,480,SEMRUSH estimate; pasted session
+keyword,us,openai-compatible api,,260,SEMRUSH estimate; pasted session
+keyword,us,deepseek api,,40500,SEMRUSH estimate; pasted session

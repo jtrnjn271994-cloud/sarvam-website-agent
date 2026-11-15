@@ -1,0 +1,14 @@
+id,source,path_or_url,date,label,use,status
+SRC-V01,Saved Voice Agents page (capture),pages/voice-agents/capture/2026-11-15-live/page-text.txt,2026-11-15,VENDOR,Page wording and hero; claims CL-001 to CL-014 quote it word for word,read in full
+SRC-V02,Seven Pages positioning (Page 5 voice),01 Final/Positioning/Sarvam Positioning — Seven Pages.md,2026-11-06,PROPOSED,Voice as entry hypothesis; cost per accepted task; primary action,lines 109-176 read by scout
+SRC-V03,ICP round 2 banks and lenders pain rows,02 Assets/Research/icp-round-2/bfsi/pain.csv,2026-11-10,CHECKED,RBI recovery directions (rows BFSI-H-11 to H-13; https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13672) and ombudsman complaints (BFSI-H-01),ledger-read rows
+SRC-V04,ICP round 2 rival cases (banks and lenders),02 Assets/Research/icp-round-2/bfsi/rival-cases.csv,2026-11-10,VENDOR,Gnani lender cases; Credgenics; Ozonetel; Yubi,read by scout; rival pages not re-read
+SRC-V05,Competitor check by offering,02 Assets/Research/sarvam-competitor-check-by-offering.md,2026-11-06,VENDOR,Voice rival list; Gnani claims; listed rivals,read by scout
+SRC-V06,Voice price ledger,02 Assets/Research/validation/ledger-B1-voice.csv,2026-11-12,CHECKED,Sarvam plan rates V-01 to V-04; minimums V-08 to V-10; telephony V-05 and V-11; Ringg V-06 and V-07,PASS rows
+SRC-V07,Field Kit say and don't say,02 Assets/Sales Enablement/source/addon-data.js,2026-11-10,PROPOSED,Do-not-say lines; blind-test counter; Kissht and PNB Housing quotes,read by scout
+SRC-V08,Gap register,05 Assignment - Website Positioning/02 Gap Register/gap-register-v0.csv,2026-11-12,AUDIT,CO-C-02 one collections story; CO-C-14 telephony billed separately; GTM-06,read by scout
+SRC-V09,Sarvam story: Mahindra Finance,https://www.sarvam.ai/stories/mahindra-finance-voice-agents,2026-11-09,VENDOR,Customer-built agents across sales collections and employee engagement,read for the Field Kit 9 Nov 2026
+SRC-V10,Sarvam story: Tata Capital,https://www.sarvam.ai/stories/tata-capital-ai-voice-transformation,2026-11-09,VENDOR,Multilingual voice conversations across consumer loan products,read for the Field Kit 9 Nov 2026
+SRC-V11,Project brief facts and do-not-claim list,CLAUDE.md (project root),2026-11-12,PROPOSED,Founder claims with ledger ids N077 to N083; do-not-claim list,read
+SRC-V12,ICP round 2 buying committee,02 Assets/Research/icp-round-2/icp-data.json,2026-11-10,INFERENCE,What procurement asks for (price per minute; volume tiers),read by scout
+SRC-V13,Buyer checklist (Business owner; banks and lenders),pages/voice-agents/setup/checklists/bfsi--business-owner.md,2026-11-15,PROPOSED,Main objection copied from the persona row,approved in the console 15 Nov 2026

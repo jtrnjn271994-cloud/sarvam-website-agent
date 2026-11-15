@@ -1,0 +1,55 @@
+{
+  "note": "Layout map for agent/render_page.py. Nav labels are the labels the layout audit of 13 Nov 2026 read on the baseline page (VENDOR). The layouts below are keyed to run-03 section names. From run 04 on, a variant takes its layouts from the layouts key of its own design-<X>.json, which wins over this map. code_placeholder is no longer drawn: a code box shows only code that a copy line holds.",
+  "nav_links": [
+    "Products",
+    "Developers",
+    "Resources",
+    "Company"
+  ],
+  "nav_actions": [
+    "Log In",
+    "Contact Us"
+  ],
+  "nav_pricing_label": "Pricing",
+  "layouts": {
+    "A": {
+      "where-your-workload-runs": "text",
+      "agreed-terms": "cards",
+      "test-your-workload": "steps",
+      "models": "text",
+      "pricing": "pricing"
+    },
+    "B": {
+      "how-the-test-works": "steps",
+      "models": "panel",
+      "where-your-workload-runs": "text",
+      "pricing": "pricing",
+      "security-and-terms": "block"
+    }
+  },
+  "card_kickers": [
+    {
+      "match": "uptime",
+      "label": "Uptime SLA"
+    },
+    {
+      "match": "zero data retention",
+      "label": "Zero data retention"
+    },
+    {
+      "match": "ISO 27001",
+      "label": "Certifications"
+    }
+  ],
+  "code_placeholder": [
+    "base_url = \"<your endpoint>\"",
+    "api_key = \"<your key>\"",
+    "model = \"<your model>\""
+  ],
+  "form_fields": [
+    "Your workload",
+    "Quality bar",
+    "Speed bar",
+    "Cost bar"
+  ]
+}

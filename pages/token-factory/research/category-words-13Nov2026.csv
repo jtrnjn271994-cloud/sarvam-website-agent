@@ -1,0 +1,31 @@
+phrase,india_monthly_volume,us_monthly_volume,us_cpc_usd,us_intent_code,rivals_using_phrase_on_their_page,note
+deepseek api,9900,40500,4.33,2,,model-name search; Sarvam hosts DeepSeek V4.1 Flash and V4 Pro
+kimi api,no data,5400,3.48,2,,model-name search; Sarvam lists Kimi K3.1 Pro
+qwen api,no data,1600,4.68,"1,3",,model-name search; Sarvam lists Qwen 3.8 27B
+glm api,no data,480,1.61,1,,model-name search; Sarvam lists GLM 5.3
+gpu as a service,720,480,7.42,1,Krutrim,infrastructure phrase; India volume is its highest after DeepSeek
+model serving,20,480,35.75,1,,US CPC is the highest in this set
+ai inference platform,no data,480,6.86,1,Yotta Shakti Studio (nav label),
+openai compatible api,no data,260,5.17,1,"E2E; Fireworks; Together; Yotta; Krutrim docs",shared feature phrase; low competition
+serverless gpu,110,260,6.40,1,Yotta Shakti Studio,
+inference as a service,40,210,6.73,1,,no rival page uses this exact phrase in the pages we read
+llm hosting,no data,170,4.09,1,,
+llm api pricing,no data,110,4.83,3,,transactional intent
+token factory,20,90,6.85,1,"Nebius; E2E (The Token Factory); Sarvam",low volume; used by three vendors
+inference api,no data,90,9.30,1,E2E (model inference API),
+openai alternative,no data,70,9.63,"1,0",,
+sovereign ai cloud,no data,50,13.77,1,Yotta,
+managed inference,no data,40,9.10,1,,
+open source model hosting,no data,40,2.92,1,,
+llm inference api,no data,30,19.67,,,highest CPC in this set
+private llm hosting,no data,30,4.64,1,,
+open source llm api,no data,20,5.57,,,
+open source llm inference,no data,20,0,,,
+india gpu cloud,no data,20,0,,,
+serverless llm,no data,10,3.92,,Together (serverless inference),
+ai cloud india,no data,10,0,,Krutrim; Yotta,
+gpu cloud india,no data,10,0,,,
+zero data retention llm,no data,10,0,,"Nebius; Fireworks; Sarvam (on request)",
+dedicated inference endpoint,no data,0,0,,Together (dedicated inference),
+llm api india,no data,no data,,,,
+indian llm api,no data,no data,,,,

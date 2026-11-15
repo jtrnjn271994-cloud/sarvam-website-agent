@@ -1,0 +1,335 @@
+{
+ "label": "PROBE, provisional pass line 0.50, uncalibrated",
+ "roles": {
+  "writer": "deepseek/deepseek-v4-pro",
+  "judge1": "typesafe/jev-1.14",
+  "judge2": "openai/gpt-6-luna-decisions"
+ },
+ "audit": {
+  "model": "typesafe/jev-1.14-20261014",
+  "questions": {
+   "A1-audience": "Does the hero speak to this buyer and their situation, so that the buyer would see themselves in it?",
+   "A2-value": "Does the headline say what the product does and what the buyer gets, in words this buyer uses?",
+   "A3-proof": "Does the hero give a checkable proof point, such as a named standard, a number with its source, or a named customer?",
+   "A4-cta": "Does the main button tell this buyer what happens when they click it?",
+   "A5-positioning": "Does the hero say what the positioning's main claim says?",
+   "A6-swap": "Could any rival in the rival rows print this exact hero on its own page without changing it?",
+   "A7-checklist-item-1": "Does the hero answer this question the buyer asks: Does the page say how to test one workload?",
+   "A7-checklist-item-2": "Does the hero answer this question the buyer asks: Does the page say the API is OpenAI-compatible?",
+   "A7-checklist-item-3": "Does the hero answer this question the buyer asks: Does the page say where inference runs?",
+   "A7-checklist-item-4": "Does the hero answer this question the buyer asks: Does the page show a price per 1M tokens, or link to prices?",
+   "A7-checklist-item-5": "Does the hero answer this question the buyer asks: Does the page say who owns fine-tuned weights?"
+  },
+  "p": {
+   "A1-audience": 0.72,
+   "A2-value": 0.45,
+   "A3-proof": 0.04,
+   "A4-cta": 0.17,
+   "A5-positioning": 0.54,
+   "A6-swap": 0.29,
+   "A7-checklist-item-1": 0.28,
+   "A7-checklist-item-2": 0.05,
+   "A7-checklist-item-3": 0.94,
+   "A7-checklist-item-4": 0.05,
+   "A7-checklist-item-5": 0.04
+  }
+ },
+ "gap": {
+  "required_failed": [
+   "A3-proof",
+   "A4-cta",
+   "A2-value"
+  ],
+  "lead_missing_item": "Does the page say who owns fine-tuned weights"
+ },
+ "writer": {
+  "model": "deepseek/deepseek-v4-pro",
+  "cost": 0.00068243721,
+  "prompt_chars": 5137
+ },
+ "variants": [
+  {
+   "name": "A",
+   "h1": "Run leading open models on India-hosted GPUs, then validate against your own throughput and latency targets.",
+   "subline": "ISO 27001:2022 certified and SOC 2 Type II attested. Zero data retention available on request. Models served from Sarvam-operated infrastructure in India—your prompts never leave the country to a foreign API.",
+   "cta": "Compare on your workload",
+   "claims_used": [
+    "CL-001",
+    "CL-002",
+    "CL-004",
+    "CL-005",
+    "CL-013"
+   ],
+   "why": "Closes A3-proof with ISO/SOC attestation, answers weight ownership indirectly by stating India-hosted and not forwarded, and makes the CTA's outcome clear (size a deployment for your workload)."
+  },
+  {
+   "name": "B",
+   "h1": "Serve production model workloads from Indian GPUs and prove they hit your quality, speed and cost bar.",
+   "subline": "One API key accesses all catalogue models. Enterprise deployments backed by a 99.95% uptime SLA. Share your concurrency, prompt lengths, peak traffic and response-time targets so the team can size a deployment that fits.",
+   "cta": "Compare on your workload",
+   "claims_used": [
+    "CL-001",
+    "CL-003",
+    "CL-006",
+    "CL-013"
+   ],
+   "why": "Closes A2-value by stating the product (production model workloads on Indian GPUs) and the buyer's gain (prove they meet their bar), and A4-cta by explaining what happens after click: the team sizes a deployment from the buyer's own numbers."
+  }
+ ],
+ "gate1": {
+  "A": [],
+  "B": []
+ },
+ "gate2": {
+  "A": {
+   "gate1_problems": [],
+   "judge1": {
+    "claim CL-001": {
+     "G1-support": 0.73,
+     "G2-overreach": 0.75
+    },
+    "claim CL-002": {
+     "G1-support": 0.8,
+     "G2-overreach": 0.6
+    },
+    "claim CL-004": {
+     "G1-support": 0.69,
+     "G2-overreach": 0.48
+    },
+    "claim CL-005": {
+     "G1-support": 0.5,
+     "G2-overreach": 0.48
+    },
+    "claim CL-013": {
+     "G1-support": 0.2,
+     "G2-overreach": 0.28
+    },
+    "G3-banned": 0.64,
+    "G4-distinct": 0.82,
+    "audit_variant": {
+     "A1-audience": 0.85,
+     "A2-value": 0.72,
+     "A3-proof": 0.96,
+     "A4-cta": 0.54,
+     "A5-positioning": 0.87,
+     "A6-swap": 0.17,
+     "A7-checklist-item-1": 0.63,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.95,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.03
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.45,
+     "A3-proof": 0.04,
+     "A4-cta": 0.17,
+     "A5-positioning": 0.54,
+     "A6-swap": 0.29,
+     "A7-checklist-item-1": 0.28,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.04
+    }
+   },
+   "judge2": {
+    "claim CL-001": {
+     "G1-support": 0.88,
+     "G2-overreach": 0.01
+    },
+    "claim CL-002": {
+     "G1-support": 0.75,
+     "G2-overreach": 0.03
+    },
+    "claim CL-004": {
+     "G1-support": 0.35,
+     "G2-overreach": 0.0
+    },
+    "claim CL-005": {
+     "G1-support": 0.38,
+     "G2-overreach": 0.0
+    },
+    "claim CL-013": {
+     "G1-support": 0.17,
+     "G2-overreach": 0.0
+    },
+    "G3-banned": 0.02,
+    "G4-distinct": 0.99,
+    "audit_variant": {
+     "A1-audience": 0.84,
+     "A2-value": 0.79,
+     "A3-proof": 1.0,
+     "A4-cta": 0.73,
+     "A5-positioning": 0.93,
+     "A6-swap": 0.02,
+     "A7-checklist-item-1": 0.84,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 0.0,
+     "A7-checklist-item-5": 0.03
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.49,
+     "A3-proof": 0.0,
+     "A4-cta": 0.06,
+     "A5-positioning": 0.66,
+     "A6-swap": 0.28,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 0.01,
+     "A7-checklist-item-5": 0.0
+    }
+   }
+  },
+  "B": {
+   "gate1_problems": [],
+   "judge1": {
+    "claim CL-001": {
+     "G1-support": 0.45,
+     "G2-overreach": 0.82
+    },
+    "claim CL-003": {
+     "G1-support": 0.64,
+     "G2-overreach": 0.51
+    },
+    "claim CL-006": {
+     "G1-support": 0.54,
+     "G2-overreach": 0.62
+    },
+    "claim CL-013": {
+     "G1-support": 0.49,
+     "G2-overreach": 0.29
+    },
+    "G3-banned": 0.39,
+    "G4-distinct": 0.8,
+    "audit_variant": {
+     "A1-audience": 0.85,
+     "A2-value": 0.75,
+     "A3-proof": 0.68,
+     "A4-cta": 0.58,
+     "A5-positioning": 0.93,
+     "A6-swap": 0.29,
+     "A7-checklist-item-1": 0.69,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.86,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.03
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.45,
+     "A3-proof": 0.04,
+     "A4-cta": 0.17,
+     "A5-positioning": 0.54,
+     "A6-swap": 0.29,
+     "A7-checklist-item-1": 0.28,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.04
+    }
+   },
+   "judge2": {
+    "claim CL-001": {
+     "G1-support": 0.71,
+     "G2-overreach": 0.92
+    },
+    "claim CL-003": {
+     "G1-support": 0.84,
+     "G2-overreach": 0.18
+    },
+    "claim CL-006": {
+     "G1-support": 0.28,
+     "G2-overreach": 0.01
+    },
+    "claim CL-013": {
+     "G1-support": 0.16,
+     "G2-overreach": 0.41
+    },
+    "G3-banned": 0.05,
+    "G4-distinct": 0.99,
+    "audit_variant": {
+     "A1-audience": 0.85,
+     "A2-value": 0.82,
+     "A3-proof": 0.48,
+     "A4-cta": 0.6,
+     "A5-positioning": 0.95,
+     "A6-swap": 0.78,
+     "A7-checklist-item-1": 0.81,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.95,
+     "A7-checklist-item-4": 0.0,
+     "A7-checklist-item-5": 0.0
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.49,
+     "A3-proof": 0.0,
+     "A4-cta": 0.06,
+     "A5-positioning": 0.66,
+     "A6-swap": 0.28,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 0.01,
+     "A7-checklist-item-5": 0.0
+    }
+   }
+  }
+ },
+ "summary": {
+  "A": {
+   "gate1": true,
+   "judge1": {
+    "safe": false,
+    "better_than_baseline": true,
+    "gains_on_required": {
+     "A1-audience": 0.13,
+     "A2-value": 0.27,
+     "A3-proof": 0.92,
+     "A4-cta": 0.37
+    }
+   },
+   "judge2": {
+    "safe": false,
+    "better_than_baseline": true,
+    "gains_on_required": {
+     "A1-audience": 0.12,
+     "A2-value": 0.3,
+     "A3-proof": 1.0,
+     "A4-cta": 0.67
+    }
+   },
+   "pass_both": false,
+   "judges_disagree": false
+  },
+  "B": {
+   "gate1": true,
+   "judge1": {
+    "safe": false,
+    "better_than_baseline": true,
+    "gains_on_required": {
+     "A1-audience": 0.13,
+     "A2-value": 0.3,
+     "A3-proof": 0.64,
+     "A4-cta": 0.41
+    }
+   },
+   "judge2": {
+    "safe": false,
+    "better_than_baseline": true,
+    "gains_on_required": {
+     "A1-audience": 0.13,
+     "A2-value": 0.33,
+     "A3-proof": 0.48,
+     "A4-cta": 0.54
+    }
+   },
+   "pass_both": false,
+   "judges_disagree": false
+  }
+ }
+}

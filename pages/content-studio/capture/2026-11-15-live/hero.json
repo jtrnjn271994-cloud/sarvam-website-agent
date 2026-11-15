@@ -1,0 +1,238 @@
+{
+  "h1": "The multilingual content workspace",
+  "sub": "Dub, generate and clone voices across languages, with control to review and refine every line.",
+  "ctas": [
+    {
+      "index": 0,
+      "text": "Start creating",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page",
+      "tag": "a"
+    },
+    {
+      "index": 1,
+      "text": "Explore the workflow",
+      "href": "https://www.sarvam.ai/products/content-studio#workflow",
+      "tag": "a"
+    }
+  ],
+  "box": {
+    "x": 106.671875,
+    "y": 160,
+    "width": 1066.65625,
+    "height": 320.71875
+  },
+  "links": [
+    {
+      "text": "50% off AI dubbing in Content Studio, for a limited time Start dubbing",
+      "href": "https://indus.sarvam.ai/creator-studio/dubbing"
+    },
+    {
+      "text": "Offer50% off AI dubbing in Content Studio, for a limited timeStart dubbing",
+      "href": "https://indus.sarvam.ai/creator-studio/dubbing"
+    },
+    {
+      "text": "Offer50% off AI dubbing in Content Studio, for a limited timeStart dubbing",
+      "href": "https://indus.sarvam.ai/creator-studio/dubbing"
+    },
+    {
+      "text": "How to build with Sarvam Voice Agents MCP · 18 November, 4 PM ISTRegister now",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Start creating",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Explore the workflow",
+      "href": "https://www.sarvam.ai/products/content-studio#workflow"
+    },
+    {
+      "text": "CONTENT STUDIO PRODUCTION STORY Each episode is translated and dubbed into multi",
+      "href": "https://www.sarvam.ai/blogs/sarvam-studio"
+    },
+    {
+      "text": "Start creating",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Learn about Dubbing",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Start creating",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Learn about cloning",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Start creating",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Visit the Trust Center",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Start creating",
+      "href": "https://indus.sarvam.ai/creator-studio?utm_source=website&utm_medium=content-studio&utm_campaign=content-studio-page"
+    },
+    {
+      "text": "Talk to sales",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Content Studio",
+      "href": "https://www.sarvam.ai/products/content-studio"
+    },
+    {
+      "text": "Token Factory",
+      "href": "https://www.sarvam.ai/token-factory"
+    },
+    {
+      "text": "Document AI",
+      "href": "https://www.sarvam.ai/products/document-ai"
+    },
+    {
+      "text": "Work Agents",
+      "href": "https://www.sarvam.ai/products/work-agents"
+    },
+    {
+      "text": "Coding Agents",
+      "href": "https://www.sarvam.ai/products/coding-agents"
+    },
+    {
+      "text": "Sarvam Edge",
+      "href": "https://www.sarvam.ai/products/edge"
+    },
+    {
+      "text": "Model Training",
+      "href": "https://www.sarvam.ai/products/model-training"
+    },
+    {
+      "text": "Text to Speech",
+      "href": "https://www.sarvam.ai/apis/text-to-speech"
+    },
+    {
+      "text": "Speech to Text",
+      "href": "https://www.sarvam.ai/apis/speech-to-text"
+    },
+    {
+      "text": "Doc Digitisation",
+      "href": "https://www.sarvam.ai/apis/document-digitisation"
+    },
+    {
+      "text": "Translation",
+      "href": "https://www.sarvam.ai/apis/translation"
+    },
+    {
+      "text": "Models",
+      "href": "https://www.sarvam.ai/models"
+    },
+    {
+      "text": "Blogs",
+      "href": "https://www.sarvam.ai/blogs"
+    },
+    {
+      "text": "Building AI Agents",
+      "href": "https://www.sarvam.ai/blogs/building-ai-agents"
+    },
+    {
+      "text": "Events",
+      "href": "https://www.sarvam.ai/events"
+    },
+    {
+      "text": "Customer Stories",
+      "href": "https://www.sarvam.ai/stories"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://docs.sarvam.ai/sarvam-api-docs"
+    },
+    {
+      "text": "API Pricing",
+      "href": "https://www.sarvam.ai/api-pricing"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://www.sarvam.ai/integrations"
+    },
+    {
+      "text": "Startup Program",
+      "href": "https://www.sarvam.ai/startup-program"
+    },
+    {
+      "text": "Sarvam Champions",
+      "href": "https://www.sarvam.ai/sarvam-champions"
+    },
+    {
+      "text": "About Us",
+      "href": "https://www.sarvam.ai/about-us"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.sarvam.ai/careers"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Brand",
+      "href": "https://www.sarvam.ai/brand"
+    },
+    {
+      "text": "Brand Guidelines",
+      "href": "https://www.sarvam.ai/brand-guidelines"
+    },
+    {
+      "text": "Partnerships",
+      "href": "https://www.sarvam.ai/partnerships"
+    },
+    {
+      "text": "Trust Center",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Terms of Service",
+      "href": "https://www.sarvam.ai/terms-of-service"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    },
+    {
+      "text": "EULA",
+      "href": "https://www.sarvam.ai/eula"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    }
+  ],
+  "title": "Sarvam Content Studio | Dub, Clone and Generate Multilingual Content",
+  "url": "https://www.sarvam.ai/products/content-studio",
+  "captured_at": "2026-11-15T19:26:12",
+  "viewport": "1280x900",
+  "hero_clip": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 504.71875
+  },
+  "selectors": {
+    "h1": "[data-hero=h1]",
+    "sub": "[data-hero=sub]",
+    "cta": "[data-hero^=cta-]"
+  },
+  "label": "LIVE CAPTURE. Loaded once. No bot traffic goes to this URL."
+}

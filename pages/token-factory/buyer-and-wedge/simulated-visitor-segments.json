@@ -1,0 +1,65 @@
+{
+  "version": "segments v1, 13 Nov 2026",
+  "label": "PROPOSED, SYNTHETIC",
+  "note": "These numbers are not data. Weights and click propensities are placeholders for a simulated test. No real visitor produced them. Do not quote them as results.",
+  "source_audiences": "pages/token-factory/profile.json, primary_audience and supporting_audiences",
+  "source_checklists": "pages/token-factory/buyer-and-wedge/checklists/*.md (all labels PROPOSED, no buyer interview)",
+  "segments": [
+    {
+      "id": "seg-primary",
+      "audience": "primary",
+      "role": "Enterprise IT services and GCC leaders who decide on AI inference (the key decision-maker)",
+      "what_they_look_for": [
+        "Proof from a real deployment, one clear next step that asks for little effort, and no cost-saving claim without a matched comparison (BR-002).",
+        "A list of models offered, a price per 1M tokens, inference in India, and no cheaper-than claim without a matched comparison (BR-006)."
+      ],
+      "checklist_ids": ["BR-002", "BR-006"],
+      "weight": {"value": 0.30, "label": "PROPOSED"},
+      "main_cta_propensity_baseline": {"value": 0.04, "label": "PROPOSED, SYNTHETIC"}
+    },
+    {
+      "id": "seg-ai-platform-lead",
+      "audience": "supporting",
+      "role": "AI platform leads, who run the test",
+      "what_they_look_for": [
+        "How to test one workload, OpenAI-compatible API, where inference runs, a price per 1M tokens or a link to prices, and who owns fine-tuned weights (BR-001)."
+      ],
+      "checklist_ids": ["BR-001"],
+      "weight": {"value": 0.25, "label": "PROPOSED"},
+      "main_cta_propensity_baseline": {"value": 0.06, "label": "PROPOSED, SYNTHETIC"}
+    },
+    {
+      "id": "seg-practice-head-architect",
+      "audience": "supporting",
+      "role": "Practice heads and solution architects, who judge fit",
+      "what_they_look_for": [
+        "Clients can switch models by changing the model name, how to test a client workload, OpenAI-compatible API, and no sovereign claim for Sarvam (BR-005)."
+      ],
+      "checklist_ids": ["BR-005"],
+      "weight": {"value": 0.20, "label": "PROPOSED"},
+      "main_cta_propensity_baseline": {"value": 0.05, "label": "PROPOSED, SYNTHETIC"}
+    },
+    {
+      "id": "seg-risk-compliance",
+      "audience": "supporting",
+      "role": "Risk and compliance reviewers",
+      "what_they_look_for": [
+        "Where inference runs, zero data retention on request, named security certifications, and operational logs under separate terms (BR-003)."
+      ],
+      "checklist_ids": ["BR-003"],
+      "weight": {"value": 0.15, "label": "PROPOSED"},
+      "main_cta_propensity_baseline": {"value": 0.02, "label": "PROPOSED, SYNTHETIC"}
+    },
+    {
+      "id": "seg-procurement",
+      "audience": "supporting",
+      "role": "Procurement",
+      "what_they_look_for": [
+        "Prices in a clear unit with the tax rule, SLA terms agreed by contract, how to ask for security documents, and a list of models with a price (BR-004)."
+      ],
+      "checklist_ids": ["BR-004"],
+      "weight": {"value": 0.10, "label": "PROPOSED"},
+      "main_cta_propensity_baseline": {"value": 0.03, "label": "PROPOSED, SYNTHETIC"}
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "version": "buyer v1, 13 Nov 2026",
+  "status": "DRAFT. Page, target, goal and action set by the user on 13 Nov 2026. Differentiator is PROPOSED.",
+  "buyer": "Enterprise IT services and GCC leaders, serving clients in all industry verticals. Primary: enterprise accounts, GCCs and IT majors. Their teams run the test.",
+  "conversion_action": "Main CTA: Compare on your workload. Second CTA: Discuss your requirements (on the official page today). \"Book a demo\" was dropped on 13 Nov 2026.",
+  "labels": {
+    "FIELD_KIT": "Taken from our Field Kit data. These are analyst proposals, not checked buyer facts.",
+    "GTM": "Taken from our GTM map data (data/C.json).",
+    "CHECKED": "Passed our rule-based quote check (ledger id given).",
+    "HYPOTHESIS": "Derived from rival page patterns we read on 13 Nov 2026. Not tested with any buyer."
+  },
+  "roles": {
+    "label": "FIELD_KIT",
+    "source": "02 Assets/Sales Enablement/source/kit.js line 2101",
+    "items": [
+      "GCC CTO or VP Engineering",
+      "Head of AI platform",
+      "GCC head",
+      "IT services practice head"
+    ]
+  },
+  "workload": {
+    "label": "FIELD_KIT",
+    "text": "Moving an OpenAI-compatible workload to a new inference provider",
+    "alternatives_named": [
+      "OpenRouter",
+      "Fireworks",
+      "Together",
+      "Azure OpenAI",
+      "Bedrock",
+      "E2E",
+      "Yotta"
+    ],
+    "source": "kit.js line 2107"
+  },
+  "gtm_status": {
+    "label": "GTM",
+    "inference_layer": "prove (Prove first)",
+    "use": "Indian-hosted inference for GCC AI teams serving India customers.",
+    "route": "Marketplaces; direct to platform teams.",
+    "source": "02 Assets/Engine/map-source/data/C.json, gcc.inference",
+    "note": "'later' and 'prove' here are timing and proof words, not sales approval."
+  },
+  "need": {
+    "label": "FIELD_KIT",
+    "text": "A benchmark on the team's own workload: cost, latency, language quality, and effort to switch.",
+    "source": "kit.js line 2103"
+  },
+  "objections": [
+    {
+      "label": "FIELD_KIT",
+      "text": "Who owns fine-tuned weights",
+      "source": "kit.js line 2102"
+    },
+    {
+      "label": "FIELD_KIT (banks, not GCC)",
+      "text": "Where models run and where data is stored",
+      "source": "kit.js line 2060",
+      "note": "Written for banks. Treat as a likely GCC objection only as a HYPOTHESIS."
+    }
+  ],
+  "evidence_quote": {
+    "label": "CHECKED",
+    "ledger_id": "GCC-Q-11",
+    "speaker_role": "Tech Mahindra CEO",
+    "event": "Q2 FY27 earnings call, 15 Oct 2026",
+    "text": "It is true that clients have started looking at open router and other models to be able to incrementally move AI inference workloads to cheaper open - source, open-weight models.",
+    "file": "02 Assets/Research/icp-round-2/gcc/ledger-quotes.csv",
+    "shows": "Buyers move inference to cheaper open-weight models.",
+    "does_not_show": "That any buyer would choose Sarvam."
+  },
+  "what_this_buyer_may_want_on_the_page": {
+    "label": "HYPOTHESIS",
+    "basis": "Patterns on the rival pages we read (01 Research/rival-claims-13Nov2026.csv)",
+    "items": [
+      {
+        "want": "Proof with numbers or customer names",
+        "seen_on": [
+          "Nebius",
+          "Fireworks",
+          "Together"
+        ],
+        "sarvam_page_today": "none on the page"
+      },
+      {
+        "want": "A stated uptime commitment",
+        "seen_on": [
+          "Nebius 99.9%",
+          "Fireworks (reserved only)"
+        ],
+        "sarvam_page_today": "99.95% via SLA (VENDOR)"
+      },
+      {
+        "want": "Zero data retention",
+        "seen_on": [
+          "Fireworks (default)",
+          "Nebius"
+        ],
+        "sarvam_page_today": "on request (VENDOR)"
+      },
+      {
+        "want": "A code sample using the OpenAI client",
+        "seen_on": [
+          "Nebius",
+          "E2E",
+          "Together"
+        ],
+        "sarvam_page_today": "not on the hero; docs hold guides"
+      },
+      {
+        "want": "Visible pricing or a link to it",
+        "seen_on": [
+          "Fireworks"
+        ],
+        "sarvam_page_today": "Compare pricing CTA"
+      },
+      {
+        "want": "A comparison of deployment options",
+        "seen_on": [
+          "Fireworks",
+          "Together"
+        ],
+        "sarvam_page_today": "shared or dedicated capacity mentioned"
+      }
+    ]
+  },
+  "unknowns": [
+    "No Token Factory buyer interview exists in our files.",
+    "Most buyer pain signals in our research were collected for Voice Agents.",
+    "No named Token Factory customer outcome is on file.",
+    "We have not compared quality, speed or total cost on one workload."
+  ],
+  "goal": "An enterprise IT services or GCC leader visits the page and asks Sarvam to compare their workload. Ambition: become the token provider of their choice.",
+  "target": "Enterprise IT services and GCC leaders, serving clients in all industry verticals. Primary: enterprise accounts, GCCs and IT majors. Their teams run the test.",
+  "rival_from_quote": "OpenRouter and \"other models\" (the executive names them). Aggregator group in rivals file.",
+  "ambition": "Become the token provider of their choice.",
+  "differentiator_hypothesis": {
+    "label": "PROPOSED",
+    "ideas": [
+      {
+        "id": "D1",
+        "text": "API routing: map each task to the right model so each task costs less.",
+        "evidence": "Decisions API (Prism, Clef) docs list routing as a use (VENDOR). No automatic router documented. Rivals offer routing: E2E Blaze auto model, Fireworks.",
+        "status": "UNPROVEN"
+      },
+      {
+        "id": "D2",
+        "text": "Host Token Factory and an agent harness inside the customer organisation.",
+        "evidence": "Field Kit: Private deployment and engineers, Live, VPC / on-prem / air-gapped (VENDOR). Docs: self-hosted covers Saaras, Vision, Bulbul only; harness docs are Voice Agents only.",
+        "status": "UNPROVEN for Token Factory"
+      }
+    ]
+  },
+  "signals_from_other_it_firms": [
+    {
+      "firm": "Coforge",
+      "text": "Launched AI Launchpad for open-weight models (account fact, not a quote)",
+      "source": "02 Assets/Research/icp-round-2/gcc/ledger-accounts.csv"
+    },
+    {
+      "firm": "LTM",
+      "ledger_id": "GCC-Q-14",
+      "theme": "cost and control"
+    },
+    {
+      "firm": "Infosys",
+      "ledger_id": "GCC-Q-05",
+      "theme": "control"
+    },
+    {
+      "firm": "Wipro",
+      "ledger_id": "GCC-Q-07",
+      "theme": "control"
+    },
+    {
+      "firm": "HCLTech CFO",
+      "text": "Sarvam is a very good option but the model dependency need not be Sarvam (from concall notes; not in the quote ledger; check before quoting)",
+      "source": "02 Assets/Research/concall-reads-nov-2026.md"
+    }
+  ],
+  "goal_quote_ledger": "GCC-Q-11",
+  "market_demand_and_validation_quote": {
+    "label": "MATCHED BY EYE to the saved transcript; not yet in the quote ledger",
+    "text": "there's not a single enterprise client I know, a Fortune 500 company, that uses only a single cloud. And so similarly, clients will use multiple models. And unlike the cloud, they have the option of open -source model as well. And so they will use that option even if it gives them 98% or 97% of what a frontier model gives.",
+    "event": "Tech Mahindra Q2 FY27 earnings call, 15 Oct 2026, page 14 of 20",
+    "file": "02 Assets/Research/validation/transcripts/gcc-techm-q2fy27.txt",
+    "shows": "Clients will use several models and will accept an open model at 97-98% of frontier quality.",
+    "does_not_show": "That any client would pick Sarvam."
+  }
+}

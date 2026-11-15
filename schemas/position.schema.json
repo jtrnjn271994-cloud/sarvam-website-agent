@@ -1,0 +1,324 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Step 3a position",
+ "type": "object",
+ "required": [
+  "first_buyer",
+  "category",
+  "alternatives",
+  "main_claim",
+  "proof",
+  "swap_test",
+  "weak_points",
+  "self_check"
+ ],
+ "properties": {
+  "first_buyer": {
+   "type": "object",
+   "required": [
+    "text",
+    "evidence_ids",
+    "label",
+    "reason"
+   ],
+   "properties": {
+    "evidence_ids": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+     },
+     "minItems": 1
+    },
+    "label": {
+     "enum": [
+      "CHECKED",
+      "CALC",
+      "VENDOR",
+      "SEMRUSH",
+      "AUDIT",
+      "PROPOSED",
+      "UNCHECKED"
+     ]
+    },
+    "reason": {
+     "type": "string",
+     "minLength": 10,
+     "maxLength": 400
+    },
+    "text": {
+     "type": "string",
+     "minLength": 1
+    }
+   }
+  },
+  "category": {
+   "type": "object",
+   "required": [
+    "text",
+    "evidence_ids",
+    "label",
+    "reason"
+   ],
+   "properties": {
+    "evidence_ids": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+     },
+     "minItems": 1
+    },
+    "label": {
+     "enum": [
+      "CHECKED",
+      "CALC",
+      "VENDOR",
+      "SEMRUSH",
+      "AUDIT",
+      "PROPOSED",
+      "UNCHECKED"
+     ]
+    },
+    "reason": {
+     "type": "string",
+     "minLength": 10,
+     "maxLength": 400
+    },
+    "text": {
+     "type": "string",
+     "minLength": 1
+    }
+   }
+  },
+  "alternatives": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "text",
+     "evidence_ids",
+     "label",
+     "reason"
+    ],
+    "properties": {
+     "evidence_ids": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+      },
+      "minItems": 1
+     },
+     "label": {
+      "enum": [
+       "CHECKED",
+       "CALC",
+       "VENDOR",
+       "SEMRUSH",
+       "AUDIT",
+       "PROPOSED",
+       "UNCHECKED"
+      ]
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400
+     },
+     "text": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  },
+  "main_claim": {
+   "type": "object",
+   "required": [
+    "text",
+    "evidence_ids",
+    "label",
+    "reason"
+   ],
+   "properties": {
+    "evidence_ids": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+     },
+     "minItems": 1
+    },
+    "label": {
+     "enum": [
+      "CHECKED",
+      "CALC",
+      "VENDOR",
+      "SEMRUSH",
+      "AUDIT",
+      "PROPOSED",
+      "UNCHECKED"
+     ]
+    },
+    "reason": {
+     "type": "string",
+     "minLength": 10,
+     "maxLength": 400
+    },
+    "text": {
+     "type": "string",
+     "minLength": 1
+    }
+   }
+  },
+  "proof": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "text",
+     "evidence_ids",
+     "label",
+     "reason"
+    ],
+    "properties": {
+     "evidence_ids": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+      },
+      "minItems": 1
+     },
+     "label": {
+      "enum": [
+       "CHECKED",
+       "CALC",
+       "VENDOR",
+       "SEMRUSH",
+       "AUDIT",
+       "PROPOSED",
+       "UNCHECKED"
+      ]
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400
+     },
+     "text": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  },
+  "swap_test": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "rival_id",
+     "rival_could_print",
+     "reason"
+    ],
+    "properties": {
+     "rival_id": {
+      "type": "string",
+      "minLength": 1
+     },
+     "rival_could_print": {
+      "type": [
+       "boolean",
+       "null"
+      ],
+      "description": "true or false when we hold the rival text. null means the rival text is not held: shown as UNKNOWN."
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400
+     }
+    }
+   }
+  },
+  "weak_points": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "minLength": 1
+   },
+   "maxItems": 3
+  },
+  "self_check": {
+   "type": "object",
+   "required": [
+    "promise_used",
+    "alternative_beaten",
+    "evidence_ids_used",
+    "swap_test",
+    "audiences_served",
+    "rules_checked",
+    "gaps"
+   ],
+   "properties": {
+    "evidence_ids_used": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "gaps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "promise_used": {
+     "type": "string"
+    },
+    "alternative_beaten": {
+     "type": "string"
+    },
+    "swap_test": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "line",
+       "rival_could_print",
+       "why"
+      ],
+      "properties": {
+       "line": {
+        "type": "string"
+       },
+       "rival_could_print": {
+        "type": [
+         "boolean",
+         "null"
+        ]
+       },
+       "why": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "audiences_served": {
+     "type": "array"
+    },
+    "rules_checked": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

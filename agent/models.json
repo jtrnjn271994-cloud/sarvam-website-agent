@@ -1,0 +1,190 @@
+{
+ "version": 1,
+ "contract_file": "rules/run-contract.md",
+ "note": "Names of env variables only. Never put a key value in this file.",
+ "jev_note": "Only the Jev yes/no calls use the API (OpenRouter). typesafe/jev-router runs on Jev, and Jev picks which model answers each request. The reply names that model; the results keep it as routed_model. base_url is a plain URL, not a secret. The env variable JEV_BASE_URL overrides it if set. The key is in the env variable OPENROUTER_API_KEY, which the code also reads from the project .env file without printing it. Replace the model name with SET-ME and live mode stops.",
+ "profile_note": "Local runs use the default steps above: bets, copy and design in manual mode (Claude Sonnet writes the replies). The online profile is for Vercel later, not now. Pass a profile name to load_models. The validate step is the same in both profiles.",
+ "profiles": {
+  "local": {
+   "note": "The default above. generate_* steps are manual with sonnet. validate is typesafe/jev-router."
+  },
+  "online": {
+   "note": "Used later on Vercel only. Writing (generate_*) calls deepseek/deepseek-v4-pro. Animation code (SVG and CSS) calls anthropic/claude-sonnet-5.5. Section visuals call google/gemini-3.1-flash-image. All go through OpenRouter. validate stays on Jev, the same as local.",
+   "models": {
+    "deepseek": "deepseek/deepseek-v4-pro",
+    "sonnet_or": "anthropic/claude-sonnet-5.5",
+    "gemini_image": "google/gemini-3.1-flash-image"
+   },
+   "steps": {
+    "generate_animation": {
+     "model": "sonnet_or",
+     "provider": "model-api",
+     "base_url": "https://openrouter.ai/api/v1",
+     "base_url_env": "MODEL_BASE_URL",
+     "api_key_env": "OPENROUTER_API_KEY"
+    },
+    "generate_visual": {
+     "model": "gemini_image",
+     "provider": "model-api",
+     "base_url": "https://openrouter.ai/api/v1",
+     "base_url_env": "MODEL_BASE_URL",
+     "api_key_env": "OPENROUTER_API_KEY"
+    },
+    "generate_bets": {
+     "model": "deepseek",
+     "provider": "model-api",
+     "base_url": "https://openrouter.ai/api/v1",
+     "base_url_env": "MODEL_BASE_URL",
+     "api_key_env": "OPENROUTER_API_KEY"
+    },
+    "generate_copy": {
+     "model": "deepseek",
+     "provider": "model-api",
+     "base_url": "https://openrouter.ai/api/v1",
+     "base_url_env": "MODEL_BASE_URL",
+     "api_key_env": "OPENROUTER_API_KEY"
+    },
+    "generate_design": {
+     "model": "deepseek",
+     "provider": "model-api",
+     "base_url": "https://openrouter.ai/api/v1",
+     "base_url_env": "MODEL_BASE_URL",
+     "api_key_env": "OPENROUTER_API_KEY"
+    }
+   }
+  }
+ },
+ "models": {
+  "code": "none",
+  "haiku": "claude-haiku-5-5",
+  "sonnet": "claude-sonnet-5-5",
+  "opus": "claude-opus-5-5",
+  "jev": "typesafe/jev-router"
+ },
+ "steps": {
+  "crawl": {
+   "model": "haiku",
+   "provider": "subagent",
+   "note": "The fetch itself is code. Haiku (a Claude subagent, manual mode, no API key) reads the fetched pages and sums them up."
+  },
+  "search": {
+   "model": "haiku",
+   "provider": "subagent",
+   "note": "Research search. A Claude Haiku subagent, manual mode, no API key."
+  },
+  "data_validation": {
+   "model": "haiku",
+   "provider": "subagent",
+   "note": "Checks sources, quotes and links in research before it is used. A Claude Haiku subagent, manual mode, no API key."
+  },
+  "copy": {
+   "model": "code",
+   "provider": "code"
+  },
+  "checks": {
+   "model": "code",
+   "provider": "code"
+  },
+  "read_summary": {
+   "model": "haiku",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "notes": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "generate_bets": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "generate_copy": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "generate_design": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "position_page": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "position_assemble": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "gap_hypothesis": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "positioning_source": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "buyer_checklist": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "variant_fill": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "visual_review": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY",
+   "upgrade_to": "opus"
+  },
+  "orchestrate": {
+   "model": "sonnet",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY",
+   "upgrade_to": "opus"
+  },
+  "audit": {
+   "model": "opus",
+   "provider": "model-api",
+   "base_url_env": "MODEL_BASE_URL",
+   "api_key_env": "MODEL_API_KEY"
+  },
+  "validate": {
+   "model": "jev",
+   "provider": "jev",
+   "base_url": "https://openrouter.ai/api/v1",
+   "base_url_env": "JEV_BASE_URL",
+   "api_key_env": "OPENROUTER_API_KEY",
+   "label": "Jev (TypeSafe Jev Router via OpenRouter)"
+  }
+ },
+ "roles": {
+  "reasoning": "google/gemini-3.8-flash",
+  "writer": "anthropic/claude-opus-5.5",
+  "judge1": "typesafe/jev-1.14",
+  "judge2": "openai/gpt-6-luna-decisions"
+ },
+ "roles_note": "Four makers (Decisions Log row 38, supersedes 36). reasoning (Google Gemini 3.8 Flash): page setup (positioning, claims, checklists), the gap dossier, report prose; it never decides pass or fail. writer (Anthropic Opus 5.5): hero variants only. judge1 Jev (TypeSafe): audit and Gate 2. judge2 (OpenAI decisions): Gate 2. The writer's maker differs from both judges' makers."
+}

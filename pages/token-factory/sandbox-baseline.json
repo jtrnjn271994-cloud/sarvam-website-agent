@@ -1,0 +1,22 @@
+{
+  "note": "Data for the model-played sandbox (agent/sandbox_visitors.py). It names the baseline page text and how to split it into screens. Written 14 Nov 2026. The text file is a verbatim library copy (VENDOR, fetched 12 Nov 2026). The first-screen facts and the button styling come from the layout audit of 13 Nov 2026 (research/ui-ux-audit/2026-11-13/sarvam-token-factory.md). The audit saw 'Explore models' styled as primary.",
+  "baseline_text_path": "library/brand/official-sources-12nov2026/sarvam.ai_token-factory_fetched-2026-11-12.txt",
+  "baseline_first_screen": {
+    "navigation": ["Products", "Developers", "Resources", "Company", "Log In", "Contact Us"],
+    "headline": "Frontier open models. Served with speed, scale and privacy.",
+    "sub_line": "Run leading open models on Sarvam’s GPUs in India, with shared or dedicated capacity and zero data retention available on request.",
+    "buttons": ["Get Started", "Explore models"]
+  },
+  "baseline_buttons": {"main": "Explore models", "second": "Get Started"},
+  "baseline_sections": [
+    {"name": "first screen", "marker": "Frontier open models. Served with speed, scale and privacy."},
+    {"name": "inference that scales with demand", "marker": "Inference that scales with demand"},
+    {"name": "speed and reliability on one serving fleet", "marker": "Speed and reliability on one serving fleet."},
+    {"name": "built for real-world workloads", "marker": "Built for real-world workloads"},
+    {"name": "leading models, ready to use today", "marker": "Leading models. Ready to use today."},
+    {"name": "serverless inference, ready to scale", "marker": "Serverless inference. Ready to scale"},
+    {"name": "enterprise-grade security", "marker": "Enterprise-grade security. Compliance and privacy built in."},
+    {"name": "questions before you go live", "marker": "Questions before you go live"}
+  ],
+  "variant_nav_from": "pages/token-factory/render-map.json"
+}

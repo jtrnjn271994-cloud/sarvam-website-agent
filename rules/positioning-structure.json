@@ -1,0 +1,21 @@
+{
+  "note": "One structure for every page's positioning (Decisions Log row 39). Modelled on the Token Factory context pack. The drafter must follow it; code checks it (agent/page_setup.py check_positioning); the console will not accept an approval while a check fails. Edit this file to change the rule for all pages.",
+  "bullet_rule": "Every bullet ends with [source ids | LABEL]. Source ids are claim ids (CL-), evidence ids (EV-), source register ids (SRC-), library ids (LIB-), buyer rows (BR-), a rules/ file or a project file path. LABEL is one or more of the allowed labels, separated by commas.",
+  "labels": ["VERIFIED", "CHECKED", "VENDOR", "FOUNDER CLAIM", "PROPOSED", "INFERENCE", "AUDIT", "CALC", "SEMRUSH", "UNCHECKED"],
+  "promise_rule": "Section 1 holds one line: Promise, exact words: \"...\". At most 30 words. It must not restate the live hero (more than 60% shared words fails).",
+  "market_signal_rule": "A market signal shows demand for a kind of product. It is never proof about Sarvam. Each section 8 bullet starts with 'Market signal.' or 'Reading:'.",
+  "sections": [
+    {"n": 1, "heading": "Positioning promise", "min_bullets": 1, "must_cover": "the promise in exact words; the page message to test (headline and support, PROPOSED); the proposed advantage and what it is NOT a lead in"},
+    {"n": 2, "heading": "Category and first purchase", "min_bullets": 2, "must_cover": "the category in plain words and what it is not; the first purchase a buyer makes; the commercial unit; any hard word defined once"},
+    {"n": 3, "heading": "Primary audience and trigger", "min_bullets": 2, "must_cover": "the primary buyer; the event that makes them look now; any conflict between research files, kept visible"},
+    {"n": 4, "heading": "Supporting audiences and what each must see", "min_bullets": 2, "must_cover": "each buying-committee role and what the page must show them; each role's main objection"},
+    {"n": 5, "heading": "The real alternatives and what beats each", "min_bullets": 3, "must_cover": "doing nothing or the current way; direct rivals; build in-house; what would beat each, as a test, not a claim"},
+    {"n": 6, "heading": "Rival gaps from the UI/UX audit", "min_bullets": 1, "must_cover": "what rival pages show that this page does not, and the strengths to keep; a missing rival feature does not prove the rival lacks it"},
+    {"n": 7, "heading": "What the position does NOT claim", "min_bullets": 3, "must_cover": "claims that are not exclusive, not proven or banned (rules/do-not-claim.md)"},
+    {"n": 8, "heading": "Market signals (not proof about Sarvam)", "min_bullets": 1, "must_cover": "demand signals with exact quotes and dates, then one Reading: line"},
+    {"n": 9, "heading": "Proof Sarvam has (claim ids) and proof missing", "min_bullets": 3, "must_cover": "every hero-usable fact with its claim id; the proof that is missing"},
+    {"n": 10, "heading": "What happens after the main CTA", "min_bullets": 1, "must_cover": "the real next step behind the main button, or UNKNOWN"},
+    {"n": 11, "heading": "Headline angles that failed or were rejected", "min_bullets": 1, "must_cover": "angles set aside and why (swap test, no proof, banned word)"},
+    {"n": 12, "heading": "Open gaps", "min_bullets": 1, "must_cover": "what a person must find or decide before the page can say more"}
+  ]
+}

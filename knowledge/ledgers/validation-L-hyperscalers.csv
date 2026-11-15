@@ -1,0 +1,4 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+L-01,Microsoft Azure Speech,speech supports Odia,Odia,India,https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support,VENDOR,2026-11-11,PASS,2026-11-11,
+L-02,Microsoft Azure Speech,speech supports Tamil,Tamil,India,https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support,VENDOR,2026-11-11,PASS,2026-11-11,
+L-03,Google Cloud Speech-to-Text,supports Telugu,Telugu,India,https://cloud.google.com/speech-to-text/docs/speech-to-text-supported-languages,VENDOR,2026-11-11,PASS,2026-11-11,

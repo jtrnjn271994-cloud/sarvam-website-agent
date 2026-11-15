@@ -1,0 +1,314 @@
+{
+  "h1": "AI for all from India",
+  "sub": "Built on sovereign compute. Powered by frontier-class models. Delivering population-scale impact.",
+  "ctas": [
+    {
+      "index": 0,
+      "text": "Sign up",
+      "href": "https://indus.sarvam.ai/",
+      "tag": "a"
+    },
+    {
+      "index": 1,
+      "text": "Sign up",
+      "href": null,
+      "tag": "button"
+    },
+    {
+      "index": 2,
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us",
+      "tag": "a"
+    },
+    {
+      "index": 3,
+      "text": "Contact Us",
+      "href": null,
+      "tag": "button"
+    }
+  ],
+  "box": {
+    "x": 106.671875,
+    "y": 160,
+    "width": 1066.65625,
+    "height": 599
+  },
+  "links": [
+    {
+      "text": "How to build with Sarvam Voice Agents MCP · 18 November, 4 PM IST Register now",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Sign up",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Explore Indus Cowork",
+      "href": "https://www.sarvam.ai/indus-cowork"
+    },
+    {
+      "text": "Explore Indus Cowork",
+      "href": "https://www.sarvam.ai/indus-cowork"
+    },
+    {
+      "text": "Get your API key & get started",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Text to SpeechNatural voices across 11 Indic languages",
+      "href": "https://indus.sarvam.ai/text-to-speech"
+    },
+    {
+      "text": "Speech to TextHigh-accuracy ASR across 12 Indic languages",
+      "href": "https://indus.sarvam.ai/speech-to-text"
+    },
+    {
+      "text": "TranslationState-of-the-art translation across 23 languages",
+      "href": "https://indus.sarvam.ai/translate"
+    },
+    {
+      "text": "ParseTurn PDFs and images into structured formats",
+      "href": "https://indus.sarvam.ai/vision"
+    },
+    {
+      "text": "Explore Sarvam",
+      "href": "https://www.sarvam.ai/products/voice-agents"
+    },
+    {
+      "text": "Get Started",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Voice Agents",
+      "href": "https://www.sarvam.ai/products/voice-agents"
+    },
+    {
+      "text": "Content Studio",
+      "href": "https://www.sarvam.ai/products/content-agents"
+    },
+    {
+      "text": "Document AI",
+      "href": "https://www.sarvam.ai/products/document-ai"
+    },
+    {
+      "text": "Work Agents",
+      "href": "https://www.sarvam.ai/products/work-agents"
+    },
+    {
+      "text": "Natural Voices",
+      "href": "https://www.sarvam.ai/apis/text-to-speech"
+    },
+    {
+      "text": "Accurate Transcription",
+      "href": "https://www.sarvam.ai/apis/speech-to-text"
+    },
+    {
+      "text": "Multilingual Translation",
+      "href": "https://www.sarvam.ai/apis/translation"
+    },
+    {
+      "text": "Document Intelligence",
+      "href": "https://www.sarvam.ai/apis/document-digitisation"
+    },
+    {
+      "text": "tokens served 10B+",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "median latency <100ms",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "uptime SLA 99.9%",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Start building with Sarvam",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Read full story",
+      "href": "https://www.sarvam.ai/stories/tata-capital-ai-voice-transformation"
+    },
+    {
+      "text": "Nov 9, 2026 · Announcement Sashikumar Sreedharan joins Sarvam as President and C",
+      "href": "https://www.sarvam.ai/blogs/sashikumar-sreedharan-joins-sarvam"
+    },
+    {
+      "text": "Nov 3, 2026 · Research Introducing Sarvam Prism",
+      "href": "https://www.sarvam.ai/blogs/sarvam-prism"
+    },
+    {
+      "text": "Oct 27, 2026 · Announcement Sarvam and HQ IDS establish joint framework for AI a",
+      "href": "https://www.sarvam.ai/blogs/sarvam-hq-ids-mou"
+    },
+    {
+      "text": "View All Updates",
+      "href": "https://www.sarvam.ai/blogs"
+    },
+    {
+      "text": "Sign Up",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Content Studio",
+      "href": "https://www.sarvam.ai/products/content-studio"
+    },
+    {
+      "text": "Token Factory",
+      "href": "https://www.sarvam.ai/token-factory"
+    },
+    {
+      "text": "Document AI",
+      "href": "https://www.sarvam.ai/products/document-ai"
+    },
+    {
+      "text": "Work Agents",
+      "href": "https://www.sarvam.ai/products/work-agents"
+    },
+    {
+      "text": "Coding Agents",
+      "href": "https://www.sarvam.ai/products/coding-agents"
+    },
+    {
+      "text": "Sarvam Edge",
+      "href": "https://www.sarvam.ai/products/edge"
+    },
+    {
+      "text": "Model Training",
+      "href": "https://www.sarvam.ai/products/model-training"
+    },
+    {
+      "text": "Text to Speech",
+      "href": "https://www.sarvam.ai/apis/text-to-speech"
+    },
+    {
+      "text": "Speech to Text",
+      "href": "https://www.sarvam.ai/apis/speech-to-text"
+    },
+    {
+      "text": "Doc Digitisation",
+      "href": "https://www.sarvam.ai/apis/document-digitisation"
+    },
+    {
+      "text": "Translation",
+      "href": "https://www.sarvam.ai/apis/translation"
+    },
+    {
+      "text": "Models",
+      "href": "https://www.sarvam.ai/models"
+    },
+    {
+      "text": "Blogs",
+      "href": "https://www.sarvam.ai/blogs"
+    },
+    {
+      "text": "Building AI Agents",
+      "href": "https://www.sarvam.ai/blogs/building-ai-agents"
+    },
+    {
+      "text": "Events",
+      "href": "https://www.sarvam.ai/events"
+    },
+    {
+      "text": "Customer Stories",
+      "href": "https://www.sarvam.ai/stories"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://docs.sarvam.ai/sarvam-api-docs"
+    },
+    {
+      "text": "API Pricing",
+      "href": "https://www.sarvam.ai/api-pricing"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://www.sarvam.ai/integrations"
+    },
+    {
+      "text": "Startup Program",
+      "href": "https://www.sarvam.ai/startup-program"
+    },
+    {
+      "text": "Sarvam Champions",
+      "href": "https://www.sarvam.ai/sarvam-champions"
+    },
+    {
+      "text": "About Us",
+      "href": "https://www.sarvam.ai/about-us"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.sarvam.ai/careers"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Brand",
+      "href": "https://www.sarvam.ai/brand"
+    },
+    {
+      "text": "Brand Guidelines",
+      "href": "https://www.sarvam.ai/brand-guidelines"
+    },
+    {
+      "text": "Partnerships",
+      "href": "https://www.sarvam.ai/partnerships"
+    },
+    {
+      "text": "Trust Center",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Terms of Service",
+      "href": "https://www.sarvam.ai/terms-of-service"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    },
+    {
+      "text": "EULA",
+      "href": "https://www.sarvam.ai/eula"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    }
+  ],
+  "title": "Sarvam | India's Full-Stack Sovereign AI Platform",
+  "url": "https://www.sarvam.ai/",
+  "captured_at": "2026-11-15T19:26:59",
+  "viewport": "1280x900",
+  "hero_clip": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 783
+  },
+  "selectors": {
+    "h1": "[data-hero=h1]",
+    "sub": "[data-hero=sub]",
+    "cta": "[data-hero^=cta-]"
+  },
+  "label": "LIVE CAPTURE. Loaded once. No bot traffic goes to this URL."
+}

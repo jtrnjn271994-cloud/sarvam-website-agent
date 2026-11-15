@@ -1,0 +1,31 @@
+{
+  "note": "Step-to-skills map. The engine loads these skills in this order for each step. Each skill is logged with its sha256. The hard rules (claims, banned list, Gate 1 limits) always come AFTER the skills in the prompt and override them. marketing-psychology is left out of the hero writer: it pushes urgency, numbers and comparisons that the claims rules forbid.",
+  "cap_chars_per_skill": 20000,
+  "steps": {
+    "positioning_draft": [
+      "seven-page-positioning",
+      "product-marketing"
+    ],
+    "dossier": [
+      "cro",
+      "buyer-profile-validation",
+      "claim-evidence-check",
+      "marketing-plain-writing"
+    ],
+    "writer_draft": [
+      "copywriting-marketingskills",
+      "cro",
+      "page-copy-draft"
+    ],
+    "writer_edit": [
+      "copy-editing",
+      "no-ai-slop",
+      "marketing-plain-writing"
+    ],
+    "submission": [
+      "sandbox-ab-report",
+      "marketing-plain-writing",
+      "no-ai-slop"
+    ]
+  }
+}

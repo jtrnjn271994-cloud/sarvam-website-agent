@@ -1,0 +1,43 @@
+{
+  "note": "Default hero policy for pages without their own (copied from the Token Factory page pack, 15 Nov 2026). Gate 1 blocks these words.",
+  "no_third_party_model_names": true,
+  "model_name_words": [
+    "deepseek",
+    "qwen",
+    "llama",
+    "mistral",
+    "gemma",
+    "gpt-oss",
+    "kimi",
+    "glm",
+    "embeddinggemma"
+  ],
+  "stretch_phrases": [
+    "drop-in",
+    "drop in",
+    "existing code works",
+    "your code works",
+    "code just works",
+    "no code change",
+    "no changes",
+    "no testing",
+    "without testing",
+    "easy to switch",
+    "easy switch",
+    "seamless",
+    "never kept",
+    "never stored",
+    "every user",
+    "all deployments",
+    "better uptime",
+    "sovereign",
+    "verified",
+    "we will reply",
+    "reply within",
+    "guaranteed",
+    "sarvam's deepseek",
+    "built the open models"
+  ],
+  "claim_qualifiers": [],
+  "keep_rules": []
+}

@@ -1,0 +1,24 @@
+{
+  "goal": "An engineering head lands on the Token Factory page, sees how to test one of their own workloads, and clicks the main button. Success: a higher click share on the main button than the baseline (SYNTHETIC sandbox test). Decided by the owner on 14 Nov 2026 (Decisions Log row 14).",
+  "first_buyer": {
+    "role": "Engineering head (CTO, VP Engineering, head of AI platform)",
+    "checklist": "BR-001"
+  },
+  "vertical": "GCCs and IT services",
+  "main_cta": "GENERATED: the writer picks a label for one destination in profile.hero.cta_destinations",
+  "second_cta": "Get Started",
+  "offer_after_click": "The sizing request from the live FAQ (CL-013, VENDOR): the buyer shares expected concurrency, prompt lengths, peak traffic and response-time targets so the team can size the deployment. The saved page does not say where this request goes. In the local prototype the button opens a local form that sends nothing, and the page labels it a prototype. No promise of a reply, a quote, a report or a response time. Corrected 14 Nov 2026 after the GPT completion audit.",
+  "limits": [
+    "No customer block: no named customer is checked for this page.",
+    "No speed figure: no claim backs speed (claims/INDEX.md line 22).",
+    "No claim of lower cost, 'best', 'only' or 'sovereign'. See decisions/do-not-claim.md."
+  ],
+  "page_url": "https://www.sarvam.ai/token-factory",
+  "scope": "section:hero",
+  "test_type": "hero",
+  "answers_source": "Owner answers, Decisions Log rows 14 and 15 (14 Nov 2026). Written down by the orchestrator from those rows. Change only by running agent/start.py.",
+  "open_conflicts": [],
+  "test_type_note": "Decisions Log row 28: words and main button change together. Baseline keeps its live button.",
+  "baseline_main_cta": "Get Started",
+  "main_cta_superseded": "Compare on your workload (row 14). Kept as an idea only: the sizing request has no linked destination."
+}

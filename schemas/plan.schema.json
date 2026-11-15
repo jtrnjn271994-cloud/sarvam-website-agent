@@ -1,0 +1,88 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Step 6 test plan",
+ "type": "object",
+ "required": [
+  "metric",
+  "arms",
+  "decision_rule"
+ ],
+ "properties": {
+  "test_type": {
+   "enum": [
+    "ab",
+    "abn",
+    "multivariate",
+    "value",
+    "sequential",
+    "before_after"
+   ]
+  },
+  "gap_id": {
+   "type": "string"
+  },
+  "hypothesis": {
+   "type": "string"
+  },
+  "metric": {
+   "type": "object",
+   "required": [
+    "name"
+   ],
+   "properties": {
+    "name": {
+     "type": "string",
+     "minLength": 1
+    }
+   }
+  },
+  "arms": {
+   "type": "array",
+   "minItems": 2,
+   "items": {
+    "type": "object",
+    "required": [
+     "arm"
+    ],
+    "properties": {
+     "arm": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  },
+  "decision_rule": {
+   "type": "object",
+   "required": [
+    "text"
+   ],
+   "properties": {
+    "text": {
+     "type": "string",
+     "minLength": 1
+    },
+    "alpha": {
+     "type": "number"
+    },
+    "min_visitors_per_arm": {
+     "type": "integer"
+    }
+   }
+  },
+  "plan_hash": {
+   "type": "string"
+  },
+  "self_check": {
+   "type": "object",
+   "properties": {
+    "gaps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

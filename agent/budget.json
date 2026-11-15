@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "note": "Default caps from rules/spend-rules.md. Only a person changes them. The jev cap is 50: 12 calibration cases, 6 headline checks and about 28 section checks.",
+  "max_tokens_per_run": 200000,
+  "call_caps": {
+    "bets": 3,
+    "copy": 4,
+    "design": 4,
+    "visual_review": 3,
+    "jev": 50
+  },
+  "loop_limit": 2,
+  "semrush_units": 800,
+  "cache": true
+}

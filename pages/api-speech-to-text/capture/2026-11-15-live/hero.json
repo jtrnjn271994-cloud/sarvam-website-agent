@@ -1,0 +1,282 @@
+{
+  "h1": "Speech to Text, perfected for India",
+  "sub": "Trust every transcript, even with background noise, multiple accents, or mid-sentence language switches.",
+  "ctas": [
+    {
+      "index": 0,
+      "text": "Get Started for Free",
+      "href": "https://indus.sarvam.ai/",
+      "tag": "a"
+    },
+    {
+      "index": 1,
+      "text": "Get Started for Free",
+      "href": null,
+      "tag": "button"
+    },
+    {
+      "index": 2,
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us",
+      "tag": "a"
+    },
+    {
+      "index": 3,
+      "text": "Contact Us",
+      "href": null,
+      "tag": "button"
+    }
+  ],
+  "box": {
+    "x": 106.671875,
+    "y": 160,
+    "width": 1066.65625,
+    "height": 316.625
+  },
+  "links": [
+    {
+      "text": "How to build with Sarvam Voice Agents MCP · 18 November, 4 PM IST Register now",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Get Started for Free",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Turn Saaras into a voice agent that takes calls, as low as ₹3 a minute. Explore ",
+      "href": "https://www.sarvam.ai/products/voice-agents"
+    },
+    {
+      "text": "Get API key",
+      "href": "https://indus.sarvam.ai/signin"
+    },
+    {
+      "text": "See voice-to-text use cases",
+      "href": "https://docs.sarvam.ai/api/api-guides-tutorials/speech-to-text/use-cases/ivr-contact-center"
+    },
+    {
+      "text": "Get API key",
+      "href": "https://indus.sarvam.ai/signin"
+    },
+    {
+      "text": "हिन्दी Hindi · hi-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/hindi"
+    },
+    {
+      "text": "বাংলা Bengali · bn-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/bengali"
+    },
+    {
+      "text": "தமிழ் Tamil · ta-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/tamil"
+    },
+    {
+      "text": "తెలుగు Telugu · te-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/telugu"
+    },
+    {
+      "text": "मराठी Marathi · mr-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/marathi"
+    },
+    {
+      "text": "ગુજરાતી Gujarati · gu-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/gujarati"
+    },
+    {
+      "text": "ಕನ್ನಡ Kannada · kn-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/kannada"
+    },
+    {
+      "text": "മലയാളം Malayalam · ml-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/malayalam"
+    },
+    {
+      "text": "नेपाली Nepali · ne-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/nepali"
+    },
+    {
+      "text": "ਪੰਜਾਬੀ Punjabi · pa-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/punjabi"
+    },
+    {
+      "text": "ଓଡ଼ିଆ Odia · or-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/odia"
+    },
+    {
+      "text": "कोंकणी Konkani · kok-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/konkani"
+    },
+    {
+      "text": "मैथिली Maithili · mai-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/maithili"
+    },
+    {
+      "text": "سنڌي Sindhi · sd-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/sindhi"
+    },
+    {
+      "text": "ᱥᱟᱱᱛᱟᱲᱤ Santali · sat-IN",
+      "href": "https://www.sarvam.ai/apis/speech-to-text/santali"
+    },
+    {
+      "text": "Get Started",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Content Studio",
+      "href": "https://www.sarvam.ai/products/content-studio"
+    },
+    {
+      "text": "Token Factory",
+      "href": "https://www.sarvam.ai/token-factory"
+    },
+    {
+      "text": "Document AI",
+      "href": "https://www.sarvam.ai/products/document-ai"
+    },
+    {
+      "text": "Work Agents",
+      "href": "https://www.sarvam.ai/products/work-agents"
+    },
+    {
+      "text": "Coding Agents",
+      "href": "https://www.sarvam.ai/products/coding-agents"
+    },
+    {
+      "text": "Sarvam Edge",
+      "href": "https://www.sarvam.ai/products/edge"
+    },
+    {
+      "text": "Model Training",
+      "href": "https://www.sarvam.ai/products/model-training"
+    },
+    {
+      "text": "Text to Speech",
+      "href": "https://www.sarvam.ai/apis/text-to-speech"
+    },
+    {
+      "text": "Speech to Text",
+      "href": "https://www.sarvam.ai/apis/speech-to-text"
+    },
+    {
+      "text": "Doc Digitisation",
+      "href": "https://www.sarvam.ai/apis/document-digitisation"
+    },
+    {
+      "text": "Translation",
+      "href": "https://www.sarvam.ai/apis/translation"
+    },
+    {
+      "text": "Models",
+      "href": "https://www.sarvam.ai/models"
+    },
+    {
+      "text": "Blogs",
+      "href": "https://www.sarvam.ai/blogs"
+    },
+    {
+      "text": "Building AI Agents",
+      "href": "https://www.sarvam.ai/blogs/building-ai-agents"
+    },
+    {
+      "text": "Events",
+      "href": "https://www.sarvam.ai/events"
+    },
+    {
+      "text": "Customer Stories",
+      "href": "https://www.sarvam.ai/stories"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://docs.sarvam.ai/sarvam-api-docs"
+    },
+    {
+      "text": "API Pricing",
+      "href": "https://www.sarvam.ai/api-pricing"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://www.sarvam.ai/integrations"
+    },
+    {
+      "text": "Startup Program",
+      "href": "https://www.sarvam.ai/startup-program"
+    },
+    {
+      "text": "Sarvam Champions",
+      "href": "https://www.sarvam.ai/sarvam-champions"
+    },
+    {
+      "text": "About Us",
+      "href": "https://www.sarvam.ai/about-us"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.sarvam.ai/careers"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Brand",
+      "href": "https://www.sarvam.ai/brand"
+    },
+    {
+      "text": "Brand Guidelines",
+      "href": "https://www.sarvam.ai/brand-guidelines"
+    },
+    {
+      "text": "Partnerships",
+      "href": "https://www.sarvam.ai/partnerships"
+    },
+    {
+      "text": "Trust Center",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Terms of Service",
+      "href": "https://www.sarvam.ai/terms-of-service"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    },
+    {
+      "text": "EULA",
+      "href": "https://www.sarvam.ai/eula"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    }
+  ],
+  "title": "Speech to Text API for Indian Languages | Sarvam",
+  "url": "https://www.sarvam.ai/apis/speech-to-text",
+  "captured_at": "2026-11-15T19:26:30",
+  "viewport": "1280x900",
+  "hero_clip": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 500.625
+  },
+  "selectors": {
+    "h1": "[data-hero=h1]",
+    "sub": "[data-hero=sub]",
+    "cta": "[data-hero^=cta-]"
+  },
+  "label": "LIVE CAPTURE. Loaded once. No bot traffic goes to this URL."
+}

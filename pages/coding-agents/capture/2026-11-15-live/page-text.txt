@@ -1,0 +1,161 @@
+How to build with Sarvam Voice Agents MCP · 18 November, 4 PM IST
+Register now
+Voice Agents MCP webinar · 18 November, 4 PM IST
+Products
+Developers
+Resources
+Company
+Log In
+Contact Us
+Coding Agents
+Better code in the long run
+Coding Agents work across the codebase and saves checkpoints as it goes. The plan stays visible, so you can change direction while the run is live.
+Try Coding Agents
+Talk to us
+user@sarvam:~/acme/payments-service$
+sarvam-code
+(v0.38.0)
+directory:
+~/acme/payments-service
+Migrate the payments data layer
+Move the payments service off the legacy ORM without downtime. Keep the public API stable. Stop the run if a contract test fails.
+Thought
+for 6 seconds
+Read
+billing/repository.py, billing/models.py, tests/contract/
+Found
+214 uses of 'session.execute'
+I'll add a compatibility shim, migrate one module at a time, and run the contract suite after each change. Billing first.
+billing/repository.py
++shim
++41
+billing/models.py
++data layer
++96
+-12
+Contract tests pass. 3 of 5 steps done. Moving to the ledger module now.
+Flow
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ove on to the ledger module
+Context 38% used
+Distinguished
+A visible plan for work across the codebase.
+Coding Agents break the job into steps, writes and tests each change, and saves checkpoints as it goes. The plan stays visible throughout the run.
+Work across the codebase
+Give Coding Agents a refactor, migration, or performance problem that crosses services. It works through one part at a time while the original goal stays on the plan.
+Migrate 214 database calls
+Replace the legacy ORM across the payments service, one module at a time.
+for 4 seconds
+214 call sites across 18 modules
+ledger/queries.py
++63
+ontinue with the next module
+Context 4% used
+Steer the run
+The whole plan stays on screen. Change the goal, move a step, or stop the current approach. Coding Agents pick up from the work already done.
+Reorder the migration plan
+Skip the webhook rewrite for now and finish the ledger module first. Keep the rest of the plan.
+for 2 seconds
+Dropped
+branch 'reconnect-webhooks'
+Plan updated. The ledger module is step 3. The webhook rewrite is last.
+tart the ledger module now
+Pick up from a checkpoint
+When a test fails or a path reaches a dead end, Coding Agents returns to a checkpoint and tries again. Completed steps stay in place.
+Recover from a failed test
+The ledger contract tests failed. Resume from the last checkpoint and keep the completed steps.
+for 7 seconds
+tests/contract/test_ledger.py
+fix decimal rounding
+Contract suite passes. I resumed from the last checkpoint and kept the completed work.
+e-run the contract suite
+Use expensive models only for the tasks that need them.
+Pick a model for each task
+A refactor and a rollback review call for different models. Coding Agents routes them separately during the same run.
+Tested at every step
+Coding Agents runs your test suite after each change, so a broken step is caught before the next one starts.
+Route each task
+Write the data-layer boilerplate, then review the rollback path. Route each one to whichever model suits it.
+Classified
+2 task types in this run
+Scaffolding
+routed to a fast, lower-cost model
+Rollback review
+routed to a reasoning model
+Scaffolding and rollback review went to different models. Coding Agents routed each task separately.
+how the cost split by task
+Context 11% used
+Finish the migration
+Complete the remaining changes in the migration and report what finished.
+migration complete
+214 call sites
++612
+-188
+Migration complete across 214 call sites. Contract suite passes.
+ummarise the completed work
+Context 54% used
+Train a model for a specialised task.
+Coding Agents can train a task-specific model during the run using your data and requirements, then apply it to the job. For underwriting, that can mean training on your risk parameters.
+user@sarvam:~/acme/underwriting$
+~/acme/underwriting
+Train an underwriting model
+Train a task-specific model on our portfolio and risk parameters, then use it for this pricing task.
+for 9 seconds
+risk/params.yaml, historical policies
+Prepared
+evaluation holdout
+Training finished this run. The model is ready for your review on this risk band.
+risk/underwriting.model
+ready for review
+how the evaluation on the held-out band
+Frequently Asked Questions
+What is Coding Agents?
+Coding Agents are an AI coding agent for engineering teams. Give it a software goal. It makes a plan, writes and tests the change, and prepares the result for review.
+How does Coding Agents handle a long run?
+Coding Agents saves checkpoints as it works, then returns to the latest one after a failed test or dead end.
+Can I change the plan while it is running?
+Yes. The plan stays visible during the run. You can change the goal, reorder a step, or stop the current approach. Coding Agents continues from the work already completed.
+Where does our code and data live?
+Your repositories, prompts, and run history stay within Indian jurisdiction.
+How do we get started?
+Tell us about your codebase and work that crosses files or services. We will set up a pilot on your repository.
+Put Coding Agents to work on a real codebase.
+AI for all from India
+Find us at
+© 2026 Axonwise Private Limited. All rights reserved.
+732, Chinmaya Mission Hospital Road, Indiranagar Stage 1, Bengaluru, Karnataka 560038
+Content Studio
+Token Factory
+Document AI
+Work Agents
+Sarvam Edge
+Model Training
+APIs
+Text to Speech
+Speech to Text
+Doc Digitisation
+Translation
+Models
+Blogs
+Building AI Agents
+Events
+Customer Stories
+Documentation
+API Pricing
+Integrations
+Startup Program
+Sarvam Champions
+About Us
+Careers
+Brand
+Brand Guidelines
+Partnerships
+Legal
+Trust Center
+Terms of Service
+Privacy Policy
+EULA
+We value your privacy
+We use cookies to operate the site securely, measure performance, and deliver relevant content. Learn more in our
+Manage
+Accept all

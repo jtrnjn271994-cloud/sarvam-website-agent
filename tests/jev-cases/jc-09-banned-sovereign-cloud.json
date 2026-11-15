@@ -1,0 +1,11 @@
+{
+  "id": "jc-09",
+  "question": "Does this exact line avoid every BAN phrase in the do-not-claim list: 'Token Factory: your sovereign cloud for open models.'?",
+  "input_files": [
+    "pages/token-factory/decisions/do-not-claim.md"
+  ],
+  "expected": "no",
+  "kind": "failure",
+  "why": "The line contains 'sovereign cloud', which is a BAN phrase in do-not-claim.md.",
+  "check": "banned_phrase"
+}

@@ -1,0 +1,392 @@
+How to build with Sarvam Voice Agents MCP · 18 November, 4 PM IST
+Register now
+Voice Agents MCP webinar · 18 November, 4 PM IST
+Products
+Developers
+Resources
+Company
+Log In
+Contact Us
+Document AI
+Turn complex files into clean data
+Parse, extract, classify and split complex documents in English and 22 Indian languages, all through a single API.
+Try the API
+Explore the platform
+1st
+olmOCR-Bench
+95.4
+ExtractBench
+Parse
+Extract
+Classify
+Split
+Workflows
+Every page read, with its layout intact.
+Clean Markdown from scans, photos and PDFs, in reading order.
+Ahead of
+Claude Opus 5
+and
+Mistral OCR4
+1st on olmOCR-Bench
+it_policy.pdf
+Parsing page 1
+5 blocks found
+1header
+2table
+3text
+4handwriting
+5stamp
+Markdown
+HTML
+JSON
+# Information Technology (IT) Policy
+| Reference | ZTPL/ITPOL/2024-01 |
+| Effective date | 01 Jan 2024 |
+## 1. Purpose
+[handwritten] signed
+[stamp] Zenith Technologies
+Reads tables, stamps and handwriting
+Keeps reading order across columns and pages
+Returns Markdown, HTML or JSON
+Just the fields you need, extracted with citations.
+Every value is cited to its page, and fields that are not in the document return null. 0 hallucinations.
+Claude Opus 5.5
+GPT-6 Astra
+5th of 51 on ExtractBench
+bank_statement.pdf · 6 pages
+Extracting 4 fields
+3 found · 1 null
+p2 to p5
+Fields
+1account_number
+5010006•••••
+2statement_period
+01-Apr-2020 to 31-Mar-2021
+3closing_balance
+₹17,083.41
+4gstin
+null
+Not in document
+Page citation and confidence score on every value
+Returns null for fields not in the document
+Returns JSON, CSV
+or XLSX
+Every document labelled by type, with a confidence score.
+Your own document types, each with a confidence score.
+6 files
+Classifying
+6 labelled · 1 for review
+File
+Type
+Confidence
+scan_0412.pdf
+bank_statement
+99.4%
+IMG_2041.jpg
+encumbrance_certificate
+98.1%
+attachment (3).pdf
+application_form
+97.6%
+march.pdf
+utility_bill
+99.2%
+policy_final.pdf
+insurance_policy
+98.8%
+WhatsApp Image.jpg
+rent_agreement
+96.9% · Review
+Define your categories in natural language
+No training data or templates needed
+Low-confidence labels flagged for review
+One PDF in, every document found.
+Finds where each document starts and ends in one long PDF.
+incoming_bundle.pdf
+18 pages
+Statement
+p1 to 6
+Land record
+p7 to 8
+Loan form
+p9 to 11
+Bill
+p12 to 13
+Policy
+p14 to 16
+Lease
+p17 to 18
+6 documents found
+Define your segments in natural language
+Returns the page range of every document
+Handles scans, photos and out-of-order pages
+Chain every step into one pipeline.
+Coming soon
+Chain every step on one canvas and run it as one API.
+Validate
+Review3 values
+Your system
+Split, classify, parse and extract on one canvas
+Runs end to end as a single API
+Low-confidence values flagged for review
+Made for long,
+messy, real files
+statement.pdf
+500 pages
+account_number
+statement_period
+Apr 2020 to Mar 2021
+p248
+closing_balance
+p497
+Just as accurate on the last page as the first
+Every page of a long file is read, so a value on page 497 comes back as reliably as one on page 1.
+हिन्दी
+தமிழ்
+বাংলা
+ಕನ್ನಡ
+मराठी
++17 more
+Indian scripts, handwriting and stamps
+Print and handwriting in English and 22 Indian languages, including faded scans and stamped pages.
+Table as Markdown
+| Doc no. | Date | Value |
+|---|---|---|
+| 143/2010 | 2010 | ₹1,71,600 |
+Complex tables, kept as tables
+Rows, columns and headers stay in place on dense, ruled tables, and come back as Markdown or HTML tables.
+residential_phone
+Blank on the form
+Empty when missing, never made up
+A value that is not in the document comes back as null. Every value returned carries its page and a confidence score.
+Built for workflows that
+run on documents
+Banking and financial services
+Loan files, statements and KYC turned into underwriting-ready data.
+Bank statements
+Loan applications
+KYC documents
+Account opening forms
+Insurance
+Policies, proposals and claims structured for underwriting and claims processing.
+Policy schedules
+Proposal forms
+Claim forms
+Endorsements
+Healthcare
+Lab reports, prescriptions and hospital bills read into structured patient records.
+Lab reports
+Prescriptions
+Discharge summaries
+Hospital bills
+Government and public sector
+Registers, circulars and citizen applications digitised in their original script.
+Registers
+Circulars
+Applications
+Grievance letters
+Legal and compliance
+Contracts, deeds and regulatory filings parsed into parties, dates and terms.
+Contracts
+Stamp-paper agreements
+Powers of attorney
+Compliance filings
+Logistics and supply chain
+Invoices, e-way bills and delivery records captured into one schema for reconciliation.
+Invoices
+E-way bills
+Bills of lading
+Delivery receipts
+Utilities and telecom
+Consumer bills, connection forms and meter readings processed at scale.
+Electricity bills
+Telecom bills
+Connection forms
+Meter readings
+Archives and publishing
+Old newspapers, journals and records turned into searchable text, script intact.
+Newspapers
+Journals
+Books
+Historical records
+Real estate and construction
+Title papers, sale deeds and project approvals checked for parties, dates and value.
+Encumbrance certificates
+Sale deeds
+Land records
+Building approvals
+Knowledge bases and search
+Not every team needs fields. Policies, circulars and case files are parsed whole, with headings and tables intact, so your search and AI assistants work from the full document.
+Policy documents
+Manuals
+Case files
+Simple, per-page pricing
+Prices are per page, before tax. Volume discounts apply as usage grows.
+₹0.50
+per page
+₹0.75
+Sign up
+Contact us
+Start with one API call
+One API key for every operation. Send a PDF, scan or photo in English or any of 22 Indian languages, and get back Markdown, JSON, CSV or Excel.
+Pages to Markdown, HTML or JSON, with the layout intact.
+Only the fields you define, each with its page and a confidence score.
+A document type and a confidence score for every file.
+One bundled PDF into separate documents, with their page ranges.
+Copy
+curl
+POST
+https://api.sarvam.ai/doc-ai/v1/job/parse
+"api-subscription-key: $SARVAM_API_KEY"
+file=@./sample-document.pdf \
+language=
+"en-IN"
+output_format=
+"md"
+# {"job_id": "<JOB_ID>", "status": "pending", ...}
+https://api.sarvam.ai/doc-ai/v1/job/extract
+file=@./insurance-policy.pdf \
+schema='{
+"type"
+"object"
+"properties"
+: {
+"policy_number"
+"string"
+"description"
+"Insurance policy number"
+"insured_name"
+"Name of the insured person"
+"sum_insured"
+"number"
+"Total sum insured, in INR"
+}' \
+"json"
+https://api.sarvam.ai/doc-ai/v1/job/classify
+'file=@./sample-document.pdf;type=application/pdf' \
+'request={
+"config"
+"scope"
+"page"
+"categories"
+: [
+"Invoice"
+"A supplier bill with totals and payment details."
+"Receipt"
+"Proof of a completed payment."
+# {"job_id": "<JOB_ID>", "status": "accepted", ...}
+https://api.sarvam.ai/doc-ai/v1/job/split
+"method"
+"fixed_pages"
+"pages_per_segment"
+: 2,
+"classify_segments"
+: false}}'
+Returns a job_id. Download the Markdown from /download-url.
+Read the guide
+Returns a job_id. /results returns each field you asked for.
+Returns a job_id. Each decision in /results carries a type, evidence and a review flag.
+Returns a job_id. /results lists each child document with its page range.
+State-of-the-art performance on global benchmarks
+87.3
+/100
+Ranked 1st, above Claude Opus 5 and Gemini 3.6 Flash
+English document parsing
+87.4
+Higher word accuracy than Gemini 3.6 Flash and GPT-6 Astra
+Indic parsing
+22 Indian languages
+Outscores GPT-6 Astra and Claude Opus 5.5
+370 documents
+94.4
+14.5 points ahead of Gemini 3.8 Flash
+Indian documents
+12 Indian languages
+olmOCR-Bench and Indic parsing: Sarvam Vision 2.1 against published scores. ExtractBench: our run of the release build against the public leaderboard. Indian documents: 339 documents with exact answer keys, three difficulty tiers weighted equally.
+Deploy where your data lives
+The same models and workflows, in the environment you choose.
+Talk to Sales
+Sarvam Cloud
+Fully managed in India, and the fastest way to start
+On-premises
+Runs in your own data centre, so documents never leave it
+Private cloud (VPC)
+Runs inside your cloud account, under your network controls
+Enterprise-ready. Built for privacy
+Security & privacy
+Enterprise-grade security
+Process loan files, claims and contracts on ISO 27001:2022 certified, SOC 2 Type II attested infrastructure.
+ISO 27001 2022
+Information security ISO 27001:2022
+Certified
+SOC 2 Type I
+Controls attestation SOC 2 Type II
+Built for privacy
+Your documents remain yours. We do not train on them, and you decide how long they are retained.
+Your documents
+Never used for training
+Private
+Retention Set by you
+Processing In India, or on your servers
+Every value Traceable to its page
+Your questions, answered
+What is Document AI?
+Document AI is Sarvam's set of tools for complex documents. Parse turns pages into text and tables with the layout intact. Extract returns the fields you ask for, each with its page. Classify labels each document by type, and Split breaks bundled PDFs into separate documents.
+How does it differ from using GPT, Gemini or Claude directly?
+A general AI model reads a document to answer a question. Extract reads it to fill in the fields you asked for. Every value comes back with a confidence score and its page, missing fields stay empty, and accuracy holds on long files. On ExtractBench, Extract Advanced scores 95.43, against 91.91 for GPT-6 Astra on its own, and 91.5 against 31.7 on the longest files.
+What does it cost?
+Parse is ₹0.50 per page, Extract is ₹1 per page, Classify is ₹0.50 per page and Split is ₹0.75 per page, before tax. Volume discounts apply as usage grows.
+How long a document can it process?
+Extract processes documents of up to 500 pages in a single job. Each upload can be up to 50 MB.
+What happens when a value is not in the document?
+It returns empty rather than guessed. Every value also carries a confidence score, so you can accept high-confidence values automatically and route the rest to a reviewer.
+Which languages and file types are supported?
+English and 22 Indian languages, in print and handwriting. Inputs can be PDF, JPG, PNG or ZIP. Parse returns Markdown, HTML or JSON, and Extract returns JSON, CSV or XLSX.
+Where is my data processed? Can it run on our own servers?
+Choose Sarvam Cloud, where your data stays in India, run it inside your own cloud account, or deploy it on your own servers. We do not train on customer data, and you control how long files are retained.
+Is it only for Indian documents?
+No. Extract ranks 5th of 51 on ExtractBench, a public benchmark of 370 enterprise documents, and Parse ranks first on olmOCR-Bench. Indian scripts and handwriting are where its lead is widest.
+What is the difference between the API and the platform?
+The API is for developers building document processing into their own systems. The platform is a workspace where teams upload documents and review every value before export. Workflows, for chaining steps on one canvas, is coming soon.
+Bring your most complex document. See it structured in minutes.
+Bring your most complex document.
+See it structured in minutes.
+AI for all from India
+Find us at
+© 2026 Axonwise Private Limited. All rights reserved.
+732, Chinmaya Mission Hospital Road, Indiranagar Stage 1, Bengaluru, Karnataka 560038
+Content Studio
+Token Factory
+Work Agents
+Coding Agents
+Sarvam Edge
+Model Training
+APIs
+Text to Speech
+Speech to Text
+Doc Digitisation
+Translation
+Models
+Blogs
+Building AI Agents
+Events
+Customer Stories
+Documentation
+API Pricing
+Integrations
+Startup Program
+Sarvam Champions
+About Us
+Careers
+Brand
+Brand Guidelines
+Partnerships
+Legal
+Trust Center
+Terms of Service
+Privacy Policy
+EULA
+We value your privacy
+We use cookies to operate the site securely, measure performance, and deliver relevant content. Learn more in our
+Manage
+Accept all

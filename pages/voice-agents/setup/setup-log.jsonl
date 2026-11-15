@@ -1,0 +1,5 @@
+{"kind": "chat", "role": "reasoning", "asked_model": "anthropic/claude-sonnet-5.5", "answered_model": "anthropic/claude-sonnet-5.5", "purpose": "setup positioning", "seconds": 15.46, "cost": 0.044288, "chars": 2210}
+{"kind": "chat", "role": "reasoning", "asked_model": "anthropic/claude-sonnet-5.5", "answered_model": "anthropic/claude-sonnet-5.5", "purpose": "setup claims", "seconds": 14.27, "cost": 0.02993, "chars": 2814}
+{"kind": "chat", "role": "reasoning", "asked_model": "anthropic/claude-sonnet-5.5", "answered_model": "anthropic/claude-sonnet-5.5", "purpose": "setup checklist bfsi:business-owner", "seconds": 6.46, "cost": 0.013928, "chars": 811}
+{"kind": "chat", "role": "reasoning", "asked_model": "anthropic/claude-sonnet-5.5", "answered_model": "anthropic/claude-sonnet-5.5", "purpose": "setup positioning", "seconds": 14.5, "cost": 0.043338, "chars": 2403}
+{"kind": "chat", "role": "reasoning", "asked_model": "anthropic/claude-sonnet-5.5", "answered_model": "anthropic/claude-sonnet-5.5", "purpose": "setup positioning", "seconds": 10.91, "cost": 0.03755, "chars": 1886}

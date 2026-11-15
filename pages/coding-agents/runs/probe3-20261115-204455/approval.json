@@ -1,0 +1,38 @@
+{
+ "note": "Append-only. The latest entry counts. Written only when a person clicks in the console.",
+ "entries": [
+  {
+   "decision": "approve",
+   "variant": "A",
+   "group_at_decision": "failed_gate2",
+   "reasons_shown": [
+    "Jev says not better (targeted gain +0.24, but other questions dropped more than 0.05: A7-checklist-item-1 -0.25); Judge 2 says not better (targeted gain +0.25, but other questions dropped more than 0.05: A7-checklist-item-1 -0.11)."
+   ],
+   "override": true,
+   "name": "Console user",
+   "reason": "we are trying too see whether the process workflow works",
+   "note": "",
+   "at": "2026-11-15T20:49:54",
+   "variant_hash": "24452efd6f59be7bdd4c4940168186f7dc23b130ea483b2185a0e4d1068e12bc",
+   "png_hash": "68d496c388fca804d4f61b0905eeea5254d99a138d23aad1b1b9abcbb745c1b8",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "decision": "approve",
+   "variant": "B",
+   "group_at_decision": "failed_gate2",
+   "reasons_shown": [
+    "NEAR MISS. Both judges see the gain the gaps need (average +0.20 and +0.28), but A7-checklist-item-1 fell. Often this is wording, not meaning: read it before you decide.",
+    "Jev says not better (targeted gain +0.20, but other questions dropped more than 0.05: A7-checklist-item-1 -0.29); Judge 2 says not better (targeted gain +0.28, but other questions dropped more than 0.05: A7-checklist-item-1 -0.21)."
+   ],
+   "override": true,
+   "name": "Claude, on the owner's instruction",
+   "reason": "Owner asked to test the best variant even below the threshold. Both judges agree on B, it gains on the targeted gaps, and the A7 drop is wording.",
+   "note": "",
+   "at": "2026-11-15T20:59:38",
+   "variant_hash": "17b529c703e1289d41a0aed2edf5c4a8b412e1aee38f05c050d68e64469a6603",
+   "png_hash": "2f7b5119344f24a9831e39cae7473e898ae6d8bc797d7528d9695cbcc0653ec2",
+   "made_by": "a person, in the local console"
+  }
+ ]
+}

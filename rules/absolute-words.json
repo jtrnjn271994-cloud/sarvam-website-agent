@@ -1,0 +1,13 @@
+{
+  "absolute_words": [
+    "never",
+    "always",
+    "guarantee",
+    "guaranteed",
+    "100%",
+    "every",
+    "all",
+    "any"
+  ],
+  "note": "A fragment may use one of these words only if the cited claim text or its evidence quote also contains it."
+}

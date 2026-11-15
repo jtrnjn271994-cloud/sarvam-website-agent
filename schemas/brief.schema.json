@@ -1,0 +1,160 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Step 0 brief (a person writes it; the run reads it before the bets step)",
+ "type": "object",
+ "required": [
+  "goal",
+  "page_url",
+  "scope",
+  "first_buyer",
+  "vertical",
+  "main_cta",
+  "offer_after_click",
+  "test_type",
+  "open_conflicts"
+ ],
+ "properties": {
+  "goal": {
+   "type": "string",
+   "minLength": 1,
+   "description": "What the page test should achieve (flow v2 step 1)."
+  },
+  "page_url": {
+   "type": "string",
+   "pattern": "^https?://\\S+$",
+   "description": "The live page address (flow v2 step 1)."
+  },
+  "scope": {
+   "type": "string",
+   "pattern": "^(page|section:.+)$",
+   "description": "'page' or 'section:<name>' (flow v2 step 2). A section name comes from the latest capture."
+  },
+  "first_buyer": {
+   "type": "object",
+   "required": [
+    "role",
+    "checklist"
+   ],
+   "properties": {
+    "role": {
+     "type": "string",
+     "minLength": 1,
+     "description": "One buyer role. Not two."
+    },
+    "checklist": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "pattern": "^BR-[0-9]+$",
+     "description": "One buyer checklist id. null while a typed persona waits for step 3c to draft one (the run brief always has an id)."
+    },
+    "evidence_ids": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+     }
+    },
+    "label": {
+     "enum": [
+      "CHECKED",
+      "CALC",
+      "VENDOR",
+      "SEMRUSH",
+      "AUDIT",
+      "PROPOSED",
+      "UNCHECKED"
+     ]
+    },
+    "reason": {
+     "type": "string",
+     "maxLength": 400
+    },
+    "decides": {
+     "type": "string",
+     "minLength": 1,
+     "description": "What this buyer decides. Required by step 3 for a new brief. Older briefs may lack it."
+    },
+    "must_see": {
+     "type": "string",
+     "minLength": 1,
+     "description": "What this buyer must see before acting. Required by step 3 for a new brief."
+    },
+    "source": {
+     "enum": [
+      "shortcut",
+      "typed"
+     ],
+     "description": "shortcut: a role from the page profile. typed: the person typed the buyer."
+    }
+   }
+  },
+  "vertical": {
+   "type": "string",
+   "minLength": 1,
+   "description": "The one vertical this test is for, in the person's own words (flow v2 step 3). The code holds no list of verticals."
+  },
+  "offer_after_click": {
+   "type": "string",
+   "minLength": 1,
+   "description": "What the buyer gets after the click, or 'UNKNOWN: <reason>'."
+  },
+  "limits": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "minLength": 1
+   }
+  },
+  "open_conflicts": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "minLength": 1
+   },
+   "description": "Must be empty before a run starts."
+  },
+  "self_check": {
+   "type": "object",
+   "required": [
+    "evidence_ids_used",
+    "gaps"
+   ],
+   "properties": {
+    "evidence_ids_used": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "gaps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "main_cta": {
+   "type": "string",
+   "minLength": 1,
+   "description": "The one button label. Both arms use it (lesson L18)."
+  },
+  "second_cta": {
+   "type": "string"
+  },
+  "test_type": {
+   "enum": [
+    "message",
+    "design"
+   ],
+   "description": "message: only words change. design: only layout or motion changes (flow v2 step 5). One test changes one thing."
+  },
+  "product": {
+   "type": "string",
+   "minLength": 1,
+   "description": "The product this page sells (step 1). Older briefs may lack it."
+  }
+ }
+}

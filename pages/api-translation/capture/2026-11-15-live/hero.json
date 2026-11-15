@@ -1,0 +1,262 @@
+{
+  "h1": "Translation that feels native across India's languages",
+  "sub": "Translate text between English and 10 Indian languages with accuracy that preserves meaning, tone, and cultural context.",
+  "ctas": [
+    {
+      "index": 0,
+      "text": "Try It for Free",
+      "href": "https://indus.sarvam.ai/",
+      "tag": "a"
+    },
+    {
+      "index": 1,
+      "text": "Try It for Free",
+      "href": null,
+      "tag": "button"
+    },
+    {
+      "index": 2,
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us",
+      "tag": "a"
+    },
+    {
+      "index": 3,
+      "text": "Contact Us",
+      "href": null,
+      "tag": "button"
+    }
+  ],
+  "box": {
+    "x": 106.671875,
+    "y": 160,
+    "width": 1066.65625,
+    "height": 316.625
+  },
+  "links": [
+    {
+      "text": "How to build with Sarvam Voice Agents MCP · 18 November, 4 PM IST Register now",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Try It for Free",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Try it for free",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "हिन्दी Hindi · hi-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-hindi"
+    },
+    {
+      "text": "தமிழ் Tamil · ta-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-tamil"
+    },
+    {
+      "text": "বাংলা Bengali · bn-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-bengali"
+    },
+    {
+      "text": "తెలుగు Telugu · te-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-telugu"
+    },
+    {
+      "text": "ಕನ್ನಡ Kannada · kn-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-kannada"
+    },
+    {
+      "text": "മലയാളം Malayalam · ml-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-malayalam"
+    },
+    {
+      "text": "मराठी Marathi · mr-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-marathi"
+    },
+    {
+      "text": "ગુજરાતી Gujarati · gu-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-gujarati"
+    },
+    {
+      "text": "ਪੰਜਾਬੀ Punjabi · pa-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-punjabi"
+    },
+    {
+      "text": "ଓଡ଼ିଆ Odia · or-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-odia"
+    },
+    {
+      "text": "English English · en-IN",
+      "href": "https://www.sarvam.ai/apis/translation/english-to-hindi"
+    },
+    {
+      "text": "Sign Up",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Sign Up",
+      "href": "https://indus.sarvam.ai/translate"
+    },
+    {
+      "text": "Content Studio",
+      "href": "https://www.sarvam.ai/products/content-studio"
+    },
+    {
+      "text": "Token Factory",
+      "href": "https://www.sarvam.ai/token-factory"
+    },
+    {
+      "text": "Document AI",
+      "href": "https://www.sarvam.ai/products/document-ai"
+    },
+    {
+      "text": "Work Agents",
+      "href": "https://www.sarvam.ai/products/work-agents"
+    },
+    {
+      "text": "Coding Agents",
+      "href": "https://www.sarvam.ai/products/coding-agents"
+    },
+    {
+      "text": "Sarvam Edge",
+      "href": "https://www.sarvam.ai/products/edge"
+    },
+    {
+      "text": "Model Training",
+      "href": "https://www.sarvam.ai/products/model-training"
+    },
+    {
+      "text": "Text to Speech",
+      "href": "https://www.sarvam.ai/apis/text-to-speech"
+    },
+    {
+      "text": "Speech to Text",
+      "href": "https://www.sarvam.ai/apis/speech-to-text"
+    },
+    {
+      "text": "Doc Digitisation",
+      "href": "https://www.sarvam.ai/apis/document-digitisation"
+    },
+    {
+      "text": "Translation",
+      "href": "https://www.sarvam.ai/apis/translation"
+    },
+    {
+      "text": "Models",
+      "href": "https://www.sarvam.ai/models"
+    },
+    {
+      "text": "Blogs",
+      "href": "https://www.sarvam.ai/blogs"
+    },
+    {
+      "text": "Building AI Agents",
+      "href": "https://www.sarvam.ai/blogs/building-ai-agents"
+    },
+    {
+      "text": "Events",
+      "href": "https://www.sarvam.ai/events"
+    },
+    {
+      "text": "Customer Stories",
+      "href": "https://www.sarvam.ai/stories"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://docs.sarvam.ai/sarvam-api-docs"
+    },
+    {
+      "text": "API Pricing",
+      "href": "https://www.sarvam.ai/api-pricing"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://www.sarvam.ai/integrations"
+    },
+    {
+      "text": "Startup Program",
+      "href": "https://www.sarvam.ai/startup-program"
+    },
+    {
+      "text": "Sarvam Champions",
+      "href": "https://www.sarvam.ai/sarvam-champions"
+    },
+    {
+      "text": "About Us",
+      "href": "https://www.sarvam.ai/about-us"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.sarvam.ai/careers"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Brand",
+      "href": "https://www.sarvam.ai/brand"
+    },
+    {
+      "text": "Brand Guidelines",
+      "href": "https://www.sarvam.ai/brand-guidelines"
+    },
+    {
+      "text": "Partnerships",
+      "href": "https://www.sarvam.ai/partnerships"
+    },
+    {
+      "text": "Trust Center",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Terms of Service",
+      "href": "https://www.sarvam.ai/terms-of-service"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    },
+    {
+      "text": "EULA",
+      "href": "https://www.sarvam.ai/eula"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    }
+  ],
+  "title": "Translation API | Mayura | Sarvam AI",
+  "url": "https://www.sarvam.ai/apis/translation",
+  "captured_at": "2026-11-15T19:26:39",
+  "viewport": "1280x900",
+  "hero_clip": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 500.625
+  },
+  "selectors": {
+    "h1": "[data-hero=h1]",
+    "sub": "[data-hero=sub]",
+    "cta": "[data-hero^=cta-]"
+  },
+  "label": "LIVE CAPTURE. Loaded once. No bot traffic goes to this URL."
+}

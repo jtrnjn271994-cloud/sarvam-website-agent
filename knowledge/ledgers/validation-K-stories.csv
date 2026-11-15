@@ -1,0 +1,12 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+K-01,Sarvam / Mahindra Finance,voice agents story,Mahindra Finance,voice,https://www.sarvam.ai/stories/mahindra-finance-voice-agents,VENDOR,2026-11-11,PASS,2026-11-11,
+K-02,Sarvam / HealthPlix,speech to text story,HealthPlix,consultations,https://www.sarvam.ai/stories/healthplix,VENDOR,2026-11-11,PASS,2026-11-11,
+K-03,Sarvam / NHA,citizen voice story,National Health Authority,languages,https://www.sarvam.ai/stories/nha,VENDOR,2026-11-11,PASS-2ND,2026-11-11,R3 wide window (table): value within 600 chars of the company name
+K-05,Sarvam / UIDAI Aadhaar,citizen voice story,Aadhaar,languages,https://www.sarvam.ai/stories/aadhaar,VENDOR,2026-11-11,PASS-2ND,2026-11-11,R3 wide window (table): value within 600 chars of the company name
+K-06,Sarvam / Dezerv,customer story,Dezerv,Sarvam,https://www.sarvam.ai/stories/dezerv,VENDOR,2026-11-11,PASS,2026-11-11,
+K-07,Sarvam / IIM Udaipur,dubbing and translation story,IIM Udaipur,Hindi,https://www.sarvam.ai/stories/iim-udaipur,VENDOR,2026-11-11,PASS,2026-11-11,
+K-08,Sarvam / Equal AI,speech to text story,Equal,Saaras,https://www.sarvam.ai/stories/equal,VENDOR,2026-11-11,PASS,2026-11-11,
+K-09,Sarvam / Tata Capital,voice story,Tata Capital,Samvaad,https://www.sarvam.ai/stories/tata-capital-ai-voice-transformation,VENDOR,2026-11-11,PASS,2026-11-11,
+K-10,Sarvam / Portea,voice agents story,Portea,voice agent,https://www.sarvam.ai/stories/portea,VENDOR,2026-11-11,PASS,2026-11-11,
+K-11,Sarvam / EkStep,story,EkStep,Sarvam,https://www.sarvam.ai/stories/ekstep,VENDOR,2026-11-11,PASS,2026-11-11,
+K-12,Sarvam / Digital Crop Survey,story,Crop Survey,Sarvam,https://www.sarvam.ai/stories/dcs,VENDOR,2026-11-11,PASS,2026-11-11,

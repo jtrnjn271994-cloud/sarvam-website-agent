@@ -1,0 +1,12 @@
+{
+  "id": "jc-10",
+  "question": "Does the promise 'through an OpenAI-compatible API' in line CL-001 match a promise that a rival makes in the rival claims file?",
+  "input_files": [
+    "pages/token-factory/claims/cl-001-open-models-one-openai-compatible-api.md",
+    "pages/token-factory/research/rival-claims-13Nov2026.csv"
+  ],
+  "expected": "yes",
+  "kind": "normal",
+  "why": "The rival claims file marks openai_compatible as yes for Fireworks AI Inference and for both Together AI rows.",
+  "check": "same_promise_as_rival"
+}

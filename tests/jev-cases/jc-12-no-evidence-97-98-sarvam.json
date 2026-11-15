@@ -1,0 +1,12 @@
+{
+  "id": "jc-12",
+  "question": "Does evidence EV-002 support this exact line: 'Sarvam models reach 97% or 98% of frontier quality.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-008-market-signal-several-models-open-at-97-98.md",
+    "pages/token-factory/evidence/ev-002-techm-several-models-97-98.md"
+  ],
+  "expected": "no",
+  "kind": "failure",
+  "why": "EV-002 is an opinion on a call; it gives no measured quality figure and does not name Sarvam, and CL-008 forbids this line.",
+  "check": "evidence_supports_line"
+}

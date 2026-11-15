@@ -1,0 +1,332 @@
+{
+  "about": "Rules that tag library-register rows by product, industry, buyer role and category. Data only. Step 3a of the run reads this file. A row matches when its library_path or title holds one of the listed words (lower case), or its relevance value is listed. If the page product or vertical names no entry here, the code falls back to the words of what the person typed (words of 4 or more letters in the title or the path). Edit this file to teach the tags a new product or industry. Built 14 Nov 2026 from the real folder names under library/.",
+  "min_word_length": 4,
+  "products": [
+    {
+      "names": [
+        "token factory"
+      ],
+      "path_contains": [
+        "token-factory",
+        "token_factory"
+      ],
+      "title_words": [
+        "token factory",
+        "token-factory"
+      ],
+      "relevance": [
+        "token-factory",
+        "brand"
+      ]
+    },
+    {
+      "names": [
+        "voice agents",
+        "voice agent"
+      ],
+      "path_contains": [
+        "voice"
+      ],
+      "title_words": [
+        "voice agent",
+        "voice"
+      ],
+      "relevance": []
+    },
+    {
+      "names": [
+        "doc agents",
+        "doc agent",
+        "document agents"
+      ],
+      "path_contains": [
+        "doc-agent",
+        "documents"
+      ],
+      "title_words": [
+        "doc agent",
+        "document"
+      ],
+      "relevance": []
+    }
+  ],
+  "industries": [
+    {
+      "names": [
+        "gcc",
+        "gccs",
+        "it services",
+        "global capability"
+      ],
+      "path_contains": [
+        "icp-round-2/gcc/",
+        "transcripts/gcc-"
+      ],
+      "title_words": [
+        "gcc"
+      ]
+    },
+    {
+      "names": [
+        "bfsi",
+        "bank",
+        "banks",
+        "lender",
+        "lenders",
+        "financial services",
+        "nbfc"
+      ],
+      "path_contains": [
+        "icp-round-2/bfsi/",
+        "rfp-"
+      ],
+      "title_words": [
+        "bfsi",
+        "bank"
+      ]
+    },
+    {
+      "names": [
+        "insurance",
+        "insurer",
+        "insurers"
+      ],
+      "path_contains": [
+        "icp-round-2/ins/",
+        "transcripts/ins-"
+      ],
+      "title_words": [
+        "insurance"
+      ]
+    },
+    {
+      "names": [
+        "education",
+        "edtech",
+        "university",
+        "universities"
+      ],
+      "path_contains": [
+        "icp-round-2/edu/",
+        "transcripts/edu-"
+      ],
+      "title_words": [
+        "education"
+      ]
+    },
+    {
+      "names": [
+        "government",
+        "public sector",
+        "gov"
+      ],
+      "path_contains": [
+        "icp-round-2/gov/",
+        "transcripts/gov-"
+      ],
+      "title_words": [
+        "government"
+      ]
+    },
+    {
+      "names": [
+        "health",
+        "healthcare",
+        "hospital",
+        "hospitals"
+      ],
+      "path_contains": [
+        "icp-round-2/health/",
+        "transcripts/health-"
+      ],
+      "title_words": [
+        "health"
+      ]
+    },
+    {
+      "names": [
+        "retail",
+        "e-commerce",
+        "ecommerce"
+      ],
+      "path_contains": [
+        "icp-round-2/retail/",
+        "transcripts/retail-"
+      ],
+      "title_words": [
+        "retail"
+      ]
+    },
+    {
+      "names": [
+        "telecom",
+        "telco",
+        "telecommunications"
+      ],
+      "path_contains": [
+        "icp-round-2/tel/",
+        "transcripts/tel-"
+      ],
+      "title_words": [
+        "telecom"
+      ]
+    }
+  ],
+  "buyer_categories": [
+    "committees",
+    "pain",
+    "quotes"
+  ],
+  "buyer_note": "A row matches the buyer when its category is listed in buyer_categories and the row also matches the industry, or when a word of 4 or more letters from the role text sits in its title or path.",
+  "categories": [
+    {
+      "name": "committees",
+      "path_contains": [
+        "committee"
+      ],
+      "title_words": [
+        "committee"
+      ]
+    },
+    {
+      "name": "pain",
+      "path_contains": [
+        "pain"
+      ],
+      "title_words": [
+        "pain"
+      ]
+    },
+    {
+      "name": "quotes",
+      "path_contains": [
+        "quotes"
+      ],
+      "title_words": [
+        "quote"
+      ]
+    },
+    {
+      "name": "rivals",
+      "path_contains": [
+        "rival",
+        "competitor"
+      ],
+      "title_words": [
+        "rival",
+        "competitor"
+      ]
+    },
+    {
+      "name": "tenders",
+      "path_contains": [
+        "rfp",
+        "tender"
+      ],
+      "title_words": [
+        "rfp",
+        "tender"
+      ]
+    }
+  ],
+  "exclude": {
+    "owners": [
+      "gpt"
+    ],
+    "types": [
+      "audit"
+    ],
+    "source_words": [
+      "audit"
+    ],
+    "past_review_by": true
+  },
+  "research_categories_for_checklist": [
+    "committees",
+    "pain",
+    "quotes"
+  ],
+  "research_types_for_checklist": [
+    "data",
+    "research"
+  ],
+  "exclude_note": "Only a row that is AUDIT is blocked: owner gpt, type audit, or the word audit in its source. The code reads the register row, never the path. Tier 3 is no longer a block: official page fetches, call transcripts and tender texts may reach a model, with their full stamp. A row past its review_by date is stale and is not passed (owner brief, item 8).",
+  "input_groups": {
+    "buyer_insights": {
+      "label": "Buyer insights",
+      "id_ranges": [
+        [
+          "LIB-042",
+          "LIB-053"
+        ]
+      ],
+      "folder_rules": [
+        {
+          "path_contains": "icp-round-2/",
+          "needs_industry": true,
+          "categories": [
+            "committees",
+            "pain",
+            "quotes"
+          ]
+        }
+      ]
+    },
+    "competitor_positioning": {
+      "label": "Competitor positioning",
+      "ids": [
+        "LIB-001",
+        "LIB-050",
+        "LIB-120",
+        "LIB-142",
+        "LIB-143",
+        "LIB-144",
+        "LIB-145"
+      ],
+      "folder_rules": [
+        {
+          "path_contains": "icp-round-2/",
+          "needs_industry": true,
+          "categories": [
+            "rivals"
+          ]
+        }
+      ]
+    },
+    "market_landscape": {
+      "label": "Market landscape",
+      "id_ranges": [
+        [
+          "LIB-054",
+          "LIB-062"
+        ]
+      ],
+      "folder_rules": [
+        {
+          "path_contains": "market-and-rivals/"
+        }
+      ]
+    }
+  },
+  "input_groups_note": "The three named input groups for generating a positioning source (option B, step 3d). Chosen by register ids, id ranges and folder rules. Edit here to change them. No AUDIT row can enter a group.",
+  "restamp": {
+    "refuse_ids": [
+      "LIB-118"
+    ],
+    "owners": [
+      "user",
+      "claude",
+      "gpt",
+      "unknown"
+    ],
+    "tiers": [
+      "1",
+      "2"
+    ],
+    "types": [
+      "positioning",
+      "research"
+    ],
+    "note": "start.py --restamp may change owner, tier and source of one positioning or research row. It refuses audit-type rows, rows whose owner is gpt and whose type is not positioning, and the ids listed here (owner decision)."
+  }
+}

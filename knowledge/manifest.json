@@ -1,0 +1,518 @@
+{
+ "made": "2026-11-15",
+ "rules": "Only rows with a verification status. No contacts, no named people, no transcripts. The agent reads this folder only.",
+ "files": [
+  {
+   "file": "ledgers/validation-A-finserv.csv",
+   "source": "02 Assets/Research/validation/ledger-A-finserv.csv",
+   "source_sha256": "e998aca8c467cd7c3856de7a2b0a41b083a33ab533f57cd1d2e68cb84153523c",
+   "rows_in_source": 17,
+   "rows_kept": 14,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-A2-health-public.csv",
+   "source": "02 Assets/Research/validation/ledger-A2-health-public.csv",
+   "source_sha256": "ecdc0b883fc375164f8a125960afb35ce315d955b42d0783471f72bdd452347f",
+   "rows_in_source": 29,
+   "rows_kept": 27,
+   "rows_dropped": 2,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-B1-voice.csv",
+   "source": "02 Assets/Research/validation/ledger-B1-voice.csv",
+   "source_sha256": "fd5e0eb2e319596fd7bdb66d497920b0817e9fe5b8e6966f0c802e3b134c3f2a",
+   "rows_in_source": 11,
+   "rows_kept": 11,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-B2-docs.csv",
+   "source": "02 Assets/Research/validation/ledger-B2-docs.csv",
+   "source_sha256": "dc0ae28f89a650ee082da8a8e7823e2826554d4f604287bcf5a1fdc24ec1cca8",
+   "rows_in_source": 20,
+   "rows_kept": 19,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-B3-inference.csv",
+   "source": "02 Assets/Research/validation/ledger-B3-inference.csv",
+   "source_sha256": "27d3ede07292b4a0492e312c26c2af5405c1691028eed81dd06f29b6aae06086",
+   "rows_in_source": 17,
+   "rows_kept": 12,
+   "rows_dropped": 5,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-C-evidence.csv",
+   "source": "02 Assets/Research/validation/ledger-C-evidence.csv",
+   "source_sha256": "2e3db10a133de84a04e85c1940890482f83dc15516833c38791524575f7b4fcf",
+   "rows_in_source": 23,
+   "rows_kept": 20,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-C2-evidence.csv",
+   "source": "02 Assets/Research/validation/ledger-C2-evidence.csv",
+   "source_sha256": "ba0cf29bcc3dc7b6a9031657f6dd049d5c176e429fb2f8933ceb7597ecdc1c31",
+   "rows_in_source": 23,
+   "rows_kept": 15,
+   "rows_dropped": 8,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-D-gap-close.csv",
+   "source": "02 Assets/Research/validation/ledger-D-gap-close.csv",
+   "source_sha256": "d117222a32c12b7b45cd6d2b04819c80a903b92644e6c0326b7511c9bd5d8e39",
+   "rows_in_source": 14,
+   "rows_kept": 9,
+   "rows_dropped": 5,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-E-benchmarks.csv",
+   "source": "02 Assets/Research/validation/ledger-E-benchmarks.csv",
+   "source_sha256": "9457792ad3c809174ccbea8a7669cbd7435077dd4bd6ebcc6646086a67013191",
+   "rows_in_source": 5,
+   "rows_kept": 3,
+   "rows_dropped": 2,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-F-language-radar.csv",
+   "source": "02 Assets/Research/validation/ledger-F-language-radar.csv",
+   "source_sha256": "0a784786ca2054f0dba7606e6379321b9251374243bb8cfa2308efce184160df",
+   "rows_in_source": 4,
+   "rows_kept": 1,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-G-partners.csv",
+   "source": "02 Assets/Research/validation/ledger-G-partners.csv",
+   "source_sha256": "d9c01dff7c8a21681a593673f770c112f61d0b781ca59aa913cbdb5a83236f94",
+   "rows_in_source": 3,
+   "rows_kept": 0,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-H-saaras.csv",
+   "source": "02 Assets/Research/validation/ledger-H-saaras.csv",
+   "source_sha256": "05e417bdb83d6014f29162c3eaecba43097d392ca96282e5e9bc1f2514cb69e5",
+   "rows_in_source": 1,
+   "rows_kept": 1,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-I-proof.csv",
+   "source": "02 Assets/Research/validation/ledger-I-proof.csv",
+   "source_sha256": "6f06f1310d996a3ceb88d1b75145bc4385152eb2932a534c0d0cab7e244143d9",
+   "rows_in_source": 5,
+   "rows_kept": 5,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-J-rules.csv",
+   "source": "02 Assets/Research/validation/ledger-J-rules.csv",
+   "source_sha256": "c70bf847dcaa07ccbabdeee5d10e198668de738e646dab634bcfb146c0e629ed",
+   "rows_in_source": 5,
+   "rows_kept": 5,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-K-stories.csv",
+   "source": "02 Assets/Research/validation/ledger-K-stories.csv",
+   "source_sha256": "f5bd3a1f365db545c97c348f63c9b5844d0c4d6920e17b15d2dbf0d3ed404cf9",
+   "rows_in_source": 12,
+   "rows_kept": 11,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-L-hyperscalers.csv",
+   "source": "02 Assets/Research/validation/ledger-L-hyperscalers.csv",
+   "source_sha256": "0bb8ea7301e703e456053a7f3d72e4ccf3466dba0585be13fdb76f3e0b8e9e65",
+   "rows_in_source": 4,
+   "rows_kept": 3,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/validation-M-gov.csv",
+   "source": "02 Assets/Research/validation/ledger-M-gov.csv",
+   "source_sha256": "686157132702b9adf6eabf8f94a70edaa0fa456071919b096d59cdbb83518556",
+   "rows_in_source": 6,
+   "rows_kept": 5,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-bfsi-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/bfsi/ledger-expansion.csv",
+   "source_sha256": "9cb818071ad4667d22d75bc03fd1b764e08b6b9178d8c791752a53af6b21e247",
+   "rows_in_source": 10,
+   "rows_kept": 10,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-bfsi-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/bfsi/ledger-pain.csv",
+   "source_sha256": "58a91f3f4c5dcb771e1c99859c9332bd6437a312a5c299f2f7bb273d4fc4cdc1",
+   "rows_in_source": 19,
+   "rows_kept": 16,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-bfsi-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/bfsi/ledger-quotes.csv",
+   "source_sha256": "5c122dfadcfa40744810372510f149049b097d8ae30f8393f45d47595ff354d1",
+   "rows_in_source": 9,
+   "rows_kept": 9,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-bfsi-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/bfsi/ledger-rivals.csv",
+   "source_sha256": "b4726f1774f957d32952f849c6f28f444dcc3874acf58073a58a5ec073feba09",
+   "rows_in_source": 12,
+   "rows_kept": 9,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-edu-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/edu/ledger-expansion.csv",
+   "source_sha256": "df9a7d5eb6332fbb41f917eb3bc390f93a2bc85722f8635d3f983923b6f1f69a",
+   "rows_in_source": 11,
+   "rows_kept": 10,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-edu-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/edu/ledger-pain.csv",
+   "source_sha256": "20e8377812e72bce8e0535ebdb21a763614c419c23c2cce6f34358b76843d417",
+   "rows_in_source": 20,
+   "rows_kept": 16,
+   "rows_dropped": 4,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-edu-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/edu/ledger-quotes.csv",
+   "source_sha256": "0a0f76ce33e99322dabfd617fe1f7e76c6612f4137bfaede3e772679838041a1",
+   "rows_in_source": 10,
+   "rows_kept": 10,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-edu-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/edu/ledger-rivals.csv",
+   "source_sha256": "0954a2fa3e418ee6f116a446e40ca34ee8773aa0ce78afa9daeab9c2a87c7e22",
+   "rows_in_source": 10,
+   "rows_kept": 5,
+   "rows_dropped": 5,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gcc-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/gcc/ledger-expansion.csv",
+   "source_sha256": "a65563351bd0f9cde1028644028e9ca920230806aa8287f3cea5082e44207693",
+   "rows_in_source": 14,
+   "rows_kept": 12,
+   "rows_dropped": 2,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gcc-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/gcc/ledger-pain.csv",
+   "source_sha256": "85342bb032f0ab20b84ecaa604992c1f3328058766a4477cd0a9942ac01cf782",
+   "rows_in_source": 11,
+   "rows_kept": 8,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gcc-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/gcc/ledger-quotes.csv",
+   "source_sha256": "72c9c33f06fb123ac749a185a36e807636dc1258d5c50ccac137d4312ae4fa0d",
+   "rows_in_source": 16,
+   "rows_kept": 16,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gcc-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/gcc/ledger-rivals.csv",
+   "source_sha256": "621e560b30ee7dc1e8e633387002ed145eb863a48aa60f8308e4e20f2b9455d4",
+   "rows_in_source": 17,
+   "rows_kept": 6,
+   "rows_dropped": 11,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gov-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/gov/ledger-expansion.csv",
+   "source_sha256": "38a8f2febe166850808f4a5dfa5f3bcac6a8254d5a43a736004c8ac2200d22cc",
+   "rows_in_source": 11,
+   "rows_kept": 11,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gov-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/gov/ledger-pain.csv",
+   "source_sha256": "928272b0f15e3be5da2aeffd34e751d20c092ad0fa93146a18ba173a47800dcd",
+   "rows_in_source": 29,
+   "rows_kept": 26,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-gov-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/gov/ledger-rivals.csv",
+   "source_sha256": "4c8af9b9be2c740da3a125ef4ef50f83e922afd14f92c62e2d5ebd8b25b23a4a",
+   "rows_in_source": 7,
+   "rows_kept": 4,
+   "rows_dropped": 3,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-health-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/health/ledger-expansion.csv",
+   "source_sha256": "421e235e8cb65bd6456d7f9672e6881b000e94b3fe42190763a0c9e4bfe884a6",
+   "rows_in_source": 8,
+   "rows_kept": 7,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-health-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/health/ledger-pain.csv",
+   "source_sha256": "12bcea3eeaaef544c71a5a8204a64433b6d3a49eb718838ab2785bb1a7e4e6af",
+   "rows_in_source": 12,
+   "rows_kept": 7,
+   "rows_dropped": 5,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-health-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/health/ledger-quotes.csv",
+   "source_sha256": "b88a0feafda0374023dbf186ed352d51e41690666c8d6df68525abdceac07cf9",
+   "rows_in_source": 11,
+   "rows_kept": 11,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-health-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/health/ledger-rivals.csv",
+   "source_sha256": "ed55008f63f15a28010c8e8e5f7a883e8d363cf16174636d771e5c74bea12bee",
+   "rows_in_source": 16,
+   "rows_kept": 11,
+   "rows_dropped": 5,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-ins-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/ins/ledger-expansion.csv",
+   "source_sha256": "0f96aff0e0e0c921f464bb7770dc8721f7fdf3a6e9ac2433f1a8ecb2ba38e22d",
+   "rows_in_source": 7,
+   "rows_kept": 7,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-ins-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/ins/ledger-pain.csv",
+   "source_sha256": "b98ab8418aca2b1bd50899028da0c7e45bcd351819f2f67b41fb1480ee2a6d2a",
+   "rows_in_source": 41,
+   "rows_kept": 26,
+   "rows_dropped": 15,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-ins-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/ins/ledger-quotes.csv",
+   "source_sha256": "ee280b9c835ffbef0d0c79007681cfc68a635d8ecdd3ce9a429d7845b651156d",
+   "rows_in_source": 7,
+   "rows_kept": 7,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-ins-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/ins/ledger-rivals.csv",
+   "source_sha256": "be88af583a3aaaaa70f30317270aff09e8b5c405676a32eb404c03dda06b5c3c",
+   "rows_in_source": 8,
+   "rows_kept": 2,
+   "rows_dropped": 6,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-ins-rules.csv",
+   "source": "02 Assets/Research/icp-round-2/ins/ledger-rules.csv",
+   "source_sha256": "b5d70fe16d58d4084a4490bc1229a1c62f5f2878acb558ade0623e375f833391",
+   "rows_in_source": 7,
+   "rows_kept": 7,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-retail-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/retail/ledger-expansion.csv",
+   "source_sha256": "e5b2ae7ebd80889c32e9b443d43433723f080c1a7e15ece0b936a4ef30670da7",
+   "rows_in_source": 6,
+   "rows_kept": 5,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-retail-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/retail/ledger-pain.csv",
+   "source_sha256": "d8254fe60f414ef4cacec59be537699fe4e0b4aa3edcf3de2e2fa5c2c8e4ccbb",
+   "rows_in_source": 15,
+   "rows_kept": 11,
+   "rows_dropped": 4,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-retail-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/retail/ledger-quotes.csv",
+   "source_sha256": "32bc6e72efa3ada710ff4becd8a5f7350513de77acd78f2194b441f31345d643",
+   "rows_in_source": 9,
+   "rows_kept": 9,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-retail-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/retail/ledger-rivals.csv",
+   "source_sha256": "0a4b10fe450880f5bdafc37021da56a9468cebd6846142411ca11fb2f05ceccd",
+   "rows_in_source": 6,
+   "rows_kept": 6,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-tel-expansion.csv",
+   "source": "02 Assets/Research/icp-round-2/tel/ledger-expansion.csv",
+   "source_sha256": "8e52c9665e833c139742f7aa944adb998673f12f248259c3c5010d5e6143c9af",
+   "rows_in_source": 7,
+   "rows_kept": 7,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-tel-pain.csv",
+   "source": "02 Assets/Research/icp-round-2/tel/ledger-pain.csv",
+   "source_sha256": "1b1b3f070925b24ab5487fd74df48bbd2d458b796b7b2562b40d4580ba8d11c5",
+   "rows_in_source": 11,
+   "rows_kept": 7,
+   "rows_dropped": 4,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-tel-quotes.csv",
+   "source": "02 Assets/Research/icp-round-2/tel/ledger-quotes.csv",
+   "source_sha256": "fab6caaeaf558ac3a7d382b0ec5dbe7cd2f97e89ddffbc53777642107573f89f",
+   "rows_in_source": 10,
+   "rows_kept": 10,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-tel-rivals.csv",
+   "source": "02 Assets/Research/icp-round-2/tel/ledger-rivals.csv",
+   "source_sha256": "bf6894832edb79bc2343d83aff25914dc2dc95707436982803a362a174545f47",
+   "rows_in_source": 12,
+   "rows_kept": 11,
+   "rows_dropped": 1,
+   "kind": "ledger"
+  },
+  {
+   "file": "ledgers/icp-tel-rules.csv",
+   "source": "02 Assets/Research/icp-round-2/tel/ledger-rules.csv",
+   "source_sha256": "2289969b7130594fcb5a36d9d120d40f77195f7d2de0ab0fd4dbf9845492f95f",
+   "rows_in_source": 6,
+   "rows_kept": 6,
+   "rows_dropped": 0,
+   "kind": "ledger"
+  },
+  {
+   "file": "buyers/bfsi-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/bfsi/committee.csv",
+   "source_sha256": "16f23eef3618e572c8b6c3c3bf4b914466077e9e6bbb6d4385c5ee450c71d8ee",
+   "rows_kept": 8,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/edu-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/edu/committee.csv",
+   "source_sha256": "0c4f99648e1a02c1413b414cb4089eb43d2d3406784f0e3e59d053ca45d22a83",
+   "rows_kept": 7,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/gcc-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/gcc/committee.csv",
+   "source_sha256": "5dc7ce6272cb158e15c80433f1a23d2d51eef1e5f1382603b68dc2fca2064e4d",
+   "rows_kept": 8,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/gov-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/gov/committee.csv",
+   "source_sha256": "0fed862fa005e3d4dcea306ccd13026dd1566c836241f430adc715e4ef805bea",
+   "rows_kept": 7,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/health-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/health/committee.csv",
+   "source_sha256": "0fcf419cf5adff48dbd5e111bb4bb8d3b6c7837e75ed9d72bbbb4f8d24a644a0",
+   "rows_kept": 8,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/ins-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/ins/committee.csv",
+   "source_sha256": "4569b01cb6b1e910dd5e70f124ea1c0b0490a76e96dfdbccc1797408afc3f39c",
+   "rows_kept": 8,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/retail-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/retail/committee.csv",
+   "source_sha256": "5fd7b03cab87e684233ffc37f5438259a0097d5e909e1a0f9dd0b55779131cf1",
+   "rows_kept": 7,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "buyers/tel-committee.csv",
+   "source": "02 Assets/Research/icp-round-2/tel/committee.csv",
+   "source_sha256": "12e9a57e1aeecb6199570613f2f51929a1332c605da5726d9e9a28d6750bfd4c",
+   "rows_kept": 7,
+   "kind": "buying committee (roles only)"
+  },
+  {
+   "file": "notes/sarvam-competitor-check-by-offering.md",
+   "source": "02 Assets/Research/sarvam-competitor-check-by-offering.md",
+   "source_sha256": "be6081148915affce100da93596e0f4584448f2b350efa4a3a982d522b382a4e",
+   "kind": "note (rivals by offering)"
+  }
+ ]
+}

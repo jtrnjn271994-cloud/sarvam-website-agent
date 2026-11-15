@@ -1,0 +1,14 @@
+{
+  "id": "jc-03",
+  "question": "BR-005 asks 'Does the page say clients can switch models by changing the model name?' Does evidence EV-013 support this exact line: 'You can use all models in the Token Factory catalogue with one API key by changing the model name.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-006-one-api-key-many-models.md",
+    "pages/token-factory/evidence/ev-013-tf-single-api-key-model-switch.md",
+    "pages/token-factory/buyer-and-wedge/checklists/it-services-champion.md"
+  ],
+  "expected": "yes",
+  "kind": "normal",
+  "why": "EV-013 quotes the FAQ: all catalogue models work with a single API key by changing the model name.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-005"
+}

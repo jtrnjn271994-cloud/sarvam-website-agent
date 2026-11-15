@@ -1,0 +1,32 @@
+{
+  "qualifiers": [
+    {
+      "in_claim": "on request",
+      "fragment_needs_any": [
+        "on request"
+      ]
+    },
+    {
+      "in_claim": "by contract",
+      "fragment_needs_any": [
+        "contract",
+        "agreed"
+      ]
+    },
+    {
+      "in_claim": "agreed arrangement",
+      "fragment_needs_any": [
+        "agreed",
+        "arrangement",
+        "on request"
+      ]
+    },
+    {
+      "in_claim": "enterprise",
+      "fragment_needs_any": [
+        "enterprise"
+      ]
+    }
+  ],
+  "note": "If a cited claim carries a qualifier, the fragment must keep it."
+}

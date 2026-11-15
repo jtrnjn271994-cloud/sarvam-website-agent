@@ -1,0 +1,14 @@
+{
+  "id": "jc-01",
+  "question": "BR-001 asks 'Does the page say the API is OpenAI-compatible?' Does evidence EV-008 support this exact line: 'Sarvam supports OpenAI-compatible Chat Completions and Responses APIs.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-001-open-models-one-openai-compatible-api.md",
+    "pages/token-factory/evidence/ev-008-tf-openai-compatible-api.md",
+    "pages/token-factory/buyer-and-wedge/checklists/technical-evaluator.md"
+  ],
+  "expected": "yes",
+  "kind": "normal",
+  "why": "EV-008 quotes the vendor saying exactly this in its FAQ.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-001"
+}

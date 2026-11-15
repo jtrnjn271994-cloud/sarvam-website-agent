@@ -1,0 +1,13 @@
+{
+  "id": "jc-04",
+  "question": "BR-005 asks 'Does the page avoid calling Sarvam sovereign?' Does this exact line avoid that: 'Sarvam is the sovereign AI choice for IT services firms.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-009-market-signal-it-firms-sovereignty-model-choice.md",
+    "pages/token-factory/buyer-and-wedge/checklists/it-services-champion.md"
+  ],
+  "expected": "no",
+  "kind": "failure",
+  "why": "The line calls Sarvam sovereign, and CL-009 says not to; the buyer-side checklist question asks the page to avoid it.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-005"
+}

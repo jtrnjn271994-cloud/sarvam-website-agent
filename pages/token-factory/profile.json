@@ -1,0 +1,341 @@
+{
+  "page": "Sarvam Token Factory",
+  "url": "https://www.sarvam.ai/token-factory",
+  "status": "STUB. Copied from the project README (Step 1) and buyer.json on 13 Nov 2026. No new facts.",
+  "buyer": "Enterprise IT services and GCC leaders, serving clients in all industry verticals. Primary: enterprise accounts, GCCs and IT majors. Their teams (AI platform leads, practice heads, solution architects) run the test.",
+  "goal": "An enterprise IT services or GCC leader lands on the page. In the first screen they see that Sarvam serves open-weight models in India through one OpenAI-compatible API (VENDOR facts). They see how to test one of their own workloads on quality, speed and cost. They ask Sarvam to compare that workload. Success for the assignment: a higher share of enterprise visitors click the main CTA than on the baseline page (SYNTHETIC test). We make no claim of lower cost.",
+  "main_cta": "Compare on your workload",
+  "second_cta": "Discuss your requirements (already on the official page)",
+  "needed_insights": [
+    {
+      "id": "buyer_roles",
+      "label": "Buyer role checklists",
+      "path_glob": "buyer-and-wedge/checklists/*.md",
+      "min_files": 3,
+      "how_to_fill": "run skill buyer-profile-validation"
+    },
+    {
+      "id": "evidence_notes",
+      "label": "Evidence notes",
+      "path_glob": "evidence/ev-*.md",
+      "min_files": 15,
+      "how_to_fill": "run skill claim-evidence-check on library sources"
+    },
+    {
+      "id": "rival_claims",
+      "label": "Rival claims table",
+      "path_glob": "research/rival-claims-*.csv",
+      "min_files": 1,
+      "how_to_fill": "run skill competitor-page-analysis"
+    },
+    {
+      "id": "semrush",
+      "label": "Semrush snapshot",
+      "path_glob": "research/semrush-snapshot-*.csv",
+      "min_files": 1,
+      "how_to_fill": "pull a Semrush snapshot (see skills/competitor-page-analysis)"
+    },
+    {
+      "id": "ui_ux_audit",
+      "label": "Layout audit",
+      "path_glob": "research/ui-ux-audit/*/comparison.md",
+      "min_files": 1,
+      "how_to_fill": "python3 agent/crawl_page_layout.py ... (see skills/competitor-page-analysis)"
+    },
+    {
+      "id": "brand_rules",
+      "label": "Brand rules in the library",
+      "path_glob": "library/brand/our-brand-rules/*.md",
+      "min_files": 1,
+      "how_to_fill": "add the brand rules to library/brand/our-brand-rules"
+    },
+    {
+      "id": "context_pack",
+      "label": "Page context pack",
+      "path_glob": "context-pack.md",
+      "min_files": 1,
+      "how_to_fill": "run skill context-pack-builder (Sonnet)"
+    },
+    {
+      "id": "page_profile_confirmed",
+      "label": "A person confirms goal, buyer and CTAs",
+      "person_task": true,
+      "how_to_fill": "a person fills goal, buyer, main_cta and second_cta, then sets status"
+    }
+  ],
+  "ui_ux_audit": {
+    "latest": "pages/token-factory/research/ui-ux-audit/2026-11-13",
+    "date": "2026-11-13",
+    "review_by": "2026-12-13"
+  },
+  "buyer_needs": [
+    "A benchmark on the team's own workload: cost, latency, language quality, and effort to switch. (buyer.json, need, FIELD_KIT)",
+    "Who owns fine-tuned weights. (buyer.json, objections, FIELD_KIT)",
+    "Where models run and where data is stored. (buyer.json, objections, FIELD_KIT for banks; a HYPOTHESIS for GCCs)",
+    "Proof with numbers or customer names. (buyer.json, HYPOTHESIS from rival pages)",
+    "A stated uptime commitment. (buyer.json, HYPOTHESIS from rival pages)",
+    "Zero data retention terms. (buyer.json, HYPOTHESIS from rival pages)",
+    "A code sample that uses the OpenAI client. (buyer.json, HYPOTHESIS from rival pages)",
+    "Visible pricing or a link to it. (buyer.json, HYPOTHESIS from rival pages)",
+    "A comparison of deployment options. (buyer.json, HYPOTHESIS from rival pages)"
+  ],
+  "primary_audience": "GCC heads and engineering heads who decide on AI inference and run the test.",
+  "supporting_audiences": [
+    "AI platform leads, who run the test",
+    "Practice heads and solution architects, who judge fit",
+    "Risk and compliance reviewers",
+    "Procurement"
+  ],
+  "positioning_inputs": [
+    {
+      "name": "positioning_seven_pages",
+      "path": "library/positioning/final-positioning/Token Factory Positioning — Seven Pages.md",
+      "steps": [
+        "bets"
+      ],
+      "max_chars": 15000
+    },
+    {
+      "name": "positioning_seven_pages_full",
+      "path": "library/positioning/final-positioning/Token Factory Positioning — Seven Pages.md",
+      "steps": [
+        "copy"
+      ],
+      "max_chars": 20000
+    },
+    {
+      "name": "buyer_and_wedge",
+      "path": "pages/token-factory/buyer-and-wedge/buyer.json",
+      "steps": [
+        "bets",
+        "copy"
+      ],
+      "max_chars": 8000
+    },
+    {
+      "name": "rival_claims",
+      "path": "pages/token-factory/research/rival-claims-13Nov2026.csv",
+      "steps": [
+        "bets",
+        "copy"
+      ],
+      "max_chars": 8000
+    },
+    {
+      "name": "rival_positioning",
+      "path": "library/positioning/token-factory-pilot/competitor-positioning.csv",
+      "steps": [
+        "bets"
+      ],
+      "max_chars": 2000
+    },
+    {
+      "name": "earlier_hero_variants",
+      "path": "library/positioning/token-factory-pilot/hero-variants.csv",
+      "steps": [
+        "copy"
+      ],
+      "max_chars": 3000
+    },
+    {
+      "name": "do_not_claim",
+      "path": "pages/token-factory/decisions/do-not-claim.md",
+      "steps": [
+        "bets",
+        "copy"
+      ],
+      "max_chars": 6000
+    }
+  ],
+  "design_inputs": [
+    {
+      "name": "ui_ux_audit_comparison",
+      "path": "pages/token-factory/research/ui-ux-audit/2026-11-13/comparison.md",
+      "steps": [
+        "design"
+      ],
+      "max_chars": 12000
+    },
+    {
+      "name": "brand_tokens",
+      "path": "library/brand/our-brand-rules/brand-tokens-13Nov2026.md",
+      "steps": [
+        "design"
+      ],
+      "max_chars": 12000
+    },
+    {
+      "name": "brand_checklist",
+      "path": "library/brand/our-brand-rules/brand-checklist.md",
+      "steps": [
+        "design"
+      ],
+      "max_chars": 12000
+    },
+    {
+      "name": "design_rules",
+      "path": "rules/design-and-distribution-rules.md",
+      "steps": [
+        "design"
+      ],
+      "max_chars": 12000
+    }
+  ],
+  "primary_buyers": [
+    {
+      "role": "Head of the GCC (India centre economic buyer)",
+      "checklist": "BR-002"
+    },
+    {
+      "role": "Engineering head (CTO, VP Engineering, head of AI platform)",
+      "checklist": "BR-001"
+    }
+  ],
+  "secondary_buyers": [
+    {
+      "role": "Risk and compliance",
+      "checklist": "BR-003"
+    },
+    {
+      "role": "Procurement",
+      "checklist": "BR-004"
+    },
+    {
+      "role": "IT services champion (practice head, chief AI officer)",
+      "checklist": "BR-005"
+    },
+    {
+      "role": "IT services economic buyer (growth officer, India business president)",
+      "checklist": "BR-006"
+    }
+  ],
+  "audience_checklists": {
+    "primary": [
+      "BR-002",
+      "BR-001"
+    ],
+    "secondary": [
+      "BR-003",
+      "BR-004",
+      "BR-005",
+      "BR-006"
+    ]
+  },
+  "baseline_map": "pages/token-factory/baseline-map.json",
+  "hero": {
+    "baseline_main_cta": "Get Started",
+    "claim_ids": [
+      "CL-001",
+      "CL-002",
+      "CL-003",
+      "CL-004",
+      "CL-005",
+      "CL-006",
+      "CL-013"
+    ],
+    "checklist_file": "buyer-and-wedge/checklists/technical-evaluator.md",
+    "rival_count": 6,
+    "note": "Read by the engine. Page details live here, not in code.",
+    "claim_qualifiers": [
+      {
+        "claim": "CL-003",
+        "fragment_needs_any": [
+          "enterprise",
+          "contract"
+        ],
+        "why": "The SLA is for enterprise deployments, agreed by contract."
+      }
+    ],
+    "cta_destinations": [
+      {
+        "id": "console",
+        "url": "https://indus.sarvam.ai/token-factory/home",
+        "live_label": "Get Started",
+        "what_it_is": "Token Factory home on indus.sarvam.ai (the product console). What the visitor sees there is not checked."
+      },
+      {
+        "id": "models",
+        "url": "https://www.sarvam.ai/token-factory/models",
+        "live_label": "Explore models",
+        "what_it_is": "The Token Factory model catalogue page."
+      },
+      {
+        "id": "contact",
+        "url": "https://www.sarvam.ai/contact-us?product=token-factory&request=inference",
+        "live_label": "Discuss your requirements",
+        "what_it_is": "Sarvam contact form, pre-set to Token Factory inference. A person replies; the reply time is not stated."
+      },
+      {
+        "id": "pricing",
+        "url": "https://www.sarvam.ai/token-factory/pricing",
+        "live_label": "Compare pricing",
+        "what_it_is": "The Token Factory pricing page."
+      },
+      {
+        "id": "docs",
+        "url": "https://docs.sarvam.ai/api/token-factory/models",
+        "live_label": "Read the API guide",
+        "what_it_is": "The Token Factory API documentation."
+      }
+    ],
+    "cta_destinations_note": "From the live capture of 15 Nov 2026 (capture/2026-11-15-live/hero.json, links). Labels and URLs as found on the page.",
+    "no_third_party_model_names": true,
+    "model_name_words": [
+      "deepseek",
+      "qwen",
+      "llama",
+      "mistral",
+      "gemma",
+      "gpt-oss",
+      "kimi",
+      "glm",
+      "embeddinggemma"
+    ],
+    "policy_note": "Owner, 15 Nov 2026 (row 30): the hero names no third-party model. Sarvam is an India platform; naming a specific foreign model in the first screen is a business risk. Frame the hero in business terms. The list price claim CL-011 is model-specific, so it leaves the hero.",
+    "stretch_phrases": [
+      "drop-in",
+      "drop in",
+      "existing code works",
+      "your code works",
+      "code just works",
+      "no code change",
+      "no changes",
+      "no testing",
+      "without testing",
+      "easy to switch",
+      "easy switch",
+      "seamless",
+      "never kept",
+      "never stored",
+      "every user",
+      "all deployments",
+      "better uptime",
+      "sovereign",
+      "verified",
+      "we will reply",
+      "reply within",
+      "guaranteed",
+      "sarvam's deepseek",
+      "built the open models"
+    ],
+    "stretch_note": "Machine form of each claim's 'Do not stretch it' note (CL-001 to CL-006, CL-013). A hero or dossier line with one of these phrases fails Gate 1.",
+    "keep_rules": [
+      {
+        "claim": "CL-002",
+        "if_any": [
+          "forward",
+          "overseas",
+          "abroad",
+          "leave"
+        ],
+        "needs_any": [
+          "original model",
+          "model maker",
+          "model developer",
+          "model's maker"
+        ],
+        "why": "CL-002 only says requests do not go to the ORIGINAL MODEL MAKER's overseas API."
+      }
+    ]
+  }
+}

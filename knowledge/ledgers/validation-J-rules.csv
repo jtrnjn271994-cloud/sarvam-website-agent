@@ -1,0 +1,6 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+J-01,RBI (commercial banks),bank recovery calls only 08:00 to 19:00,19:00 hours,08:00 hours,https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13665,PUBLISHED,2026-11-11,PASS,2026-11-11,
+J-02,RBI (commercial banks),bank must record recovery calls,recording of the content,bank shall ensure,https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13665,PUBLISHED,2026-11-11,PASS,2026-11-11,
+J-03,RBI (commercial banks),effective date,"January 1, 2027",come into effect,https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13665,PUBLISHED,2026-11-11,PASS,2026-11-11,
+J-04,TRAI TCCCPR amendment 2025,promotional calls use 140 series,140,promotional,https://www.trai.gov.in/sites/default/files/2025-02/Regulation_12022025.pdf,PUBLISHED,2026-11-11,PASS,2026-11-11,
+J-05,TRAI TCCCPR amendment 2025,service and transactional calls use 1600 series,1600,transactional,https://www.trai.gov.in/sites/default/files/2025-02/Regulation_12022025.pdf,PUBLISHED,2026-11-11,PASS,2026-11-11,

@@ -1,0 +1,43 @@
+# Gap dossier (PROBE)
+
+**Gap dossier: hero for the engineering head**
+
+**What the hero says now**
+The headline reads: "Frontier open models. Served with speed, scale and privacy." The sub-line reads: "Run leading open models on Sarvam's GPUs in India, with shared or dedicated capacity and zero data retention available on request." The button reads "Get Started". It goes to the Token Factory home in the product console. We have not checked what the visitor sees there.
+
+**Needs it fails, and why it matters**
+- The button does not say what happens after the click. An engineering head at a GCC or IT services firm must judge risk and effort before they commit time.
+- The hero does not speak to this buyer or their situation.
+- The headline does not say plainly what the product does or what the buyer gets.
+- The hero gives no checkable proof point, such as a named standard.
+
+No buyer question was asked, because the page questions are not approved. So we quote no buyer words.
+
+**Evidence we hold**
+CL-001 and CL-002 cover India-served inference. CL-004 covers zero data retention on request. CL-003 covers an uptime SLA by contract. CL-005 is a vendor statement about independent security assessment. CL-006 says one key reaches all catalogue models. CL-013 describes a sizing step with the team. These are vendor claims. The positioning promise is PROPOSED and not buyer-validated.
+
+**Hypothesis**
+If we change the main button so it states the next step for an engineering head at a GCC or IT services firm, more of them click it, because CL-013 and CL-006 give a concrete, low-effort next step.
+
+**What we do not know**
+We have no internal analytics. The real click rate is unknown. We also do not know whether the console page meets the promise the new button makes.
+
+**What would prove it wrong**
+The hypothesis fails if, over the same period and with similar traffic, the new button gets the same clicks as the current one or fewer.
+
+## Audit method
+
+| Question | Asked | Jev probability | Calibrated band | Result |
+|---|---|---|---|---|
+| A1-audience | Does the hero speak to this buyer and their situation, so that the buyer would see themselves in it? | 0.67 | pass at 0.69, fail at 0.17 | hold |
+| A2-value | Does the headline say what the product does and what the buyer gets, in words this buyer uses? | 0.40 | pass at 0.50, fail at 0.09 | hold |
+| A3-proof | Does the hero give a checkable proof point, such as a named standard, a number with its source, or a named customer? | 0.06 | pass at 0.74, fail at 0.04 | hold |
+| A4-cta | Does the main button tell this buyer what happens when they click it? | 0.14 | pass at 0.64, fail at 0.48 | fail |
+| A5-positioning | Does the hero say what the positioning's main claim says? | 0.56 | no band (advisory) | advisory-hold |
+| A6-swap | Could any rival in the rival rows print this exact hero on its own page without changing it? | 0.19 | no band (advisory) | advisory-hold |
+
+Page questions: NOT approved by a person, so the buyer-checklist questions (A7) and the main-objection question (A8) were not asked. Out of hero scope (the page body must answer these): Does the page say who owns fine-tuned weights.
+
+How to read the band: a good-direction question passes at or above the pass line and fails at or below the fail line; between the two it is held for a person. A bad-direction question (A6) flags at or above the flag line. 'Advisory' means the calibration cases did not separate cleanly, so the result informs but never blocks.
+
+Limits: Jev and Judge 2 are general decision models. We did not train or fine-tune either one for this program. The pass lines come from a small set of examples that we wrote. The probabilities are an audit signal, not an assurance. A person makes every approval.

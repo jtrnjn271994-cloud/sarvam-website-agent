@@ -1,0 +1,12 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+V-01,Sarvam Voice Agents,Pay as you go INR per min,3.50,Pay as you go,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-02,Sarvam Voice Agents,Pro INR per min,3.25,Pro,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-03,Sarvam Voice Agents,Growth INR per min,3.15,Growth,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-04,Sarvam Voice Agents,Business INR per min,3.00,Business,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-05,Sarvam Telephony,Sarvam telephony INR per 30s pulse,0.20,telephony,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-06,Ringg,All-in INR per connected minute,6,connected minute,https://www.ringg.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-07,Ringg,Phone number INR per month,499,number,https://www.ringg.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+V-08,Sarvam Voice Agents,Business monthly minimum INR (comes back as credits),"1,99,999",Business,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-12,PASS,2026-11-12,
+V-09,Sarvam Voice Agents,Pro monthly minimum INR (comes back as credits),"9,999",Pro,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-12,PASS,2026-11-12,
+V-10,Sarvam Voice Agents,Growth monthly minimum INR (comes back as credits),"49,999",Growth,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-12,PASS,2026-11-12,
+V-11,Sarvam Voice Agents,Phone number rental INR per number per 30 days,59,Phone number rental,https://docs.sarvam.ai/voice-agents/pricing,VENDOR,2026-11-12,PASS,2026-11-12,

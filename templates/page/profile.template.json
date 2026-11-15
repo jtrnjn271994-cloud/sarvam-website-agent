@@ -1,0 +1,70 @@
+{
+  "page": "",
+  "name": "",
+  "url": "",
+  "buyer": "",
+  "goal": "",
+  "main_cta": "",
+  "second_cta": "",
+  "status": "needs-confirmation",
+  "needed_insights": [
+    {
+      "id": "buyer_roles",
+      "label": "Buyer role checklists",
+      "path_glob": "buyer-and-wedge/checklists/*.md",
+      "min_files": 3,
+      "how_to_fill": "run skill buyer-profile-validation"
+    },
+    {
+      "id": "evidence_notes",
+      "label": "Evidence notes",
+      "path_glob": "evidence/ev-*.md",
+      "min_files": 15,
+      "how_to_fill": "run skill claim-evidence-check on library sources"
+    },
+    {
+      "id": "rival_claims",
+      "label": "Rival claims table",
+      "path_glob": "research/rival-claims-*.csv",
+      "min_files": 1,
+      "how_to_fill": "run skill competitor-page-analysis"
+    },
+    {
+      "id": "semrush",
+      "label": "Semrush snapshot",
+      "path_glob": "research/semrush-snapshot-*.csv",
+      "min_files": 1,
+      "how_to_fill": "pull a Semrush snapshot (see skills/competitor-page-analysis)"
+    },
+    {
+      "id": "ui_ux_audit",
+      "label": "Layout audit",
+      "path_glob": "research/ui-ux-audit/*/comparison.md",
+      "min_files": 1,
+      "how_to_fill": "python3 agent/crawl_page_layout.py ... (see skills/competitor-page-analysis)"
+    },
+    {
+      "id": "brand_rules",
+      "label": "Brand rules in the library",
+      "path_glob": "library/brand/our-brand-rules/*.md",
+      "min_files": 1,
+      "how_to_fill": "add the brand rules to library/brand/our-brand-rules"
+    },
+    {
+      "id": "context_pack",
+      "label": "Page context pack",
+      "path_glob": "context-pack.md",
+      "min_files": 1,
+      "how_to_fill": "run skill context-pack-builder (Sonnet)"
+    },
+    {
+      "id": "page_profile_confirmed",
+      "label": "A person confirms goal, buyer and CTAs",
+      "person_task": true,
+      "how_to_fill": "a person fills goal, buyer, main_cta and second_cta, then sets status"
+    }
+  ],
+  "primary_buyers": [],
+  "secondary_buyers": [],
+  "audience_checklists": {}
+}

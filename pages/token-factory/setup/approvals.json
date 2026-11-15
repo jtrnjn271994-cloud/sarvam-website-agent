@@ -1,0 +1,41 @@
+{
+ "note": "Append-only. Written only when a person clicks in the console. A part counts as approved while its file hash matches the latest approve.",
+ "entries": [
+  {
+   "part": "positioning",
+   "decision": "approve",
+   "hash": "571993018bd17e29ea52d26dec6ebaffb5bd4eb9ca19a326a02d976e0a9c140e",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:13:04",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "claims",
+   "decision": "approve",
+   "hash": "58a63fe532d0226441f6f20fac967bd4b9c085117bd7a7c608119a297d83e355",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:13:06",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "claims",
+   "decision": "approve",
+   "hash": "58a63fe532d0226441f6f20fac967bd4b9c085117bd7a7c608119a297d83e355",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:13:52",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "checklist:gov:economic-buyer",
+   "decision": "approve",
+   "hash": "9eee960a72338307cf5ad2e4999b2c4265f505cb5e62c99df50fbc689f27f726",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:15:41",
+   "made_by": "a person, in the local console"
+  }
+ ]
+}

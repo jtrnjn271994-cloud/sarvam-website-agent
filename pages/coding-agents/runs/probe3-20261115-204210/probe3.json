@@ -1,0 +1,1156 @@
+{
+ "label": "PROBE v3 on the live baseline. Calibrated lines from rules/judge-thresholds.json (small self-written case set).",
+ "roles": {
+  "reasoning": "google/gemini-3.8-flash",
+  "writer": "anthropic/claude-opus-5.5",
+  "judge1": "typesafe/jev-1.14",
+  "judge2": "openai/gpt-6-luna-decisions"
+ },
+ "live_capture": "pages/coding-agents/capture/2026-11-15-live/hero.json",
+ "skills": {
+  "dossier": [
+   {
+    "skill": "cro",
+    "sha256": "c9bcd125a883bc6a",
+    "chars": 6972
+   },
+   {
+    "skill": "buyer-profile-validation",
+    "sha256": "438204d6978d78dc",
+    "chars": 1962
+   },
+   {
+    "skill": "claim-evidence-check",
+    "sha256": "41eb161a53f6efe2",
+    "chars": 2126
+   },
+   {
+    "skill": "marketing-plain-writing",
+    "sha256": "8347ff7b098959a8",
+    "chars": 3550
+   }
+  ],
+  "writer_draft": [
+   {
+    "skill": "copywriting-marketingskills",
+    "sha256": "4e754d587b7472a7",
+    "chars": 15209
+   },
+   {
+    "skill": "cro",
+    "sha256": "c9bcd125a883bc6a",
+    "chars": 6972
+   },
+   {
+    "skill": "page-copy-draft",
+    "sha256": "7cd9314a529acba0",
+    "chars": 2210
+   }
+  ],
+  "writer_edit": [
+   {
+    "skill": "copy-editing",
+    "sha256": "1bff8ad92989988e",
+    "chars": 18109
+   },
+   {
+    "skill": "no-ai-slop",
+    "sha256": "418975d103483f7c",
+    "chars": 11013
+   },
+   {
+    "skill": "marketing-plain-writing",
+    "sha256": "8347ff7b098959a8",
+    "chars": 3550
+   }
+  ]
+ },
+ "page": "coding-agents",
+ "persona": {
+  "key": "gcc:technical-evaluator",
+  "buyer": "Technical evaluator (Head of AI; Head of Engineering India; Chief Technology Officer and Managing Director of the India centre) in GCCs & IT services",
+  "label": "INFERENCE"
+ },
+ "goal": {
+  "id": "read-docs",
+  "label": "More developers open the API docs",
+  "kind": "docs"
+ },
+ "destinations": {
+  "docs": {
+   "id": "docs",
+   "kind": "docs",
+   "url": "https://docs.sarvam.ai/sarvam-api-docs",
+   "live_label": "Documentation",
+   "in_hero": false,
+   "what_it_is": "A link found on the saved page, labelled 'Documentation'. What the visitor sees there is not checked."
+  }
+ },
+ "baseline_destination": {
+  "id": "console",
+  "kind": "console",
+  "url": "https://indus.sarvam.ai/",
+  "live_label": "Try Coding Agents",
+  "in_hero": true,
+  "what_it_is": "A link found on the saved page, labelled 'Try Coding Agents'. What the visitor sees there is not checked."
+ },
+ "main_cta_index": 0,
+ "page_questions": {
+  "approved": true,
+  "approved_by_on": [
+   "Claude, on the owner's instruction",
+   "2026-11-15T20:40:37"
+  ],
+  "hero_items": [
+   "Does the page say Coding Agents work across the codebase and save checkpoints as they go"
+  ],
+  "page_items_out_of_hero_scope": [
+   "Does the page say whether repositories, prompts, and run history stay hosted in India",
+   "Does the page show how tasks are routed to lower-cost models to manage token cost",
+   "Does the page say whether Coding Agents connect to existing HR and ticket systems",
+   "Does the page show how Coding Agents run your test suite after each change"
+  ],
+  "main_objection": "The pilot cannot reach production data",
+  "skipped": [
+   "A6-swap (no rival heroes saved for this page)"
+  ]
+ },
+ "audit": {
+  "p": {
+   "A1-audience": 0.6,
+   "A2-value": 0.13,
+   "A3-proof": 0.03,
+   "A4-cta": 0.24,
+   "A5-positioning": 0.46,
+   "A7-checklist-item-1": 0.97,
+   "A8-objection": 0.13
+  },
+  "verdict": {
+   "A1-audience": "hold",
+   "A2-value": "hold",
+   "A3-proof": "fail",
+   "A4-cta": "fail",
+   "A5-positioning": "advisory-hold",
+   "A7-checklist-item-1": "pass",
+   "A8-objection": "fail"
+  },
+  "gaps": [
+   "A3-proof",
+   "A4-cta",
+   "A1-audience",
+   "A2-value"
+  ],
+  "unclear": [
+   "A1-audience",
+   "A2-value"
+  ],
+  "lead_item": null,
+  "lead_txt": null,
+  "objection_gap": true
+ },
+ "thresholds_used": {
+  "date": "2026-11-15",
+  "gray_zone": null,
+  "judges": {
+   "judge1": {
+    "model": "typesafe/jev-1.14",
+    "A1-audience": {
+     "polarity": "good",
+     "pass_at": 0.69,
+     "fail_at": 0.17,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A2-value": {
+     "polarity": "good",
+     "pass_at": 0.5,
+     "fail_at": 0.09,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A3-proof": {
+     "polarity": "good",
+     "pass_at": 0.74,
+     "fail_at": 0.04,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A4-cta": {
+     "polarity": "good",
+     "pass_at": 0.64,
+     "fail_at": 0.48,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A7-checklist-item": {
+     "polarity": "good",
+     "pass_at": 0.82,
+     "fail_at": 0.23,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "A8-objection": {
+     "polarity": "good",
+     "pass_at": 0.44,
+     "fail_at": 0.37,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "G1-support": {
+     "polarity": "good",
+     "pass_at": 0.14,
+     "fail_at": 0.69,
+     "advisory": true,
+     "n_fit": 9
+    },
+    "G2-overreach": {
+     "polarity": "bad",
+     "flag_at": 0.16,
+     "clean_at": 0.23,
+     "advisory": true,
+     "n_fit": 11
+    },
+    "G3-banned": {
+     "polarity": "bad",
+     "flag_at": 0.31,
+     "clean_at": 0.22,
+     "advisory": false,
+     "n_fit": 6
+    }
+   },
+   "judge2": {
+    "model": "openai/gpt-6-luna-decisions",
+    "A1-audience": {
+     "polarity": "good",
+     "pass_at": 0.83,
+     "fail_at": 0.24,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A2-value": {
+     "polarity": "good",
+     "pass_at": 0.76,
+     "fail_at": 0.11,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A3-proof": {
+     "polarity": "good",
+     "pass_at": 0.94,
+     "fail_at": 0.0,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A4-cta": {
+     "polarity": "good",
+     "pass_at": 1.0,
+     "fail_at": 0.42,
+     "advisory": false,
+     "n_fit": 5
+    },
+    "A7-checklist-item": {
+     "polarity": "good",
+     "pass_at": 0.99,
+     "fail_at": 0.01,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "A8-objection": {
+     "polarity": "good",
+     "pass_at": 0.7,
+     "fail_at": 0.09,
+     "advisory": false,
+     "n_fit": 10
+    },
+    "G1-support": {
+     "polarity": "good",
+     "pass_at": 0.64,
+     "fail_at": 0.96,
+     "advisory": true,
+     "n_fit": 9
+    },
+    "G2-overreach": {
+     "polarity": "bad",
+     "flag_at": 0.0,
+     "clean_at": 0.46,
+     "advisory": true,
+     "n_fit": 11
+    },
+    "G3-banned": {
+     "polarity": "bad",
+     "flag_at": 0.0,
+     "clean_at": 0.01,
+     "advisory": true,
+     "n_fit": 6
+    }
+   }
+  },
+  "method": "Bands: the hold band lies between the highest failure case and the lowest good case (fit cases only). Advisory when they overlap.",
+  "note": "Set by agent/calibrate.py from tests/calibration/cases.json. Small, self-written case set: an audit signal, not an assurance."
+ },
+ "dossier": {
+  "text": "The hero currently shows the headline \"Better code in the long run\". The sub-line states, \"Coding Agents work across the codebase and saves checkpoints as it goes. The plan stays visible, so you can change direction while the run is live.\" The primary button reads \"Try Coding Agents\".\n\nThis copy fails several buyer needs. The headline does not state what the product does or what the buyer gets. The hero gives no checkable proof point. It leaves the main objection unanswered: The pilot cannot reach production data. Technical evaluators in GCCs and IT services must maintain local data control before running code tools. For the buyer question answered worst, none asked (page questions not approved).\n\nOur evidence shows that repositories, prompts, and run history stay within Indian jurisdiction (CL-008). Coding Agents also saves checkpoints and executes test suites after every change (CL-001, CL-004, CL-005).\n\nHypothesis: If we change the headline, sub-line, and call-to-action copy for technical evaluators in GCCs and IT services to state Indian jurisdiction and step-by-step test execution, more of them click the hero's main button, because engineering leaders require local data residency and automated testing.\n\nWe have no internal analytics, so the real click rate is unknown. A flat or lower click rate on the new button during a test proves this hypothesis wrong.",
+  "prose_problems_left": []
+ },
+ "variants": [
+  {
+   "name": "A",
+   "angle": "Jurisdiction first: refactor work for GCC teams, with code and run data kept under Indian jurisdiction",
+   "h1": "Run multi-step refactors for your GCC while repositories stay in Indian jurisdiction",
+   "subline": "Coding Agents writes and tests each change and saves checkpoints as it goes. Your prompts and run history also stay in Indian jurisdiction.",
+   "cta": "Read the documentation",
+   "cta_destination": "docs",
+   "map": [
+    {
+     "fragment": "Run multi-step refactors for your GCC",
+     "claim": "CL-001"
+    },
+    {
+     "fragment": "while repositories stay in Indian jurisdiction",
+     "claim": "CL-008"
+    },
+    {
+     "fragment": "Coding Agents writes and tests each change and saves checkpoints as it goes.",
+     "claim": "CL-001"
+    },
+    {
+     "fragment": "Your prompts and run history also stay in Indian jurisdiction.",
+     "claim": "CL-008"
+    }
+   ],
+   "why": "Leads with the jurisdiction fact that GCC technical evaluators check first. It keeps the refactor, test and checkpoint ideas from the promise."
+  },
+  {
+   "name": "B",
+   "angle": "Live control: engineering leads steer the run while the whole plan stays on screen",
+   "h1": "Steer your GCC's multi-step refactors live, with the whole plan on screen",
+   "subline": "Change the goal, move a step, or stop an approach while the run is live. When a test fails, Coding Agents returns to a checkpoint and tries again. Your repositories stay in Indian jurisdiction.",
+   "cta": "Open the documentation",
+   "cta_destination": "docs",
+   "map": [
+    {
+     "fragment": "Steer your GCC's multi-step refactors live",
+     "claim": "CL-002"
+    },
+    {
+     "fragment": "with the whole plan on screen",
+     "claim": "CL-003"
+    },
+    {
+     "fragment": "Change the goal, move a step, or stop an approach while the run is live.",
+     "claim": "CL-003"
+    },
+    {
+     "fragment": "When a test fails, Coding Agents returns to a checkpoint and tries again.",
+     "claim": "CL-004"
+    },
+    {
+     "fragment": "Your repositories stay in Indian jurisdiction.",
+     "claim": "CL-008"
+    }
+   ],
+   "why": "Speaks to a Head of Engineering who wants control of a long run. Checkpoint recovery and jurisdiction back the claim."
+  },
+  {
+   "name": "C",
+   "angle": "Recovery and routing: refactors that catch broken steps and send each task to a suitable model",
+   "h1": "GCC and IT services teams get multi-step refactors that recover from failed tests",
+   "subline": "Coding Agents runs your test suite after each change and returns to a checkpoint when a test fails. It sends different tasks to different models in the same run. Repositories, prompts and run history stay in Indian jurisdiction.",
+   "cta": "Go to the documentation",
+   "cta_destination": "docs",
+   "map": [
+    {
+     "fragment": "multi-step refactors",
+     "claim": "CL-001"
+    },
+    {
+     "fragment": "recover from failed tests",
+     "claim": "CL-004"
+    },
+    {
+     "fragment": "Coding Agents runs your test suite after each change",
+     "claim": "CL-005"
+    },
+    {
+     "fragment": "returns to a checkpoint when a test fails",
+     "claim": "CL-004"
+    },
+    {
+     "fragment": "It sends different tasks to different models in the same run.",
+     "claim": "CL-006"
+    },
+    {
+     "fragment": "Repositories, prompts and run history stay in Indian jurisdiction.",
+     "claim": "CL-008"
+    }
+   ],
+   "why": "Gives a CTO or Head of AI mechanics they can test: tests after each change, checkpoint rollback and task routing, all under Indian jurisdiction."
+  }
+ ],
+ "gate1_rounds": [
+  {
+   "A": [],
+   "B": [],
+   "C": []
+  }
+ ],
+ "gate2": {
+  "A": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Run multi-step refactors for your GCC",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.31,
+       "G2-overreach": 0.2
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "while repositories stay in Indian jurisdiction",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.16,
+       "G2-overreach": 0.21
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Coding Agents writes and tests each change and saves checkpoints as it goes.",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.13,
+       "G2-overreach": 0.11
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Your prompts and run history also stay in Indian jurisdiction.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.5,
+       "G2-overreach": 0.12
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     }
+    ],
+    "G3": 0.42,
+    "G3_verdict": "fail",
+    "audit_variant": {
+     "A1-audience": 0.82,
+     "A2-value": 0.58,
+     "A3-proof": 0.04,
+     "A4-cta": 0.57,
+     "A5-positioning": 0.75,
+     "A7-checklist-item-1": 0.68,
+     "A8-objection": 0.2
+    },
+    "audit_baseline": {
+     "A1-audience": 0.6,
+     "A2-value": 0.13,
+     "A3-proof": 0.03,
+     "A4-cta": 0.24,
+     "A5-positioning": 0.46,
+     "A7-checklist-item-1": 0.97,
+     "A8-objection": 0.13
+    },
+    "delta": {
+     "A1-audience": 0.22,
+     "A2-value": 0.45,
+     "A3-proof": 0.01,
+     "A4-cta": 0.33,
+     "A5-positioning": 0.29,
+     "A7-checklist-item-1": -0.29,
+     "A8-objection": 0.07
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A7-checklist-item-1"
+    ],
+    "better": false,
+    "hard_fail": true,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "pass",
+     "A3-proof": "fail",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Run multi-step refactors for your GCC",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.67,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "while repositories stay in Indian jurisdiction",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.78,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Coding Agents writes and tests each change and saves checkpoints as it goes.",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.13,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Your prompts and run history also stay in Indian jurisdiction.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.11,
+       "G2-overreach": 0.01
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.0,
+    "G3_verdict": "advisory-hold",
+    "audit_variant": {
+     "A1-audience": 0.82,
+     "A2-value": 0.66,
+     "A3-proof": 0.0,
+     "A4-cta": 0.94,
+     "A5-positioning": 0.58,
+     "A7-checklist-item-1": 0.9,
+     "A8-objection": 0.07
+    },
+    "audit_baseline": {
+     "A1-audience": 0.46,
+     "A2-value": 0.17,
+     "A3-proof": 0.0,
+     "A4-cta": 0.0,
+     "A5-positioning": 0.2,
+     "A7-checklist-item-1": 1.0,
+     "A8-objection": 0.01
+    },
+    "delta": {
+     "A1-audience": 0.36,
+     "A2-value": 0.49,
+     "A3-proof": 0.0,
+     "A4-cta": 0.94,
+     "A5-positioning": 0.38,
+     "A7-checklist-item-1": -0.1,
+     "A8-objection": 0.06
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A7-checklist-item-1"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "fail",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "pass": false,
+   "disagree": true
+  },
+  "B": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Steer your GCC's multi-step refactors live",
+      "claim": "CL-002",
+      "p": {
+       "G1-support": 0.44,
+       "G2-overreach": 0.43
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "with the whole plan on screen",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.37,
+       "G2-overreach": 0.14
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Change the goal, move a step, or stop an approach while the run is live.",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.4,
+       "G2-overreach": 0.18
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "When a test fails, Coding Agents returns to a checkpoint and tries again.",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.06,
+       "G2-overreach": 0.14
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Your repositories stay in Indian jurisdiction.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.24,
+       "G2-overreach": 0.13
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     }
+    ],
+    "G3": 0.46,
+    "G3_verdict": "fail",
+    "audit_variant": {
+     "A1-audience": 0.83,
+     "A2-value": 0.62,
+     "A3-proof": 0.05,
+     "A4-cta": 0.67,
+     "A5-positioning": 0.81,
+     "A7-checklist-item-1": 0.45,
+     "A8-objection": 0.23
+    },
+    "audit_baseline": {
+     "A1-audience": 0.6,
+     "A2-value": 0.13,
+     "A3-proof": 0.03,
+     "A4-cta": 0.24,
+     "A5-positioning": 0.46,
+     "A7-checklist-item-1": 0.97,
+     "A8-objection": 0.13
+    },
+    "delta": {
+     "A1-audience": 0.23,
+     "A2-value": 0.49,
+     "A3-proof": 0.02,
+     "A4-cta": 0.43,
+     "A5-positioning": 0.35,
+     "A7-checklist-item-1": -0.52,
+     "A8-objection": 0.1
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A7-checklist-item-1"
+    ],
+    "better": false,
+    "hard_fail": true,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "pass",
+     "A3-proof": "hold",
+     "A4-cta": "pass",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Steer your GCC's multi-step refactors live",
+      "claim": "CL-002",
+      "p": {
+       "G1-support": 0.79,
+       "G2-overreach": 0.01
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "with the whole plan on screen",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Change the goal, move a step, or stop an approach while the run is live.",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "When a test fails, Coding Agents returns to a checkpoint and tries again.",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.19,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Your repositories stay in Indian jurisdiction.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.07,
+       "G2-overreach": 0.01
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.0,
+    "G3_verdict": "advisory-hold",
+    "audit_variant": {
+     "A1-audience": 0.78,
+     "A2-value": 0.51,
+     "A3-proof": 0.0,
+     "A4-cta": 0.58,
+     "A5-positioning": 0.53,
+     "A7-checklist-item-1": 0.68,
+     "A8-objection": 0.12
+    },
+    "audit_baseline": {
+     "A1-audience": 0.46,
+     "A2-value": 0.17,
+     "A3-proof": 0.0,
+     "A4-cta": 0.0,
+     "A5-positioning": 0.2,
+     "A7-checklist-item-1": 1.0,
+     "A8-objection": 0.01
+    },
+    "delta": {
+     "A1-audience": 0.32,
+     "A2-value": 0.34,
+     "A3-proof": 0.0,
+     "A4-cta": 0.58,
+     "A5-positioning": 0.33,
+     "A7-checklist-item-1": -0.32,
+     "A8-objection": 0.11
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A7-checklist-item-1"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "fail",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "hold"
+    }
+   },
+   "pass": false,
+   "disagree": true
+  },
+  "C": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "multi-step refactors",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.48,
+       "G2-overreach": 0.1
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "recover from failed tests",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.62,
+       "G2-overreach": 0.15
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "Coding Agents runs your test suite after each change",
+      "claim": "CL-005",
+      "p": {
+       "G1-support": 0.34,
+       "G2-overreach": 0.14
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "returns to a checkpoint when a test fails",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.47,
+       "G2-overreach": 0.15
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "It sends different tasks to different models in the same run.",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.74,
+       "G2-overreach": 0.34
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Repositories, prompts and run history stay in Indian jurisdiction.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 0.96,
+       "G2-overreach": 0.06
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-pass"
+      }
+     }
+    ],
+    "G3": 0.37,
+    "G3_verdict": "fail",
+    "audit_variant": {
+     "A1-audience": 0.84,
+     "A2-value": 0.64,
+     "A3-proof": 0.05,
+     "A4-cta": 0.66,
+     "A5-positioning": 0.77,
+     "A7-checklist-item-1": 0.56,
+     "A8-objection": 0.16
+    },
+    "audit_baseline": {
+     "A1-audience": 0.6,
+     "A2-value": 0.13,
+     "A3-proof": 0.03,
+     "A4-cta": 0.24,
+     "A5-positioning": 0.46,
+     "A7-checklist-item-1": 0.97,
+     "A8-objection": 0.13
+    },
+    "delta": {
+     "A1-audience": 0.24,
+     "A2-value": 0.51,
+     "A3-proof": 0.02,
+     "A4-cta": 0.42,
+     "A5-positioning": 0.31,
+     "A7-checklist-item-1": -0.41,
+     "A8-objection": 0.03
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A7-checklist-item-1"
+    ],
+    "better": false,
+    "hard_fail": true,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "pass",
+     "A3-proof": "hold",
+     "A4-cta": "pass",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "multi-step refactors",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.2,
+       "G2-overreach": 0.02
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "recover from failed tests",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Coding Agents runs your test suite after each change",
+      "claim": "CL-005",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "returns to a checkpoint when a test fails",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "It sends different tasks to different models in the same run.",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Repositories, prompts and run history stay in Indian jurisdiction.",
+      "claim": "CL-008",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.01,
+    "G3_verdict": "advisory-hold",
+    "audit_variant": {
+     "A1-audience": 0.85,
+     "A2-value": 0.78,
+     "A3-proof": 0.0,
+     "A4-cta": 0.93,
+     "A5-positioning": 0.78,
+     "A7-checklist-item-1": 0.64,
+     "A8-objection": 0.08
+    },
+    "audit_baseline": {
+     "A1-audience": 0.46,
+     "A2-value": 0.17,
+     "A3-proof": 0.0,
+     "A4-cta": 0.0,
+     "A5-positioning": 0.2,
+     "A7-checklist-item-1": 1.0,
+     "A8-objection": 0.01
+    },
+    "delta": {
+     "A1-audience": 0.39,
+     "A2-value": 0.61,
+     "A3-proof": 0.0,
+     "A4-cta": 0.93,
+     "A5-positioning": 0.58,
+     "A7-checklist-item-1": -0.36,
+     "A8-objection": 0.07
+    },
+    "targeted": [
+     "A3-proof",
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A8-objection"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A7-checklist-item-1"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "pass",
+     "A3-proof": "fail",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A7-checklist-item-1": "hold",
+     "A8-objection": "fail"
+    }
+   },
+   "pass": false,
+   "disagree": true
+  }
+ },
+ "shortlist": [
+  {
+   "name": "C",
+   "angle": "Recovery and routing: refactors that catch broken steps and send each task to a suitable model",
+   "h1": "GCC and IT services teams get multi-step refactors that recover from failed tests",
+   "subline": "Coding Agents runs your test suite after each change and returns to a checkpoint when a test fails. It sends different tasks to different models in the same run. Repositories, prompts and run history stay in Indian jurisdiction.",
+   "cta": "Go to the documentation",
+   "cta_destination": "docs",
+   "reasons": [
+    "Jev says not better (targeted gain +0.24, but other questions dropped more than 0.05: A7-checklist-item-1 -0.41); Judge 2 says not better (targeted gain +0.40, but other questions dropped more than 0.05: A7-checklist-item-1 -0.36)."
+   ],
+   "score": 0.322,
+   "gains": {
+    "Jev": 0.24,
+    "Judge 2": 0.4
+   },
+   "group": "failed_gate2"
+  },
+  {
+   "name": "A",
+   "angle": "Jurisdiction first: refactor work for GCC teams, with code and run data kept under Indian jurisdiction",
+   "h1": "Run multi-step refactors for your GCC while repositories stay in Indian jurisdiction",
+   "subline": "Coding Agents writes and tests each change and saves checkpoints as it goes. Your prompts and run history also stay in Indian jurisdiction.",
+   "cta": "Read the documentation",
+   "cta_destination": "docs",
+   "reasons": [
+    "Jev says not better (targeted gain +0.22, but other questions dropped more than 0.05: A7-checklist-item-1 -0.29); Judge 2 says not better (targeted gain +0.37, but other questions dropped more than 0.05: A7-checklist-item-1 -0.10)."
+   ],
+   "score": 0.293,
+   "gains": {
+    "Jev": 0.22,
+    "Judge 2": 0.37
+   },
+   "group": "failed_gate2"
+  },
+  {
+   "name": "B",
+   "angle": "Live control: engineering leads steer the run while the whole plan stays on screen",
+   "h1": "Steer your GCC's multi-step refactors live, with the whole plan on screen",
+   "subline": "Change the goal, move a step, or stop an approach while the run is live. When a test fails, Coding Agents returns to a checkpoint and tries again. Your repositories stay in Indian jurisdiction.",
+   "cta": "Open the documentation",
+   "cta_destination": "docs",
+   "reasons": [
+    "Jev says not better (targeted gain +0.25, but other questions dropped more than 0.05: A7-checklist-item-1 -0.52); Judge 2 says not better (targeted gain +0.27, but other questions dropped more than 0.05: A7-checklist-item-1 -0.32)."
+   ],
+   "score": 0.262,
+   "gains": {
+    "Jev": 0.25,
+    "Judge 2": 0.27
+   },
+   "group": "failed_gate2"
+  }
+ ],
+ "cost_usd": 0.2681,
+ "calls": 51
+}

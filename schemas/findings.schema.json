@@ -1,0 +1,93 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Step 11 findings and learnings",
+ "type": "object",
+ "required": [
+  "label",
+  "result",
+  "learnings",
+  "self_check"
+ ],
+ "properties": {
+  "label": {
+   "const": "SYNTHETIC"
+  },
+  "result": {
+   "enum": [
+    "clear",
+    "inconclusive"
+   ]
+  },
+  "learnings": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "text",
+     "applies_to",
+     "evidence_ids",
+     "label",
+     "reason"
+    ],
+    "properties": {
+     "evidence_ids": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "pattern": "^[A-Z]{2,5}-[A-Za-z0-9-]+$"
+      },
+      "minItems": 1
+     },
+     "label": {
+      "enum": [
+       "CHECKED",
+       "CALC",
+       "VENDOR",
+       "SEMRUSH",
+       "AUDIT",
+       "PROPOSED",
+       "UNCHECKED"
+      ]
+     },
+     "reason": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400
+     },
+     "text": {
+      "type": "string",
+      "minLength": 1
+     },
+     "applies_to": {
+      "enum": [
+       "page",
+       "company",
+       "process"
+      ]
+     }
+    }
+   }
+  },
+  "self_check": {
+   "type": "object",
+   "required": [
+    "evidence_ids_used",
+    "gaps"
+   ],
+   "properties": {
+    "evidence_ids_used": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "gaps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

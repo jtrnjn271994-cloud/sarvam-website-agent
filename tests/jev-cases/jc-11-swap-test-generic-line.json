@@ -1,0 +1,11 @@
+{
+  "id": "jc-11",
+  "question": "Does this exact line pass the swap test, so that a rival could not put it on its page word for word: 'Fast, scalable, private AI inference for open models.'?",
+  "input_files": [
+    "pages/token-factory/research/rival-claims-13Nov2026.csv"
+  ],
+  "expected": "no",
+  "kind": "failure",
+  "why": "The line names no Sarvam fact, and a rival such as Nebius (zero-retention security, sub-second latency) could print it word for word.",
+  "check": "swap_test"
+}

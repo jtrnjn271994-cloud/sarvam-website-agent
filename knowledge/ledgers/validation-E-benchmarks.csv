@@ -1,0 +1,4 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+E-1,NPCI (IndicBankBench),Benchmark size in cases,799,case benchmark for Indian retail banking,https://arxiv.org/abs/2609.29167,PUBLISHED,2026-11-10,PASS,2026-11-10,
+E-2,NPCI (IndicBankBench),Lowest strict reliability across 11 models (percent),43.7,strict reliability ranges from,https://arxiv.org/abs/2609.29167,PUBLISHED,2026-11-10,PASS,2026-11-10,
+E-3,NPCI (IndicBankBench),Highest strict reliability across 11 models (percent),58.2,strict reliability ranges from,https://arxiv.org/abs/2609.29167,PUBLISHED,2026-11-10,PASS,2026-11-10,

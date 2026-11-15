@@ -1,0 +1,14 @@
+{
+  "id": "jc-07",
+  "question": "BR-004 asks 'Does the page show prices in a clear unit with the tax rule?' Does evidence EV-015 support this exact line: 'Token Factory lists the open model DeepSeek V4.1 Flash 1017 at INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-011-list-price-deepseek-flash-1017.md",
+    "pages/token-factory/evidence/ev-015-tf-price-deepseek-flash-1017.md",
+    "pages/token-factory/buyer-and-wedge/checklists/procurement.md"
+  ],
+  "expected": "yes",
+  "kind": "normal",
+  "why": "EV-015 supports INR 14 in and INR 55 out per 1M tokens, serverless, excluding GST.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-004"
+}

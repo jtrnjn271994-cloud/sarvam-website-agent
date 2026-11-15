@@ -1,0 +1,13 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+I-01,Sarvam Token Factory,DeepSeek V4.1 Flash 1017 input INR per 1M,14,DeepSeek V4.1 Flash 1017,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-02,Sarvam Token Factory,DeepSeek V4.1 Flash 1017 output INR per 1M,55,DeepSeek V4.1 Flash 1017,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-03,Sarvam Token Factory,Sarvam 105B input INR per 1M,15,Sarvam 105B,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-04,Sarvam Token Factory,Sarvam 105B output INR per 1M,60,Sarvam 105B,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-05,Together AI,DeepSeek V4.1 Flash 1017 input USD per 1M,0.30,DeepSeek V4.1 Flash 1017,https://www.together.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-06,Together AI,DeepSeek V4.1 Flash 1017 output USD per 1M,1.20,DeepSeek V4.1 Flash 1017,https://www.together.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-07,Fireworks AI,DeepSeek V4.1 Flash 1017 input USD per 1M,0.30,DeepSeek V4.1 Flash 1017,https://fireworks.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-08,Fireworks AI,DeepSeek V4.1 Flash 1017 output USD per 1M,1.20,DeepSeek V4.1 Flash 1017,https://fireworks.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-11,OpenRouter,Standard plan platform fee on credit purchases,5.5%,Standard,https://openrouter.ai/pricing,VENDOR,2026-11-10,PASS,2026-11-10,
+I-15,Sarvam Token Factory,DeepSeek V4.1 Flash 1017 Interactive input INR per 1M,25,Flash 1017 Interactive,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-12,PASS,2026-11-12,
+I-16,Sarvam Token Factory,DeepSeek V4.1 Flash 1017 Interactive output INR per 1M,105,Flash 1017 Interactive,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-12,PASS,2026-11-12,
+I-17,Sarvam Token Factory,Sarvam Prism input INR per 1M,4,Sarvam Prism,https://docs.sarvam.ai/api/getting-started/pricing,VENDOR,2026-11-12,PASS,2026-11-12,

@@ -1,0 +1,140 @@
+{
+  "date": "2026-11-15",
+  "gray_zone": null,
+  "judges": {
+    "judge1": {
+      "model": "typesafe/jev-1.14",
+      "A1-audience": {
+        "polarity": "good",
+        "pass_at": 0.69,
+        "fail_at": 0.17,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A2-value": {
+        "polarity": "good",
+        "pass_at": 0.5,
+        "fail_at": 0.09,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A3-proof": {
+        "polarity": "good",
+        "pass_at": 0.74,
+        "fail_at": 0.04,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A4-cta": {
+        "polarity": "good",
+        "pass_at": 0.64,
+        "fail_at": 0.48,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A7-checklist-item": {
+        "polarity": "good",
+        "pass_at": 0.82,
+        "fail_at": 0.23,
+        "advisory": false,
+        "n_fit": 10
+      },
+      "A8-objection": {
+        "polarity": "good",
+        "pass_at": 0.44,
+        "fail_at": 0.37,
+        "advisory": false,
+        "n_fit": 10
+      },
+      "G1-support": {
+        "polarity": "good",
+        "pass_at": 0.14,
+        "fail_at": 0.69,
+        "advisory": true,
+        "n_fit": 9
+      },
+      "G2-overreach": {
+        "polarity": "bad",
+        "flag_at": 0.16,
+        "clean_at": 0.23,
+        "advisory": true,
+        "n_fit": 11
+      },
+      "G3-banned": {
+        "polarity": "bad",
+        "flag_at": 0.31,
+        "clean_at": 0.22,
+        "advisory": false,
+        "n_fit": 6
+      }
+    },
+    "judge2": {
+      "model": "openai/gpt-6-luna-decisions",
+      "A1-audience": {
+        "polarity": "good",
+        "pass_at": 0.83,
+        "fail_at": 0.24,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A2-value": {
+        "polarity": "good",
+        "pass_at": 0.76,
+        "fail_at": 0.11,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A3-proof": {
+        "polarity": "good",
+        "pass_at": 0.94,
+        "fail_at": 0.0,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A4-cta": {
+        "polarity": "good",
+        "pass_at": 1.0,
+        "fail_at": 0.42,
+        "advisory": false,
+        "n_fit": 5
+      },
+      "A7-checklist-item": {
+        "polarity": "good",
+        "pass_at": 0.99,
+        "fail_at": 0.01,
+        "advisory": false,
+        "n_fit": 10
+      },
+      "A8-objection": {
+        "polarity": "good",
+        "pass_at": 0.7,
+        "fail_at": 0.09,
+        "advisory": false,
+        "n_fit": 10
+      },
+      "G1-support": {
+        "polarity": "good",
+        "pass_at": 0.64,
+        "fail_at": 0.96,
+        "advisory": true,
+        "n_fit": 9
+      },
+      "G2-overreach": {
+        "polarity": "bad",
+        "flag_at": 0.0,
+        "clean_at": 0.46,
+        "advisory": true,
+        "n_fit": 11
+      },
+      "G3-banned": {
+        "polarity": "bad",
+        "flag_at": 0.0,
+        "clean_at": 0.01,
+        "advisory": true,
+        "n_fit": 6
+      }
+    }
+  },
+  "method": "Bands: the hold band lies between the highest failure case and the lowest good case (fit cases only). Advisory when they overlap.",
+  "note": "Set by agent/calibrate.py from tests/calibration/cases.json. Small, self-written case set: an audit signal, not an assurance."
+}

@@ -1,0 +1,21 @@
+{
+ "note": "Append-only. The latest entry counts. Written only when a person clicks in the console.",
+ "entries": [
+  {
+   "decision": "approve",
+   "variant": "B",
+   "group_at_decision": "passed",
+   "reasons_shown": [
+    "Jev says better (average gain on the targeted gaps +0.12); Judge 2 says better (average gain on the targeted gaps +0.15)."
+   ],
+   "override": false,
+   "name": "Console user",
+   "reason": "",
+   "note": "",
+   "at": "2026-11-15T20:30:49",
+   "variant_hash": "5eb6d37241f77682d58980697c8f16cd0d0eb9d21800c99c0a77d7a268f0eca9",
+   "png_hash": "e219004e408528794e115d39c8e572ccb758a4e5bb0755c2b8d80c596e866af3",
+   "made_by": "a person, in the local console"
+  }
+ ]
+}

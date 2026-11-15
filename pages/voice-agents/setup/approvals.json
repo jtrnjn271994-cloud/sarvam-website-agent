@@ -1,0 +1,41 @@
+{
+ "note": "Append-only. Written only when a person clicks in the console. A part counts as approved while its file hash matches the latest approve.",
+ "entries": [
+  {
+   "part": "claims",
+   "decision": "approve",
+   "hash": "842ef77d60511c5e7e01ad01e39fd2ce349a0f93eda18b01c8ea2b4a968d43f3",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:19:35",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "checklist:bfsi:business-owner",
+   "decision": "approve",
+   "hash": "10c50db07adab08a4b2cd4dcf384b6d9efb06ff951d3ba7e94f79a44e76f6a86",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:19:37",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "positioning",
+   "decision": "approve",
+   "hash": "6b19a2094d54f7e331ac9a4e4ec46919dc8ac55d5e5cbb6d3c35b2537a83b40f",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:19:42",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "positioning",
+   "decision": "approve",
+   "hash": "9be6b3e86758daaffb08bac3a4d71ec23d74dfcab46faea63c62ce402eef1747",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:28:04",
+   "made_by": "a person, in the local console"
+  }
+ ]
+}

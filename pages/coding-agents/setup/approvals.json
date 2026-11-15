@@ -1,0 +1,32 @@
+{
+ "note": "Append-only. Written only when a person clicks in the console. A part counts as approved while its file hash matches the latest approve.",
+ "entries": [
+  {
+   "part": "positioning",
+   "decision": "approve",
+   "hash": "f9854a8a50e726e56ebea23e9414d238781c2e1ab2a82a2a50833584cd9be552",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:39:38",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "claims",
+   "decision": "approve",
+   "hash": "4c13250ff65e9fc9ab2dac2b55127f0cdb7e530049d026dd35332a7f2b16b8c3",
+   "name": "Console user",
+   "note": "",
+   "at": "2026-11-15T20:39:39",
+   "made_by": "a person, in the local console"
+  },
+  {
+   "part": "checklist:gcc:technical-evaluator",
+   "decision": "approve",
+   "hash": "aff280cef50bcc07a768415f6504532b858148278e08aed408e9d45f668cdbfd",
+   "name": "Claude, on the owner's instruction",
+   "note": "Owner asked Claude to approve the setup parts for the Coding Agents test run, 15 Nov 2026. The variant approval stays with the owner.",
+   "at": "2026-11-15T20:40:37",
+   "made_by": "a person, in the local console"
+  }
+ ]
+}

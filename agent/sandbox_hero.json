@@ -1,0 +1,33 @@
+{
+ "note": "Settings for the hero sandbox (agent/sandbox_hero.py, agent/sandbox_plan.py, Decisions Log row 40). The visitor groups, their reaction strength, the declared lift and the visitor counts are BUILT PER RUN from the buyer, the goal and the judge scores. Only the numbers below are typed: they are assumptions, not findings. A person may edit them; record any change in the Decisions Log.",
+ "seed": 20261115,
+ "alpha": 0.05,
+ "min_visitors_per_arm": 1000,
+ "base_rate": 0.04,
+ "primary_share": 0.5,
+ "supporting_sensitivity": 0.5,
+ "lift_per_gain": 0.5,
+ "lift_floor": 0.02,
+ "lift_cap": 0.5,
+ "goal_fit": [
+  1.0,
+  0.6,
+  0.3
+ ],
+ "enough_factor": 1.5,
+ "few_factor": 0.2,
+ "max_visitors_per_arm": 100000,
+ "scenarios_fallback_note": "Used only for old runs that have no Gate 2 scores.",
+ "scenarios_fallback": [
+  {
+   "name": "clear",
+   "visitors_per_arm": 8000,
+   "lift_relative": 0.5
+  },
+  {
+   "name": "inconclusive",
+   "visitors_per_arm": 800,
+   "lift_relative": 0.1
+  }
+ ]
+}

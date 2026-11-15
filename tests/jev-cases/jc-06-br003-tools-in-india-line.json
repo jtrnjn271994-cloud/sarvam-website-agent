@@ -1,0 +1,14 @@
+{
+  "id": "jc-06",
+  "question": "BR-003 asks 'Does the page say where inference runs?' Does evidence EV-009 support this exact line: 'All inference, including the tools your application connects, runs in India.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-002-inference-runs-in-india.md",
+    "pages/token-factory/evidence/ev-009-tf-inference-in-india.md",
+    "pages/token-factory/buyer-and-wedge/checklists/risk-and-compliance.md"
+  ],
+  "expected": "no",
+  "kind": "failure",
+  "why": "EV-009 covers model inference only; it says connected tools have their own processing locations.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-003"
+}

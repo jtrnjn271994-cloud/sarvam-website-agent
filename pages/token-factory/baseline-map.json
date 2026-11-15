@@ -1,0 +1,78 @@
+{
+  "note": "Map for agent/baseline.py. It splits the saved copy of the live page into sections by marker text. The text file is a verbatim library copy (VENDOR, fetched 12 Nov 2026). Folded from sandbox-baseline.json (a draft by a stopped builder; that file is left in place because parked work names it). The button order and the styling facts come from the layout audit of 13 Nov 2026 (research/ui-ux-audit/2026-11-13/sarvam-token-factory.md). Every marker is checked against the text on each run. A missing marker stops the run.",
+  "label": "VENDOR",
+  "fetched": "2026-11-12",
+  "baseline_text_path": "library/brand/official-sources-12nov2026/sarvam.ai_token-factory_fetched-2026-11-12.txt",
+  "hero": {
+    "headline": "Frontier open models. Served with speed, scale and privacy.",
+    "sub_line": "Run leading open models on Sarvam’s GPUs in India, with shared or dedicated capacity and zero data retention available on request.",
+    "buttons_in_text_order": [
+      "Get Started",
+      "Explore models"
+    ],
+    "main_cta": "Explore models",
+    "second_cta": "Get Started",
+    "main_cta_note": "The layout audit of 13 Nov 2026 saw 'Explore models' styled as the primary button. 'Get Started' comes first in the text."
+  },
+  "nav_text_before_first_marker": "dropped",
+  "sections": [
+    {
+      "section": "hero",
+      "marker": "Frontier open models. Served with speed, scale and privacy.",
+      "alias_of": "first screen"
+    },
+    {
+      "section": "scales-with-demand",
+      "marker": "Inference that scales with demand"
+    },
+    {
+      "section": "speed-and-reliability",
+      "marker": "Speed and reliability on one serving fleet."
+    },
+    {
+      "section": "workloads",
+      "marker": "Built for real-world workloads"
+    },
+    {
+      "section": "models",
+      "marker": "Leading models. Ready to use today."
+    },
+    {
+      "section": "quickstart",
+      "marker": "Serverless inference. Ready to scale"
+    },
+    {
+      "section": "security",
+      "marker": "Enterprise-grade security. Compliance and privacy built in."
+    },
+    {
+      "section": "faq",
+      "marker": "Questions before you go live"
+    },
+    {
+      "section": "close",
+      "marker": "Build with frontier open-weight models. Served from India.",
+      "buttons": [
+        "Get Started",
+        "Read the docs"
+      ]
+    }
+  ],
+  "stop_marker": "AI for all from India",
+  "section_aliases": {
+    "hero": [
+      "first screen"
+    ],
+    "close": [
+      "closing band"
+    ]
+  },
+  "capture_names": {
+    "platform": "scales-with-demand",
+    "performance": "speed-and-reliability",
+    "use-cases": "workloads",
+    "deployments": "quickstart",
+    "section-9": "close"
+  },
+  "capture_names_note": "Used by agent/capture.py. It maps the page's section id (or, with no id and no heading, 'section-<position>') to the readable section names that earlier runs used."
+}

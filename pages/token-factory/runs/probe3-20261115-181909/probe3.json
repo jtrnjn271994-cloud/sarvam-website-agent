@@ -1,0 +1,905 @@
+{
+ "label": "PROBE v3 on the live baseline. Calibrated lines from rules/judge-thresholds.json (small self-written case set).",
+ "roles": {
+  "writer": "deepseek/deepseek-v4-pro",
+  "judge1": "typesafe/jev-1.14",
+  "judge2": "openai/gpt-6-luna-decisions"
+ },
+ "live_capture": "pages/token-factory/capture/2026-11-15-live/hero.json",
+ "skills": {
+  "dossier": [
+   {
+    "skill": "cro",
+    "sha256": "c9bcd125a883bc6a",
+    "chars": 6972
+   },
+   {
+    "skill": "buyer-profile-validation",
+    "sha256": "438204d6978d78dc",
+    "chars": 1962
+   },
+   {
+    "skill": "claim-evidence-check",
+    "sha256": "41eb161a53f6efe2",
+    "chars": 2126
+   },
+   {
+    "skill": "marketing-plain-writing",
+    "sha256": "8347ff7b098959a8",
+    "chars": 3550
+   }
+  ],
+  "writer_draft": [
+   {
+    "skill": "copywriting-marketingskills",
+    "sha256": "4e754d587b7472a7",
+    "chars": 15209
+   },
+   {
+    "skill": "cro",
+    "sha256": "c9bcd125a883bc6a",
+    "chars": 6972
+   },
+   {
+    "skill": "page-copy-draft",
+    "sha256": "7cd9314a529acba0",
+    "chars": 2210
+   }
+  ],
+  "writer_edit": [
+   {
+    "skill": "copy-editing",
+    "sha256": "1bff8ad92989988e",
+    "chars": 18109
+   },
+   {
+    "skill": "no-ai-slop",
+    "sha256": "418975d103483f7c",
+    "chars": 11013
+   },
+   {
+    "skill": "marketing-plain-writing",
+    "sha256": "8347ff7b098959a8",
+    "chars": 3550
+   }
+  ]
+ },
+ "audit": {
+  "p": {
+   "A1-audience": 0.66,
+   "A2-value": 0.39,
+   "A3-proof": 0.05,
+   "A4-cta": 0.14,
+   "A5-positioning": 0.57,
+   "A6-swap": 0.19,
+   "A7-checklist-item-1": 0.31,
+   "A7-checklist-item-2": 0.03,
+   "A7-checklist-item-3": 0.94,
+   "A7-checklist-item-4": 0.04,
+   "A7-checklist-item-5": 0.03
+  },
+  "verdict": {
+   "A1-audience": "hold",
+   "A2-value": "hold",
+   "A3-proof": "hold",
+   "A4-cta": "fail",
+   "A5-positioning": "advisory-hold",
+   "A6-swap": "advisory-hold",
+   "A7-checklist-item-1": "advisory-hold",
+   "A7-checklist-item-2": "advisory-fail",
+   "A7-checklist-item-3": "advisory-pass",
+   "A7-checklist-item-4": "advisory-fail",
+   "A7-checklist-item-5": "advisory-fail"
+  },
+  "gaps": [
+   "A4-cta",
+   "A1-audience",
+   "A2-value",
+   "A3-proof"
+  ],
+  "unclear": [
+   "A1-audience",
+   "A2-value",
+   "A3-proof"
+  ]
+ },
+ "dossier": {
+  "text": "The hero section currently says: “Frontier open models. Served with speed, scale and privacy.” The sub‑line adds “Run leading open models on Sarvam’s GPUs in India, with shared or dedicated capacity and zero data retention available on request.” The button reads “Get Started” and links to the Token Factory console.\n\nThis fails the engineering head buyer because it never answers their most urgent question: “Is your API a drop‑in replacement for what my team already uses?” The page does not mention OpenAI compatibility (the worst‑answered buyer question), nor does it show a named security certification. For a CTO or",
+  "prosecheck_unknown_numbers": []
+ },
+ "variants": [
+  {
+   "name": "A",
+   "angle": "OpenAI-compatible API on India GPUs",
+   "h1": "Run open models on GPUs in India through an OpenAI-compatible API.",
+   "subline": "Change the endpoint, key, and model; your existing code works. Inference stays on Sarvam-operated GPUs in India, and requests are not forwarded overseas. Zero data retention available on request.",
+   "cta": "Explore models",
+   "cta_destination": "models",
+   "map": [
+    {
+     "fragment": "Run open models on GPUs in India through an OpenAI-compatible API.",
+     "claim": "CL-001"
+    },
+    {
+     "fragment": "Change the endpoint, key, and model; your existing code works.",
+     "claim": "CL-001"
+    },
+    {
+     "fragment": "Inference stays on Sarvam-operated GPUs in India, and requests are not forwarded overseas.",
+     "claim": "CL-002"
+    },
+    {
+     "fragment": "Zero data retention available on request.",
+     "claim": "CL-004"
+    }
+   ],
+   "why": "Directly answers the buyer's top question about API compatibility and data locality, using the simplest possible language."
+  },
+  {
+   "name": "B",
+   "angle": "Enterprise-grade reliability for production workloads",
+   "h1": "Run enterprise workloads on an India-served API with a 99.95% SLA, by contract.",
+   "subline": "Share your expected concurrency, prompt lengths, peak traffic, and response-time targets so the team can size the deployment. ISO 27001:2022 certified and SOC 2 Type II attested by independent assessors.",
+   "cta": "Discuss your requirements",
+   "cta_destination": "contact",
+   "map": [
+    {
+     "fragment": "Run enterprise workloads on an India-served API with a 99.95% SLA, by contract.",
+     "claim": "CL-003"
+    },
+    {
+     "fragment": "Share your expected concurrency, prompt lengths, peak traffic, and response-time targets so the team can size the deployment.",
+     "claim": "CL-013"
+    },
+    {
+     "fragment": "ISO 27001:2022 certified and SOC 2 Type II attested by independent assessors.",
+     "claim": "CL-005"
+    }
+   ],
+   "why": "Speaks to the engineering head's need for reliability and compliance, with a concrete SLA and security certifications."
+  },
+  {
+   "name": "C",
+   "angle": "Transparent pricing and single-key access to multiple models",
+   "h1": "One API key, multiple open models, inference on GPUs in India.",
+   "subline": "Use all models in the catalogue by changing the model name. DeepSeek V4.1 Flash 1017 costs INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+   "cta": "Compare pricing",
+   "cta_destination": "pricing",
+   "map": [
+    {
+     "fragment": "One API key, multiple open models, inference on GPUs in India.",
+     "claim": "CL-006"
+    },
+    {
+     "fragment": "Use all models in the catalogue by changing the model name.",
+     "claim": "CL-006"
+    },
+    {
+     "fragment": "DeepSeek V4.1 Flash 1017 costs INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+     "claim": "CL-011"
+    }
+   ],
+   "why": "Highlights cost transparency and operational simplicity, with a specific price point and the convenience of a single API key."
+  }
+ ],
+ "gate1_rounds": [
+  {
+   "A": [],
+   "B": [
+    "H1 is longer than 14 words"
+   ],
+   "C": []
+  },
+  {
+   "A": [],
+   "B": [],
+   "C": []
+  }
+ ],
+ "gate2": {
+  "A": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Run open models on GPUs in India through an OpenAI-compatible API.",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.27,
+       "G2-overreach": 0.35
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Change the endpoint, key, and model; your existing code works.",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.54,
+       "G2-overreach": 0.3
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Inference stays on Sarvam-operated GPUs in India, and requests are not forwarded overseas.",
+      "claim": "CL-002",
+      "p": {
+       "G1-support": 0.52,
+       "G2-overreach": 0.24
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Zero data retention available on request.",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.18,
+       "G2-overreach": 0.17
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.37,
+    "G3_verdict": "fail",
+    "audit_variant": {
+     "A1-audience": 0.78,
+     "A2-value": 0.59,
+     "A3-proof": 0.09,
+     "A4-cta": 0.63,
+     "A5-positioning": 0.82,
+     "A6-swap": 0.21,
+     "A7-checklist-item-1": 0.51,
+     "A7-checklist-item-2": 0.95,
+     "A7-checklist-item-3": 0.97,
+     "A7-checklist-item-4": 0.08,
+     "A7-checklist-item-5": 0.03
+    },
+    "audit_baseline": {
+     "A1-audience": 0.66,
+     "A2-value": 0.39,
+     "A3-proof": 0.05,
+     "A4-cta": 0.14,
+     "A5-positioning": 0.57,
+     "A6-swap": 0.19,
+     "A7-checklist-item-1": 0.31,
+     "A7-checklist-item-2": 0.03,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.04,
+     "A7-checklist-item-5": 0.03
+    },
+    "delta": {
+     "A1-audience": 0.12,
+     "A2-value": 0.2,
+     "A3-proof": 0.04,
+     "A4-cta": 0.49,
+     "A5-positioning": 0.25,
+     "A6-swap": -0.02,
+     "A7-checklist-item-1": 0.2,
+     "A7-checklist-item-2": 0.92,
+     "A7-checklist-item-3": 0.03,
+     "A7-checklist-item-4": 0.04,
+     "A7-checklist-item-5": 0.0
+    },
+    "targeted": [
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A3-proof",
+     "A7-checklist-item-2"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A6-swap",
+     "A7-checklist-item-1",
+     "A7-checklist-item-3",
+     "A7-checklist-item-4",
+     "A7-checklist-item-5"
+    ],
+    "better": true,
+    "hard_fail": true,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "hold",
+     "A3-proof": "hold",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A6-swap": "advisory-hold",
+     "A7-checklist-item-1": "advisory-hold",
+     "A7-checklist-item-2": "advisory-pass",
+     "A7-checklist-item-3": "advisory-pass",
+     "A7-checklist-item-4": "advisory-hold",
+     "A7-checklist-item-5": "advisory-fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Run open models on GPUs in India through an OpenAI-compatible API.",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.93,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Change the endpoint, key, and model; your existing code works.",
+      "claim": "CL-001",
+      "p": {
+       "G1-support": 0.21,
+       "G2-overreach": 0.1
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Inference stays on Sarvam-operated GPUs in India, and requests are not forwarded overseas.",
+      "claim": "CL-002",
+      "p": {
+       "G1-support": 0.95,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Zero data retention available on request.",
+      "claim": "CL-004",
+      "p": {
+       "G1-support": 0.68,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.0,
+    "G3_verdict": "advisory-hold",
+    "audit_variant": {
+     "A1-audience": 0.8,
+     "A2-value": 0.81,
+     "A3-proof": 0.0,
+     "A4-cta": 0.84,
+     "A5-positioning": 0.75,
+     "A6-swap": 0.16,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 1.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 0.0,
+     "A7-checklist-item-5": 0.0
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.56,
+     "A3-proof": 0.0,
+     "A4-cta": 0.0,
+     "A5-positioning": 0.33,
+     "A6-swap": 0.34,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.97,
+     "A7-checklist-item-4": 0.01,
+     "A7-checklist-item-5": 0.0
+    },
+    "delta": {
+     "A1-audience": 0.08,
+     "A2-value": 0.25,
+     "A3-proof": 0.0,
+     "A4-cta": 0.84,
+     "A5-positioning": 0.42,
+     "A6-swap": 0.18,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 1.0,
+     "A7-checklist-item-3": 0.03,
+     "A7-checklist-item-4": -0.01,
+     "A7-checklist-item-5": 0.0
+    },
+    "targeted": [
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A3-proof",
+     "A7-checklist-item-2"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A6-swap",
+     "A7-checklist-item-1",
+     "A7-checklist-item-3",
+     "A7-checklist-item-4",
+     "A7-checklist-item-5"
+    ],
+    "better": true,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "pass",
+     "A3-proof": "fail",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A6-swap": "advisory-hold",
+     "A7-checklist-item-1": "advisory-fail",
+     "A7-checklist-item-2": "advisory-pass",
+     "A7-checklist-item-3": "advisory-pass",
+     "A7-checklist-item-4": "advisory-fail",
+     "A7-checklist-item-5": "advisory-fail"
+    }
+   },
+   "pass": false,
+   "disagree": true
+  },
+  "B": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "Run enterprise workloads on an India-served API with a 99.95% SLA, by contract.",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.33,
+       "G2-overreach": 0.62
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Share your expected concurrency, prompt lengths, peak traffic, and response-time targets so the team can size the deployment.",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 0.86,
+       "G2-overreach": 0.09
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-pass"
+      }
+     },
+     {
+      "fragment": "ISO 27001:2022 certified and SOC 2 Type II attested by independent assessors.",
+      "claim": "CL-005",
+      "p": {
+       "G1-support": 0.93,
+       "G2-overreach": 0.06
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-pass"
+      }
+     }
+    ],
+    "G3": 0.17,
+    "G3_verdict": "pass",
+    "audit_variant": {
+     "A1-audience": 0.72,
+     "A2-value": 0.62,
+     "A3-proof": 0.95,
+     "A4-cta": 0.64,
+     "A5-positioning": 0.74,
+     "A6-swap": 0.19,
+     "A7-checklist-item-1": 0.49,
+     "A7-checklist-item-2": 0.03,
+     "A7-checklist-item-3": 0.74,
+     "A7-checklist-item-4": 0.03,
+     "A7-checklist-item-5": 0.04
+    },
+    "audit_baseline": {
+     "A1-audience": 0.66,
+     "A2-value": 0.39,
+     "A3-proof": 0.05,
+     "A4-cta": 0.14,
+     "A5-positioning": 0.57,
+     "A6-swap": 0.19,
+     "A7-checklist-item-1": 0.31,
+     "A7-checklist-item-2": 0.03,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.04,
+     "A7-checklist-item-5": 0.03
+    },
+    "delta": {
+     "A1-audience": 0.06,
+     "A2-value": 0.23,
+     "A3-proof": 0.9,
+     "A4-cta": 0.5,
+     "A5-positioning": 0.17,
+     "A6-swap": -0.0,
+     "A7-checklist-item-1": 0.18,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": -0.2,
+     "A7-checklist-item-4": -0.01,
+     "A7-checklist-item-5": 0.01
+    },
+    "targeted": [
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A3-proof",
+     "A7-checklist-item-2"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A6-swap",
+     "A7-checklist-item-1",
+     "A7-checklist-item-3",
+     "A7-checklist-item-4",
+     "A7-checklist-item-5"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "pass",
+     "A2-value": "hold",
+     "A3-proof": "hold",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A6-swap": "advisory-hold",
+     "A7-checklist-item-1": "advisory-hold",
+     "A7-checklist-item-2": "advisory-fail",
+     "A7-checklist-item-3": "advisory-pass",
+     "A7-checklist-item-4": "advisory-fail",
+     "A7-checklist-item-5": "advisory-fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "Run enterprise workloads on an India-served API with a 99.95% SLA, by contract.",
+      "claim": "CL-003",
+      "p": {
+       "G1-support": 0.77,
+       "G2-overreach": 0.16
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Share your expected concurrency, prompt lengths, peak traffic, and response-time targets so the team can size the deployment.",
+      "claim": "CL-013",
+      "p": {
+       "G1-support": 1.0,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-pass",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "ISO 27001:2022 certified and SOC 2 Type II attested by independent assessors.",
+      "claim": "CL-005",
+      "p": {
+       "G1-support": 0.77,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.01,
+    "G3_verdict": "advisory-hold",
+    "audit_variant": {
+     "A1-audience": 0.78,
+     "A2-value": 0.7,
+     "A3-proof": 0.99,
+     "A4-cta": 0.98,
+     "A5-positioning": 0.49,
+     "A6-swap": 0.09,
+     "A7-checklist-item-1": 0.01,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.84,
+     "A7-checklist-item-4": 0.06,
+     "A7-checklist-item-5": 0.0
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.56,
+     "A3-proof": 0.0,
+     "A4-cta": 0.0,
+     "A5-positioning": 0.33,
+     "A6-swap": 0.34,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.97,
+     "A7-checklist-item-4": 0.01,
+     "A7-checklist-item-5": 0.0
+    },
+    "delta": {
+     "A1-audience": 0.06,
+     "A2-value": 0.14,
+     "A3-proof": 0.99,
+     "A4-cta": 0.98,
+     "A5-positioning": 0.16,
+     "A6-swap": 0.25,
+     "A7-checklist-item-1": 0.01,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": -0.13,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.0
+    },
+    "targeted": [
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A3-proof",
+     "A7-checklist-item-2"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A6-swap",
+     "A7-checklist-item-1",
+     "A7-checklist-item-3",
+     "A7-checklist-item-4",
+     "A7-checklist-item-5"
+    ],
+    "better": false,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "hold",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A6-swap": "advisory-hold",
+     "A7-checklist-item-1": "advisory-fail",
+     "A7-checklist-item-2": "advisory-fail",
+     "A7-checklist-item-3": "advisory-pass",
+     "A7-checklist-item-4": "advisory-fail",
+     "A7-checklist-item-5": "advisory-fail"
+    }
+   },
+   "pass": false,
+   "disagree": false
+  },
+  "C": {
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "One API key, multiple open models, inference on GPUs in India.",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.46,
+       "G2-overreach": 0.49
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-fail"
+      }
+     },
+     {
+      "fragment": "Use all models in the catalogue by changing the model name.",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.32,
+       "G2-overreach": 0.2
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "DeepSeek V4.1 Flash 1017 costs INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+      "claim": "CL-011",
+      "p": {
+       "G1-support": 0.26,
+       "G2-overreach": 0.18
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.26,
+    "G3_verdict": "hold",
+    "audit_variant": {
+     "A1-audience": 0.65,
+     "A2-value": 0.56,
+     "A3-proof": 0.73,
+     "A4-cta": 0.78,
+     "A5-positioning": 0.6,
+     "A6-swap": 0.2,
+     "A7-checklist-item-1": 0.31,
+     "A7-checklist-item-2": 0.04,
+     "A7-checklist-item-3": 0.93,
+     "A7-checklist-item-4": 0.96,
+     "A7-checklist-item-5": 0.04
+    },
+    "audit_baseline": {
+     "A1-audience": 0.66,
+     "A2-value": 0.39,
+     "A3-proof": 0.05,
+     "A4-cta": 0.14,
+     "A5-positioning": 0.57,
+     "A6-swap": 0.19,
+     "A7-checklist-item-1": 0.31,
+     "A7-checklist-item-2": 0.03,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.04,
+     "A7-checklist-item-5": 0.03
+    },
+    "delta": {
+     "A1-audience": -0.01,
+     "A2-value": 0.17,
+     "A3-proof": 0.68,
+     "A4-cta": 0.64,
+     "A5-positioning": 0.03,
+     "A6-swap": -0.01,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 0.01,
+     "A7-checklist-item-3": -0.01,
+     "A7-checklist-item-4": 0.92,
+     "A7-checklist-item-5": 0.01
+    },
+    "targeted": [
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A3-proof",
+     "A7-checklist-item-2"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A6-swap",
+     "A7-checklist-item-1",
+     "A7-checklist-item-3",
+     "A7-checklist-item-4",
+     "A7-checklist-item-5"
+    ],
+    "better": true,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "hold",
+     "A3-proof": "hold",
+     "A4-cta": "hold",
+     "A5-positioning": "advisory-hold",
+     "A6-swap": "advisory-hold",
+     "A7-checklist-item-1": "advisory-hold",
+     "A7-checklist-item-2": "advisory-fail",
+     "A7-checklist-item-3": "advisory-pass",
+     "A7-checklist-item-4": "advisory-pass",
+     "A7-checklist-item-5": "advisory-fail"
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "One API key, multiple open models, inference on GPUs in India.",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.03,
+       "G2-overreach": 0.05
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "Use all models in the catalogue by changing the model name.",
+      "claim": "CL-006",
+      "p": {
+       "G1-support": 0.24,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-fail",
+       "G2-overreach": "advisory-hold"
+      }
+     },
+     {
+      "fragment": "DeepSeek V4.1 Flash 1017 costs INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+      "claim": "CL-011",
+      "p": {
+       "G1-support": 0.95,
+       "G2-overreach": 0.0
+      },
+      "verdict": {
+       "G1-support": "advisory-hold",
+       "G2-overreach": "advisory-hold"
+      }
+     }
+    ],
+    "G3": 0.11,
+    "G3_verdict": "advisory-fail",
+    "audit_variant": {
+     "A1-audience": 0.67,
+     "A2-value": 0.77,
+     "A3-proof": 0.97,
+     "A4-cta": 1.0,
+     "A5-positioning": 0.53,
+     "A6-swap": 0.14,
+     "A7-checklist-item-1": 0.01,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 1.0,
+     "A7-checklist-item-5": 0.0
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.56,
+     "A3-proof": 0.0,
+     "A4-cta": 0.0,
+     "A5-positioning": 0.33,
+     "A6-swap": 0.34,
+     "A7-checklist-item-1": 0.0,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.97,
+     "A7-checklist-item-4": 0.01,
+     "A7-checklist-item-5": 0.0
+    },
+    "delta": {
+     "A1-audience": -0.05,
+     "A2-value": 0.21,
+     "A3-proof": 0.97,
+     "A4-cta": 1.0,
+     "A5-positioning": 0.2,
+     "A6-swap": 0.2,
+     "A7-checklist-item-1": 0.01,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.03,
+     "A7-checklist-item-4": 0.99,
+     "A7-checklist-item-5": 0.0
+    },
+    "targeted": [
+     "A4-cta",
+     "A1-audience",
+     "A2-value",
+     "A3-proof",
+     "A7-checklist-item-2"
+    ],
+    "held_out": [
+     "A5-positioning",
+     "A6-swap",
+     "A7-checklist-item-1",
+     "A7-checklist-item-3",
+     "A7-checklist-item-4",
+     "A7-checklist-item-5"
+    ],
+    "better": true,
+    "hard_fail": false,
+    "variant_verdicts": {
+     "A1-audience": "hold",
+     "A2-value": "pass",
+     "A3-proof": "hold",
+     "A4-cta": "pass",
+     "A5-positioning": "advisory-hold",
+     "A6-swap": "advisory-hold",
+     "A7-checklist-item-1": "advisory-fail",
+     "A7-checklist-item-2": "advisory-fail",
+     "A7-checklist-item-3": "advisory-pass",
+     "A7-checklist-item-4": "advisory-pass",
+     "A7-checklist-item-5": "advisory-fail"
+    }
+   },
+   "pass": true,
+   "disagree": false
+  }
+ },
+ "cost_usd": 0.01,
+ "calls": 41
+}

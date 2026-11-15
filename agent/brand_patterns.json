@@ -1,0 +1,40 @@
+{
+  "company_full": "Sarvam AI",
+  "company_short": "Sarvam",
+  "banned_phrases": [
+    "Sarvam Train",
+    "Epoch Builder Edition",
+    "sovereign cloud"
+  ],
+  "word_needs_source_tag": "compute",
+  "source_tag_pattern": "\\[(?:CL|EV|LIB)-\\d+\\]|\\bsource:",
+  "model_name_words": [
+    "llama",
+    "qwen",
+    "deepseek",
+    "mistral",
+    "gemma",
+    "gpt-oss"
+  ],
+  "tokens_glob": "library/brand/our-brand-rules/brand-tokens-*.md",
+  "allowed_fonts": [
+    "Matter",
+    "Season Mix",
+    "Matter Mono",
+    "Matter Semi Mono"
+  ],
+  "generic_font_words": [
+    "sans-serif",
+    "serif",
+    "monospace",
+    "system-ui",
+    "ui-sans-serif",
+    "ui-monospace",
+    "inherit",
+    "initial",
+    "unset",
+    "cursive",
+    "fantasy"
+  ],
+  "prototype_banner": "Research prototype. Not an official Sarvam page."
+}

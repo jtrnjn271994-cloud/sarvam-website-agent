@@ -1,0 +1,59 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Step 10 sandbox results",
+ "type": "object",
+ "required": [
+  "label",
+  "plan_hash",
+  "arms"
+ ],
+ "properties": {
+  "label": {
+   "const": "SYNTHETIC"
+  },
+  "plan_hash": {
+   "type": "string",
+   "minLength": 1
+  },
+  "arms": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "arm",
+     "visitors",
+     "conversions"
+    ],
+    "properties": {
+     "arm": {
+      "type": "string",
+      "minLength": 1
+     },
+     "visitors": {
+      "type": "integer"
+     },
+     "conversions": {
+      "type": "integer"
+     }
+    }
+   }
+  },
+  "result": {
+   "enum": [
+    "clear",
+    "inconclusive"
+   ]
+  },
+  "self_check": {
+   "type": "object",
+   "properties": {
+    "gaps": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}

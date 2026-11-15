@@ -1,0 +1,80 @@
+{
+ "note": "Fixed goal list for the console dropdown (owner request, 15 Nov 2026). Each goal names one kind of button destination. The variant's main button must lead to a real link of that kind found on the saved page; the baseline keeps its live button. The sandbox counts a click on each arm's main hero button.",
+ "goals": [
+  {
+   "id": "start-building",
+   "label": "More visitors start building (self-serve)",
+   "kind": "console"
+  },
+  {
+   "id": "talk-to-sales",
+   "label": "More visitors contact sales",
+   "kind": "contact"
+  },
+  {
+   "id": "check-pricing",
+   "label": "More visitors check pricing",
+   "kind": "pricing"
+  },
+  {
+   "id": "read-docs",
+   "label": "More developers open the API docs",
+   "kind": "docs"
+  },
+  {
+   "id": "explore",
+   "label": "More visitors explore the models or try a demo",
+   "kind": "explore"
+  }
+ ],
+ "buyer_default_goal": {
+  "note": "Suggested goal for each buyer role. ANALYST PROPOSAL, not research: the goal is the one action that role most plausibly takes from a hero. A person may pick any goal; a suggested goal with no link on the page falls back to the next one listed.",
+  "economic-buyer": [
+   "talk-to-sales",
+   "check-pricing"
+  ],
+  "business-owner": [
+   "talk-to-sales",
+   "explore"
+  ],
+  "operations-user": [
+   "explore",
+   "start-building"
+  ],
+  "technical-evaluator": [
+   "read-docs",
+   "start-building"
+  ],
+  "risk-and-compliance": [
+   "talk-to-sales",
+   "read-docs"
+  ],
+  "procurement": [
+   "check-pricing",
+   "talk-to-sales"
+  ],
+  "champion": [
+   "start-building",
+   "explore"
+  ]
+ },
+ "buyer_goal_wording": {
+  "note": "The goal wording follows the buyer (owner request, 15 Nov 2026). The kind and the real link behind each goal stay fixed so the sandbox can count a click. {buyers} is filled from the role below and the industry. ANALYST WORDING, not buyer research.",
+  "templates": {
+   "console": "More {buyers} start building (self-serve)",
+   "contact": "More {buyers} contact sales",
+   "pricing": "More {buyers} check pricing",
+   "docs": "More {buyers} open the docs",
+   "explore": "More {buyers} explore the product or a demo"
+  },
+  "buyers": {
+   "economic-buyer": "budget owners",
+   "business-owner": "business owners",
+   "operations-user": "operations teams",
+   "technical-evaluator": "technical evaluators",
+   "risk-and-compliance": "risk and compliance reviewers",
+   "procurement": "procurement teams",
+   "champion": "internal champions"
+  }
+ }
+}

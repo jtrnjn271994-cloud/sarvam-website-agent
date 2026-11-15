@@ -1,0 +1,258 @@
+{
+  "h1": "Turn complex files into clean data",
+  "sub": "Parse, extract, classify and split complex documents in English and 22 Indian languages, all through a single API.",
+  "ctas": [
+    {
+      "index": 0,
+      "text": "Try the API",
+      "href": "https://indus.sarvam.ai/api-playground/document-intelligence",
+      "tag": "a"
+    },
+    {
+      "index": 1,
+      "text": "Try the API",
+      "href": null,
+      "tag": "button"
+    },
+    {
+      "index": 2,
+      "text": "Explore the platform",
+      "href": "https://indus.sarvam.ai/akshar",
+      "tag": "a"
+    },
+    {
+      "index": 3,
+      "text": "Explore the platform",
+      "href": null,
+      "tag": "button"
+    }
+  ],
+  "box": {
+    "x": 106.671875,
+    "y": 160,
+    "width": 1066.65625,
+    "height": 282.21875
+  },
+  "links": [
+    {
+      "text": "How to build with Sarvam Voice Agents MCP · 18 November, 4 PM IST Register now",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Voice Agents MCP webinar · 18 November, 4 PM IST",
+      "href": "https://www.sarvam.ai/events/voice-agents-mcp-webinar"
+    },
+    {
+      "text": "Try the API",
+      "href": "https://indus.sarvam.ai/api-playground/document-intelligence"
+    },
+    {
+      "text": "Explore the platform",
+      "href": "https://indus.sarvam.ai/akshar"
+    },
+    {
+      "text": "1st olmOCR-Bench",
+      "href": "https://www.sarvam.ai/blogs/sarvam-vision-2-1"
+    },
+    {
+      "text": "95.4 ExtractBench",
+      "href": "https://www.sarvam.ai/blogs/sarvam-extract-v3"
+    },
+    {
+      "text": "Ahead of Claude Opus 5 and Mistral OCR4 1st on olmOCR-Bench →",
+      "href": "https://www.sarvam.ai/blogs/sarvam-vision-2-1"
+    },
+    {
+      "text": "Ahead of Claude Opus 5.5 and GPT-6 Astra 5th of 51 on ExtractBench →",
+      "href": "https://www.sarvam.ai/blogs/sarvam-extract-v3"
+    },
+    {
+      "text": "Sign up",
+      "href": "https://indus.sarvam.ai/"
+    },
+    {
+      "text": "Contact us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Read the guide →",
+      "href": "https://docs.sarvam.ai/api/api-guides-tutorials/document-intelligence/how-to/parse"
+    },
+    {
+      "text": "Read the guide →",
+      "href": "https://docs.sarvam.ai/api/api-guides-tutorials/document-intelligence/how-to/extract"
+    },
+    {
+      "text": "Read the guide →",
+      "href": "https://docs.sarvam.ai/api/api-guides-tutorials/document-intelligence/how-to/classify"
+    },
+    {
+      "text": "Read the guide →",
+      "href": "https://docs.sarvam.ai/api/api-guides-tutorials/document-intelligence/how-to/split"
+    },
+    {
+      "text": "Talk to Sales",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Talk to Sales",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Try the API",
+      "href": "https://indus.sarvam.ai/api-playground/document-intelligence"
+    },
+    {
+      "text": "Explore the platform",
+      "href": "https://indus.sarvam.ai/akshar"
+    },
+    {
+      "text": "Content Studio",
+      "href": "https://www.sarvam.ai/products/content-studio"
+    },
+    {
+      "text": "Token Factory",
+      "href": "https://www.sarvam.ai/token-factory"
+    },
+    {
+      "text": "Document AI",
+      "href": "https://www.sarvam.ai/products/document-ai"
+    },
+    {
+      "text": "Work Agents",
+      "href": "https://www.sarvam.ai/products/work-agents"
+    },
+    {
+      "text": "Coding Agents",
+      "href": "https://www.sarvam.ai/products/coding-agents"
+    },
+    {
+      "text": "Sarvam Edge",
+      "href": "https://www.sarvam.ai/products/edge"
+    },
+    {
+      "text": "Model Training",
+      "href": "https://www.sarvam.ai/products/model-training"
+    },
+    {
+      "text": "Text to Speech",
+      "href": "https://www.sarvam.ai/apis/text-to-speech"
+    },
+    {
+      "text": "Speech to Text",
+      "href": "https://www.sarvam.ai/apis/speech-to-text"
+    },
+    {
+      "text": "Doc Digitisation",
+      "href": "https://www.sarvam.ai/apis/document-digitisation"
+    },
+    {
+      "text": "Translation",
+      "href": "https://www.sarvam.ai/apis/translation"
+    },
+    {
+      "text": "Models",
+      "href": "https://www.sarvam.ai/models"
+    },
+    {
+      "text": "Blogs",
+      "href": "https://www.sarvam.ai/blogs"
+    },
+    {
+      "text": "Building AI Agents",
+      "href": "https://www.sarvam.ai/blogs/building-ai-agents"
+    },
+    {
+      "text": "Events",
+      "href": "https://www.sarvam.ai/events"
+    },
+    {
+      "text": "Customer Stories",
+      "href": "https://www.sarvam.ai/stories"
+    },
+    {
+      "text": "Documentation",
+      "href": "https://docs.sarvam.ai/sarvam-api-docs"
+    },
+    {
+      "text": "API Pricing",
+      "href": "https://www.sarvam.ai/api-pricing"
+    },
+    {
+      "text": "Integrations",
+      "href": "https://www.sarvam.ai/integrations"
+    },
+    {
+      "text": "Startup Program",
+      "href": "https://www.sarvam.ai/startup-program"
+    },
+    {
+      "text": "Sarvam Champions",
+      "href": "https://www.sarvam.ai/sarvam-champions"
+    },
+    {
+      "text": "About Us",
+      "href": "https://www.sarvam.ai/about-us"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.sarvam.ai/careers"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.sarvam.ai/contact-us"
+    },
+    {
+      "text": "Brand",
+      "href": "https://www.sarvam.ai/brand"
+    },
+    {
+      "text": "Brand Guidelines",
+      "href": "https://www.sarvam.ai/brand-guidelines"
+    },
+    {
+      "text": "Partnerships",
+      "href": "https://www.sarvam.ai/partnerships"
+    },
+    {
+      "text": "Trust Center",
+      "href": "https://www.sarvam.ai/trust-center"
+    },
+    {
+      "text": "Terms of Service",
+      "href": "https://www.sarvam.ai/terms-of-service"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    },
+    {
+      "text": "EULA",
+      "href": "https://www.sarvam.ai/eula"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.sarvam.ai/privacy-policy"
+    }
+  ],
+  "title": "Document AI | Parse, extract, classify and split documents | Sarvam",
+  "url": "https://www.sarvam.ai/products/document-ai",
+  "captured_at": "2026-11-15T19:25:11",
+  "viewport": "1280x900",
+  "hero_clip": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 500
+  },
+  "selectors": {
+    "h1": "[data-hero=h1]",
+    "sub": "[data-hero=sub]",
+    "cta": "[data-hero^=cta-]"
+  },
+  "label": "LIVE CAPTURE. Loaded once. No bot traffic goes to this URL."
+}

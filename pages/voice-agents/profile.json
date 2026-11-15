@@ -1,0 +1,18 @@
+{
+  "page": "voice-agents",
+  "name": "Voice Agents",
+  "url": "https://www.sarvam.ai/products/voice-agents",
+  "layer": "Wedge (wins customers today)",
+  "status": "setup drafted; claims reviewed 15 Nov 2026",
+  "hero": {
+    "claim_qualifiers": [
+      {
+        "claim": "CL-001",
+        "fragment_needs_any": [
+          "from"
+        ],
+        "why": "The price is a starting rate: keep 'from'."
+      }
+    ]
+  }
+}

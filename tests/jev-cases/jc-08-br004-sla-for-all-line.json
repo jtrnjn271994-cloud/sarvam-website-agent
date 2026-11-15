@@ -1,0 +1,14 @@
+{
+  "id": "jc-08",
+  "question": "BR-004 asks 'Does the page say SLA terms are agreed by contract?' Does evidence EV-010 support this exact line: 'Every Token Factory user gets a 99.95% uptime SLA.'?",
+  "input_files": [
+    "pages/token-factory/claims/cl-003-sla-99-95-enterprise.md",
+    "pages/token-factory/evidence/ev-010-tf-sla-99-95.md",
+    "pages/token-factory/buyer-and-wedge/checklists/procurement.md"
+  ],
+  "expected": "no",
+  "kind": "failure",
+  "why": "EV-010 says the 99.95% commitment is for enterprise deployments and agreed by contract, not a default for every user.",
+  "check": "supporting_audience_fit",
+  "audience_id": "BR-004"
+}

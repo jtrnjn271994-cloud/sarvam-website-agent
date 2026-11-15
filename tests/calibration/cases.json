@@ -1,0 +1,903 @@
+{
+  "built": "2026-11-15",
+  "page": "token-factory",
+  "note": "Labels are ours (owner-accepted standard, Decisions Log row 24). The judges were never trained on them.",
+  "cases": [
+    {
+      "id": "jc-01",
+      "kind": "fragment",
+      "fragment": "Sarvam supports OpenAI-compatible Chat Completions and Responses APIs.",
+      "claim": "CL-001",
+      "claim_text": "Token Factory runs leading open models on Sarvam's GPUs in India, through an OpenAI-compatible API.",
+      "evidence_quote": "Run leading open models on Sarvam’s GPUs in India, with shared or dedicated capacity and zero data retention available on request. | Sarvam supports OpenAI-compatible Chat Completions and Responses APIs. Update your endpoint, key and model, then validate the parameters, tool calls and outputs your application uses.",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": false,
+      "why": "EV-008 quotes the vendor saying exactly this in its FAQ.",
+      "source": "jc-01"
+    },
+    {
+      "id": "jc-02",
+      "kind": "fragment",
+      "fragment": "Move your app to Token Factory with no testing.",
+      "claim": "CL-001",
+      "claim_text": "Token Factory runs leading open models on Sarvam's GPUs in India, through an OpenAI-compatible API.",
+      "evidence_quote": "Run leading open models on Sarvam’s GPUs in India, with shared or dedicated capacity and zero data retention available on request. | Sarvam supports OpenAI-compatible Chat Completions and Responses APIs. Update your endpoint, key and model, then validate the parameters, tool calls and outputs your application uses.",
+      "expected": {
+        "G1-support": "no",
+        "G2-overreach": "yes"
+      },
+      "holdout": false,
+      "why": "EV-008 tells buyers to validate parameters, tool calls and outputs, and says nobody tested the move, so a no-testing line has no support.",
+      "source": "jc-02"
+    },
+    {
+      "id": "jc-03",
+      "kind": "fragment",
+      "fragment": "You can use all models in the Token Factory catalogue with one API key by changing the model name.",
+      "claim": "CL-006",
+      "claim_text": "You can use all models in the Token Factory catalogue with one API key by changing the model name.",
+      "evidence_quote": "You can use all models listed in the catalogue with a single API key by changing the model name. | GLM-5.3 GLM-5.3 Flash Gemma 4 31B DeepSeek V4.1 Flash 1017 DeepSeek V4 Pro (Provisioned Throughput) Kimi K3.1 Pro (Provisioned Throughput) Sarvam Prism",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": true,
+      "why": "EV-013 quotes the FAQ: all catalogue models work with a single API key by changing the model name.",
+      "source": "jc-03"
+    },
+    {
+      "id": "jc-04",
+      "kind": "banned",
+      "line": "Sarvam is the sovereign AI choice for IT services firms.",
+      "expected": {
+        "G3-banned": "yes"
+      },
+      "holdout": false,
+      "why": "The line calls Sarvam sovereign, and CL-009 says not to; the buyer-side checklist question asks the page to avoid it.",
+      "source": "jc-04"
+    },
+    {
+      "id": "jc-05",
+      "kind": "fragment",
+      "fragment": "Zero data retention is available on request, under an agreed arrangement.",
+      "claim": "CL-004",
+      "claim_text": "Zero data retention is available on request, under an agreed arrangement.",
+      "evidence_quote": "Zero data retention is available on request. Under an agreed ZDR arrangement, prompts and responses are not retained. Operational logs are scoped separately in the terms for your deployment.",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": false,
+      "why": "EV-011 quotes the FAQ with the same words: available on request, under an agreed ZDR arrangement.",
+      "source": "jc-05"
+    },
+    {
+      "id": "jc-06",
+      "kind": "fragment",
+      "fragment": "All inference, including the tools your application connects, runs in India.",
+      "claim": "CL-002",
+      "claim_text": "Model inference runs on Sarvam-operated GPUs in India, and requests do not go to the original model maker's overseas API.",
+      "evidence_quote": "Model inference runs on Sarvam-operated GPUs in India. Sarvam hosts the weights; requests are not forwarded to the original model developer’s overseas API.",
+      "expected": {
+        "G1-support": "no",
+        "G2-overreach": "yes"
+      },
+      "holdout": true,
+      "why": "EV-009 covers model inference only; it says connected tools have their own processing locations.",
+      "source": "jc-06"
+    },
+    {
+      "id": "jc-07",
+      "kind": "fragment",
+      "fragment": "Token Factory lists the open model DeepSeek V4.1 Flash 1017 at INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+      "claim": "CL-011",
+      "claim_text": "Token Factory lists the open model DeepSeek V4.1 Flash 1017 at INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+      "evidence_quote": "DeepSeek V4.1 Flash 1017 Chat Cached ₹0.25 Input ₹14.00 Output ₹55.00 Serverless",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": false,
+      "why": "EV-015 supports INR 14 in and INR 55 out per 1M tokens, serverless, excluding GST.",
+      "source": "jc-07"
+    },
+    {
+      "id": "jc-08",
+      "kind": "fragment",
+      "fragment": "Every Token Factory user gets a 99.95% uptime SLA.",
+      "claim": "CL-003",
+      "claim_text": "Sarvam offers a 99.95% uptime SLA for enterprise deployments, agreed by contract.",
+      "evidence_quote": "Keep critical applications available with 99.95% uptime guaranteed by an SLA.",
+      "expected": {
+        "G1-support": "no",
+        "G2-overreach": "yes"
+      },
+      "holdout": false,
+      "why": "EV-010 says the 99.95% commitment is for enterprise deployments and agreed by contract, not a default for every user.",
+      "source": "jc-08"
+    },
+    {
+      "id": "jc-09",
+      "kind": "banned",
+      "line": "Token Factory: your sovereign cloud for open models.",
+      "expected": {
+        "G3-banned": "yes"
+      },
+      "holdout": false,
+      "why": "The line contains 'sovereign cloud', which is a BAN phrase in do-not-claim.md.",
+      "source": "jc-09"
+    },
+    {
+      "id": "jc-12",
+      "kind": "fragment",
+      "fragment": "Sarvam models reach 97% or 98% of frontier quality.",
+      "claim": "CL-008",
+      "claim_text": "A Tech Mahindra leader expects clients to use several models, and to use an open model even at 98% or 97% of frontier quality.",
+      "evidence_quote": "clients will use multiple models. And unlike the cloud, they have the option of open -source model as well. And so they will use that option even if it gives them 98% or 97% of what a frontier model gives.",
+      "expected": {
+        "G1-support": "no",
+        "G2-overreach": "yes"
+      },
+      "holdout": false,
+      "why": "EV-002 is an opinion on a call; it gives no measured quality figure and does not name Sarvam, and CL-008 forbids this line.",
+      "source": "jc-12"
+    },
+    {
+      "id": "own-F1",
+      "kind": "fragment",
+      "fragment": "ISO 27001:2022 certified and SOC 2 Type II attested.",
+      "claim": "CL-005",
+      "claim_text": "Sarvam says it is ISO 27001:2022 certified and SOC 2 Type II attested by independent assessors.",
+      "evidence_quote": "ISO 27001:2022 certified and SOC 2 Type II attested by independent assessors",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": true,
+      "why": "exact restatement",
+      "source": "own-F1"
+    },
+    {
+      "id": "own-F2",
+      "kind": "fragment",
+      "fragment": "Zero data retention is available on request.",
+      "claim": "CL-004",
+      "claim_text": "Zero data retention is available on request, under an agreed arrangement.",
+      "evidence_quote": "Zero data retention is available on request. Under an agreed ZDR arrangement, prompts and responses are not retained. Operational logs are scoped separately in the terms for your deployment.",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": false,
+      "why": "keeps 'on request'",
+      "source": "own-F2"
+    },
+    {
+      "id": "own-F3",
+      "kind": "fragment",
+      "fragment": "Your prompts never leave the country.",
+      "claim": "CL-002",
+      "claim_text": "Model inference runs on Sarvam-operated GPUs in India, and requests do not go to the original model maker's overseas API.",
+      "evidence_quote": "Model inference runs on Sarvam-operated GPUs in India. Sarvam hosts the weights; requests are not forwarded to the original model developer’s overseas API.",
+      "expected": {
+        "G1-support": "no",
+        "G2-overreach": "yes"
+      },
+      "holdout": false,
+      "why": "'never' and 'the country' are wider than requests not going to the model maker's overseas API",
+      "source": "own-F3"
+    },
+    {
+      "id": "own-F4",
+      "kind": "fragment",
+      "fragment": "Backed by a 99.95% uptime SLA.",
+      "claim": "CL-003",
+      "claim_text": "Sarvam offers a 99.95% uptime SLA for enterprise deployments, agreed by contract.",
+      "evidence_quote": "Keep critical applications available with 99.95% uptime guaranteed by an SLA.",
+      "expected": {
+        "G1-support": null,
+        "G2-overreach": "yes"
+      },
+      "holdout": false,
+      "why": "drops 'enterprise deployments, agreed by contract'",
+      "source": "own-F4"
+    },
+    {
+      "id": "own-F5",
+      "kind": "fragment",
+      "fragment": "DeepSeek V4.1 Flash at ₹14 per 1M input tokens.",
+      "claim": "CL-011",
+      "claim_text": "Token Factory lists the open model DeepSeek V4.1 Flash 1017 at INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+      "evidence_quote": "DeepSeek V4.1 Flash 1017 Chat Cached ₹0.25 Input ₹14.00 Output ₹55.00 Serverless",
+      "expected": {
+        "G1-support": "yes",
+        "G2-overreach": "no"
+      },
+      "holdout": false,
+      "why": "rupee sign vs INR",
+      "source": "own-F5"
+    },
+    {
+      "id": "own-F6",
+      "kind": "fragment",
+      "fragment": "From INR 14 per 1M input tokens.",
+      "claim": "CL-011",
+      "claim_text": "Token Factory lists the open model DeepSeek V4.1 Flash 1017 at INR 14 per 1M input tokens and INR 55 per 1M output tokens, excluding GST.",
+      "evidence_quote": "DeepSeek V4.1 Flash 1017 Chat Cached ₹0.25 Input ₹14.00 Output ₹55.00 Serverless",
+      "expected": {
+        "G1-support": null,
+        "G2-overreach": "yes"
+      },
+      "holdout": false,
+      "why": "implies the lowest price across all models",
+      "source": "own-F6"
+    },
+    {
+      "id": "own-B1",
+      "kind": "banned",
+      "line": "Run leading open models on Sarvam's GPUs in India.",
+      "expected": {
+        "G3-banned": "no"
+      },
+      "holdout": false,
+      "why": "clean",
+      "source": "own"
+    },
+    {
+      "id": "own-B2",
+      "kind": "banned",
+      "line": "Zero data retention is available on request.",
+      "expected": {
+        "G3-banned": "no"
+      },
+      "holdout": false,
+      "why": "clean",
+      "source": "own"
+    },
+    {
+      "id": "own-B3",
+      "kind": "banned",
+      "line": "A sovereign cloud for your AI inference, hosted in India.",
+      "expected": {
+        "G3-banned": "yes"
+      },
+      "holdout": false,
+      "why": "paraphrase of 'sovereign cloud'",
+      "source": "own"
+    },
+    {
+      "id": "own-B4",
+      "kind": "banned",
+      "line": "One API key for every model in the catalogue.",
+      "expected": {
+        "G3-banned": "no"
+      },
+      "holdout": false,
+      "why": "clean",
+      "source": "own"
+    },
+    {
+      "id": "own-A2-yes",
+      "kind": "audit",
+      "question": "A2-value",
+      "h1": "Run open models on Sarvam GPUs in India through one OpenAI-compatible API.",
+      "sub": "Pick shared or dedicated capacity.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A2-value": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A2-no",
+      "kind": "audit",
+      "question": "A2-value",
+      "h1": "The future of intelligence, built here.",
+      "sub": "Unlock what comes next.",
+      "cta": "Learn more",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A2-value": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A3-yes",
+      "kind": "audit",
+      "question": "A3-proof",
+      "h1": "Open models served in India.",
+      "sub": "ISO 27001:2022 certified and SOC 2 Type II attested.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A3-proof": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A3-no",
+      "kind": "audit",
+      "question": "A3-proof",
+      "h1": "Open models served in India.",
+      "sub": "Fast, private and ready for your team.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A3-proof": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A4-yes",
+      "kind": "audit",
+      "question": "A4-cta",
+      "h1": "Open models served in India.",
+      "sub": "Pick a model and read its price per 1M tokens.",
+      "cta": "Browse the model catalogue",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A4-cta": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A4-no",
+      "kind": "audit",
+      "question": "A4-cta",
+      "h1": "Open models served in India.",
+      "sub": "Pick a model that fits.",
+      "cta": "Go",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A4-cta": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-yes",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "For engineering teams that move production model workloads to an India-served API.",
+      "sub": "Open models through one OpenAI-compatible API.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-no",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "AI for everyone.",
+      "sub": "Something for every need.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-yes2",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "Engineering leaders: serve your production model workloads from India.",
+      "sub": "Open models through one OpenAI-compatible API.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-yes3",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "Built for AI platform teams at GCCs and IT services firms.",
+      "sub": "Serve open models on GPUs in India.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-no2",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "Models for the modern world.",
+      "sub": "Fast and simple.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A2-yes2",
+      "kind": "audit",
+      "question": "A2-value",
+      "h1": "Serve open models from GPUs in India with one API key.",
+      "sub": "Change the model name to switch models.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A2-value": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A2-no2",
+      "kind": "audit",
+      "question": "A2-value",
+      "h1": "Where ideas meet scale.",
+      "sub": "Built for what is next.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A2-value": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A2-no3",
+      "kind": "audit",
+      "question": "A2-value",
+      "h1": "Innovation without limits.",
+      "sub": "The platform for tomorrow.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A2-value": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A3-yes2",
+      "kind": "audit",
+      "question": "A3-proof",
+      "h1": "Open models served in India.",
+      "sub": "99.95% uptime SLA for enterprise deployments, agreed by contract.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A3-proof": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A3-no2",
+      "kind": "audit",
+      "question": "A3-proof",
+      "h1": "Open models served in India.",
+      "sub": "Trusted, secure and reliable.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A3-proof": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A3-no3",
+      "kind": "audit",
+      "question": "A3-proof",
+      "h1": "Open models served in India.",
+      "sub": "Teams love how easy it is.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A3-proof": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A4-yes2",
+      "kind": "audit",
+      "question": "A4-cta",
+      "h1": "Open models served in India.",
+      "sub": "Prices are listed per 1M tokens.",
+      "cta": "Compare pricing",
+      "destination": "the Token Factory pricing page",
+      "expected": {
+        "A4-cta": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A4-yes3",
+      "kind": "audit",
+      "question": "A4-cta",
+      "h1": "Open models served in India.",
+      "sub": "Tell us about your workload.",
+      "cta": "Discuss your requirements",
+      "destination": "a contact form for Token Factory inference",
+      "expected": {
+        "A4-cta": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A4-no2",
+      "kind": "audit",
+      "question": "A4-cta",
+      "h1": "Open models served in India.",
+      "sub": "Built for teams.",
+      "cta": "Click here",
+      "destination": "the product console",
+      "expected": {
+        "A4-cta": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-yes1",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say where inference runs"
+      },
+      "h1": "Open models served in India.",
+      "sub": "Inference runs on GPUs in India.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A7-checklist-item": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-yes2",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say the API is OpenAI-compatible"
+      },
+      "h1": "Open models on one API.",
+      "sub": "The API is OpenAI-compatible: change the endpoint, key and model.",
+      "cta": "Read the API guide",
+      "destination": "the API documentation",
+      "expected": {
+        "A7-checklist-item": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-yes3",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page show a price per 1M tokens, or link to prices"
+      },
+      "h1": "Open models served in India.",
+      "sub": "Every model lists its price per 1M tokens.",
+      "cta": "Compare pricing",
+      "destination": "the Token Factory pricing page",
+      "expected": {
+        "A7-checklist-item": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-yes4",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say how to test one workload"
+      },
+      "h1": "Test one workload before you commit.",
+      "sub": "Send a sample of your own workload and compare cost and latency.",
+      "cta": "Start a test",
+      "destination": "the product console",
+      "expected": {
+        "A7-checklist-item": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-yes5",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say the service has an uptime commitment"
+      },
+      "h1": "Open models served in India.",
+      "sub": "A 99.95% uptime SLA for enterprise deployments, agreed by contract.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A7-checklist-item": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-no1",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say where inference runs"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A7-checklist-item": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-no2",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say the API is OpenAI-compatible"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A7-checklist-item": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-no3",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page show a price per 1M tokens, or link to prices"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A7-checklist-item": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-no4",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say how to test one workload"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A7-checklist-item": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A7-no5",
+      "kind": "audit",
+      "question": "A7-checklist-item",
+      "fill": {
+        "item": "Does the page say the service has an uptime commitment"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A7-checklist-item": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-yes1",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "The model may fail our own test set"
+      },
+      "h1": "Open models served in India.",
+      "sub": "Test any model on a sample of your own data before you commit.",
+      "cta": "Start a test",
+      "destination": "the product console",
+      "expected": {
+        "A8-objection": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-yes2",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "Our data may leave India"
+      },
+      "h1": "Inference runs on GPUs in India.",
+      "sub": "Requests do not go to the original model maker's overseas API.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A8-objection": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-yes3",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "Switching APIs will take too much engineering work"
+      },
+      "h1": "Open models on an OpenAI-compatible API.",
+      "sub": "Change the endpoint, key and model, then test your calls.",
+      "cta": "Read the API guide",
+      "destination": "the API documentation",
+      "expected": {
+        "A8-objection": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-yes4",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "We cannot predict the bill"
+      },
+      "h1": "Open models served in India.",
+      "sub": "Each model lists its price per 1M input and output tokens.",
+      "cta": "Compare pricing",
+      "destination": "the Token Factory pricing page",
+      "expected": {
+        "A8-objection": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-yes5",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "The service may go down in production"
+      },
+      "h1": "Open models served in India.",
+      "sub": "A 99.95% uptime SLA for enterprise deployments, agreed by contract.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A8-objection": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-no1",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "The model may fail our own test set"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A8-objection": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-no2",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "Our data may leave India"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A8-objection": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-no3",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "Switching APIs will take too much engineering work"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A8-objection": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-no4",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "We cannot predict the bill"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A8-objection": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A8-no5",
+      "kind": "audit",
+      "question": "A8-objection",
+      "fill": {
+        "objection": "The service may go down in production"
+      },
+      "h1": "Frontier open models.",
+      "sub": "Fast, simple and ready for your team.",
+      "cta": "Get started",
+      "destination": "the product console",
+      "expected": {
+        "A8-objection": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    }
+  ]
+}

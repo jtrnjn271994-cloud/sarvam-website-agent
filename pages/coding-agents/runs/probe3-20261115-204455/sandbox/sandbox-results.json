@@ -1,0 +1,256 @@
+{
+ "label": "SYNTHETIC",
+ "made": "2026-11-15T21:02:34",
+ "run": "probe3-20261115-204455",
+ "variant": "B",
+ "approval": {
+  "name": "Claude, on the owner's instruction",
+  "at": "2026-11-15T20:59:38",
+  "override": true,
+  "reason": "Owner asked to test the best variant even below the threshold. Both judges agree on B, it gains on the targeted gaps, and the A7 drop is wording.",
+  "variant_hash": "17b529c703e1289d41a0aed2edf5c4a8b412e1aee38f05c050d68e64469a6603",
+  "png_hash": "2f7b5119344f24a9831e39cae7473e898ae6d8bc797d7528d9695cbcc0653ec2"
+ },
+ "group_at_approval": "failed_gate2",
+ "simulated": {
+  "enough": {
+   "visitors_per_arm": 100000,
+   "declared_lift_relative": 0.12100000000000001,
+   "label": "SYNTHETIC",
+   "baseline": {
+    "visitors": 100000,
+    "clicks": 4099,
+    "rate": 0.04099,
+    "ci95": [
+     0.03977865789885522,
+     0.042236607402712956
+    ]
+   },
+   "variant": {
+    "visitors": 100000,
+    "clicks": 4136,
+    "rate": 0.04136,
+    "ci95": [
+     0.040143348879139486,
+     0.04261188799568074
+    ]
+   },
+   "diff": 0.00037000000000000227,
+   "diff_ci95": [
+    -0.001371635864997271,
+    0.002111635864997276
+   ],
+   "relative_lift": 0.009026591851671196,
+   "z": 0.41638995856464417,
+   "p": 0.677124675043072,
+   "result": "inconclusive"
+  },
+  "too_few": {
+   "visitors_per_arm": 20000,
+   "declared_lift_relative": 0.12100000000000001,
+   "label": "SYNTHETIC",
+   "baseline": {
+    "visitors": 20000,
+    "clicks": 798,
+    "rate": 0.0399,
+    "ci95": [
+     0.03727458068339297,
+     0.042702137388599765
+    ]
+   },
+   "variant": {
+    "visitors": 20000,
+    "clicks": 808,
+    "rate": 0.0404,
+    "ci95": [
+     0.0377582653930579,
+     0.04321826063582248
+    ]
+   },
+   "diff": 0.0005000000000000004,
+   "diff_ci95": [
+    -0.0033476909213708936,
+    0.004347690921370894
+   ],
+   "relative_lift": 0.012531328320802016,
+   "z": 0.2546980059874079,
+   "p": 0.7989563564593529,
+   "result": "inconclusive"
+  },
+  "A/A check": {
+   "visitors_per_arm": 100000,
+   "declared_lift_relative": 0.0,
+   "label": "SYNTHETIC",
+   "baseline": {
+    "visitors": 100000,
+    "clicks": 4058,
+    "rate": 0.04058,
+    "ci95": [
+     0.03937457266088107,
+     0.041820724140596996
+    ]
+   },
+   "variant": {
+    "visitors": 100000,
+    "clicks": 3970,
+    "rate": 0.0397,
+    "ci95": [
+     0.0385073828515322,
+     0.04092798155950858
+    ]
+   },
+   "diff": -0.0008799999999999988,
+   "diff_ci95": [
+    -0.0026005314240134052,
+    0.0008405314240134075
+   ],
+   "relative_lift": -0.02168555938886148,
+   "z": -1.0024784450438011,
+   "p": 0.3161125719266441,
+   "result": "inconclusive"
+  }
+ },
+ "plan": {
+  "segments": [
+   {
+    "name": "Technical evaluator",
+    "industry": "GCCs & IT services",
+    "role": "targeted",
+    "weight": 0.5,
+    "goal_fit": 1.0,
+    "strength": 1.0,
+    "sensitivity": 1.0
+   },
+   {
+    "name": "Economic buyer (India centre)",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Risk and compliance",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.6,
+    "strength": 0.5,
+    "sensitivity": 0.3
+   },
+   {
+    "name": "Procurement",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Business owner",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Operations user",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Champion",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   },
+   {
+    "name": "Economic buyer (IT services firm)",
+    "industry": "GCCs & IT services",
+    "role": "other",
+    "weight": 0.07142857142857142,
+    "goal_fit": 0.3,
+    "strength": 0.5,
+    "sensitivity": 0.15
+   }
+  ],
+  "judge_gains": {
+   "Jev": 0.204,
+   "Judge 2": 0.28
+  },
+  "avg_gain": 0.242,
+  "lift_rule": {
+   "lift_per_gain": 0.5,
+   "floor": 0.02,
+   "cap": 0.5
+  },
+  "declared_lift": 0.121,
+  "effective_lift": 0.0709,
+  "base_rate": 0.04,
+  "visitors_needed_for_effective_lift": 77548,
+  "capped": false,
+  "goal": {
+   "id": "read-docs",
+   "label": "More developers open the API docs",
+   "kind": "docs"
+  },
+  "persona": "Technical evaluator (Head of AI; Head of Engineering India; Chief Technology Officer and Managing Director of the India centre) in GCCs & IT services",
+  "scenarios": [
+   {
+    "name": "enough",
+    "visitors_per_arm": 100000,
+    "lift_relative": 0.12100000000000001
+   },
+   {
+    "name": "too_few",
+    "visitors_per_arm": 20000,
+    "lift_relative": 0.12100000000000001
+   }
+  ]
+ },
+ "plan_explained_by": "reasoning model",
+ "browser": {
+  "sessions_per_arm": 20,
+  "passed": {
+   "baseline": 20,
+   "variant": 20
+  },
+  "blocked_requests": {
+   "count": 1403,
+   "hosts": [
+    "assets.sarvam.ai",
+    "cdn.claydar.com",
+    "connect.facebook.net",
+    "googleads.g.doubleclick.net",
+    "js-eu1.hs-analytics.net",
+    "js-eu1.hs-banner.com",
+    "js-eu1.hs-scripts.com",
+    "js-eu1.hsadspixel.net",
+    "js-eu1.hscollectedforms.net",
+    "k.sarvam.ai",
+    "snap.licdn.com",
+    "static.claydar.com",
+    "static.cloudflareinsights.com",
+    "www.googletagmanager.com",
+    "www.sarvam.ai"
+   ]
+  }
+ },
+ "config": {
+  "seed": 20261115,
+  "alpha": 0.05,
+  "min_visitors_per_arm": 1000,
+  "base_rate": 0.04
+ }
+}

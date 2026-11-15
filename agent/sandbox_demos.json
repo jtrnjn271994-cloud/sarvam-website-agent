@@ -1,0 +1,17 @@
+{
+  "note": "Built-in demo scenarios for sandbox.py. The lifts are assumptions chosen to show one clear and one inconclusive result. They are not predictions. Only a person edits this file.",
+  "seed": 20261113,
+  "alpha": 0.05,
+  "min_visitors_per_arm": 1000,
+  "base_rate": 0.04,
+  "primary_share": 0.5,
+  "supporting_sensitivity": 0.5,
+  "ablation_cap": 3,
+  "visitor_cap_total": 40000,
+  "scenarios": [
+    {"name": "clear", "visitors_per_arm": 4000, "lift_relative": 0.5, "action_lift": 0.4,
+     "section_lifts": {"hero": 0.3, "proof": 0.15, "cta": 0.05}},
+    {"name": "inconclusive", "visitors_per_arm": 800, "lift_relative": 0.1, "action_lift": 0.08,
+     "section_lifts": {"hero": 0.06, "proof": 0.03, "cta": 0.01}}
+  ]
+}

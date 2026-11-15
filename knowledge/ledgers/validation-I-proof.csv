@@ -1,0 +1,6 @@
+id,vendor,field,value,anchor,url,label,date_read,status,checked_on,notes
+I2-01,Sarvam / Portea Medical,pilot length before expansion,Over 17 days,pilot,https://www.sarvam.ai/stories/portea,VENDOR,2026-11-11,PASS,2026-11-11,
+I2-02,Sarvam / Portea Medical,calls a day after expansion,"2,000",calls,https://www.sarvam.ai/stories/portea,VENDOR,2026-11-11,PASS,2026-11-11,
+I2-03,Sarvam / Equal AI,primary speech model,Saaras V3,Equal,https://www.sarvam.ai/stories/equal,VENDOR,2026-11-11,PASS,2026-11-11,
+I2-04,Sarvam / Tata Capital,platform deployed,Samvaad,Tata Capital,https://www.sarvam.ai/stories/tata-capital-ai-voice-transformation,VENDOR,2026-11-11,PASS,2026-11-11,
+I2-05,Sarvam / Portea Medical,expanded after pilot,expanded Sarvam across its staff and patient workflows,After the pilot,https://www.sarvam.ai/stories/portea,VENDOR,2026-11-11,PASS,2026-11-11,

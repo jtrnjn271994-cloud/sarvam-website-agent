@@ -1,0 +1,493 @@
+{
+ "label": "PROBE v2, provisional pass line 0.50, uncalibrated",
+ "roles": {
+  "writer": "deepseek/deepseek-v4-pro",
+  "judge1": "typesafe/jev-1.14",
+  "judge2": "openai/gpt-6-luna-decisions"
+ },
+ "audit": {
+  "model": "typesafe/jev-1.14-20261014",
+  "p": {
+   "A1-audience": 0.68,
+   "A2-value": 0.46,
+   "A3-proof": 0.05,
+   "A4-cta": 0.17,
+   "A5-positioning": 0.55,
+   "A6-swap": 0.28,
+   "A7-checklist-item-1": 0.29,
+   "A7-checklist-item-2": 0.05,
+   "A7-checklist-item-3": 0.94,
+   "A7-checklist-item-4": 0.04,
+   "A7-checklist-item-5": 0.04
+  }
+ },
+ "writer": {
+  "model": "deepseek/deepseek-v4-pro",
+  "rounds": [
+   {
+    "round": 1,
+    "gate1": {
+     "A": [
+      "fragment citing CL-001 drops the qualifier 'on request': 'India-hosted open models'",
+      "fragment citing CL-001 drops the qualifier 'on request': 'Run DeepSeek V4.1 Flash and other models on Sarvam's GPUs.'"
+     ],
+     "B": [
+      "fragment citing CL-001 drops the qualifier 'on request': 'India-hosted open models'",
+      "fragment citing CL-001 drops the qualifier 'on request': 'Run leading open models on Sarvam's GPUs in India.'"
+     ]
+    }
+   },
+   {
+    "round": 2,
+    "gate1": {
+     "A": [],
+     "B": []
+    }
+   }
+  ]
+ },
+ "variants": [
+  {
+   "name": "A",
+   "h1": "India-hosted open models, ISO 27001 certified, from INR 14/1M input tokens.",
+   "subline": "Run DeepSeek V4.1 Flash and other models on Sarvam's GPUs. Zero data retention on request. Compare quality, speed, and cost on your workload.",
+   "cta": "Compare on your workload",
+   "map": [
+    {
+     "fragment": "India-hosted open models",
+     "claim": "CL-002"
+    },
+    {
+     "fragment": "ISO 27001 certified",
+     "claim": "CL-005"
+    },
+    {
+     "fragment": "from INR 14/1M input tokens",
+     "claim": "CL-011"
+    },
+    {
+     "fragment": "Run DeepSeek V4.1 Flash and other models on Sarvam's GPUs.",
+     "claim": "CL-002"
+    },
+    {
+     "fragment": "Zero data retention on request.",
+     "claim": "CL-004"
+    },
+    {
+     "fragment": "Compare quality, speed, and cost on your workload.",
+     "claim": "CL-013"
+    }
+   ],
+   "why": "Pairs ISO 27001 certification with a concrete token price to give engineering leaders immediate proof of security and cost."
+  },
+  {
+   "name": "B",
+   "h1": "India-hosted open models, SOC 2 Type II attested, from INR 14/1M input tokens.",
+   "subline": "Run leading open models on Sarvam's GPUs in India. Zero data retention on request. Compare on your workload.",
+   "cta": "Compare on your workload",
+   "map": [
+    {
+     "fragment": "India-hosted open models",
+     "claim": "CL-002"
+    },
+    {
+     "fragment": "SOC 2 Type II attested",
+     "claim": "CL-005"
+    },
+    {
+     "fragment": "from INR 14/1M input tokens",
+     "claim": "CL-011"
+    },
+    {
+     "fragment": "Run leading open models on Sarvam's GPUs in India.",
+     "claim": "CL-002"
+    },
+    {
+     "fragment": "Zero data retention on request.",
+     "claim": "CL-004"
+    },
+    {
+     "fragment": "Compare on your workload.",
+     "claim": "CL-013"
+    }
+   ],
+   "why": "Uses SOC 2 Type II attestation and the INR 14 input token price to address compliance and budget concerns upfront."
+  }
+ ],
+ "gate2": {
+  "A": {
+   "gate1_problems": [],
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "India-hosted open models",
+      "claim": "CL-002",
+      "support": 0.51,
+      "overreach": 0.22
+     },
+     {
+      "fragment": "ISO 27001 certified",
+      "claim": "CL-005",
+      "support": 0.1,
+      "overreach": 0.07
+     },
+     {
+      "fragment": "from INR 14/1M input tokens",
+      "claim": "CL-011",
+      "support": 0.45,
+      "overreach": 0.13
+     },
+     {
+      "fragment": "Run DeepSeek V4.1 Flash and other models on Sarvam's GPUs.",
+      "claim": "CL-002",
+      "support": 0.3,
+      "overreach": 0.32
+     },
+     {
+      "fragment": "Zero data retention on request.",
+      "claim": "CL-004",
+      "support": 0.18,
+      "overreach": 0.19
+     },
+     {
+      "fragment": "Compare quality, speed, and cost on your workload.",
+      "claim": "CL-013",
+      "support": 0.09,
+      "overreach": 0.62
+     }
+    ],
+    "G3-banned": 0.51,
+    "G5-buyer": 0.8,
+    "audit_variant": {
+     "A1-audience": 0.81,
+     "A2-value": 0.5,
+     "A3-proof": 0.94,
+     "A4-cta": 0.7,
+     "A5-positioning": 0.74,
+     "A6-swap": 0.16,
+     "A7-checklist-item-1": 0.7,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.93,
+     "A7-checklist-item-4": 0.93,
+     "A7-checklist-item-5": 0.04
+    },
+    "audit_baseline": {
+     "A1-audience": 0.78,
+     "A2-value": 0.49,
+     "A3-proof": 0.05,
+     "A4-cta": 0.6,
+     "A5-positioning": 0.66,
+     "A6-swap": 0.26,
+     "A7-checklist-item-1": 0.59,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.04
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "India-hosted open models",
+      "claim": "CL-002",
+      "support": 1.0,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "ISO 27001 certified",
+      "claim": "CL-005",
+      "support": 0.24,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "from INR 14/1M input tokens",
+      "claim": "CL-011",
+      "support": 0.5,
+      "overreach": 0.02
+     },
+     {
+      "fragment": "Run DeepSeek V4.1 Flash and other models on Sarvam's GPUs.",
+      "claim": "CL-002",
+      "support": 0.96,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "Zero data retention on request.",
+      "claim": "CL-004",
+      "support": 0.88,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "Compare quality, speed, and cost on your workload.",
+      "claim": "CL-013",
+      "support": 0.0,
+      "overreach": 0.07
+     }
+    ],
+    "G3-banned": 0.09,
+    "G5-buyer": 1.0,
+    "audit_variant": {
+     "A1-audience": 0.76,
+     "A2-value": 0.73,
+     "A3-proof": 1.0,
+     "A4-cta": 0.79,
+     "A5-positioning": 0.7,
+     "A6-swap": 0.01,
+     "A7-checklist-item-1": 0.85,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.99,
+     "A7-checklist-item-4": 1.0,
+     "A7-checklist-item-5": 0.08
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.3,
+     "A3-proof": 0.02,
+     "A4-cta": 0.81,
+     "A5-positioning": 0.72,
+     "A6-swap": 0.02,
+     "A7-checklist-item-1": 0.23,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 0.0,
+     "A7-checklist-item-5": 0.14
+    }
+   }
+  },
+  "B": {
+   "gate1_problems": [],
+   "judge1": {
+    "fragments": [
+     {
+      "fragment": "India-hosted open models",
+      "claim": "CL-002",
+      "support": 0.52,
+      "overreach": 0.2
+     },
+     {
+      "fragment": "SOC 2 Type II attested",
+      "claim": "CL-005",
+      "support": 0.22,
+      "overreach": 0.07
+     },
+     {
+      "fragment": "from INR 14/1M input tokens",
+      "claim": "CL-011",
+      "support": 0.41,
+      "overreach": 0.13
+     },
+     {
+      "fragment": "Run leading open models on Sarvam's GPUs in India.",
+      "claim": "CL-002",
+      "support": 0.47,
+      "overreach": 0.2
+     },
+     {
+      "fragment": "Zero data retention on request.",
+      "claim": "CL-004",
+      "support": 0.19,
+      "overreach": 0.16
+     },
+     {
+      "fragment": "Compare on your workload.",
+      "claim": "CL-013",
+      "support": 0.16,
+      "overreach": 0.46
+     }
+    ],
+    "G3-banned": 0.58,
+    "G5-buyer": 0.82,
+    "audit_variant": {
+     "A1-audience": 0.8,
+     "A2-value": 0.52,
+     "A3-proof": 0.94,
+     "A4-cta": 0.56,
+     "A5-positioning": 0.65,
+     "A6-swap": 0.17,
+     "A7-checklist-item-1": 0.7,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.94,
+     "A7-checklist-item-4": 0.94,
+     "A7-checklist-item-5": 0.04
+    },
+    "audit_baseline": {
+     "A1-audience": 0.8,
+     "A2-value": 0.5,
+     "A3-proof": 0.05,
+     "A4-cta": 0.64,
+     "A5-positioning": 0.64,
+     "A6-swap": 0.26,
+     "A7-checklist-item-1": 0.58,
+     "A7-checklist-item-2": 0.05,
+     "A7-checklist-item-3": 0.93,
+     "A7-checklist-item-4": 0.05,
+     "A7-checklist-item-5": 0.04
+    }
+   },
+   "judge2": {
+    "fragments": [
+     {
+      "fragment": "India-hosted open models",
+      "claim": "CL-002",
+      "support": 1.0,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "SOC 2 Type II attested",
+      "claim": "CL-005",
+      "support": 0.63,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "from INR 14/1M input tokens",
+      "claim": "CL-011",
+      "support": 0.5,
+      "overreach": 0.02
+     },
+     {
+      "fragment": "Run leading open models on Sarvam's GPUs in India.",
+      "claim": "CL-002",
+      "support": 0.85,
+      "overreach": 0.02
+     },
+     {
+      "fragment": "Zero data retention on request.",
+      "claim": "CL-004",
+      "support": 0.88,
+      "overreach": 0.0
+     },
+     {
+      "fragment": "Compare on your workload.",
+      "claim": "CL-013",
+      "support": 0.03,
+      "overreach": 0.02
+     }
+    ],
+    "G3-banned": 0.11,
+    "G5-buyer": 0.98,
+    "audit_variant": {
+     "A1-audience": 0.73,
+     "A2-value": 0.76,
+     "A3-proof": 0.99,
+     "A4-cta": 0.74,
+     "A5-positioning": 0.63,
+     "A6-swap": 0.0,
+     "A7-checklist-item-1": 0.79,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 1.0,
+     "A7-checklist-item-5": 0.01
+    },
+    "audit_baseline": {
+     "A1-audience": 0.72,
+     "A2-value": 0.3,
+     "A3-proof": 0.02,
+     "A4-cta": 0.81,
+     "A5-positioning": 0.72,
+     "A6-swap": 0.02,
+     "A7-checklist-item-1": 0.23,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 1.0,
+     "A7-checklist-item-4": 0.0,
+     "A7-checklist-item-5": 0.14
+    }
+   }
+  }
+ },
+ "summary": {
+  "A": {
+   "gate1": true,
+   "judge1": {
+    "safe": false,
+    "better": true,
+    "targeted_delta": {
+     "A3-proof": 0.89,
+     "A4-cta": 0.1,
+     "A2-value": 0.01,
+     "A7-checklist-item-4": 0.88
+    },
+    "heldout_delta": {
+     "A1-audience": 0.03,
+     "A5-positioning": 0.08,
+     "A6-swap": 0.1,
+     "A7-checklist-item-1": 0.11,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": -0.01,
+     "A7-checklist-item-5": 0.0
+    },
+    "G3": 0.51,
+    "G5": 0.8
+   },
+   "judge2": {
+    "safe": false,
+    "better": false,
+    "targeted_delta": {
+     "A3-proof": 0.98,
+     "A4-cta": -0.02,
+     "A2-value": 0.43,
+     "A7-checklist-item-4": 1.0
+    },
+    "heldout_delta": {
+     "A1-audience": 0.04,
+     "A5-positioning": -0.02,
+     "A6-swap": 0.01,
+     "A7-checklist-item-1": 0.62,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": -0.01,
+     "A7-checklist-item-5": -0.06
+    },
+    "G3": 0.09,
+    "G5": 1.0
+   },
+   "pass_both": false,
+   "judges_disagree": true
+  },
+  "B": {
+   "gate1": true,
+   "judge1": {
+    "safe": false,
+    "better": true,
+    "targeted_delta": {
+     "A3-proof": 0.89,
+     "A4-cta": -0.08,
+     "A2-value": 0.02,
+     "A7-checklist-item-4": 0.89
+    },
+    "heldout_delta": {
+     "A1-audience": 0.0,
+     "A5-positioning": 0.01,
+     "A6-swap": 0.09,
+     "A7-checklist-item-1": 0.12,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.01,
+     "A7-checklist-item-5": 0.0
+    },
+    "G3": 0.58,
+    "G5": 0.82
+   },
+   "judge2": {
+    "safe": false,
+    "better": false,
+    "targeted_delta": {
+     "A3-proof": 0.97,
+     "A4-cta": -0.07,
+     "A2-value": 0.46,
+     "A7-checklist-item-4": 1.0
+    },
+    "heldout_delta": {
+     "A1-audience": 0.01,
+     "A5-positioning": -0.09,
+     "A6-swap": 0.02,
+     "A7-checklist-item-1": 0.56,
+     "A7-checklist-item-2": 0.0,
+     "A7-checklist-item-3": 0.0,
+     "A7-checklist-item-5": -0.13
+    },
+    "G3": 0.11,
+    "G5": 0.98
+   },
+   "pass_both": false,
+   "judges_disagree": true
+  }
+ }
+}

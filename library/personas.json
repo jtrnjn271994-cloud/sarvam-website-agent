@@ -1,0 +1,764 @@
+{
+ "built": "2026-11-15",
+ "note": "Buyer committees from icp-round-2 (analyst research, not buyer interviews) and fit statuses from the GTM map. Do not edit by hand; rebuild.",
+ "fit_words": {
+  "lead": "Start here",
+  "prove": "Test first",
+  "attach": "Add-on",
+  "later": "Later",
+  "park": "Hold"
+ },
+ "fit_order": {
+  "lead": 0,
+  "prove": 1,
+  "attach": 2,
+  "later": 3,
+  "park": 4
+ },
+ "industries": [
+  {
+   "id": "bfsi",
+   "name": "Banks & lenders",
+   "sub": "NBFCs, HFCs, MFIs, cards",
+   "roles": [
+    {
+     "key": "bfsi:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "MD and CEO; Chief Financial Officer; Chief Operating Officer",
+     "owns": "The budget for collections and customer service. Also the cost-to-income target.",
+     "cares_about": "Cost per call and cost per rupee collected. Recovery that does not rise with headcount. Bajaj's technology and operations chief says the AI cost must be below the human cost. He gives one-third as the voice AI figure. The link to Sarvam is INFERENCE.",
+     "blocks_if": "The pilot has no result the CFO can check against the human baseline. Or the vendor price rises as call volume grows.",
+     "label": "INFERENCE",
+     "source_url": "https://nsearchives.nseindia.com/corporate/ltfinance_20072026224417_NSEBSEINTIMATION.pdf"
+    },
+    {
+     "key": "bfsi:business-owner",
+     "role": "Business owner",
+     "typical_titles": "Chief Credit Officer; Head of Collections; Chief Credit and Collections Officer",
+     "owns": "Recovery targets by overdue bucket. The size and rules of the calling team.",
+     "cares_about": "Flow rates from early to late buckets. Bounce rate (failed repayments) and collection efficiency. Kissht reports a 13.1% bounce rate and 97.01% collection efficiency. AU reports 99.5% collection efficiency. The two firms may measure it in different ways.",
+     "blocks_if": "The bot cannot capture a promise to pay or route a hard case to a human. Or it hurts repayment rates in a pilot.",
+     "label": "INFERENCE",
+     "source_url": "https://www.hdbfs.com/sites/default/files/policies/CORPORATE_GOVERNANCE_CODE_24042025.pdf"
+    },
+    {
+     "key": "bfsi:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Head of Customer Service; Chief of Operations and Customer Service; Head of Operations; Chief Customer Service Officer",
+     "owns": "The contact centre, service requests and complaint handling. Often the first daily user of a voice agent.",
+     "cares_about": "Share of calls handled with no manual step. ABCL says 63% of contact centre interactions went through straight-through processing (STP, which means no manual step). Languages the floor cannot cover.",
+     "blocks_if": "Agents must type the data in again after the bot hands off. Or the bot fails in a language the team does not speak.",
+     "label": "INFERENCE",
+     "source_url": "https://www.pnbhousing.com/about-us/leadership-team"
+    },
+    {
+     "key": "bfsi:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "Chief Technology Officer; Chief Information Officer; Chief Digital and AI Officer",
+     "owns": "Links to the loan origination and loan management systems, the dialer and the call-recording stack. Security review.",
+     "cares_about": "Speed of reply, links to the dialer and the core systems, call recording, and who can reach call data. AU names a Chief Digital and AI Officer on its call.",
+     "blocks_if": "The vendor cannot show where it stores call audio. Or it cannot link to the dialer. Or one model does not cover the languages the lender serves.",
+     "label": "INFERENCE",
+     "source_url": "https://www.au.bank.in/as/pdfs/quaterly-compliance/2026-27/Call-transcript_Q1FY27.pdf"
+    },
+    {
+     "key": "bfsi:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Chief Risk Officer; Chief Compliance Officer",
+     "owns": "Recovery conduct policy, the code of conduct for agents and staff, and call records.",
+     "cares_about": "RBI recovery directions of 6 Aug 2026 (in force 1 Jan 2027). They apply to NBFCs. Banks have separate directions with the same recording and call-hour rules. Calls only between 08:00 and 19:00 (unless the borrower expressly asks or authorises another time). Call time and number of calls documented. Call content recorded and kept six months. Recovery agents hold an IIBF certificate within one year. Graded escalation matrix. The lender stays answerable for its recovery agents.",
+     "blocks_if": "A voice agent calls outside hours, or calls too often, or records nothing. Or the vendor cannot prove it follows the lender's code of conduct.",
+     "label": "PUBLISHED",
+     "source_url": "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13672"
+    },
+    {
+     "key": "bfsi:risk-and-compliance-grievance-and-vendor-risk",
+     "role": "Risk and compliance (grievance and vendor risk)",
+     "typical_titles": "Grievance Redressal Officer; Principal Nodal Officer; Head of Outsourcing or Vendor Risk",
+     "owns": "Outsourcing policy and vendor checks. Complaint handling under the RBI Fair Practices Code and the Integrated Ombudsman Scheme.",
+     "cares_about": "RBI outsourcing directions of 28 Nov 2025: the lender is responsible for the actions of its service provider, recovery agents included. The lender keeps ultimate control. The lender must display the name and contact details of its grievance officer.",
+     "blocks_if": "The vendor is a black box. Or the contract does not let the lender audit calls, or the vendor cannot show how it keeps a complaint trail.",
+     "label": "PUBLISHED",
+     "source_url": "https://www.rbi.org.in/scripts/BS_ViewMasDirections.aspx?id=12941"
+    },
+    {
+     "key": "bfsi:procurement",
+     "role": "Procurement",
+     "typical_titles": "Head of Procurement; Vendor Management; Chief Operating Officer office",
+     "owns": "Commercial terms, the price model and the contract.",
+     "cares_about": "A per-minute price the lender can test on a small pilot. Sarvam's page lists Rs 3.50 a minute pay as you go, plus telephony. Compare completed outcomes, not the headline rate.",
+     "blocks_if": "Telephony, setup and integration costs are not on the quote. Or the price is not published.",
+     "label": "INFERENCE",
+     "source_url": "https://docs.sarvam.ai/voice-agents/pricing"
+    },
+    {
+     "key": "bfsi:champion",
+     "role": "Champion",
+     "typical_titles": "Chief Digital Officer; Head of Digital; AI or Transformation lead",
+     "owns": "The proof of concept. PNB Housing says it finished a Voice AI proof of concept for pre-due collections. ABCL says it deploys Voice AI across onboarding, servicing and cross sell.",
+     "cares_about": "A result the lender can show its own board. A small first test that does not need a long project.",
+     "blocks_if": "The sponsor leaves, or the proof of concept has no named owner after the pilot.",
+     "label": "INFERENCE",
+     "source_url": "https://www.pnbhousing.com/documents/d/guest/Earnings%20Call%20Transcript%2007082026"
+    }
+   ],
+   "fit": {
+    "compute": "park",
+    "inference": "later",
+    "models": "prove",
+    "speech": "lead",
+    "translate": "attach",
+    "docs": "prove",
+    "voice": "lead",
+    "custom": "later",
+    "agents": "park"
+   }
+  },
+  {
+   "id": "ins",
+   "name": "Insurance",
+   "sub": "Health, life, general",
+   "roles": [
+    {
+     "key": "ins:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "MD & CEO; Executive Director; CFO",
+     "owns": "The budget and the final yes",
+     "cares_about": "Cost per claim and per call, fewer grievances, IRDAI standing (INFERENCE)",
+     "blocks_if": "No pass bar the insurer sets itself; no public customer result in India",
+     "label": "INFERENCE",
+     "source_url": "https://nsearchives.nseindia.com/corporate/ICICIGI_19102026131424_SE_Intimation_Earnings_call_transcript.pdf"
+    },
+    {
+     "key": "ins:business-owner-claims-and-service",
+     "role": "Business owner (claims and service)",
+     "typical_titles": "Chief Health UW & Claims, Customer Service & Operations; Chief Operating Officer; Head of Claims",
+     "owns": "Claims turnaround, claim-status calls, customer service",
+     "cares_about": "Grievances and pendency (IRDAI Tables 37 and 56), IRDAI 14-day complaint resolution, claim-status call volume",
+     "blocks_if": "Voice agent adds a new failure in a claim journey; no human hand-off",
+     "label": "PUBLISHED",
+     "source_url": "https://nsearchives.nseindia.com/corporate/ICICIGI_19102026131424_SE_Intimation_Earnings_call_transcript.pdf"
+    },
+    {
+     "key": "ins:business-owner-distribution",
+     "role": "Business owner (distribution)",
+     "typical_titles": "Chief Distribution Officer; Chief Business Officer; Chief Marketing Officer",
+     "owns": "Renewals, persistency, agent and bank channels, Tier 2/3 growth",
+     "cares_about": "13-month persistency (HDFC Life 84%), renewal reminders in the customer's language, agent training in new regions",
+     "blocks_if": "Cannot show a lift in renewals or persistency on a test cohort",
+     "label": "PUBLISHED",
+     "source_url": "https://www.hdfclife.com/content/dam/hdfclifeinsurancecompany/about-us/pdf/investor-relations/financial-information/investor-presentation/HDFC-Life-Q1-FY2027-Call-Transcript.pdf"
+    },
+    {
+     "key": "ins:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Head of Customer Service; Head of Contact Centre; Head of Renewals and Collections",
+     "owns": "Inbound and outbound call queues, scripts, quality checks",
+     "cares_about": "Language coverage, hand-off to humans, call recording and quality scores",
+     "blocks_if": "Agents see the bot as extra work; no regional-language quality proof",
+     "label": "INFERENCE",
+     "source_url": "https://irdai.gov.in/document-detail?documentId=5625747"
+    },
+    {
+     "key": "ins:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "Chief Enterprise AI & Technology; CTO; CIO; Head of AI Lab",
+     "owns": "Integration with claims and policy systems, model testing, hosting",
+     "cares_about": "India hosting, API fit, test results on the insurer's own calls",
+     "blocks_if": "Data leaves India without approval; no integration with the policy admin system",
+     "label": "PUBLISHED",
+     "source_url": "https://nsearchives.nseindia.com/corporate/ICICIGI_19102026131424_SE_Intimation_Earnings_call_transcript.pdf"
+    },
+    {
+     "key": "ins:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Chief Risk Officer; Chief Compliance Officer; Chief Information Security Officer; Grievance Redressal Officer",
+     "owns": "IRDAI rules on grievances, outsourcing, cyber security and records",
+     "cares_about": "IRDAI Master Circular on Protection of Policyholders' Interests 2024 (14-day complaint resolution; regional-language forms on request; call-centre tracking). IRDAI Information and Cyber Security Guidelines (CISO role). We have not read the 2026 version in full.",
+     "blocks_if": "Voice agent cannot show call records, audit trail and human escalation; unclear cyber-security sign-off",
+     "label": "PUBLISHED",
+     "source_url": "https://irdai.gov.in/document-detail?documentId=5625747"
+    },
+    {
+     "key": "ins:procurement",
+     "role": "Procurement",
+     "typical_titles": "Head of Procurement; Head of Vendor Management; IT sourcing lead",
+     "owns": "Vendor onboarding, contract terms, price comparison",
+     "cares_about": "Published per-minute price, exit terms, IRDAI outsourcing and IT-procurement oversight (a law-firm note says the 2026 cyber guidelines add IT procurement oversight; UNCHECKED)",
+     "blocks_if": "Needs a quote to compare; contract lacks IRDAI audit access",
+     "label": "UNCHECKED",
+     "source_url": "https://corporate.cyrilamarchandblogs.com/2026/06/amended-cyber-security-guidelines-for-insurance-sector-key-amendments-and-what-they-mean-for-regulated-entities/"
+    },
+    {
+     "key": "ins:champion",
+     "role": "Champion",
+     "typical_titles": "Head of Digital; Head of AI Lab; Head of Customer Experience; TPA or broker technology lead",
+     "owns": "Pilots and internal proof",
+     "cares_about": "Niva Bupa says GenAI is in production through its AI Lab (FOUNDER). Star Health says bots ran 7.5 million call minutes (FOUNDER). A champion wants a pilot that reports a number.",
+     "blocks_if": "No quick pilot path; vendor needs a long contract first",
+     "label": "INFERENCE",
+     "source_url": "https://transactions.nivabupa.com/pages/doc/investor-relations/Corporate-Announcements/2026-27/Disclosure-Earnings-Call-Transcript-Q1-FY-2026-27.pdf?v=1.1"
+    }
+   ],
+   "fit": {
+    "compute": "park",
+    "inference": "later",
+    "models": "later",
+    "speech": "attach",
+    "translate": "attach",
+    "docs": "prove",
+    "voice": "prove",
+    "custom": "later",
+    "agents": "park"
+   }
+  },
+  {
+   "id": "health",
+   "name": "Healthcare",
+   "sub": "Hospitals, TPAs",
+   "roles": [
+    {
+     "key": "health:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "CEO or Group CEO; Managing Director; Unit head of a hospital cluster",
+     "owns": "Network budget, new-city plans, vendor spend",
+     "cares_about": "Occupancy, ARPOB (revenue per occupied bed), cost per patient contact, ramp-up of new hospitals",
+     "blocks_if": "Cannot see a payback inside the quarter; patient-safety or brand risk",
+     "label": "PUBLISHED",
+     "source_url": "https://d31scedd5hpubp.cloudfront.net/investor_files/Analyst_Concall_Transcript_-_Q1_&_FY27.pdf"
+    },
+    {
+     "key": "health:business-owner",
+     "role": "Business owner",
+     "typical_titles": "Head of Patient Experience; Head of Contact Centre; Chief Marketing and Customer Officer; Head of Patient Acquisition",
+     "owns": "Appointment calls, lead conversion, patient follow-up, call centre staff",
+     "cares_about": "Missed calls, lead conversion, patient satisfaction, regional language reach. Example title: Chief Marketing and Customer Officer at Redcliffe Labs (Exotel page).",
+     "blocks_if": "Voice agent hurts patient trust or duplicates the current CRM",
+     "label": "INFERENCE",
+     "source_url": "https://exotel.com/industry/healthcare-pharma/"
+    },
+    {
+     "key": "health:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Contact centre team lead; front-desk and OPD registration head; TPA desk and revenue cycle head",
+     "owns": "Daily call queues, pre-authorisation calls, discharge-day calls",
+     "cares_about": "Fewer abandoned calls, clean hand-off to a person, claim turnaround",
+     "blocks_if": "Bot adds work when it hands off with no context",
+     "label": "INFERENCE",
+     "source_url": "https://www.apollohospitals.com/sites/default/files/2026-08/transcript-of-apollo-hospitals---q1-fy27-earnings-call.pdf"
+    },
+    {
+     "key": "health:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "Chief Information Officer; Chief Digital Officer; Head of IT and HIS (hospital information system)",
+     "owns": "HIS, CRM and telephony integration, vendor security review",
+     "cares_about": "Integration with HIS and CRM, ABDM links, uptime, data location. Rainbow says it is building a new CRM and HIS design.",
+     "blocks_if": "No API into the HIS; data leaves India; no audit log",
+     "label": "FOUNDER",
+     "source_url": "https://d31scedd5hpubp.cloudfront.net/investor_files/Analyst_Concall_Transcript_-_Q1_&_FY27.pdf"
+    },
+    {
+     "key": "health:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Medical Director; Chief Medical Officer; Head of Quality (clinical safety blocker)",
+     "owns": "Clinical protocols, what a bot may say to a patient",
+     "cares_about": "No medical advice from the bot, fast hand-off to a nurse or doctor, NABH quality rules",
+     "blocks_if": "Bot answers a clinical question or gives a result",
+     "label": "INFERENCE",
+     "source_url": "https://www.nabh.co/"
+    },
+    {
+     "key": "health:risk-and-compliance-data-privacy",
+     "role": "Risk and compliance (data privacy)",
+     "typical_titles": "Data privacy officer; Company Secretary and Compliance Officer",
+     "owns": "DPDP Act consent notice, retention, breach duty",
+     "cares_about": "Consent before outbound health calls, data kept in India, audit trail. Rule 4 (consent managers) starts 14 Nov 2026. Rules 3 and 5 to 16 start 18 months after 14 Nov 2025.",
+     "blocks_if": "No consent record per call; no deletion path",
+     "label": "PUBLISHED",
+     "source_url": "https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2190014&lang=2&reg=3"
+    },
+    {
+     "key": "health:procurement",
+     "role": "Procurement",
+     "typical_titles": "Head of Procurement; Head of Purchase and Supply Chain; Group CFO office",
+     "owns": "Vendor onboarding, price terms, contract",
+     "cares_about": "Per-minute price against the cost of agent time, pilot with a pass bar, exit terms",
+     "blocks_if": "No fixed price; no named hospital reference",
+     "label": "INFERENCE",
+     "source_url": "https://max-website20-images.s3.ap-south-1.amazonaws.com/MHC_Q1_FY_27_Earnings_Call_Transcript_c7022ba3c6.pdf"
+    },
+    {
+     "key": "health:champion",
+     "role": "Champion",
+     "typical_titles": "Group COO; Chief Digital Officer; Group Director for growth",
+     "owns": "New-hospital launches, shared services",
+     "cares_about": "Faster ramp of new hospitals; one script set across states. Example: Narayana lists a Group Chief Operating Officer on its call.",
+     "blocks_if": "Pilot needs hospital staff time they do not have",
+     "label": "INFERENCE",
+     "source_url": "https://nsearchives.nseindia.com/corporate/Narayana_10082026191135_SE_Transcript_Q12027_1__003_.pdf"
+    }
+   ],
+   "fit": {
+    "compute": "park",
+    "inference": "later",
+    "models": "later",
+    "speech": "lead",
+    "translate": "attach",
+    "docs": "prove",
+    "voice": "lead",
+    "custom": "later",
+    "agents": "park"
+   }
+  },
+  {
+   "id": "gov",
+   "name": "Public sector",
+   "sub": "States, PSUs, schemes",
+   "roles": [
+    {
+     "key": "gov:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "Secretary or Principal Secretary (IT / e-Governance); Chairman of the state IT agency",
+     "owns": "The budget and the final approval of the tender",
+     "cares_about": "Citizen reach, cost per call against the current call centre, and a clean audit trail",
+     "blocks_if": "The tender is not approved by the department, or the cost model does not fit the approved budget",
+     "label": "INFERENCE",
+     "source_url": "https://ceg.karnataka.gov.in/3/contact-us/en"
+    },
+    {
+     "key": "gov:business-owner",
+     "role": "Business owner",
+     "typical_titles": "CEO or Managing Director of the state e-governance agency; Mission CEO; helpline project head",
+     "owns": "The service (a helpline, a portal or a scheme) and its service targets",
+     "cares_about": "Fewer long waits, more calls solved the first time, more languages covered",
+     "blocks_if": "The bot lowers call quality, or citizens cannot reach a person when needed",
+     "label": "INFERENCE",
+     "source_url": "https://gil.gujarat.gov.in/team"
+    },
+    {
+     "key": "gov:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Helpline or call centre head; project manager at the agency",
+     "owns": "Daily call handling and the human agents. The MP 181 RFP lists about 800 agents and 50000-60,000 inbound calls a day",
+     "cares_about": "Hand-off to a live agent with full context, queue length, shift cover",
+     "blocks_if": "The bot cannot pass a call to a person, or the agents lose context",
+     "label": "PUBLISHED",
+     "source_url": "https://mpsedc.mp.gov.in/Uploaded%20Document/Tenders/24072026013924RFP703.pdf"
+    },
+    {
+     "key": "gov:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "Technical Evaluation Committee; agency CTO; NIC or NeGD technical staff",
+     "owns": "The live demo and the pass or fail scoring in the RFP",
+     "cares_about": "Language detection and switching, interruptions, accuracy on real calls, logs",
+     "blocks_if": "The bot fails the demo. The MP RFP marks demo items 'Qualified/ Not Qualified'",
+     "label": "PUBLISHED",
+     "source_url": "https://mpsedc.mp.gov.in/Uploaded%20Document/Tenders/24072026013924RFP703.pdf"
+    },
+    {
+     "key": "gov:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Data protection and security officer; CERT-In empanelled auditor; CAG audit",
+     "owns": "Data residency, AI governance, consent and audit",
+     "cares_about": "Citizen data stays in India. The MP RFP clause 7.14 bars processing outside India unless the agency approves",
+     "blocks_if": "The vendor cannot show where data and logs sit",
+     "label": "PUBLISHED",
+     "source_url": "https://mpsedc.mp.gov.in/Uploaded%20Document/Tenders/24072026013924RFP703.pdf"
+    },
+    {
+     "key": "gov:procurement",
+     "role": "Procurement",
+     "typical_titles": "GeM buyer; agency purchase cell; the PSU or system integrator that holds the bid",
+     "owns": "The bid process, eligibility and the contract. The Odisha RFP accepted bids only from Central or State PSUs engaged in IT/ITeS. The MP RFP exempts DPIIT-recognised startups from turnover and GST pre-qualification",
+     "cares_about": "Eligibility, bid security, a clean empanelment",
+     "blocks_if": "The vendor is not eligible alone. Sarvam would then need a PSU or a system integrator as the bidder (INFERENCE)",
+     "label": "PUBLISHED",
+     "source_url": "https://bidplus.gem.gov.in/bidding/bid/downloadBuyerDoc/9986608/17911956328633.pdf"
+    },
+    {
+     "key": "gov:champion",
+     "role": "Champion",
+     "typical_titles": "Bhashini Ecosystem Enablement lead for Government and Public Services; state IT officer who runs the language projects",
+     "owns": "Pushes language technology inside the state and links vendors to national programmes",
+     "cares_about": "Bhashini language coverage, scheme reach in local languages",
+     "blocks_if": "Prefers an in-house or Bhashini-only build",
+     "label": "INFERENCE",
+     "source_url": "https://bhashini.gov.in/our-team"
+    }
+   ],
+   "fit": {
+    "compute": "prove",
+    "inference": "prove",
+    "models": "prove",
+    "speech": "attach",
+    "translate": "attach",
+    "docs": "prove",
+    "voice": "lead",
+    "custom": "later",
+    "agents": "later"
+   }
+  },
+  {
+   "id": "tel",
+   "name": "Telecom",
+   "sub": "Operators",
+   "roles": [
+    {
+     "key": "tel:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "Managing Director and CEO; CFO; circle or business-unit CEO",
+     "owns": "Budget for customer care and AI spend",
+     "cares_about": "Cost per call, churn, ARPU",
+     "blocks_if": "Gross margin hit; no proof from a pilot",
+     "label": "PUBLISHED",
+     "source_url": "https://nsearchives.nseindia.com/corporate/BHARTIARTL_20052026201857_AirtelEarningCallTranscript.pdf"
+    },
+    {
+     "key": "tel:business-owner",
+     "role": "Business owner",
+     "typical_titles": "Chief Customer Experience Officer; Chief Marketing or Consumer Business head",
+     "owns": "Customer care outcomes and plan sales",
+     "cares_about": "Complaints, retention, regional reach",
+     "blocks_if": "Language quality drops; brand risk",
+     "label": "INFERENCE",
+     "source_url": "https://www.tatacommunications.com/about/leadership/"
+    },
+    {
+     "key": "tel:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Head of Contact Centre; Head of Customer Care; BPO vendor lead",
+     "owns": "Daily call handling and agent teams",
+     "cares_about": "Calls answered fast, handle time",
+     "blocks_if": "Agents lose control of the call flow",
+     "label": "INFERENCE",
+     "source_url": "https://www.trai.gov.in/sites/default/files/2026-10/QPIR_12102026.pdf"
+    },
+    {
+     "key": "tel:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "CTO; CIO; Head of Digital and AI",
+     "owns": "Platform fit, telephony link, data hosting",
+     "cares_about": "Latency, integration with billing and CRM, data stays in India",
+     "blocks_if": "Builds in-house first (Airtel, BSNL did)",
+     "label": "INFERENCE",
+     "source_url": "https://nsearchives.nseindia.com/corporate/BHARTIARTL_20052026201857_AirtelEarningCallTranscript.pdf"
+    },
+    {
+     "key": "tel:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Regulatory Affairs head; Chief Legal and Compliance Officer",
+     "owns": "TRAI quality-of-service rules, recording and consent",
+     "cares_about": "Meeting TRAI call-centre benchmarks",
+     "blocks_if": "Unclear data handling or call recording rules",
+     "label": "INFERENCE",
+     "source_url": "https://www.trai.gov.in/sites/default/files/2026-10/QPIR_12102026.pdf"
+    },
+    {
+     "key": "tel:procurement",
+     "role": "Procurement",
+     "typical_titles": "Head of Procurement; BSNL and MTNL tender officer",
+     "owns": "Vendor selection and contract terms",
+     "cares_about": "Price per minute, SLA, local hosting",
+     "blocks_if": "Single-vendor lock-in; no tender route",
+     "label": "INFERENCE",
+     "source_url": "https://www.trai.gov.in/sites/default/files/2026-10/QPIR_12102026.pdf"
+    },
+    {
+     "key": "tel:champion",
+     "role": "Champion",
+     "typical_titles": "Circle CEO; Circle customer care head",
+     "owns": "Regional pilots in one circle",
+     "cares_about": "Local-language service for new rural subscribers",
+     "blocks_if": "No local-language pilot budget",
+     "label": "INFERENCE",
+     "source_url": "https://www.trai.gov.in/sites/default/files/2026-10/QPIR_12102026.pdf"
+    }
+   ],
+   "fit": {
+    "compute": "park",
+    "inference": "later",
+    "models": "later",
+    "speech": "prove",
+    "translate": "attach",
+    "docs": "park",
+    "voice": "prove",
+    "custom": "later",
+    "agents": "park"
+   }
+  },
+  {
+   "id": "edu",
+   "name": "Education",
+   "sub": "Universities, edtech",
+   "roles": [
+    {
+     "key": "edu:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "Vice Chancellor, Director, Registrar (institutions); CEO, Whole-time Director, Group CEO (edtech)",
+     "owns": "The budget and the final yes. At IIM Udaipur the Director has the final say on most day-to-day cases.",
+     "cares_about": "Reach in new languages, cost per admission, brand risk.",
+     "blocks_if": "He sees no clear cost cut or enrolment gain, or a pilot touches the brand before it is proven.",
+     "label": "INFERENCE",
+     "source_url": "https://www.iimu.ac.in/rti"
+    },
+    {
+     "key": "edu:business-owner",
+     "role": "Business owner",
+     "typical_titles": "Head of Admissions, Head of Sales and Counselling, Chief Business Officer, Dean (Programs)",
+     "owns": "Enquiry-to-enrolment targets and the counsellor team.",
+     "cares_about": "Speed to first call, qualified leads, counsellor hours.",
+     "blocks_if": "Voice quality drops in the caller's language, or leads reach counsellors with no context.",
+     "label": "INFERENCE",
+     "source_url": "https://www.iimu.ac.in/wp-content/uploads/2026/05/IIMU-CPIO-List-1.pdf"
+    },
+    {
+     "key": "edu:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Counselling team lead, call centre head, student support head, content operations head",
+     "owns": "The daily call queue, doubt desk and dubbing or translation workflow.",
+     "cares_about": "Easy hand-off to a human, call recordings, fewer repeat calls.",
+     "blocks_if": "The tool adds work, or it cannot escalate a hard call.",
+     "label": "INFERENCE",
+     "source_url": "https://static.pw.live/5eb393ee95fab7468a79d189/4b6745a2-e059-44a1-af9b-af1ca7781891.pdf"
+    },
+    {
+     "key": "edu:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "CTO, Chief Technology Officer, Head of Product, Head of Engineering",
+     "owns": "The test of speech, translation and CRM links.",
+     "cares_about": "Accuracy on colloquial speech, API fit, uptime, data location.",
+     "blocks_if": "The model fails on the team's own recordings.",
+     "label": "INFERENCE",
+     "source_url": "https://in.marketscreener.com/quote/stock/APTECH-LIMITED-9059554/company-governance"
+    },
+    {
+     "key": "edu:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Data protection officer, General Counsel, Company Secretary and Compliance Officer",
+     "owns": "Consent, children's data and student privacy.",
+     "cares_about": "Parent consent for minors, where data sits, call recording rules.",
+     "blocks_if": "No clear answer on minors' data. DPDP rules need full compliance by May 2027.",
+     "label": "INFERENCE",
+     "source_url": "https://www.newindianexpress.com/business/2026/Sep/04/edtech-sector-shifts-focus-as-funding-falls-consolidation-grows"
+    },
+    {
+     "key": "edu:procurement",
+     "role": "Procurement",
+     "typical_titles": "CFO, Chief of Administration, purchase officer; GeM buyer for public bodies",
+     "owns": "Contract terms, price and the tender route.",
+     "cares_about": "Unit price per minute or page, volume tiers, tender fit.",
+     "blocks_if": "The price is above the firm's current cost per minute. PhysicsWallah says about Rs 2.7 a minute (its shareholder letter).",
+     "label": "INFERENCE",
+     "source_url": "https://ciet.ncert.gov.in/storage/app/public/files/19/newsletterpdf/JulytoSept2025.pdf"
+    },
+    {
+     "key": "edu:champion",
+     "role": "Champion",
+     "typical_titles": "Dean (Programs), Head of Centre for Teaching and Learning, Chief Content Officer, product head",
+     "owns": "The pilot and the case to the Director or CEO.",
+     "cares_about": "Better learner experience, faster content in a new language.",
+     "blocks_if": "He has no data from his own content to show his boss.",
+     "label": "INFERENCE",
+     "source_url": "https://www.iimu.ac.in/staff-directory/"
+    }
+   ],
+   "fit": {
+    "compute": "park",
+    "inference": "prove",
+    "models": "prove",
+    "speech": "lead",
+    "translate": "prove",
+    "docs": "later",
+    "voice": "later",
+    "custom": "park",
+    "agents": "park"
+   }
+  },
+  {
+   "id": "gcc",
+   "name": "GCCs & IT services",
+   "sub": "Builders and partners",
+   "roles": [
+    {
+     "key": "gcc:economic-buyer-india-centre",
+     "role": "Economic buyer (India centre)",
+     "typical_titles": "Country head; Managing Director India; Site leader; CEO and Managing Director of the India centre",
+     "owns": "The India centre budget and the choice of tools for its own staff",
+     "cares_about": "Proof that the tool works for India staff; low run cost; no clash with the parent's global tools",
+     "blocks_if": "The parent already picked a global tool for the same job, or the head has no budget line for a new tool",
+     "label": "INFERENCE",
+     "source_url": "https://gcc.et-edge.com/speakers"
+    },
+    {
+     "key": "gcc:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "Head of AI; Head of Engineering India; Chief Technology Officer and Managing Director of the India centre",
+     "owns": "Model tests, integration and the pilot design",
+     "cares_about": "Accuracy on real data; hosting in India; links to existing HR and ticket systems; token cost",
+     "blocks_if": "The pilot cannot reach production data, or the model fails the team's own test set",
+     "label": "INFERENCE",
+     "source_url": "https://gcc.economictimes.indiatimes.com/news/workplace-transformation/lowes-india-inaugurates-new-office-for-bengaluru-gcc/135570280"
+    },
+    {
+     "key": "gcc:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "Parent-company chief information officer; chief information and AI officer; chief risk officer; chief information security officer",
+     "owns": "Approval of any AI tool that touches parent data or staff data",
+     "cares_about": "Data stays in approved places; audit trail; vendor risk review; one approved AI stack",
+     "blocks_if": "The tool sends data outside the approved cloud, or lacks an audit trail. The Dell-Zinnov report says GCCs often add governance after the pilot, so pilots stall",
+     "label": "INFERENCE",
+     "source_url": "https://gcc.economictimes.indiatimes.com/news/workplace-transformation/lowes-india-inaugurates-new-office-for-bengaluru-gcc/135570280"
+    },
+    {
+     "key": "gcc:procurement",
+     "role": "Procurement",
+     "typical_titles": "Parent-company procurement or vendor management; India centre finance and admin head",
+     "owns": "Vendor onboarding, contract terms and price checks",
+     "cares_about": "Standard contract; security questionnaire passed; a price that fits an existing category",
+     "blocks_if": "The vendor is not on the parent's approved list, or the contract needs a global legal review",
+     "label": "INFERENCE",
+     "source_url": "https://m.economictimes.com/tech/technology/nearly-70-of-indias-gccs-stuck-at-ai-pilot-stage-dell-zinnov-report/amp_articleshow/134432876.cms"
+    },
+    {
+     "key": "gcc:business-owner",
+     "role": "Business owner",
+     "typical_titles": "Head of HR India; Head of shared services; Head of customer operations; business unit leads",
+     "owns": "The use case (onboarding, HR queries, support calls) and the success measure",
+     "cares_about": "Faster onboarding; fewer repeat questions; staff and new hires in their own language",
+     "blocks_if": "No clear number to improve, or the unit prefers its global vendor",
+     "label": "INFERENCE",
+     "source_url": "https://www.ey.com/content/dam/ey-unified-site/ey-com/en-in/newsroom/2026/09/ey-leapfrog-2032-the-road-to-200-gcc-s-in-coimbatore.pdf"
+    },
+    {
+     "key": "gcc:operations-user",
+     "role": "Operations user",
+     "typical_titles": "HR operations lead at the new city site; local hires; site admin team",
+     "owns": "Daily use of the onboarding and HR assistant",
+     "cares_about": "Answers in the hire's own language; works on a phone; no new login",
+     "blocks_if": "The assistant speaks only English or Hindi, so local hires ignore it",
+     "label": "INFERENCE",
+     "source_url": "https://gcc.economictimes.indiatimes.com/news/workplace-transformation/ford-business-solutions-launches-new-global-capability-centre-in-coimbatore/132258009"
+    },
+    {
+     "key": "gcc:champion",
+     "role": "Champion",
+     "typical_titles": "IT services side: Chief Technology Officer and Head of Ecosystems; Chief AI and Innovation Officer; head of alliances",
+     "owns": "Partner choice for AI models in the firm's platforms and in client deals",
+     "cares_about": "A model that wins client tests; sovereign and India-hosted options; margin on the deal",
+     "blocks_if": "The firm already holds frontier-model deals (HCLTech also signed Anthropic and Cohere in the same quarter)",
+     "label": "VENDOR",
+     "source_url": "https://www.hcltech.com/leadership"
+    },
+    {
+     "key": "gcc:economic-buyer-it-services-firm",
+     "role": "Economic buyer (IT services firm)",
+     "typical_titles": "IT services side: Chief Growth Officer; President of the India business; CEO and Managing Director",
+     "owns": "Deal flow, pricing and the AI revenue target",
+     "cares_about": "Win rate on AI deals; price pressure; clients who ask for India-hosted models",
+     "blocks_if": "The client asks for a different model, or the margin is too thin after model costs",
+     "label": "VENDOR",
+     "source_url": "https://www.hcltech.com/leadership"
+    }
+   ],
+   "fit": {
+    "compute": "later",
+    "inference": "prove",
+    "models": "prove",
+    "speech": "lead",
+    "translate": "attach",
+    "docs": "later",
+    "voice": "attach",
+    "custom": "prove",
+    "agents": "later"
+   }
+  },
+  {
+   "id": "retail",
+   "name": "Retail & consumer",
+   "sub": "E-commerce, D2C, auto",
+   "roles": [
+    {
+     "key": "retail:economic-buyer",
+     "role": "Economic buyer",
+     "typical_titles": "Managing Director and Group CEO; CEO; Founder CEO",
+     "owns": "Total budget for customer care and growth",
+     "cares_about": "Cost per order and per contact; growth in new cities",
+     "blocks_if": "The case shows no saving in the P&L",
+     "label": "VENDOR",
+     "source_url": "https://www.swiggy.com/corporate/"
+    },
+    {
+     "key": "retail:business-owner",
+     "role": "Business owner",
+     "typical_titles": "CEO of a business unit (Instamart, Food Marketplace); Chief Business Officer",
+     "owns": "New-city launch, dealer growth, seller growth",
+     "cares_about": "Order growth; dealer reach; repeat rate",
+     "blocks_if": "A pilot slows a launch",
+     "label": "VENDOR",
+     "source_url": "https://www.heromotocorp.com/en-in/company/about-us/board-and-leadership.html"
+    },
+    {
+     "key": "retail:operations-user",
+     "role": "Operations user",
+     "typical_titles": "Head of customer care; Head of seller or dealer operations; Retail Head",
+     "owns": "Daily calls, tickets, returns and onboarding",
+     "cares_about": "Handle time; peak-day load; local-language cover",
+     "blocks_if": "The bot cannot hand over to a human",
+     "label": "INFERENCE",
+     "source_url": "https://v2retail.com/about-us/"
+    },
+    {
+     "key": "retail:technical-evaluator",
+     "role": "Technical evaluator",
+     "typical_titles": "Chief Technology Officer; Chief Digital & Information Officer; Chief Product Officer",
+     "owns": "Links to order, CRM and telephony systems",
+     "cares_about": "API fit; delay in replies; data held in India",
+     "blocks_if": "No API for order lookup",
+     "label": "VENDOR",
+     "source_url": "https://www.swiggy.com/corporate/"
+    },
+    {
+     "key": "retail:risk-and-compliance",
+     "role": "Risk and compliance",
+     "typical_titles": "General Counsel; Company Secretary; consumer-protection compliance lead",
+     "owns": "Consumer Protection Act duties; CCPA dark-pattern self-declaration; NCH replies",
+     "cares_about": "Wrong refund promises; no clear way to reach a person; call records",
+     "blocks_if": "No call record or audit trail",
+     "label": "VENDOR",
+     "source_url": "https://www.titancompany.in/leadership-team"
+    },
+    {
+     "key": "retail:procurement",
+     "role": "Procurement",
+     "typical_titles": "Head of Procurement; vendor management; CFO signs",
+     "owns": "Vendor choice and contract terms",
+     "cares_about": "Per-minute price; telephony extras; exit terms",
+     "blocks_if": "Total cost after telephony is unclear",
+     "label": "INFERENCE",
+     "source_url": "https://docs.sarvam.ai/voice-agents/pricing"
+    },
+    {
+     "key": "retail:champion",
+     "role": "Champion",
+     "typical_titles": "Chief Growth Officer; Chief Marketing Officer; Head of CX; Chief Customer Officer",
+     "owns": "Vernacular marketing and customer experience goals",
+     "cares_about": "Conversion in Tier 2 and Tier 3 towns; repeat purchase; CSAT",
+     "blocks_if": "No proof in the local language",
+     "label": "INFERENCE",
+     "source_url": "https://www.swiggy.com/corporate/"
+    }
+   ],
+   "fit": {
+    "compute": "park",
+    "inference": "prove",
+    "models": "later",
+    "speech": "prove",
+    "translate": "prove",
+    "docs": "park",
+    "voice": "later",
+    "custom": "park",
+    "agents": "park"
+   }
+  }
+ ]
+}

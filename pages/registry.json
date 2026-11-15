@@ -1,0 +1,124 @@
+{
+  "note": "Pages in scope for the hero audit. Chosen from the sarvam.ai navigation (captured 15 Nov 2026) and the market map products, not by traffic. Semrush traffic is a column only: about 96% of sarvam.ai's organic search traffic in India goes to free translation tool pages, so enterprise product pages barely register. Section audited on every page: the hero (H1, sub-line, main button).",
+  "traffic_source": "Semrush organic research, database 'in' (Google India), pulled 15 Nov 2026, estimated monthly visits. 'not in top 40' means below 19 visits: the page was not among the 40 highest-traffic non-translation pages.",
+  "pages": [
+    {
+      "slug": "token-factory",
+      "name": "Token Factory",
+      "url": "https://www.sarvam.ai/token-factory",
+      "layer": "Engine (GPUs and model serving)",
+      "traffic_in": "not in top 40",
+      "status": "page pack approved for questions pending; runs done",
+      "map_product": "inference"
+    },
+    {
+      "slug": "voice-agents",
+      "name": "Voice Agents",
+      "url": "https://www.sarvam.ai/products/voice-agents",
+      "layer": "Wedge (wins customers today)",
+      "traffic_in": "not in top 40",
+      "status": "next page pack",
+      "map_product": "voice"
+    },
+    {
+      "slug": "document-ai",
+      "name": "Document AI",
+      "url": "https://www.sarvam.ai/products/document-ai",
+      "layer": "Wedge (second)",
+      "traffic_in": "not in top 40",
+      "status": "captured only",
+      "map_product": "docs"
+    },
+    {
+      "slug": "work-agents",
+      "name": "Work Agents",
+      "url": "https://www.sarvam.ai/products/work-agents",
+      "layer": "Bets",
+      "traffic_in": "not in top 40",
+      "status": "captured only",
+      "map_product": "agents"
+    },
+    {
+      "slug": "coding-agents",
+      "name": "Coding Agents",
+      "url": "https://www.sarvam.ai/products/coding-agents",
+      "layer": "Bets",
+      "traffic_in": "1,177",
+      "status": "captured only",
+      "map_product": null
+    },
+    {
+      "slug": "model-training",
+      "name": "Model Training",
+      "url": "https://www.sarvam.ai/products/model-training",
+      "layer": "Moat (custom models)",
+      "traffic_in": "not in top 40",
+      "status": "captured only",
+      "map_product": "custom"
+    },
+    {
+      "slug": "edge",
+      "name": "Sarvam Edge",
+      "url": "https://www.sarvam.ai/products/edge",
+      "layer": "Bets",
+      "traffic_in": "not in top 40",
+      "status": "captured only",
+      "map_product": null
+    },
+    {
+      "slug": "content-studio",
+      "name": "Content Studio",
+      "url": "https://www.sarvam.ai/products/content-studio",
+      "layer": "Bets",
+      "traffic_in": "not in top 40",
+      "status": "captured only",
+      "map_product": null
+    },
+    {
+      "slug": "api-text-to-speech",
+      "name": "Text to Speech API",
+      "url": "https://www.sarvam.ai/apis/text-to-speech",
+      "layer": "Models (APIs)",
+      "traffic_in": "1,593",
+      "status": "captured only",
+      "map_product": "speech"
+    },
+    {
+      "slug": "api-speech-to-text",
+      "name": "Speech to Text API",
+      "url": "https://www.sarvam.ai/apis/speech-to-text",
+      "layer": "Models (APIs)",
+      "traffic_in": "99",
+      "status": "captured only",
+      "map_product": "speech"
+    },
+    {
+      "slug": "api-translation",
+      "name": "Translation API",
+      "url": "https://www.sarvam.ai/apis/translation",
+      "layer": "Models (APIs)",
+      "traffic_in": "51",
+      "status": "captured only",
+      "map_product": "translate"
+    },
+    {
+      "slug": "api-document-digitisation",
+      "name": "Document Digitisation API",
+      "url": "https://www.sarvam.ai/apis/document-digitisation",
+      "layer": "Models (APIs)",
+      "traffic_in": "not in top 40",
+      "status": "captured only",
+      "map_product": "docs"
+    },
+    {
+      "slug": "homepage",
+      "name": "Homepage",
+      "url": "https://www.sarvam.ai/",
+      "layer": "Whole company",
+      "traffic_in": "37,997",
+      "status": "captured only",
+      "map_product": null
+    }
+  ],
+  "map_product_note": "GTM map product key used for the persona fit order. null means the map has no matching product, so all industries show without a fit status."
+}
