@@ -7,16 +7,20 @@ flowchart TD
     classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778
     classDef gate stroke-width:3px
     classDef stop fill:#FDE2E2,stroke:#D14B4B,color:#5a1010
+    classDef jev fill:#EADFFF,stroke:#7A4DD8
+    classDef j2 fill:#D9F3EC,stroke:#1E9E80
     S["1 Start (person)<br/>page: Token Factory<br/>buyer: not recorded<br/>goal: not recorded<br/>started in the local console"]
     C["2 Hero captured 2026-11-15<br/>H1: Frontier open models. Served with speed, scale and privacy.<br/>the audit, writer and gates read this saved copy"]
     P["3 Page set up and approved<br/>positioning and claims approved by the owner<br/>buyer checklist not approved: A7 and A8 skipped"]
-    A["4 AUDIT the live hero (Jev)<br/>gaps: A4-cta<br/>already answered: A1-audience, A2-value, A6-swap, A7-checklist-item-1, A7-checklist-item-3"]
+    A["4 AUDIT the saved hero (Jev only)<br/>questions v1<br/>gaps: A4-cta<br/>already answered: A1-audience, A2-value, A6-swap, A7-checklist-item-1, A7-checklist-item-3"]
     D{"Gap found?"}
     H["5 GAP DOSSIER<br/>298 words numbers, ids and quotes checked by code"]
     T["6 TEST PLAN<br/>action: one click on the main button<br/>goal link:"]
     W["7 WRITER (Opus): 3 variants<br/>A: Leading open models run on Sarvam's GPUs in India, through an OpenAI-compatible API.<br/>B: 99.95% uptime SLA for enterprise deployments, agreed by contract.<br/>C: One API key for all models in the Token Factory catalogue."]
-    G1["Gate 1: RULES, 1 round(s)<br/>A: ok<br/>B: ok<br/>C: ok"]:::gate
-    G2["Gate 2: JEV + JUDGE 2<br/>A: gain +0.32 / +0.42<br/>C: gain +0.64 / +0.98<br/>B: gain +0.48 / +0.92"]:::gate
+    G1["Gate 1: RULES (no model)<br/>1 round(s)<br/>A: ok<br/>B: ok<br/>C: ok"]:::gate
+    GJ["Jev<br/>honesty G1-G3, then A1-A8 on the variant"]:::jev
+    GK["Judge 2: OpenAI gpt-6-luna-decisions<br/>honesty G1-G3, then A1-A8 on the variant"]:::j2
+    G2["both say better?<br/>A: gain +0.32 / +0.42<br/>C: gain +0.64 / +0.98<br/>B: gain +0.48 / +0.92"]:::gate
     SL["Shortlist<br/>A: held<br/>C: failed Gate 2 (near miss)<br/>B: failed Gate 2"]
     PX["8 Apply the words, check the button link<br/>3 PNG pair(s) made"]
     AP["9 HUMAN approval<br/>waiting for a person"]:::todo
@@ -27,7 +31,9 @@ flowchart TD
     S --> C --> P --> A --> D
     D -- yes --> H --> T --> W --> G1
     G1 -- fail, max 2 rounds --> W
-    G1 -- pass --> G2 --> SL
+    G1 -- pass --> GJ --> G2
+    G1 -- pass --> GK --> G2
+    G2 --> SL
     SL --> PX --> AP
     AP -- approve --> SP --> SB --> FD --> DOC
 ```

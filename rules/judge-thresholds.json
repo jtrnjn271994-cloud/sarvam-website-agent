@@ -1,69 +1,69 @@
 {
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "gray_zone": null,
   "judges": {
     "judge1": {
       "model": "typesafe/jev-1.14",
       "A1-audience": {
         "polarity": "good",
-        "pass_at": 0.69,
+        "pass_at": 0.49,
         "fail_at": 0.17,
         "advisory": false,
-        "n_fit": 5
+        "n_fit": 9
       },
       "A2-value": {
         "polarity": "good",
-        "pass_at": 0.5,
-        "fail_at": 0.09,
+        "pass_at": 0.76,
+        "fail_at": 0.08,
         "advisory": false,
         "n_fit": 5
       },
       "A3-proof": {
         "polarity": "good",
-        "pass_at": 0.74,
+        "pass_at": 0.75,
         "fail_at": 0.04,
         "advisory": false,
         "n_fit": 5
       },
       "A4-cta": {
         "polarity": "good",
-        "pass_at": 0.64,
-        "fail_at": 0.48,
+        "pass_at": 0.9,
+        "fail_at": 0.24,
         "advisory": false,
-        "n_fit": 5
+        "n_fit": 6
       },
       "A7-checklist-item": {
         "polarity": "good",
         "pass_at": 0.82,
-        "fail_at": 0.23,
+        "fail_at": 0.22,
         "advisory": false,
         "n_fit": 10
       },
       "A8-objection": {
         "polarity": "good",
         "pass_at": 0.44,
-        "fail_at": 0.37,
+        "fail_at": 0.32,
         "advisory": false,
         "n_fit": 10
       },
       "G1-support": {
         "polarity": "good",
-        "pass_at": 0.14,
-        "fail_at": 0.69,
+        "pass_at": 0.11,
+        "fail_at": 0.72,
         "advisory": true,
         "n_fit": 9
       },
       "G2-overreach": {
         "polarity": "bad",
         "flag_at": 0.16,
-        "clean_at": 0.23,
+        "clean_at": 0.25,
         "advisory": true,
         "n_fit": 11
       },
       "G3-banned": {
         "polarity": "bad",
-        "flag_at": 0.31,
-        "clean_at": 0.22,
+        "flag_at": 0.4,
+        "clean_at": 0.23,
         "advisory": false,
         "n_fit": 6
       }
@@ -72,15 +72,15 @@
       "model": "openai/gpt-6-luna-decisions",
       "A1-audience": {
         "polarity": "good",
-        "pass_at": 0.83,
-        "fail_at": 0.24,
+        "pass_at": 0.63,
+        "fail_at": 0.22,
         "advisory": false,
-        "n_fit": 5
+        "n_fit": 9
       },
       "A2-value": {
         "polarity": "good",
-        "pass_at": 0.76,
-        "fail_at": 0.11,
+        "pass_at": 0.8,
+        "fail_at": 0.1,
         "advisory": false,
         "n_fit": 5
       },
@@ -93,10 +93,10 @@
       },
       "A4-cta": {
         "polarity": "good",
-        "pass_at": 1.0,
-        "fail_at": 0.42,
+        "pass_at": 0.99,
+        "fail_at": 0.0,
         "advisory": false,
-        "n_fit": 5
+        "n_fit": 6
       },
       "A7-checklist-item": {
         "polarity": "good",

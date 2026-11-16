@@ -5,7 +5,7 @@ variant (for example B-edit1). The original stays as it was. Nothing is approved
 
 Two ways in:
   a person's edit:   python3 agent/edit_variant.py --page P --run R --from B --h1 "..." --sub "..." --cta "..."
-  a writer rewrite:  python3 agent/edit_variant.py --page P --run R --from B --note "say who it is for"
+  a writer rewrite:  python3 agent/edit_variant.py --page P --run R --from B --note "describe the buyer's situation in the headline"
 
 Gate 1 is not relaxed: a person's edit that breaks a rule is recorded with its problems and cannot be approved.
 """

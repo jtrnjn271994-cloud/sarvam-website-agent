@@ -1,0 +1,42 @@
+# Voice Agents: run probe3-20261116-113324, step by step
+
+Same steps as docs/architecture.html. Grey dashed = not reached yet.
+
+```mermaid
+flowchart TD
+    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778
+    classDef gate stroke-width:3px
+    classDef stop fill:#FDE2E2,stroke:#D14B4B,color:#5a1010
+    classDef jev fill:#EADFFF,stroke:#7A4DD8
+    classDef j2 fill:#D9F3EC,stroke:#1E9E80
+    S["1 Start (person)<br/>page: Voice Agents<br/>buyer: Business owner (Chief Credit Officer Head of Collections Chief Credit and Collecti…<br/>goal: More visitors start building (self-serve)<br/>started in the local console"]
+    C["2 Hero captured 2026-11-15<br/>H1: Voice agents that sound human and deliver results<br/>the audit, writer and gates read this saved copy"]
+    P["3 Page set up and approved<br/>positioning and claims approved by the owner<br/>buyer checklist approved: A7 and A8 asked"]
+    A["4 AUDIT the saved hero (Jev only)<br/>questions v2<br/>gaps: A3-proof, A4-cta<br/>already answered: A1-audience, A2-value"]
+    D{"Gap found?"}
+    H["5 GAP DOSSIER<br/>239 words numbers, ids and quotes checked by code"]
+    T["6 TEST PLAN<br/>action: one click on the main button<br/>goal link: console"]
+    W["7 WRITER (Opus): 3 variants<br/>A: Describe your collections goal in plain language. Go live in minutes.<br/>B: Indian-language phone agents for lenders, on ISO 27001:2022 certified infrastructure<br/>C: Phone agents that update your loan records while the borrower is still talking"]
+    G1["Gate 1: RULES (no model)<br/>1 round(s)<br/>A: ok<br/>B: ok<br/>C: ok<br/>A-edit1: ok"]:::gate
+    GJ["Jev<br/>honesty G1-G3, then A1-A8 on the variant"]:::jev
+    GK["Judge 2: OpenAI gpt-6-luna-decisions<br/>honesty G1-G3, then A1-A8 on the variant"]:::j2
+    G2["both say better?<br/>A-edit1: gain +0.20 / +0.26<br/>A: gain +0.19 / +0.26<br/>C: gain +0.16 / +0.24<br/>B: gain +0.32 / +0.43"]:::gate
+    SL["Shortlist<br/>A-edit1: held<br/>A: held<br/>C: held<br/>B: failed Gate 2 (near miss)"]
+    PX["8 Apply the words, check the button link<br/>3 PNG pair(s) made"]
+    AP["9 HUMAN approval<br/>waiting for a person"]:::todo
+    ED["Edit and re-check<br/>A-edit1 from A (person's edit): checked by both gates"]
+    SP["10 SANDBOX PLAN<br/>after a variant is approved"]:::todo
+    SB["Simulate and check<br/>not run yet"]:::todo
+    FD["11 FINDINGS<br/>not written yet"]:::todo
+    DOC["12 Submission and docs<br/>README, architecture, Jev note"]
+    S --> C --> P --> A --> D
+    D -- yes --> H --> T --> W --> G1
+    G1 -- fail, max 2 rounds --> W
+    G1 -- pass --> GJ --> G2
+    G1 -- pass --> GK --> G2
+    G2 --> SL
+    SL --> PX --> AP
+    AP -- edit --> ED
+    ED --> G1
+    AP -- approve --> SP --> SB --> FD --> DOC
+```

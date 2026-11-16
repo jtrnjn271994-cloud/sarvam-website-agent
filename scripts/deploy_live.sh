@@ -28,6 +28,8 @@ cp docs/architecture.html "$STAGE/public/architecture.html"   # the one to share
 for x in agent app rules knowledge library skills templates schemas docs submission tests pages README.md; do
   [ -e "$x" ] && rsync -a --exclude '__pycache__' --exclude '*.pyc' --exclude '.env*' "$x" "$STAGE/bundle/"
 done
+# The deploy time. On the website, a setup file saved in Supabase before this time never replaces the deployed copy.
+python3 -I -c 'import datetime,json,sys; json.dump({"deployed_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")}, open(sys.argv[1], "w"))' "$STAGE/bundle/deploy-stamp.json"
 cat > "$STAGE/api/index.py" <<'PY'
 import os
 import sys

@@ -317,7 +317,7 @@ function viewAudit() {
       `<div class="banner p-off small">Older run: made before scope tags and question approval existed. Every checklist item was asked of the hero.</div>`) +
     `<div class="card"><b>Live hero (baseline)</b><div class="hero"><span class="h">${esc(S.capture?.h1)}</span>${esc(S.capture?.sub)}<div class="small muted">Button: ${esc((S.capture?.ctas || [])[0]?.text)}</div></div>
      ${S.capture ? `<img class="pair" alt="Live hero" src="${fileUrl("hero-desktop.png", {capture: S.capture.folder})}">` : ""}</div>
-    <div class="card tablewrap"><b>Jev audit of the live hero</b> <span class="small muted">Gaps: ${esc((a.gaps || []).join(", ") || "none")}</span>
+    <div class="card tablewrap"><b>Jev audit of the saved hero</b> <span class="small muted">Gaps: ${esc((a.gaps || []).join(", ") || "none")}</span>
     <table><tr><th>Question</th><th>Asked</th><th>p</th><th></th><th>${own ? "Band used in this run" : "Band today (this older run used an earlier one)"}</th><th>Result</th></tr>
     ${Object.entries(a.p).map(([k, v]) => `<tr><td><b>${esc(k)}</b></td><td>${esc(auditText(k))}</td><td>${v.toFixed(2)}</td>
       <td><div class="bar"><i style="width:${Math.round(v * 100)}%"></i></div></td><td class="small">${band(th[bandKey(k)])}</td><td>${pill(a.verdict[k])}</td></tr>`).join("")}</table>
@@ -407,7 +407,7 @@ function editBox(x) {
       <textarea class="esub" rows="2" maxlength="400" style="${FIELD}" aria-label="Sub-line">${esc(x.subline || "")}</textarea>
       <input class="ecta" value="${esc(x.cta || "")}" maxlength="400" style="${FIELD}" aria-label="Button">
       <button class="primary" data-k="words">Re-check my words</button>
-      <textarea class="enote" rows="2" maxlength="400" placeholder="Or a note for the writer, for example: name the buyer in the headline" style="${FIELD}"></textarea>
+      <textarea class="enote" rows="2" maxlength="400" placeholder="Or a note for the writer, for example: describe the buyer's situation in the headline" style="${FIELD}"></textarea>
       <button data-k="note">Ask the writer to revise</button>
     </div></details>`;
 }
@@ -616,7 +616,7 @@ function scoreTable(name) {
   const g3 = j => r[j] ? `${r[j].G3?.toFixed(2)} (${esc(r[j].G3_verdict)})` : "-";
   const rule = S.qs?.better_than_baseline || {};
   return `<details class="card" style="margin:8px 0" open><summary class="small"><b>How it was scored</b>: Gate 1 rules, then both judges</summary>
-    <p class="small">Gate 1 (rules, no model): ${(((S.info.probe.gate1_rounds || []).slice(-1)[0] || {})[name] || []).length ? "failed" : "passed"}. Gate 2: each judge answered every audit question for the live hero and for this variant. A higher number means “more yes”; for A6 (rival could copy it) lower is better, so its change is shown with the sign flipped.
+    <p class="small">Gate 1 (rules, no model): ${(((S.info.probe.gate1_rounds || []).slice(-1)[0] || {})[name] || []).length ? "failed" : "passed"}. Gate 2: each judge answered every audit question for today's hero (the saved copy) and for this variant. A higher number means “more yes”; for A6 (rival could copy it) lower is better, so its change is shown with the sign flipped.
     Rule: average change on the “gap” rows must be at least +${rule.min_gain}, and no “other” row may drop more than ${rule.max_drop}.</p>
     <div class="tablewrap"><table><tr><th>Question</th><th>Row</th><th>Jev: live → variant (change)</th><th>Judge 2: live → variant (change)</th></tr>
     ${qs.map(k => `<tr><td>${esc(k)}</td><td>${kind(k)}</td>${cell("judge1", k)}${cell("judge2", k)}</tr>`).join("")}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Page setup: everything a run needs for one page and one buyer persona, drafted, checked and then approved
-by a person in the console. The reasoning model (Sonnet) drafts; code checks; a person approves.
+by a person in the console. The reasoning model (Gemini) drafts; code checks; a person approves.
 
 Parts (each approved separately, by file hash, in pages/<page>/setup/approvals.json):
   positioning        loaded if the page already has one (context-pack.md), else drafted with the positioning skills

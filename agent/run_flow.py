@@ -21,7 +21,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GROUP_WORDS = {"passed": "passed", "held": "held", "failed_gate2": "failed Gate 2", "failed_gate1": "failed Gate 1"}
-HEAD = "flowchart TD\n    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778\n    classDef gate stroke-width:3px\n    classDef stop fill:#FDE2E2,stroke:#D14B4B,color:#5a1010\n"
+HEAD = "flowchart TD\n    classDef todo fill:#f4f5f7,stroke:#aab,stroke-dasharray:4 3,color:#778\n    classDef gate stroke-width:3px\n    classDef stop fill:#FDE2E2,stroke:#D14B4B,color:#5a1010\n    classDef jev fill:#EADFFF,stroke:#7A4DD8\n    classDef j2 fill:#D9F3EC,stroke:#1E9E80\n"
 
 
 def esc(t, n=90):
@@ -73,7 +73,7 @@ def mermaid(info):
     def node(i, lines, done, shape=""):
         t = "<br/>".join(esc(x) for x in lines if x is not None)
         body = '{"%s"}' % t if shape == "d" else '["%s"]' % t
-        cls = ":::todo" if not done else (":::gate" if shape == "g" else (":::stop" if shape == "s" else ""))
+        cls = ":::todo" if not done else {"g": ":::gate", "s": ":::stop", "jev": ":::jev", "j2": ":::j2"}.get(shape, "")
         L.append("    %s%s%s" % (i, body, cls))
 
     pq = p.get("page_questions") or {}
@@ -83,7 +83,8 @@ def mermaid(info):
     node("P", ["3 Page set up and approved", "positioning and claims approved by the owner",
                "buyer checklist approved: A7 and A8 asked" if pq.get("approved") else "buyer checklist not approved: A7 and A8 skipped"], bool(p))
     passed = [k for k, x in v.items() if "pass" in str(x)]
-    node("A", ["4 AUDIT the live hero (Jev)", "gaps: " + (", ".join(a.get("gaps") or []) or "none"), "already answered: " + (", ".join(passed) or "none")], bool(p.get("audit")))
+    qv = "questions v2" if p.get("questions_version") == 2 else "questions v1"
+    node("A", ["4 AUDIT the saved hero (Jev only)", qv, "gaps: " + (", ".join(a.get("gaps") or []) or "none"), "already answered: " + (", ".join(passed) or "none")], bool(p.get("audit")))
     node("D", ["Gap found?"], bool(p.get("audit")), "d")
     if nogap:
         node("N", ["Stop: no gap", "nothing is written"], True, "s")
@@ -93,10 +94,13 @@ def mermaid(info):
     node("H", ["5 GAP DOSSIER", ("%d words; numbers, ids and quotes checked by code" % len(dz.split())) if dz else "not written"], bool(dz))
     node("T", ["6 TEST PLAN", "action: one click on the main button", "goal link: " + ((p.get("goal") or {}).get("kind") or "")], bool(dz))
     node("W", ["7 WRITER (Opus): %d variants" % len(first)] + ["%s: %s" % (x.get("name"), x.get("h1")) for x in first], bool(first))
-    node("G1", ["Gate 1: RULES, %d round(s)" % len(rounds)] + ["%s: %s" % (k, ("%d problem(s)" % len(pr)) if pr else "ok") for k, pr in g1.items()], bool(rounds), "g")
+    node("G1", ["Gate 1: RULES (no model)", "%d round(s)" % len(rounds)] + ["%s: %s" % (k, ("%d problem(s)" % len(pr)) if pr else "ok") for k, pr in g1.items()], bool(rounds), "g")
     scored = [x for x in sl if x["group"] != "failed_gate1"]
-    node("G2", ["Gate 2: JEV + JUDGE 2"] + ["%s: %s" % (x["name"], ("gain " + " / ".join("%+.2f" % g for g in x["gains"].values())) if x.get("gains") else "not scored") for x in scored],
-         bool(p.get("gate2")), "g")
+    reached2 = bool(p.get("gate2"))
+    node("GJ", ["Jev", "honesty G1-G3, then A1-A8 on the variant"], reached2, "jev")
+    node("GK", ["Judge 2: OpenAI gpt-6-luna-decisions", "honesty G1-G3, then A1-A8 on the variant"], reached2, "j2")
+    node("G2", ["both say better?"] + ["%s: %s" % (x["name"], ("gain " + " / ".join("%+.2f" % g for g in x["gains"].values())) if x.get("gains") else "not scored") for x in scored],
+         reached2, "g")
     if not scored and rounds:
         node("X", ["Every variant failed Gate 1", "edit one and check it again (step 9)"], True, "s")
     node("SL", ["Shortlist"] + ["%s: %s%s" % (x["name"], GROUP_WORDS.get(x["group"], x["group"]), " (near miss)" if x.get("near_miss") else "") for x in sl], bool(sl))
@@ -124,7 +128,7 @@ def mermaid(info):
         node("SB", ["Simulate and check", "not run yet"], False)
         node("FD", ["11 FINDINGS", "not written yet"], False)
     node("DOC", ["12 Submission and docs", "README, architecture, Jev note"], True)
-    E += ["S --> C --> P --> A --> D", "D -- yes --> H --> T --> W --> G1", "G1 -- fail, max 2 rounds --> W", "G1 -- pass --> G2 --> SL"]
+    E += ["S --> C --> P --> A --> D", "D -- yes --> H --> T --> W --> G1", "G1 -- fail, max 2 rounds --> W", "G1 -- pass --> GJ --> G2", "G1 -- pass --> GK --> G2", "G2 --> SL"]
     if not scored and rounds:
         E.append("G1 -- every variant failed --> X --> SL")
     E += ["SL --> PX --> AP"]
@@ -170,7 +174,7 @@ def _judge(better):
 
 def scenarios():
     base = {"persona": {"buyer": "Buyer"}, "goal": {"label": "Goal", "kind": "docs"}, "audit": {"verdict": {"A1": "fail", "A7-x": "pass"}, "gaps": ["A1"]},
-            "dossier": {"text": "word " * 200}, "page_questions": {"approved": True}}
+            "dossier": {"text": "word " * 200}, "page_questions": {"approved": True}, "questions_version": 2}
     S = {}
     S["no gap"] = dict(base, audit={"verdict": {"A1": "pass"}, "gaps": []}, dossier=None)
     S["all failed Gate 1"] = dict(base, variants=[_variant("A"), _variant("B")], gate1_rounds=[{"A": ["x"], "B": ["y"]}, {"A": ["x"], "B": ["y"]}], gate2={})
@@ -181,6 +185,7 @@ def scenarios():
                        edits=[{"name": "A-edit1", "from": "A", "kind": "note", "gate1_problems": []}])
     S["website run"] = dict(S["passed, waiting"], screenshots="not taken (website run)")
     S["stopped early"] = dict(base, dossier=None)
+    S["questions v1 (old run)"] = {k: v for k, v in S["passed, waiting"].items() if k != "questions_version"}
     S["empty folder"] = {}
     return S
 
@@ -198,7 +203,9 @@ def selftest():
                 bad = [l for l in mm.split("\n")[4:] if l.strip() and l.count('"') % 2]
                 need = ["S", "A", "D"] + (["N"] if name == "no gap" else ["AP", "DOC"])
                 miss = [n for n in need if not re.search(r"^\s+%s[\[{]" % n, mm, re.M)]
-                ok_one = not bad and not miss and (name != "all failed Gate 1" or " X[" in mm) and (name != "edited" or "AP -- edit --> ED" in mm)
+                split = name == "no gap" or (all(re.search(r"^\s+%s[\[{]" % n, mm, re.M) for n in ("GJ", "GK", "G2")) and "GJ --> G2" in mm and "GK --> G2" in mm and "G2 --> SL" in mm)
+                qv = ("questions v2" if probe.get("questions_version") == 2 else "questions v1") in mm
+                ok_one = not bad and not miss and split and qv and (name != "all failed Gate 1" or " X[" in mm) and (name != "edited" or "AP -- edit --> ED" in mm)
             except Exception as e:
                 ok_one, bad, miss = False, [str(e)], []
             ok &= ok_one

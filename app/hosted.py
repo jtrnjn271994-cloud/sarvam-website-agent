@@ -108,11 +108,37 @@ def sb(method, path, body=None, prefer=None):
         raise RuntimeError("storage error %s: %s" % (e.code, e.read().decode("utf-8", "replace")[:300]))
 
 
+def deploy_stamp():
+    """UTC time of the deploy, written by scripts/deploy_live.sh. Empty when running outside a deploy."""
+    try:
+        return json.load(open(os.path.join(BUNDLE, "deploy-stamp.json"), encoding="utf-8"))["deployed_at"][:19]
+    except Exception:
+        return ""
+
+
+DEPLOY_STAMP = deploy_stamp()
+
+
+def deploy_is_newer(path, updated_at):
+    """A setup, claims or evidence file saved on the website before the current deploy must not replace the
+    deployed copy: the newer one wins. Runs are never in the deploy and new, so they always load."""
+    if not DEPLOY_STAMP or "/runs/" in path or not os.path.isfile(os.path.join(BUNDLE, path)):
+        return False
+    return (updated_at or "").replace(" ", "T")[:19] < DEPLOY_STAMP
+
+
 def hydrate():
     """Bring files saved by earlier website requests into this instance's /tmp copy."""
     rows = sb("GET", "sarvam_agent_files?select=path,updated_at")
     with SYNC_LOCK:
-        want = [r["path"] for r in rows if SYNCED.get(r["path"]) != r["updated_at"] and SAFE_PATH.match(r["path"])]
+        want = []
+        for r in rows:
+            if SYNCED.get(r["path"]) == r["updated_at"] or not SAFE_PATH.match(r["path"]):
+                continue
+            if deploy_is_newer(r["path"], r["updated_at"]):
+                SYNCED[r["path"]] = r["updated_at"]   # keep the deployed copy
+                continue
+            want.append(r["path"])
         for i in range(0, len(want), 40):
             chunk = want[i:i + 40]
             q = "sarvam_agent_files?select=path,content,updated_at&path=in.(" + ",".join("%22" + urllib.parse.quote(p, safe="/._-") + "%22" for p in chunk) + ")"

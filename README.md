@@ -47,6 +47,8 @@ Open http://127.0.0.1:8765. The steps are the same as on the website, plus one m
 
 On your machine the agent also takes screenshots: it loads the live page once, read only with no clicks, to draw a PNG pair for each variant. The sandbox runs 20 browser sessions per arm on the saved page, with every outside request blocked. A run costs about $0.25 to $0.55.
 
+A run on your machine stays on your machine, in `pages/<page>/runs/`. It goes to GitHub only when you commit and push it. It never goes to Supabase or the website on its own.
+
 You can browse every saved run without a key. You need the key only to start a run, edit a variant or draft a page setup.
 
 ## 3. When no variant passes
@@ -55,7 +57,7 @@ A run can end with no variant that passed both gates. You still have three ways 
 
 1. **Approve against Gate 2, with a reason.** A variant that failed Gate 2 (the judges) can be approved if you type why. A **near miss** label means the gaps improved but one kept question fell. That is often wording, not meaning.
 2. **Edit and re-check.** Open **Edit and re-check** under any variant. Change the H1, sub-line or button yourself, and click **Re-check my words**.
-3. **Ask the writer to revise.** In the same box, write a note, for example "name the buyer in the headline", and click **Ask the writer to revise**. The writer rewrites that one variant.
+3. **Ask the writer to revise.** In the same box, write a note, for example "describe the buyer's situation in the headline", and click **Ask the writer to revise**. The writer rewrites that one variant.
 
 An edit or a revision goes through Gate 1 (rules) and Gate 2 (both judges) again. It comes back as a new variant, for example `B-edit1`, and the original stays as it was. A variant that fails Gate 1 cannot be approved as it stands, because its text is not true or not allowed. Edit it and check it again. Each run allows 5 edits. An edit costs about $0.02 to $0.10.
 
@@ -67,9 +69,11 @@ If the audit finds **no gap**, the hero already answers the buyer's basic questi
 python3 agent/pages_registry.py --capture --page coding-agents        # save the live hero once
 python3 agent/page_setup.py --page coding-agents --persona gcc:technical-evaluator   # draft claims, positioning and checklist
 python3 agent/probe3.py --page coding-agents --persona gcc:technical-evaluator --goal read-docs   # one run
-python3 agent/edit_variant.py --page coding-agents --run probe3-YYYYMMDD-HHMMSS --from B --note "name the buyer"   # edit and re-check
+python3 agent/edit_variant.py --page coding-agents --run probe3-YYYYMMDD-HHMMSS --from B --note "describe the buyer's situation"   # edit and re-check
 python3 agent/sandbox_hero.py --page coding-agents --run probe3-YYYYMMDD-HHMMSS   # sandbox, after a variant is approved
 ```
+
+Jev's questions are versioned (`rules/judge-questions.json`). Each run records which version it used.
 
 Approvals are written only when a person clicks Approve in the console. The command line never approves. The sandbox refuses to run until a variant is approved.
 
@@ -82,11 +86,11 @@ python3 -I agent/sandbox_hero.py --selftest
 
 ## 5. How it works
 
-Read **`docs/architecture.html`**, online at **https://sarvam-website-agent.vercel.app/architecture.html** (also in the Submission and docs tab). It shows the whole run step by step, the three layers of the code, the questions Jev asks and the deployment. **`submission/JEV-NOTE.md`** explains where Jev fits.
+Read **`docs/architecture.html`**, online at **https://sarvam-website-agent.vercel.app/architecture.html** (also in the Submission and docs tab). It shows the whole run step by step, the three layers, who asks which questions at each check, the sandbox and findings, where things live (your machine, GitHub, the website, Supabase) and what moves between them, how the fleet works, which skills each step uses, and how each run's diagram is made. **`submission/JEV-NOTE.md`** explains where Jev fits.
 
 **Each run has its own diagram.** `agent/run_flow.py` draws the same steps, filled in with that run's facts: buyer, gaps, variants, gate results, edits, approval and sandbox. Steps the run did not reach are grey and dashed. The run, edit and sandbox scripts update it when they finish (`RUN-FLOW.html` in the run folder), and the Sandbox and findings tab shows it. The template and every scenario it handles are in `.claude/skills/run-architecture/SKILL.md`. Check them with `python3 -I agent/run_flow.py --selftest`.
 
-**Models.** Four roles live in `agent/models.json`: reasoning (Google Gemini 3.8 Flash), writer (Anthropic Claude Opus 5.5), judge 1 (Jev) and judge 2 (OpenAI GPT-6 Luna decisions). One OpenRouter key serves all four. To swap one, set it in `.env`, for example `MODEL_WRITER=anthropic/claude-opus-5.5`. The two judges use OpenRouter's decisions endpoint, which today accepts only Jev and OpenAI's decision model.
+**Models.** Four roles live in `agent/models.json`: reasoning (Google Gemini 3.8 Flash), writer (Anthropic Claude Opus 5.5), judge 1 (Jev) and Judge 2 (OpenAI gpt-6-luna-decisions). Jev alone runs the audit. Both judges run Gate 2. One OpenRouter key serves all four. To swap one, set it in `.env`, for example `MODEL_WRITER=anthropic/claude-opus-5.5`. The two judges use OpenRouter's decisions endpoint, which today accepts only Jev and OpenAI's decision model.
 
 **The knowledge base.** `knowledge/` is a fixed, versioned snapshot of the checked research: price ledgers, buyer research, rival cases and proof rows. Rows that failed a check are not in it. Contact records, named people and full transcripts are not in it. The agent cites a row as `KB:<id>`. Code checks that the id exists and that every number next to it is in that row. Every run records the knowledge version it used.
 
@@ -124,5 +128,12 @@ Read **`docs/architecture.html`**, online at **https://sarvam-website-agent.verc
 ./scripts/deploy_live.sh --prod # publishes to sarvam-website-agent.vercel.app
 ```
 The deploy script stops if it finds a key-like string in the files it is about to deploy. Set a credit limit on the OpenRouter key at openrouter.ai: the site's own caps are the second line.
+
+**Runs made on the website.** They are saved in Supabase only. They never reach your machine or GitHub on their own. To copy them here:
+```
+python3 -I scripts/pull_website_runs.py           # lists what the website has that this machine does not
+python3 -I scripts/pull_website_runs.py --write   # copies those runs into pages/<page>/runs/
+```
+It never overwrites a file on your machine and never changes Supabase. Then commit and push if you want them on GitHub.
 
 **Database.** Supabase project Red Zebra holds two tables. `sarvam_agent_files` keeps runs, approvals and setup files. `sarvam_agent_jobs` keeps the job log, the one-job lock and the spend. Row level security is on with no policies, so only the server key can read or write them.

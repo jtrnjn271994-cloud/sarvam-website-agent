@@ -226,7 +226,7 @@ def main():
     os.makedirs(run)
     llm.LOG_PATH = os.path.join(run, "run-log.jsonl")
     out = {"label": "PROBE v3 on the live baseline. Calibrated lines from rules/judge-thresholds.json (small self-written case set).",
-           "roles": llm.roles(), "knowledge_version": __import__("knowledge").version(), "live_capture": os.path.relpath(D["live_path"], PROJECT), "skills": {},
+           "roles": llm.roles(), "knowledge_version": __import__("knowledge").version(), "questions_version": Q.get("version", 1), "live_capture": os.path.relpath(D["live_path"], PROJECT), "skills": {},
            "page": args.page, "persona": {"key": D["persona_key"], "buyer": D["buyer"], "label": D["persona"]["label"]},
            "goal": {"id": D["goal"]["id"], "label": D["goal"]["label"], "kind": D["goal"]["kind"]},
            "destinations": D["dests"], "baseline_destination": D["cta_dest"], "main_cta_index": D["main_index"],
@@ -313,7 +313,7 @@ BUYER: {D['buyer']}
 LIVE HERO: H1 "{h1}" / sub-line "{sub}" / button "{cta}" (goes to {base_dest_txt})
 WHAT IS WRONG (from the audit): {' '.join(GP[k] for k in gaps)} {need_line}
 POSITIONING PROMISE (approved by a person; it is not a claim): {D['promise']}
-KEEP THE PROMISE: the judges score every variant on whether the hero carries this promise (question A5) and names this buyer (A1). A variant that fixes the gaps but drops the promise fails Gate 2. Put the promise's core idea in the H1 or the first sub-line sentence, using only the parts of it that a claim backs.
+KEEP THE PROMISE: the judges score every variant on whether the hero carries this promise (question A5) and speaks to this buyer's situation (A1). Naming the buyer is not needed; describing their situation is. A variant that fixes the gaps but drops the promise fails Gate 2. Put the promise's core idea in the H1 or the first sub-line sentence, using only the parts of it that a claim backs.
 Reply with JSON only:
 {{"variants":[{{"name":"A","angle":"...","h1":"...","subline":"...","cta":"...","cta_destination":"one destination id","map":[{{"fragment":"exact text","claim":"CL-001"}}],"why":"one sentence"}}]}}"""
     draft, _ = ask_json([{"role": "user", "content": sk_d + "\n\n" + rb + "\n\n" + task}], "writer draft")

@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "note": "Every question is a yes/no (noul) question. The judge returns the probability of yes. polarity 'good' means a high probability is good. 'bad' means a high probability is bad. Only a person edits this file. Thresholds are NOT here. --calibrate writes them to rules/judge-thresholds.json.",
   "audit": {
     "judge": "jev",
@@ -15,13 +15,13 @@
         "id": "A1-audience",
         "polarity": "good",
         "required": true,
-        "text": "Does the hero speak to this buyer and their situation, so that the buyer would see themselves in it?"
+        "text": "Would this buyer recognise their own situation or problem in the hero? A job title is not needed, and a label alone is not enough."
       },
       {
         "id": "A2-value",
         "polarity": "good",
         "required": true,
-        "text": "Does the headline say what the product does and what the buyer gets, in words this buyer uses?"
+        "text": "Does the hero say what the product does and what the buyer gets from it, in plain words, not a slogan?"
       },
       {
         "id": "A3-proof",
@@ -33,7 +33,7 @@
         "id": "A4-cta",
         "polarity": "good",
         "required": true,
-        "text": "Does the main button tell this buyer what happens when they click it?"
+        "text": "Does the main button say what happens on click (for example, open the docs, book a demo, see prices), not just a vague word such as 'Go', 'Learn more' or 'Click here'?"
       },
       {
         "id": "A5-positioning",
@@ -115,5 +115,7 @@
     "rule": "Per judge and per question id: pick the lowest threshold that lets no failure case pass. Probabilities inside the gray zone around the threshold mean HOLD.",
     "holdout_share": 0.25
   },
-  "note_v3": "15 Nov 2026: A1 to A6 and A8 are universal: the same text on every page; the page context reaches the judge through the state (buyer, positioning promise, rival heroes) and the {item}/{objection} fill. A7 items and the A8 objection come from the page pack's buyer checklist. Each checklist item is tagged [hero] or [page]; only [hero] items reach the hero audit. A7 and A8 run only when the checklist front matter carries questions_approved_by and questions_approved_on, written by a person."
+  "note_v3": "15 Nov 2026: A1 to A6 and A8 are universal: the same text on every page; the page context reaches the judge through the state (buyer, positioning promise, rival heroes) and the {item}/{objection} fill. A7 items and the A8 objection come from the page pack's buyer checklist. Each checklist item is tagged [hero] or [page]; only [hero] items reach the hero audit. A7 and A8 run only when the checklist front matter carries questions_approved_by and questions_approved_on, written by a person.",
+  "version_date": "2026-11-16",
+  "note_v4": "16 Nov 2026 (version 2): A1, A2 and A4 reworded so each says what a yes looks like. A1 asks whether the buyer recognises their situation; naming the buyer is not needed and a label alone is not enough. Calibration was rerun with new A1 and A4 cases. Runs record the version they used as questions_version. A4 names the vague button words so both judges read it the same way."
 }

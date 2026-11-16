@@ -102,6 +102,12 @@ def build(page):
         ("own-A4-yes2", "A4-cta", "yes", "Open models served in India.", "Prices are listed per 1M tokens.", "Compare pricing", "the Token Factory pricing page"),
         ("own-A4-yes3", "A4-cta", "yes", "Open models served in India.", "Tell us about your workload.", "Discuss your requirements", "a contact form for Token Factory inference"),
         ("own-A4-no2", "A4-cta", "no", "Open models served in India.", "Built for teams.", "Click here", "the product console"),
+        # added 16 Nov 2026 (questions v2): A1 is about the buyer's situation, not a label
+        ("own-A1-yes-sit1", "A1-audience", "yes", "Move production model workloads to India without rewriting your code.", "Open models through one OpenAI-compatible API.", "See the models", dest_models),
+        ("own-A1-yes-sit2", "A1-audience", "yes", "Keep inference data in India and keep the API your code already calls.", "Change one line: the base URL.", "See the models", dest_models),
+        ("own-A1-no-label1", "A1-audience", "no", "For enterprises.", "AI for every need.", "See the models", dest_models),
+        ("own-A1-no-label2", "A1-audience", "no", "Built for banks.", "The future of AI.", "See the models", dest_models),
+        ("own-A4-no-learn", "A4-cta", "no", "Open models served in India.", "Pick a model and read its price per 1M tokens.", "Learn more", dest_models),
     ]
     for cid, q, exp, h1, sub, cta, dest in heroes:
         cases.append({"id": cid, "kind": "audit", "question": q, "h1": h1, "sub": sub, "cta": cta, "destination": dest,

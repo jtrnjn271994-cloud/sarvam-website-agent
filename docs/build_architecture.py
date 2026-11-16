@@ -9,7 +9,7 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 TITLE = "Sarvam website agent: architecture"
-VERSION = "v10, 15 Nov 2026, as built"
+VERSION = "v13, 16 Nov 2026, as built"
 
 ROLES = {  # key: (label, hex fill, hex stroke)
     "person": ("Person", "#FFF4D6", "#C9A227"),
@@ -29,29 +29,34 @@ CLASSES = """    classDef person fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
     classDef gate fill:#EEF0F3,stroke:#4a5568,stroke-width:3px,color:#1f2933
     classDef gate2 fill:#EADFFF,stroke:#7A4DD8,stroke-width:3px,color:#2a1260
     classDef gate3 fill:#FFF4D6,stroke:#C9A227,stroke-width:3px,color:#3b2f00
+    classDef judge2 fill:#D9F3EC,stroke:#1E9E80,color:#073b2f
+    classDef judge2t fill:#D9F3EC,stroke:#1E9E80,stroke-width:3px,color:#073b2f
 """
 
 FLOW = """flowchart TD
-    S["1 Start (person)<br/>page, industry, buyer persona, goal<br/>picked from drop-downs, in the local console or on the website<br/>the goal list changes with the buyer; the first goal is the suggestion"] --> C["2 Capture the page once with Playwright (owner's machine)<br/>keep the hero only: H1, sub-line, main CTA text and link<br/>plus a hero screenshot (desktop) and a saved copy of the page<br/>the rest of the page is stored, never audited<br/>the audit, writer and gates read this saved copy"]
+    S["1 Start (person)<br/>page, industry, buyer persona, goal<br/>picked from drop-downs, in the local console or on the website<br/>the goal list changes with the buyer; the first goal is the suggestion"] --> C["2 Capture the page once with Playwright (owner's machine)<br/>done on 15 Nov 2026 for all 13 pages<br/>keep the hero only: H1, sub-line, main CTA text and link<br/>plus a hero screenshot (desktop) and a saved copy of the page<br/>the rest of the page is stored, never audited<br/>every run reads this saved copy, never the live page<br/>to audit a newer version of the page, capture it again"]
     C --> P{"3 Page set up<br/>and approved?"}
     P -- yes --> L["Load the approved positioning, claims and buyer checklist<br/>(the checklist is optional: it adds questions A7 and A8)"]
     P -- no --> G["Reasoning model (Gemini) drafts the page setup<br/>claims: each tied to a quote found word for word on the saved page<br/>positioning: 12 sections, every bullet sourced and labelled<br/>sources: the saved page and knowledge/ only, cited as KB ids<br/>buyer checklist: questions this buyer asks, tagged hero or page"]
     G --> GC["Rules check the draft<br/>every quote is on the page, every KB id exists,<br/>every number is in its row, the 12-section structure holds<br/>3 tries, then the problems are shown"] --> GP["Owner approves each part<br/>(on the website this needs the owner code)<br/>the approval keeps a hash: an edited file needs a fresh approval"]
     GP --> L
-    L --> A["4 AUDIT the live hero: JEV only<br/>A1 names the buyer, A2 states the value, A3 shows proof, A4 says what the button does<br/>A5 carries the positioning promise, A6 beats a rival's hero (only if rival heroes are saved)<br/>A7 answers the buyer's checklist questions, A8 answers the main objection<br/>each answer is a probability, read against pass and fail lines from 60 calibration cases"]
+    L --> A["4 AUDIT the saved hero (captured 15 Nov): JEV only<br/>A1 the buyer sees their situation, A2 says what they get in plain words,<br/>A3 gives a checkable proof, A4 the button says what happens<br/>(these four can start a rewrite; A5 to A8 inform only)<br/>each answer is a probability, read against lines from 65 test cases"]:::jev
     A --> D{"Gap found?<br/>A1 to A4 fails or holds"}
     D -- no --> N["Stop: report 'no gap'<br/>nothing is written"]
     D -- yes --> H["5 GAP DOSSIER (written out in full)<br/>Gemini writes it; code checks every number, id and quote, 2 fix rounds<br/>what the hero says now, exact text<br/>which buyer question fails and why it matters to this buyer<br/>hypothesis: if we change X for buyer Y, more of them click, because E<br/>what we do not know: no internal analytics<br/>what would prove it wrong"]
     H --> T["6 TEST PLAN<br/>action: one click on the hero's main button<br/>the button must go to the real link for the chosen goal<br/>pass lines, the better-than-baseline rule and the spend cap are saved with the run<br/>(a separate hashed plan file is not built yet)"]
     T --> W["7 WRITER (Opus) drafts 3 hero variants, then edits them<br/>one angle each; every sentence lists the claim id it relies on<br/>told the gaps, the buyer's question, the objection and the positioning promise<br/>told what the live hero already answers: keep it"]
-    W --> G1["Gate 1: RULES (code)<br/>claim id exists and its quote is on the page<br/>no banned phrase, no new number or comparison<br/>no third-party model named<br/>the button goes to the real link for the goal<br/>only the hero changes"]:::gate
+    W --> G1["Gate 1: RULES (no model)<br/>claim id exists and its quote is on the page<br/>no banned phrase, no new number or comparison<br/>no third-party model named<br/>the button goes to the real link for the goal<br/>only the hero changes"]:::gate
     G1 -- fail --> R{"Rounds left?<br/>max 2"}
     R -- yes --> W
     R -- no --> X["Variant marked: failed Gate 1<br/>shown with its problems; it can be edited (step 9)"]
-    G1 -- pass --> G2["Gate 2: DOUBLE CHECK<br/>JEV + JUDGE 2 (OpenAI decisions), each variant in parallel<br/>G1 the evidence supports the line, G2 no overreach, G3 no banned claim in other words<br/>then A1 to A8 again on the variant<br/>better = average gain of 0.10 or more on the gaps,<br/>and no other question down by more than 0.05"]:::gate
-    G2 --> SL["Shortlist: nothing is hidden<br/>passed: both judges say better<br/>held: the judges disagree, or a banned flag that code cannot confirm<br/>failed Gate 2: marked NEAR MISS when only a kept question fell<br/>failed Gate 1: shown, not approvable as it stands"]
+    G1 -- pass --> G2J["Gate 2: JEV<br/>G1-G3 honest? then A1-A8 better?"]:::gate2
+    G1 -- pass --> G2K["Gate 2: JUDGE 2<br/>OpenAI gpt-6-luna-decisions<br/>same questions, answers alone"]:::judge2t
+    G2J --> BB["Both say better?<br/>better = average gain of 0.10 or more on the gaps,<br/>and no other question down by more than 0.05<br/>disagree = held for a person"]
+    G2K --> BB
+    BB --> SL["Shortlist: nothing is hidden<br/>passed: both judges say better<br/>held: the judges disagree, or a banned flag that code cannot confirm<br/>failed Gate 2: marked NEAR MISS when only a kept question fell<br/>failed Gate 1: shown, not approvable as it stands"]
     X --> SL
-    SL --> PX["8 Apply the words to the saved page<br/>text swap only, layout and styles unchanged<br/>owner's machine: one read-only load of the live page (no clicks)<br/>for the PNG pair, baseline and variant<br/>website: no screenshots and no live load; the variant text and its hash are shown"]
+    SL --> PX["8 Picture each variant for the person (PNG pair)<br/>the capture has a picture of today's hero, but none of the new words yet<br/>so the new words are swapped into the hero: text only, layout unchanged<br/>owner's machine: one read-only load of the live page (no clicks) for this,<br/>because the saved copy draws without its styles offline<br/>website: no picture and no live load; the word-by-word change is shown"]
     PX --> F["Functional check<br/>the button of each arm points to the real link for the goal"]
     F --> AP["9 HUMAN approval<br/>the person sees each variant, both judges' scores per question,<br/>the dossier, the claim map and the PNG pair<br/>a variant that failed Gate 2 can be approved with a typed reason"]:::gate
     AP -- edit --> E["Edit and re-check<br/>the person changes the H1, sub-line or button,<br/>or writes a note and the writer (Opus) rewrites that one variant<br/>the new version goes through Gate 1 and Gate 2 again<br/>and comes back as a new variant, for example B-edit1"]
@@ -63,6 +68,7 @@ FLOW = """flowchart TD
     FD --> DOC["12 Submission and docs, in the console<br/>README, this architecture, the Jev note,<br/>a flow diagram of the run, the tick list for the assignment"]
     classDef gate stroke-width:3px
 """
+FLOW = FLOW.replace("    classDef gate stroke-width:3px\n", CLASSES)
 
 LAYERS = """flowchart TB
     subgraph ENG["Layer A: Engine (generic code, no page names)"]
@@ -95,77 +101,138 @@ LAYERS = """flowchart TB
     POL --> ENG
     NEW["pages_registry.py --capture<br/>add a page and save its hero once"] --> PACK
     KB["knowledge/: fixed research snapshot<br/>checked rows only, versioned, cited as KB ids"] -.cited by id.-> PACK
-    CAL["calibrate.py: 60 Jev test cases<br/>run separately, not every run"] --> ENG
+    CAL["calibrate.py: 65 test cases<br/>run separately, not every run"] --> ENG
     E1 ~~~ E2 ~~~ E3 ~~~ E4 ~~~ E5 ~~~ E6 ~~~ E7 ~~~ E8
     P1 ~~~ P2 ~~~ P3 ~~~ P4 ~~~ P5
     K1 ~~~ K2 ~~~ K3 ~~~ K4
 """
 
 QUESTIONS_DIAGRAM = """flowchart TB
-    subgraph Q1["1 The hero basics (required)"]
-        direction TB
-        A1["A1 Does it name the buyer?"]
-        A2["A2 Does it state the value?"]
-        A3["A3 Does it show proof?"]
-        A4["A4 Does it say what the button does?"]
-    end
-    subgraph Q2["2 Positioning fit (advisory)"]
-        direction TB
-        A5["A5 Does it carry the positioning promise?"]
-        A6["A6 Could a rival print it unchanged?<br/>only when rival heroes are saved"]
-    end
-    subgraph Q3["3 The buyer's own questions (advisory, per page)"]
-        direction TB
-        A7["A7 one question per hero item<br/>on the approved buyer checklist"]
-        A8["A8 Does it answer the main objection?"]
-    end
-    subgraph Q4["4 Checks on each variant (Gate 2, both judges)"]
-        direction TB
-        G1["G1 Does the evidence say what the line says?"]
-        G2["G2 Does the line say more than the evidence?"]
-        G3["G3 Is it a banned claim in other words?"]
-        AA["A1 to A8 again: is it better than the live hero?"]
-    end
-    Q1 -->|"a fail or hold here is a gap:<br/>only these start a rewrite"| W["Writer"]
-    Q2 -.informs the person, never blocks.-> W
-    Q3 -.tells the writer what to answer and what to keep.-> W
-    W --> Q4
-    A1 ~~~ A2 ~~~ A3 ~~~ A4
-    A5 ~~~ A6
-    A7 ~~~ A8
-    G1 ~~~ G2 ~~~ G3 ~~~ AA
+    AU["The audit (step 4)<br/>asked by: JEV only<br/>on the saved hero, 15 Nov<br/>A1-A8"]:::jev
+    GT1["Gate 1<br/>asked by: no model, code rules"]:::rules
+    JV["Gate 2 · JEV<br/>each judge answers alone<br/>G1-G3 honest?<br/>A1-A8 better?"]:::jev
+    J2["Gate 2 · JUDGE 2<br/>each judge answers alone<br/>OpenAI gpt-6-luna-decisions<br/>G1-G3 honest?<br/>A1-A8 better?"]:::judge2
+    BOTH["Both say better?"]:::rules
+    AU --> GT1
+    GT1 --> JV
+    GT1 --> J2
+    JV --> BOTH
+    J2 --> BOTH
+""" + CLASSES
+
+SANDBOX_DIAGRAM = """flowchart TB
+    AP["Approval<br/>saved with a hash<br/>the sandbox refuses to start<br/>if the variant changed"]:::person
+    PL["Sandbox plan<br/>visitor groups for this industry<br/>and how strongly each role reacts<br/>lift rule and visitors per arm<br/>Gemini explains, code checks every number"]:::reasoning
+    TS["Three tests<br/>Test 1: expected lift, enough visitors<br/>Test 2: same lift, too few visitors<br/>Test 3: the page against itself (A/A)"]:::rules
+    SE["Sessions<br/>owner's machine: 20 browser sessions per arm,<br/>outside requests blocked<br/>website: one HTML check per arm, no browser"]:::rules
+    FI["FINDINGS.md<br/>code builds the numbers and tables<br/>Gemini writes the explanation with the sandbox-ab-report skill<br/>rules check the prose<br/>SYNTHETIC, NOT rolled out"]:::reasoning
+    SH["Shown in the console<br/>Sandbox and findings tab, the run's own diagram,<br/>Submission and docs"]:::rules
+    AP --> PL --> TS --> SE --> FI --> SH
+""" + CLASSES
+
+SKILLS_DIAGRAM = """flowchart TB
+    S1["Positioning draft<br/>(Gemini)"]:::reasoning --> K1["seven-page-positioning<br/>product-marketing"]
+    S2["Dossier<br/>(Gemini)"]:::reasoning --> K2["cro<br/>buyer-profile-validation<br/>claim-evidence-check<br/>marketing-plain-writing"]
+    S3["Writer draft<br/>(Opus)"]:::writer --> K3["copywriting-marketingskills<br/>cro<br/>page-copy-draft"]
+    S4["Writer edit<br/>(Opus)"]:::writer --> K4["copy-editing<br/>no-ai-slop<br/>marketing-plain-writing"]
+    S5["Findings<br/>(Gemini)"]:::reasoning --> K5["sandbox-ab-report<br/>marketing-plain-writing<br/>no-ai-slop"]
+    S6["Jev and Judge 2"]:::jev --> K6["no skills:<br/>fixed questions only"]
+""" + CLASSES
+
+DEPLOY = """flowchart TB
+    ME["<b>1 · Your machine (the owner)</b><br/>the real code: agent/, app/, rules/, knowledge/<br/>your runs in pages/<br/>full agent: screenshots, 20 browser sessions per sandbox arm<br/>.env holds the keys: never committed, never deployed in a file"]
+    GH["<b>2 · GitHub (private)</b><br/>a shelf: the code and the runs you commit<br/>runs nothing"]
+    WEB["<b>3 · Website (Vercel)</b><br/>a frozen copy of the code and your runs, from the last deploy<br/>your runs are read-only here<br/>one Python function runs the agent when a visitor clicks<br/>no browser: no screenshots, sarvam.ai never loaded<br/>the keys sit in Vercel settings"]
+    SB[("<b>4 · Supabase (Red Zebra)</b><br/>visitor runs, edits and approvals<br/>job log, one-job lock, today's spend<br/>server key only")]
+    OR["OpenRouter<br/>the four models, one key"]
+    V(["Visitor"])
+    FR(["A reviewer with Read access"])
+    ME -- "git push: code and the runs you commit<br/>(only when you push)" --> GH
+    ME -- "deploy: a frozen copy of the code and your runs<br/>push_env.sh: the keys<br/>(only when you run the scripts)" --> WEB
+    V -- "picks options, clicks Run" --> WEB
+    WEB -- "visitor run: saved to Supabase<br/>loaded back on every request" --> SB
+    GH -- "git pull" --> FR
+    WEB -- "model calls" --> OR
+    ME -- "model calls" --> OR
+    SB -. "pull_website_runs.py: visitor runs<br/>(only when you choose)" .-> ME
+    classDef place fill:#F7F8FB,stroke:#4a5568,stroke-width:2px,color:#1a1a2e,text-align:left
+    classDef who fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
+    class ME,GH,WEB,SB place
+    class V,FR who
 """
 
-DEPLOY = """flowchart LR
-    subgraph LOCAL["Owner's machine: the full agent"]
-        direction TB
-        UI["./run-ui.sh<br/>console on 127.0.0.1:8765"]
-        PW["Playwright and Chromium<br/>capture, PNG pairs, 20 browser sessions per arm"]
-        ENV[".env: keys, never committed"]
-        PG["pages/: runs, approvals, findings"]
-        UI --> PW
-        UI --> PG
-        ENV -.-> UI
-    end
-    subgraph WEB["Website: sarvam-website-agent.vercel.app"]
-        direction TB
-        ST["Pages people see<br/>run list, audit, variants, findings, docs"]
-        FN["One Python function (app/hosted.py)<br/>start a run, edit, approve, sandbox<br/>one job at a time, up to 5 minutes<br/>no browser: no screenshots, sarvam.ai never loaded"]
-        VENV["Vercel settings: the keys<br/>never in a deployed file"]
-        ST --> FN
-        VENV -.-> FN
-    end
-    SB[("Supabase (Red Zebra)<br/>sarvam_agent_files: runs, approvals, setup<br/>sarvam_agent_jobs: job log, one-job lock, spend<br/>server key only")]
-    OR["OpenRouter<br/>one key, four models"]
-    GH["GitHub repo, private<br/>code, rules, knowledge, page packs<br/>no keys"]
-    V["Visitor"] --> ST
-    O["Owner"] -->|"owner code: page setup"| FN
-    FN <--> SB
-    FN --> OR
-    UI --> OR
-    LOCAL -->|"scripts/deploy_live.sh"| WEB
-    LOCAL -->|"git push: code only"| GH
-"""
+VISITOR_STEPS = [
+    "The visitor opens the website and picks a page, an industry, a buyer and a goal.",
+    "They click **Start a run**. The website checks the limits first: one job at a time, $1.00 a run, $3.00 a day for the whole site, 3 runs a day per visitor.",
+    "Vercel runs the same agent code, from the frozen copy, on its own server. Nothing runs on your machine.",
+    "The agent calls the models through OpenRouter, with your key. The run log records each call and its cost.",
+    "Every file the run writes is saved to Supabase. The log is saved every 4 seconds, so the Log tab shows each step as it happens.",
+    "Any visitor can now open that run, edit a variant, approve one and run the sandbox. Each of these is saved to Supabase too.",
+    "The run stays on the website. It reaches your machine only when you run `scripts/pull_website_runs.py`, and GitHub only when you then commit and push it.",
+]
+
+CANT_TOUCH = [
+    "**Your machine.** The website has no link to it.",
+    "**GitHub.** The website has no GitHub key, and Git is disconnected from Vercel. A push never changes the website.",
+    "**The code, rules and knowledge.** They are read-only on the website. Only a deploy from your machine changes them.",
+    "**Your runs.** Runs made on your machine are read-only on the website: no edits, approvals or sandbox on them.",
+    "**Page setup** (positioning, claims, buyer checklist). Only someone with the owner code can draft or approve it.",
+    "**A newer page setup.** A setup file saved on the website before the latest deploy never replaces the deployed copy. The newer one wins.",
+    "**The keys.** They live in the Vercel settings and are never sent to the browser.",
+]
+
+FLEET_INTRO = [
+    "A multi-agent system is either a **swarm** or a **fleet**. In a swarm, agents decide among themselves how to attack an open problem. That suits exploration, when nobody yet knows how to solve the task. In a fleet, each agent has one fixed job, input, output and handoff. That suits work customers will see.",
+    "**This agent is a fleet.** One script (`agent/probe3.py`) runs the steps in a fixed order. Each model has one role. Code checks every output, and a person approves.",
+    "**The research before it was not a swarm either.** We checked how each input was made:",
+]
+
+SWARM_CHECK = [
+    "**Positioning:** explored by a person with AI assistants (ChatGPT and Claude), then approved by that person. No agents negotiated among themselves.",
+    "**Buyer insights:** one orchestrator gave every worker the same fixed brief, one industry each. Workers never talked to each other or chose their own method. Code then checked every row, and planted wrong rows to prove the check catches them. That is a fleet that runs in parallel.",
+    "**Claims:** every price and quote was checked by code against fixed rules: the source opens, the number is on the page, a quote matches word for word. Inside the agent, `page_setup.py` drops any claim whose quote is not on the saved page, and a person approves the rest.",
+    "So the exploration was done by people and by parallel workers with one brief. What reached the agent is only what code checked and a person approved: rows in `knowledge/` and approved claims.",
+]
+
+LANGGRAPH = [
+    "**The graph of steps (LangGraph's job):** `agent/probe3.py` calls the steps in a fixed order. The gates are the branches: a Gate 1 fail goes back to the writer, at most twice; a pass goes on.",
+    "**Saved state (LangGraph's checkpoints):** each run's `probe3.json` holds the result of every step. An edit, the approval and the sandbox read it and add to it, so a run can be picked up later, by anyone, on the machine or the website.",
+    "**The pause for a person (LangGraph's interrupt):** the run stops before approval. Only a person's click saves an approval, with a hash of what was approved. The sandbox refuses to start without one, or if the variant changed since.",
+    "**Traces (LangSmith's job):** `run-log.jsonl` records every model call: its role, the model asked, the model that answered, the time and the cost. Each run also gets its own flow diagram.",
+    "**Evals (LangSmith's job):** Gate 1 rules, the two judges, the 65 test cases in `calibrate.py` (3 held back from tuning), and the self-tests.",
+    "**Why plain Python.** The flow is fixed, so a framework adds little. The website function needs no extra packages, and every step can be read in one file. If the flow later needs many branches or many parallel workers, LangGraph would be worth adding.",
+]
+
+LOCAL_STEPS = [
+    "You start the console with `./run-ui.sh` and open http://127.0.0.1:8765. Or you run `agent/probe3.py` from the command line.",
+    "You pick a page, an industry, a buyer and a goal, and click **Start a run**. One job runs at a time, with a $1.00 cap per run.",
+    "The agent runs on your machine, with the key in your `.env`. It calls the models through OpenRouter, and the run log records each call and its cost.",
+    "The audit, writer and gates read the saved copy of the page. For the PNG pairs, the browser loads the live page once, read only, with no clicks.",
+    "Every file is saved in `pages/<page>/runs/probe3-<date>-<time>/` on your machine. Nothing goes to Supabase, the website or GitHub.",
+    "You approve a variant and run the sandbox. It runs 20 browser sessions per arm on the saved page, with every outside request blocked.",
+    "The run reaches GitHub only when you commit and push it, and the website only when you deploy. On the website it is read-only.",
+]
+
+FLEET_HEAD = ["Practice", "What it means", "In this agent", "Gap"]
+FLEET_ROWS = [
+    ("Orchestration", "Each step runs in the right order, with the right tool or data.",
+     "`probe3.py` runs the 12 steps in a fixed order and stops at each gate.", "None known."),
+    ("Evals", "Outputs are tested before anyone sees them.",
+     "Gate 1 (rules) and Gate 2 (two judges) check every variant. Self-tests check the code.",
+     "The judges' test set is small (65 cases, 3 held back from tuning) and written by us. No fixed test set is rerun after each code change."),
+    ("Observability", "Every step can be traced, so a mistake can be found and fixed.",
+     "`run-log.jsonl` records every model call and its cost. A live Log tab, and a flow diagram for each run.", "None known."),
+    ("Guardrails", "Limits on what the agent can see, spend and change.",
+     "Spend caps, the one-job lock, the owner code, the do-not-claim list, knowledge-base number checks.", "None known."),
+    ("Model routing", "Each task goes to the right model, and a model can be swapped without starting over.",
+     "Four roles in `models.json`. Swap one in `.env`.", "If a model fails, nothing switches to a backup."),
+]
+
+NEXT = [
+    "**A learning loop, run as a fleet, not a swarm.** (1) Every decision is already recorded: what a person approved, edited or rejected and why, and every gate failure. (2) A person reviews those records and marks each case right or wrong. (3) Reviewed cases join the judges' test set (`calibrate.py`). (4) A rule or a pass line changes only after the old and new cases are rerun, including cases held back from tuning. (5) A person approves the change. No model changes its own rules. Not built.",
+    "**A model backup.** If a model call fails or a model is retired, use a named backup for that role and record which model answered. The judges have no backup today: OpenRouter's decisions endpoint accepts only Jev and OpenAI's decision model. Not built.",
+    "**A fixed test set rerun after every code change**, so a change that makes the judges or the gates worse is caught before a run uses it. Not built.",
+]
 
 GUARDS = [
     "**Spend.** $1.00 cap per run. On the website: $3.00 a day in total and 3 runs a day per visitor. A credit limit on the OpenRouter key is the last line.",
@@ -175,11 +242,94 @@ GUARDS = [
     "**No bot traffic.** The website and the sandbox never load sarvam.ai. On the owner's machine, the PNG step loads the live page once per run or edit, read only, with no clicks.",
 ]
 
+AUDIT_Q_HEAD = ["Question", "Asks", "Can it start a rewrite?"]
+AUDIT_Q_ROWS = [
+    ("A1 situation", "Would this buyer recognise their own situation or problem in the hero? A job title is not needed, and a label alone is not enough.", "Yes"),
+    ("A2 value", "Does the hero say what the product does and what the buyer gets from it, in plain words, not a slogan?", "Yes"),
+    ("A3 proof", "Does the hero give a checkable proof point, such as a named standard, a number with its source, or a named customer?", "Yes"),
+    ("A4 button", "Does the main button say what happens on click (for example, open the docs, book a demo, see prices), not just a vague word such as 'Go', 'Learn more' or 'Click here'?", "Yes"),
+    ("A5 positioning", "Does the hero say what the positioning's main claim says?", "No. It informs the person and the writer."),
+    ("A6 rival swap", "Could any rival in the rival rows print this exact hero on its own page without changing it? (Only when rival heroes are saved.)", "No. It informs the person and the writer."),
+    ("A7 buyer question", "Does the hero answer this question the buyer asks: {item}? (Only once the buyer checklist is approved.)", "No. It informs the person and the writer."),
+    ("A8 objection", "Does the hero answer this objection the buyer raises: {objection}?", "No. It informs the person and the writer."),
+]
+
+S3_INTRO = "Three checks ask questions, in this order. Each check has one asker, one input and one job. Only the audit and Gate 2 use models."
+
+S3_AUDIT = [
+    "**The audit (step 4).** Jev asks A1 to A8 of the saved hero, captured on 15 Nov 2026.",
+    "Why: to find what today's hero fails to say. If there is no gap, nothing is written.",
+    "Judge 2 does not run here, because one judge is enough to find gaps.",
+]
+
+S3_GATE1 = [
+    "**Gate 1.** No model asks anything. Code rules check each variant.",
+    "Why: to stop a variant that is not true or not allowed before any judge is paid.",
+    "The rules:",
+]
+GATE1_RULES = [
+    "The claim id exists, and its quote is on the saved page word for word.",
+    "No banned phrase, no new number and no new comparison.",
+    "No third-party model is named.",
+    "The button goes to the real link for the goal.",
+    "Only the hero changes.",
+    "A failed variant goes back to the writer with the reason, at most twice.",
+]
+
+S3_GATE2 = [
+    "**Gate 2.** Jev and Judge 2 each answer alone. Neither sees the other's answers.",
+    "Why: to show that a variant is honest and better than today's hero.",
+    "**Part 1, honest?** Each judge asks three questions of every fragment of the variant:",
+]
+GATE2_PART1 = [
+    "**G1 support** (good answer: yes): \"Does the evidence quote say what this fragment says, with nothing added?\"",
+    "**G2 overreach** (good answer: no): \"Does the fragment say more than the claim and evidence: a wider scope such as 'all' or 'never', a missing condition, a new comparison, or a guarantee?\"",
+    "**G3 banned** (good answer: no): \"Does the hero make any claim on the do-not-claim list, in other words?\"",
+]
+S3_GATE2_PART2 = [
+    "**Part 2, better?** Each judge asks A1 to A8 again of the variant.",
+    "Better means an average gain of 0.10 or more on the gap questions, and no other question down by more than 0.05.",
+    "Passed means both judges say better. If the judges disagree, the variant is held for a person.",
+]
+
+S3_EDIT = "**Edit and re-check:** the same Gate 1 and Gate 2."
+
+S3_NOTE = [
+    "Each answer is a probability of yes. We read it against pass and fail lines set from 65 test cases we wrote. 3 of those cases were held back from tuning. A value near a line means hold, and a person decides.",
+    "**Question version:** v2 from 16 Nov 2026. Earlier runs used v1, and each run says which.",
+]
+
+S4_INTRO = "After a person approves a variant, the sandbox tests it and the findings explain the result. The sandbox refuses to start unless a variant is approved and unchanged since approval."
+S4_CLOSE = "These tests check the measuring method. They do not prove a variant wins, because the lift is an input."
+
+FLEET_HOW_HEAD = ["Member", "Reasons with", "Gets", "Returns", "Checked by"]
+FLEET_HOW_ROWS = [
+    ("Orchestrator (`agent/probe3.py`)", "No model. It decides the order.", "The run's choices", "The next step", "Not applicable"),
+    ("Reasoning model (Gemini)", "Its skills", "The saved page, knowledge rows", "Page setup draft, dossier, sandbox and findings explanations", "Code checks every quote, number and id. A person approves the setup."),
+    ("Writer (Opus)", "Its skills", "Dossier, approved claims", "3 variants, each with a claim map", "Gate 1 (code), then Gate 2"),
+    ("Jev and Judge 2", "No skills: the fixed questions only", "Hero text, one claim and its quote", "A yes/no probability per question", "Calibrated pass lines. Both must agree."),
+    ("Rules (code)", "No model", "Every output above", "Pass, fail and the reasons", "Self-tests"),
+    ("Person", "Their own judgement", "Everything above", "Approve, edit or reject", "Saved with a hash"),
+]
+FLEET_HOW_LINE = "**Models reason only inside their own step. Code decides pass or fail, and no model decides what runs next.**"
+
+SKILLS_INTRO = "Each step that uses a model loads a fixed set of skills (written guides for the task):"
+SKILL_CONTROLS = [
+    "**One fixed map.** The skills for each step sit in one file, `skills/step-skills.json`. No model chooses skills.",
+    "**Saved fingerprints.** Each run saves every skill's name and sha256 fingerprint in `probe3.json`. The fingerprint changes if the skill text changes.",
+    "**Hard rules win.** The hard rules come after the skills in the prompt and override them. They are the claims rules, the banned list and the Gate 1 limits.",
+]
+SKILL_NOTE = "`marketing-psychology` is left out of the writer on purpose. It pushes urgency, numbers and comparisons that the claims rules forbid."
+
+RUN_DIAGRAM_TEXT = ("`agent/run_flow.py` is plain code with no model. At the end of every run, edit and sandbox, it reads that run's `probe3.json` and fills the same template. "
+                    "Steps the run did not reach are grey and dashed. The same run always gives the same diagram. "
+                    "The template and its cases are in `.claude/skills/run-architecture/SKILL.md`.")
+
 MODEL_BULLETS = [
     "**Reasoning model, Google `gemini-3.8-flash`:** page setup drafts, the dossier, the sandbox explanation. It never decides pass or fail.",
     "**Writer, Anthropic `claude-opus-5.5`:** the hero variants, the claim map, and a rewrite when a person asks for one.",
-    "**Jev, `typesafe/jev-1.14` (Judge 1):** the audit and Gate 2. It returns probabilities, not reasons.",
-    "**Judge 2, OpenAI `gpt-6-luna-decisions`:** Gate 2 only. Two judges from different makers; no judge grades its own maker's writing.",
+    "**Jev, `typesafe/jev-1.14` (Judge 1):** the audit, Gate 2 and edit re-checks. It returns probabilities, not reasons.",
+    "**Judge 2 (OpenAI `gpt-6-luna-decisions`):** Gate 2 and edit re-checks only; not at the audit. Two judges from different makers; no judge grades its own maker's writing.",
     "**One OpenRouter key** serves all four. Swap a model in `agent/models.json` or with `MODEL_REASONING`, `MODEL_WRITER`, `MODEL_JUDGE1`, `MODEL_JUDGE2`.",
     "**Cost.** A run costs about $0.25 to $0.55. An edit about $0.05 to $0.15. A sandbox a cent or two.",
 ]
@@ -187,11 +337,11 @@ MODEL_BULLETS = [
 LATER = DEPLOY   # older name, kept for anything that imports it
 
 QUESTIONS = [
-    ("1. The hero basics (required)", "A1 audience, A2 value, A3 proof, A4 CTA",
-     "Every buyer page must say who it is for, what the buyer gets, why to believe it and what happens on click. A fail or hold here is a gap, and only these four can start a rewrite."),
+    ("1. The hero basics (required)", "A1 situation, A2 value, A3 proof, A4 button",
+     "Every buyer page must let the buyer recognise their situation, say what they get, give a reason to believe it, and say what happens on click. Naming the buyer is not required. A fail or hold here is a gap, and only these four can start a rewrite."),
     ("2. Positioning fit (advisory)", "A5 positioning, A6 rival swap",
      "A good hero says what this product promises, in words a rival could not print as is. A5 checks the approved promise is there. A6 asks if a rival could reuse the hero unchanged (only when rival heroes are saved). They inform the person but never block."),
-    ("3. The buyer's own questions (advisory, per page)", "A7 checklist items, A8 main objection",
+    ("3. The buyer's own questions (advisory, per page)", "A7 checklist items, A8 objection",
      "Generic questions miss what a specific buyer asks. These come from the approved buyer checklist for this page and buyer, so they change with every page and persona."),
     ("4. Checks on each variant (Gate 2)", "G1 support, G2 overreach, G3 banned, then A1 to A8 again",
      "Stop the writer from over-claiming. G1 asks if the evidence says what the line says. G2 asks if the line says more. G3 asks if it makes a banned claim in other words. Asking the audit questions again of the variant shows whether it beats the live hero."),
@@ -216,8 +366,8 @@ STEPS = [
 MODELS = [
     ("Reasoning LLM", "google/gemini-3.8-flash", "OpenRouter chat completions", "Text: page-setup research and claim drafts, positioning draft, dossier prose, submission prose. Never decides pass or fail.", "Page setup, steps 3, 5, 12"),
     ("Writer LLM", "anthropic/claude-opus-5.5", "OpenRouter chat completions", "Text: hero variants (H1, sub-line, button) and their claim map", "Step 7"),
-    ("Jev (Judge 1)", "typesafe/jev-1.14", "OpenRouter Decisions API", "Probabilities only. No text.", "Steps 4, 8, calibration"),
-    ("Judge 2", "openai/gpt-6-luna-decisions", "OpenRouter Decisions API", "Probabilities only. No text.", "Step 8, calibration"),
+    ("Jev (Judge 1)", "typesafe/jev-1.14", "OpenRouter Decisions API", "Probabilities only. No text.", "Steps 4, 8, edit re-checks, calibration"),
+    ("Judge 2 (OpenAI gpt-6-luna-decisions)", "openai/gpt-6-luna-decisions", "OpenRouter Decisions API", "Probabilities only. No text.", "Step 8 and edit re-checks, calibration. Not the audit."),
 ]
 
 COVERAGE = [
@@ -298,10 +448,11 @@ def html_table(head, rows, cls=""):
 
 
 GLANCE = [
+    "**When the pages were read.** Every page's hero was captured once, on 15 Nov 2026. Every run audits that saved copy, so a run gives the same answer even if Sarvam edits its site. To audit a newer version, capture the page again.",
     "**What it does.** One run audits the hero of a Sarvam page for one buyer and one goal. It writes better heroes only if the audit finds a gap. A person approves one, or edits one and has it checked again. A sandbox then tests the approved hero against the baseline.",
     "**Where it runs.** On the owner's machine (full agent, with screenshots and browser checks) and on the website, where anyone can start a run. Website runs are saved in Supabase.",
     "**Scope.** The hero only: H1, sub-line and main button. Desktop. Thirteen pages are listed; Voice Agents, Token Factory and Coding Agents have been run.",
-    "**Models.** Four makers on one OpenRouter key: Google's Gemini 3.8 Flash reasons, Anthropic's Opus 5.5 writes, and Jev and OpenAI's decision model judge. Code verifies every fact any model writes.",
+    "**Models.** Four makers on one OpenRouter key: Google's Gemini 3.8 Flash reasons, Anthropic's Opus 5.5 writes, and Jev (Judge 1) and OpenAI's decision model (Judge 2) judge. Code verifies every fact any model writes.",
     "**Evidence.** Every claim in a variant maps to a quote found word for word on the saved page. The console ticks each assignment line from the run's own files.",
 ]
 
@@ -347,7 +498,7 @@ RULE_FILES = [
     ("rules/hero-policy.json", "Stretch phrases, keep rules, per-page qualifiers (a price must keep the word 'from')."),
     ("rules/goals.json", "Five goals, the real link kind behind each, the goal wording and suggested goal for each buyer role."),
     ("rules/judge-questions.json", "Every audit and Gate 2 question, and the better-than-baseline rule (gain 0.10, drop 0.05)."),
-    ("rules/judge-thresholds.json", "Pass and fail lines per question, set by calibration against 60 cases."),
+    ("rules/judge-thresholds.json", "Pass and fail lines per question, set by calibration against 65 cases (3 held back from tuning)."),
     ("rules/positioning-structure.json", "The 12 sections every positioning pack must follow, with the label rules."),
     ("agent/sandbox_hero.json", "The typed assumptions of the sandbox: base click rate, lift rule, goal-fit values, caps."),
 ]
@@ -385,13 +536,27 @@ def build_md():
           "- **Layer B, Policy:** the rules every page shares. Change a rule once and it applies to all pages.",
           "- **Layer C, Page pack:** the facts about one page, one folder each. A new page is a new folder.\n",
           "```mermaid\n" + LAYERS + "```\n"]
-    o += ["## 3. The questions Jev asks, and why\n",
-          "Jev answers yes/no questions with a probability. It gives no reason. Pass and fail lines come from 60 test cases we wrote (`calibrate.py`). Only the four hero basics can start a rewrite; the others inform the person and the writer.\n",
-          "```mermaid\n" + QUESTIONS_DIAGRAM + "```\n"]
-    o += ["## 4. Deployment: the owner's machine, the website, Supabase, GitHub\n", "```mermaid\n" + DEPLOY + "```\n"]
-    o += ["- " + g for g in GUARDS] + [""]
-    o += ["## 5. Models\n"] + ["- " + b for b in MODEL_BULLETS] + [""]
-    o += ["## 6. Limits\n"] + ["- " + x for x in LIMITS_LIST]
+    o += ["## 3. Who asks which questions, at each check\n", S3_INTRO + "\n", "```mermaid\n" + QUESTIONS_DIAGRAM + "```\n"]
+    o += [S3_AUDIT[0] + "\n", S3_AUDIT[1] + "\n", S3_AUDIT[2] + "\n"]
+    o += ["", "#### The audit questions\n", md_table(AUDIT_Q_HEAD, AUDIT_Q_ROWS), ""]
+    o += [x + "\n" for x in S3_GATE1[:2]] + [S3_GATE1[2]] + ["- " + x for x in GATE1_RULES] + [""]
+    o += [x + "\n" for x in S3_GATE2[:2]] + [S3_GATE2[2]] + ["- " + x for x in GATE2_PART1] + [""]
+    o += [x + "\n" for x in S3_GATE2_PART2] + [S3_EDIT + "\n"] + [x + "\n" for x in S3_NOTE]
+    o += ["## 4. After approval: the sandbox and the findings\n", S4_INTRO + "\n", "```mermaid\n" + SANDBOX_DIAGRAM + "```\n", S4_CLOSE + "\n"]
+    o += ["## 5. Where things live and what moves between them\n", "```mermaid\n" + DEPLOY + "```\n",
+          "**What happens when a visitor clicks Run**\n"] + ["%d. %s" % (k + 1, x) for k, x in enumerate(VISITOR_STEPS)] + [""]
+    o += ["**What happens when you run it on your own machine**\n"] + ["%d. %s" % (k + 1, x) for k, x in enumerate(LOCAL_STEPS)] + [""]
+    o += ["**What a visitor can't touch**\n"] + ["- " + x for x in CANT_TOUCH] + [""]
+    o += ["**Other guards**\n"] + ["- " + g for g in GUARDS] + [""]
+    o += ["## 6. Fleet, not swarm\n"] + [x + "\n" for x in FLEET_INTRO] + ["- " + x for x in SWARM_CHECK] + [""]
+    o += ["### How the fleet works\n", md_table(FLEET_HOW_HEAD, FLEET_HOW_ROWS), "", FLEET_HOW_LINE + "\n"]
+    o += ["### Which skills each step uses\n", SKILLS_INTRO + "\n", "```mermaid\n" + SKILLS_DIAGRAM + "```\n"] + ["- " + x for x in SKILL_CONTROLS] + ["", SKILL_NOTE + "\n"]
+    o += ["### The five practices\n", md_table(FLEET_HEAD, FLEET_ROWS), ""]
+    o += ["### LangGraph and LangSmith\n", "We did not use them. The agent is plain Python, and each job those tools do has a part here:\n"] + ["- " + x for x in LANGGRAPH] + [""]
+    o += ["### How each run's diagram is made\n", RUN_DIAGRAM_TEXT + "\n"]
+    o += ["## 7. Models\n"] + ["- " + b for b in MODEL_BULLETS] + [""]
+    o += ["## 8. Limits\n"] + ["- " + x for x in LIMITS_LIST] + [""]
+    o += ["## 9. Next (not built)\n"] + ["- " + x for x in NEXT]
     return "\n".join(o) + "\n"
 
 
@@ -406,6 +571,12 @@ h2{margin-top:40px;font-size:21px}
 p,li{max-width:85ch}
 code{background:var(--card);border-radius:4px;padding:1px 5px;font-size:13px}
 .mermaid{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0}
+h3{font-size:16px;margin:22px 0 6px}
+.tw{overflow-x:auto;margin:12px 0}
+table.fleet{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+table.fleet th,table.fleet td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.fleet th{background:var(--card)}
+table.fleet td:first-child{font-weight:600;white-space:nowrap}
 .note{border-left:4px solid #3B5BDB;background:var(--card);padding:8px 12px;border-radius:6px}
 """
 
@@ -430,11 +601,30 @@ def build_html():
          ul(["**Layer A, Engine:** the code that does the work. It holds no page names, so one engine serves every page.",
              "**Layer B, Policy:** the rules every page shares. Change a rule once and it applies to all pages.",
              "**Layer C, Page pack:** the facts about one page, one folder each. A new page is a new folder."]), mm(LAYERS),
-         "<h2>3. The questions Jev asks, and why</h2><p>Jev answers yes/no questions with a probability. It gives no reason. Pass and fail lines come from 60 test cases we wrote (<code>calibrate.py</code>). Only the four hero basics can start a rewrite; the others inform the person and the writer.</p>",
-         mm(QUESTIONS_DIAGRAM),
-         "<h2>4. Deployment: the owner's machine, the website, Supabase, GitHub</h2>", mm(DEPLOY), ul(GUARDS),
-         "<h2>5. Models</h2>", ul(MODEL_BULLETS),
-         "<h2>6. Limits</h2>", ul(LIMITS_LIST),
+         "<h2>3. Who asks which questions, at each check</h2>", "<p>%s</p>" % inline(S3_INTRO), mm(QUESTIONS_DIAGRAM),
+         "".join("<p>%s</p>" % inline(x) for x in S3_AUDIT),
+         "<h3>The audit questions</h3>", html_table(AUDIT_Q_HEAD, [[inline(c) for c in r] for r in AUDIT_Q_ROWS], "fleet"),
+         "".join("<p>%s</p>" % inline(x) for x in S3_GATE1), ul(GATE1_RULES),
+         "".join("<p>%s</p>" % inline(x) for x in S3_GATE2), ul(GATE2_PART1),
+         "".join("<p>%s</p>" % inline(x) for x in S3_GATE2_PART2), "<p>%s</p>" % inline(S3_EDIT),
+         "<p class='note'>%s</p>" % inline(S3_NOTE[0]), "<p>%s</p>" % inline(S3_NOTE[1]),
+         "<h2>4. After approval: the sandbox and the findings</h2>", "<p>%s</p>" % inline(S4_INTRO), mm(SANDBOX_DIAGRAM), "<p>%s</p>" % inline(S4_CLOSE),
+         "<h2>5. Where things live and what moves between them</h2>",
+         "<p>Four places, each holding something different. Each arrow says what moves and when. Nothing runs on a schedule: a run starts only when someone clicks Run or starts one from the command line.</p>",
+         mm(DEPLOY),
+         "<h3>What happens when a visitor clicks Run</h3>", "<ol>" + "".join("<li>%s</li>" % inline(x) for x in VISITOR_STEPS) + "</ol>",
+         "<h3>What happens when you run it on your own machine</h3>", "<ol>" + "".join("<li>%s</li>" % inline(x) for x in LOCAL_STEPS) + "</ol>",
+         "<h3>What a visitor can't touch</h3>", ul(CANT_TOUCH),
+         "<h3>Other guards</h3>", ul(GUARDS),
+         "<h2>6. Fleet, not swarm</h2>", "".join("<p>%s</p>" % inline(x) for x in FLEET_INTRO), ul(SWARM_CHECK),
+         "<h3>How the fleet works</h3>", html_table(FLEET_HOW_HEAD, [[inline(c) for c in r] for r in FLEET_HOW_ROWS], "fleet"), "<p>%s</p>" % inline(FLEET_HOW_LINE),
+         "<h3>Which skills each step uses</h3>", "<p>%s</p>" % inline(SKILLS_INTRO), mm(SKILLS_DIAGRAM), ul(SKILL_CONTROLS), "<p>%s</p>" % inline(SKILL_NOTE),
+         "<h3>The five practices</h3>", html_table(FLEET_HEAD, [[inline(c) for c in r] for r in FLEET_ROWS], "fleet"),
+         "<h3>LangGraph and LangSmith</h3>", "<p>We did not use them. The agent is plain Python, and each job those tools do has a part here:</p>", ul(LANGGRAPH),
+         "<h3>How each run's diagram is made</h3>", "<p>%s</p>" % inline(RUN_DIAGRAM_TEXT),
+         "<h2>7. Models</h2>", ul(MODEL_BULLETS),
+         "<h2>8. Limits</h2>", ul(LIMITS_LIST),
+         "<h2>9. Next (not built)</h2>", ul(NEXT),
          '<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>'
          '<script>mermaid.initialize({startOnLoad:true,securityLevel:"loose",theme:"default",flowchart:{useMaxWidth:true,htmlLabels:true}});</script></body></html>']
     return "\n".join(h)

@@ -1,5 +1,5 @@
 {
-  "built": "2026-11-15",
+  "built": "2026-11-16",
   "page": "token-factory",
   "note": "Labels are ours (owner-accepted standard, Decisions Log row 24). The judges were never trained on them.",
   "cases": [
@@ -553,6 +553,76 @@
       "sub": "Built for teams.",
       "cta": "Click here",
       "destination": "the product console",
+      "expected": {
+        "A4-cta": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-yes-sit1",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "Move production model workloads to India without rewriting your code.",
+      "sub": "Open models through one OpenAI-compatible API.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-yes-sit2",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "Keep inference data in India and keep the API your code already calls.",
+      "sub": "Change one line: the base URL.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "yes"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-no-label1",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "For enterprises.",
+      "sub": "AI for every need.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A1-no-label2",
+      "kind": "audit",
+      "question": "A1-audience",
+      "h1": "Built for banks.",
+      "sub": "The future of AI.",
+      "cta": "See the models",
+      "destination": "the model catalogue page",
+      "expected": {
+        "A1-audience": "no"
+      },
+      "holdout": false,
+      "source": "own"
+    },
+    {
+      "id": "own-A4-no-learn",
+      "kind": "audit",
+      "question": "A4-cta",
+      "h1": "Open models served in India.",
+      "sub": "Pick a model and read its price per 1M tokens.",
+      "cta": "Learn more",
+      "destination": "the model catalogue page",
       "expected": {
         "A4-cta": "no"
       },
