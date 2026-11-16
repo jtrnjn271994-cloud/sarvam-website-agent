@@ -220,7 +220,7 @@ function render() {
   if (S.tab === "setup") wireSetup();
   if (S.tab === "submission") wireSubmission();
   if (S.tab === "approve" && S.info) wireApprove();
-  if (S.tab === "findings" && S.info) { wireFindings(); drawRunFlow(); }
+  if (S.tab === "findings" && S.info) { wireFindings(); drawRunStory(); drawRunFlow(); }
   const gb = document.getElementById("guidego"); if (gb) gb.onclick = () => { S.tab = gb.dataset.tab; render(); };
 }
 
@@ -625,12 +625,42 @@ function scoreTable(name) {
 }
 
 function mmEsc(t, n) { t = String(t ?? "").replace(/["<>{}\[\]|#;]/g, " ").replace(/\s+/g, " ").trim(); return n && t.length > n ? t.slice(0, n - 1) + "…" : t; }
+async function runViewData() {
+  // /api/runview gives the diagram, the questions Jev was asked and the story. Static copies and older servers fall back to the diagram alone.
+  const key = S.page + "/" + S.run;
+  if (S.rv && S.rv.key === key) return S.rv.data;
+  let data = null;
+  if (S.mode !== "static") { try { const r = await fetch("/api/runview?" + new URLSearchParams({page: S.page, run: S.run}), {cache: "no-store"}); if (r.ok) data = await r.json(); } catch (e) {} }
+  S.rv = {key, data};
+  return data;
+}
 async function runFlowText() {
   // Built by agent/run_flow.py from the run's own files: one script for every run, same steps as the architecture.
+  const d = await runViewData();
+  if (d && d.mermaid) return d.mermaid;
   if (S.mode === "static") { const t = await (await fetch(fileUrl("RUN-FLOW.md"))).text(); const m = t.match(/```mermaid\n([\s\S]*?)```/); if (!m) throw new Error("no diagram for this run"); return m[1]; }
   const r = await fetch("/api/runflow?" + new URLSearchParams({page: S.page, run: S.run}), {cache: "no-store"});
   if (!r.ok) throw new Error("diagram not available");
   return await r.text();
+}
+function runStoryHtml(d) {
+  const st = d && d.story;
+  const story = st && st.text ? st.text.split(/\n\s*\n/).map(x => `<p>${esc(x)}</p>`).join("") : '<p class="muted">No story yet for this run.</p>';
+  const qs = (d && d.questions) || [];
+  const src = x => x === "page checklist (rebuilt)" ? "rebuilt from the page's buyer checklist" : x;
+  const rows = qs.map(q => typeof q.skipped === "string" && q.skipped
+    ? `<tr class="muted"><td>${esc(q.id)}</td><td>${esc(q.text)}<div class="small">${esc(src(q.source))}</div></td><td colspan="2" class="small">${esc(q.skipped)}</td></tr>`
+    : `<tr><td>${esc(q.id)}${q.gap ? ' <span class="pill p-fail">gap</span>' : ""}</td><td>${esc(q.text)}<div class="small muted">${esc(src(q.source))}</div></td><td>${typeof q.jev_p === "number" ? Math.round(q.jev_p * 100) + "%" : "-"}</td><td>${esc(q.verdict || "-")}</td></tr>`).join("");
+  return `<div class="card"><b>How this run went</b>
+    <div class="small muted" style="margin:4px 0 8px">Written by Gemini from this run's file; every number, question and variant checked by code</div>${story}
+    ${qs.length ? `<h4 style="margin:14px 0 6px">Questions Jev asked in this run (questions v${esc(d.questions_version ?? 1)})</h4>
+    <div class="small muted" style="margin-bottom:6px">Jev's answer is the chance of yes.</div>
+    <div class="tablewrap"><table><tr><th>Id</th><th>Question</th><th>Jev</th><th>Verdict</th></tr>${rows}</table></div>` : ""}</div>`;
+}
+async function drawRunStory() {
+  const key = S.page + "/" + S.run;
+  const d = await runViewData(); const el = document.getElementById("runstory");
+  if (el && d && key === S.page + "/" + S.run) el.innerHTML = runStoryHtml(d);
 }
 function loadMermaid() {
   if (window.mermaid) return Promise.resolve(window.mermaid);
@@ -644,7 +674,7 @@ function drawRunFlow() {
   Promise.all([loadMermaid(), runFlowText()]).then(([m, t]) => m.render("rf" + Date.now(), t)).then(r => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = r.svg; })
     .catch(e => { const e2 = document.getElementById("runflow"); if (e2) e2.innerHTML = '<p class="small muted">The diagram could not be drawn (' + esc(e.message || "no network") + ').</p>'; });
 }
-const RUNFLOW_CARD = `<div class="card"><b>This run, step by step</b> <span class="small muted">same 12 steps as the architecture; grey dashed = not reached yet</span><div id="runflow" style="overflow-x:auto;margin-top:8px"><p class="small muted">Drawing…</p></div></div>`;
+const RUNFLOW_CARD = `<div id="runstory"></div><div class="card"><b>This run, step by step</b> <span class="small muted">same 12 steps as the architecture; grey dashed = not reached yet</span><div id="runflow" style="overflow-x:auto;margin-top:8px"><p class="small muted">Drawing…</p></div></div>`;
 function viewFindings() {
   const sb = S.info.sandbox, C = S.info.current_approval;
   if (!sb) return RUNFLOW_CARD + `<div class="card"><b>No sandbox result for this run yet.</b><p class="small">${C ? `Variant ${esc(C.variant)} is approved. Open “Approve and test” and click “Run the sandbox”.` : "No variant of this run has been approved. Open “Approve and test”, pick a variant and approve it, then run the sandbox."} The sandbox and findings exist only for runs where a person approved a variant.</p>

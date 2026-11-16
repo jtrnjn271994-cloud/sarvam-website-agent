@@ -150,6 +150,7 @@ def main():
         except Exception as e:   # the PNG is a convenience; the approval page says when it is missing
             print("  PNG pair not made (%s)" % e)
     __import__("run_flow").write(a.page, a.run)
+    __import__("run_story").write(a.page, a.run)
     print("edit done | cost $%.4f" % llm.SPENT["usd"])
 
 

@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the coding-agents page for a technical evaluator in GCCs & IT services to help more developers open the API docs. The audit found that the hero (the saved copy from 2026-11-15) does not do its job on A1-audience, A2-value, A3-proof, and A4-cta. The writer tried three angles: Variant A focused on jurisdiction, Variant B on recovery and testing, and Variant C on control and routing. Jev and Judge 2 decided that all three variants were near misses that failed Gate 2 because A7-checklist-item-1 fell. A person approved Variant B. The sandbox results are synthetic, so the simulated visitors show that the method works, not that a variant wins.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.02939,
+ "at": "2026-11-16T11:58:07",
+ "facts_hash": "b07beffd17e9a79414c14c51a43efe856d0d8e55ceecc495a08fbb071b59da58",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

@@ -268,6 +268,7 @@ def findings(D, sims, sessions, blocked, plan, narrative, narrative_by):
     ok = lambda arm: sum(r["h1_ok"] and r["sub_ok"] and r["button_ok"] and r["href_ok"] and not r["left_local_page"] for r in sessions if r["arm"] == arm)
     goal = D["probe"].get("goal", {})
     L = ["# Findings: hero A/B sandbox (%s)" % LABEL, "",
+         "How this run went: open the run's Sandbox and findings tab for its step-by-step diagram, the exact questions Jev was asked and a short story of the run.", "",
          "**Every number below comes from a simulation set up from this run's buyer, goal and judge scores, or from a scripted browser. None of it comes from real buyers.**", "",
          "## In plain words", "",
          "**Goal chosen:** %s. **What is counted:** %s. A visitor who clicks counts as 1; one who does not counts as 0. That is the only thing measured." % (
@@ -389,6 +390,7 @@ def main(page, run):
     print("page checks passed:" if HOSTED else "browser checks passed:", res["browser"]["passed"], "of", 1 if HOSTED else SESSIONS_PER_ARM, "per arm | blocked requests:", blocked["count"])
     print("wrote", os.path.relpath(out, PROJECT))
     __import__("run_flow").write(page, run)
+    __import__("run_story").write(page, run)
     if sims["A/A check"]["result"] != "inconclusive":
         sys.exit("A/A CHECK FAILED: the set-up shows a lift where none was declared")
 

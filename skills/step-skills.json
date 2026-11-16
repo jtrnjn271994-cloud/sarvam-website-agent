@@ -22,6 +22,10 @@
       "no-ai-slop",
       "marketing-plain-writing"
     ],
+    "run_story": [
+      "run-story",
+      "marketing-plain-writing"
+    ],
     "submission": [
       "sandbox-ab-report",
       "marketing-plain-writing",

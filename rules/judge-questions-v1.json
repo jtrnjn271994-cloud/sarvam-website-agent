@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "note": "Every question is a yes/no (noul) question. The judge returns the probability of yes. polarity 'good' means a high probability is good. 'bad' means a high probability is bad. Only a person edits this file. Thresholds are NOT here. --calibrate writes them to rules/judge-thresholds.json.",
+  "audit": {
+    "judge": "jev",
+    "state": [
+      "buyer_checklist_item",
+      "buyer_main_objection",
+      "hero_text",
+      "positioning_main_claim",
+      "rival_rows"
+    ],
+    "questions": [
+      {
+        "id": "A1-audience",
+        "polarity": "good",
+        "required": true,
+        "text": "Does the hero speak to this buyer and their situation, so that the buyer would see themselves in it?"
+      },
+      {
+        "id": "A2-value",
+        "polarity": "good",
+        "required": true,
+        "text": "Does the headline say what the product does and what the buyer gets, in words this buyer uses?"
+      },
+      {
+        "id": "A3-proof",
+        "polarity": "good",
+        "required": true,
+        "text": "Does the hero give a checkable proof point, such as a named standard, a number with its source, or a named customer?"
+      },
+      {
+        "id": "A4-cta",
+        "polarity": "good",
+        "required": true,
+        "text": "Does the main button tell this buyer what happens when they click it?"
+      },
+      {
+        "id": "A5-positioning",
+        "polarity": "good",
+        "required": false,
+        "text": "Does the hero say what the positioning's main claim says?"
+      },
+      {
+        "id": "A6-swap",
+        "polarity": "bad",
+        "required": false,
+        "text": "Could any rival in the rival rows print this exact hero on its own page without changing it?"
+      },
+      {
+        "id": "A7-checklist-item",
+        "polarity": "good",
+        "required": false,
+        "repeat_for": "each buyer checklist item tagged [hero], only when the page questions are approved",
+        "text": "Does the hero answer this question the buyer asks: {item}?",
+        "fill": "item",
+        "scope": "hero items only"
+      },
+      {
+        "id": "A8-objection",
+        "polarity": "good",
+        "required": false,
+        "fill": "objection",
+        "text": "Does the hero answer this objection the buyer raises: {objection}?"
+      }
+    ]
+  },
+  "gate2": {
+    "judges": [
+      "jev",
+      "judge2"
+    ],
+    "state": [
+      "variant_line",
+      "claim_text",
+      "evidence_quote",
+      "do_not_claim_list",
+      "rival_rows",
+      "buyer_checklist_item",
+      "baseline_hero"
+    ],
+    "questions": [
+      {
+        "id": "G1-support",
+        "polarity": "good",
+        "repeat_for": "each fragment in the claim map",
+        "text": "Does the evidence quote say what this fragment says, with nothing added?"
+      },
+      {
+        "id": "G2-overreach",
+        "polarity": "bad",
+        "repeat_for": "each fragment in the claim map",
+        "text": "Does the fragment say more than the claim and evidence: a wider scope such as 'all' or 'never', a missing condition, a new comparison, or a guarantee?"
+      },
+      {
+        "id": "G3-banned",
+        "polarity": "bad",
+        "text": "Does the hero make any claim on the do-not-claim list, even in other words?"
+      },
+      {
+        "id": "G5-buyer",
+        "polarity": "good",
+        "text": "Does the hero answer the buyer question that the audit found missing?"
+      }
+    ],
+    "better_than_baseline": {
+      "note": "Targeted questions (the gap the writer was told about) and held-out questions (the rest) are reported separately. The writer is told the gap in words, never the questions or probabilities.",
+      "min_gain": 0.1,
+      "max_drop": 0.05
+    },
+    "note_v2": "G4 (distinct) was dropped on 15 Nov 2026: the probe showed it contradicted A6 (swap test). A6 is asked of the baseline and of each variant instead. G1 and G2 ask about one fragment and its claim, not the whole hero."
+  },
+  "calibration": {
+    "gray_zone": 0.1,
+    "rule": "Per judge and per question id: pick the lowest threshold that lets no failure case pass. Probabilities inside the gray zone around the threshold mean HOLD.",
+    "holdout_share": 0.25
+  },
+  "note_v3": "15 Nov 2026: A1 to A6 and A8 are universal: the same text on every page; the page context reaches the judge through the state (buyer, positioning promise, rival heroes) and the {item}/{objection} fill. A7 items and the A8 objection come from the page pack's buyer checklist. Each checklist item is tagged [hero] or [page]; only [hero] items reach the hero audit. A7 and A8 run only when the checklist front matter carries questions_approved_by and questions_approved_on, written by a person."
+}

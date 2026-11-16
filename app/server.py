@@ -447,6 +447,25 @@ class Handler(BaseHTTPRequestHandler):
             if u.path == "/api/runflow":
                 run_dir(q.get("page"), q.get("run"))
                 return self.send(200, run_flow.mermaid(run_flow.gather(q.get("page"), q.get("run"), PROJECT)).encode("utf-8"), "text/plain; charset=utf-8")
+            if u.path == "/api/runview":
+                rd = run_dir(q.get("page"), q.get("run"))
+                out = {"mermaid": run_flow.mermaid(run_flow.gather(q.get("page"), q.get("run"), PROJECT)),
+                       "questions": [], "story": None, "questions_version": 1}
+                try:   # Builder modules are imported lazily so the console starts without them
+                    import run_questions
+                    out["questions"] = run_questions.questions(q.get("page"), q.get("run"), PROJECT)
+                except Exception:
+                    pass
+                try:
+                    import run_story
+                    out["story"] = run_story.load(q.get("page"), q.get("run"), PROJECT)
+                except Exception:
+                    pass
+                try:
+                    out["questions_version"] = json.load(open(os.path.join(rd, "probe3.json"), encoding="utf-8")).get("questions_version", 1)
+                except Exception:
+                    pass
+                return self.send(200, out)
             if u.path == "/api/doc":
                 f = DOCS.get(q.get("name", ""))
                 if not f or not os.path.isfile(os.path.join(PROJECT, f)):

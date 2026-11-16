@@ -252,12 +252,13 @@ def main():
     unclear = [k for k in req if v_base[k].endswith("hold")]
     gaps = gaps + [k for k in unclear if k not in gaps]   # a hold on a required question is a possible gap: the writer works on it, the person sees it labelled
     items_fail = [k for k in aq if k.startswith("A7") and (v_base[k].endswith("fail") or v_base[k].endswith("hold"))]
-    out["audit"] = {"p": a_base, "verdict": v_base, "gaps": gaps, "unclear": unclear}
+    out["audit"] = {"p": a_base, "verdict": v_base, "gaps": gaps, "unclear": unclear, "questions": aq}   # aq: the exact wording asked
     out["thresholds_used"] = th
     if not gaps:
         print("NO GAP on the required questions. Stop: nothing is written.", "Unclear:", unclear)
         json.dump(out, open(os.path.join(run, "probe3.json"), "w"), indent=1)
         __import__("run_flow").write(args.page, os.path.basename(run))
+        __import__("run_story").write(args.page, os.path.basename(run))
         return
     lead_item = sorted(items_fail, key=lambda k: a_base[k])[0] if items_fail else None
     lead_txt = D["items"][int(lead_item.split("-")[-1]) - 1] if lead_item else None
@@ -438,6 +439,7 @@ Reply with JSON only:
     out["calls"] = llm.SPENT["calls"]
     json.dump(out, open(os.path.join(run, "probe3.json"), "w"), indent=1, ensure_ascii=False)
     __import__("run_flow").write(args.page, os.path.basename(run))   # this run's diagram, same steps as the architecture
+    __import__("run_story").write(args.page, os.path.basename(run))   # a short checked story of this run
     print("\nrun folder: %s | %d calls | cost $%.4f" % (os.path.relpath(run, PROJECT), llm.SPENT["calls"], llm.SPENT["usd"]))
 
 

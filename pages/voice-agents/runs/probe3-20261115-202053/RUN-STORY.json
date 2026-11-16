@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the voice-agents page for a collections lead in banks and lenders, with the goal to help more visitors start building. In the hero (the saved copy from 2026-11-15), audit questions A3-proof and A4-cta failed, which means the hero does not do those jobs yet. The writer tried variant A for launch speed, variant B for links to lender systems, and variant C for bank-grade proof. Jev and Judge 2 passed variant B as better, but held variants A and C because Jev flagged a phrase. A person approved variant B. The sandbox results are synthetic: the visitors are simulated and the numbers show the method works, not that a variant wins.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.02833,
+ "at": "2026-11-16T12:02:23",
+ "facts_hash": "9aee879a084938fc4be3599b0e57296fcc4532aa63855c84f027178dd38c2fb4",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

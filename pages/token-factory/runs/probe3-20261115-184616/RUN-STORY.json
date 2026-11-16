@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the token-factory page with no buyer or goal set. In the hero (the saved copy from 2026-11-15), question A4-cta failed, while A1-audience, A2-value, and A3-proof were held. These 4 gaps mean the hero does not do those jobs yet. The writer tested Variant A for India-served inference, Variant B for security standards, and Variant C for access to the full catalogue. Jev and Judge 2 both rated Variant A better than the hero, but held it for a person after Jev flagged a banned phrase. The judges disagreed on Variant B, and Variant C was a near miss that failed Gate 2 when A5-positioning dropped.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.03074,
+ "at": "2026-11-16T12:00:28",
+ "facts_hash": "39085050379e62bdbff3b57c728135f554226e0c18bdd06cfa7fa05a64155a99",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

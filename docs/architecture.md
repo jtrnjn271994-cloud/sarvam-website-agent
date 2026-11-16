@@ -1,6 +1,6 @@
 # Sarvam website agent: architecture
 
-v13, 16 Nov 2026, as built. Written for: the project owner and any reviewer. One document.
+v14, 16 Nov 2026, as built. Written for: the project owner and any reviewer. One document.
 
 - **When the pages were read.** Every page's hero was captured once, on 15 Nov 2026. Every run audits that saved copy, so a run gives the same answer even if Sarvam edits its site. To audit a newer version, capture the page again.
 - **What it does.** One run audits the hero of a Sarvam page for one buyer and one goal. It writes better heroes only if the audit finds a gap. A person approves one, or edits one and has it checked again. A sandbox then tests the approved hero against the baseline.
@@ -44,7 +44,9 @@ flowchart TD
     AP -- approve --> SP["10 SANDBOX PLAN, built for this run<br/>visitor groups: this buyer plus the other roles in the industry<br/>reaction strength: how well the goal fits each role<br/>lift: 0.5 x the judges' average gain, at least 2%, at most 50%<br/>visitors per arm: the sample a real test needs<br/>Gemini explains the set-up; code checks every number"]
     SP --> SB["Simulate and check (no model)<br/>Test 1: the expected lift, enough visitors<br/>Test 2: the same lift, too few visitors<br/>Test 3: the page against itself (A/A)<br/>owner's machine: 20 browser sessions per arm on the saved page, outside requests blocked<br/>website: one HTML check per arm, no browser"]
     SB --> FD["11 FINDINGS, built from the data<br/>plain words first, then the set-up<br/>rates with intervals, the sample a real test needs, the limits<br/>all SYNTHETIC<br/>status line: NOT rolled out, rollout needs approval"]
-    FD --> DOC["12 Submission and docs, in the console<br/>README, this architecture, the Jev note,<br/>a flow diagram of the run, the tick list for the assignment"]
+    FD --> RD["Redraw this run's diagram<br/>code, no model<br/>after every run, edit and sandbox"]:::rules
+    RD --> RS["Write the run story<br/>Gemini, run-story skill<br/>code checks every number, question and variant<br/>2 retries, else no story"]:::reasoning
+    RS --> DOC["12 Submission and docs, in the console<br/>README, this architecture, the Jev note,<br/>a flow diagram of the run, the tick list for the assignment"]
     classDef person fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
     classDef rules fill:#EEF0F3,stroke:#8A94A3,color:#1f2933
     classDef writer fill:#DCEBFF,stroke:#3B82C4,color:#0b2a4a
@@ -314,7 +316,8 @@ flowchart TB
     S3["Writer draft<br/>(Opus)"]:::writer --> K3["copywriting-marketingskills<br/>cro<br/>page-copy-draft"]
     S4["Writer edit<br/>(Opus)"]:::writer --> K4["copy-editing<br/>no-ai-slop<br/>marketing-plain-writing"]
     S5["Findings<br/>(Gemini)"]:::reasoning --> K5["sandbox-ab-report<br/>marketing-plain-writing<br/>no-ai-slop"]
-    S6["Jev and Judge 2"]:::jev --> K6["no skills:<br/>fixed questions only"]
+    S6["Run story<br/>(Gemini)"]:::reasoning --> K6["run-story<br/>marketing-plain-writing"]
+    S7["Jev and Judge 2"]:::jev --> K7["no skills:<br/>fixed questions only"]
     classDef person fill:#FFF4D6,stroke:#C9A227,color:#3b2f00
     classDef rules fill:#EEF0F3,stroke:#8A94A3,color:#1f2933
     classDef writer fill:#DCEBFF,stroke:#3B82C4,color:#0b2a4a
@@ -355,9 +358,9 @@ We did not use them. The agent is plain Python, and each job those tools do has 
 - **Evals (LangSmith's job):** Gate 1 rules, the two judges, the 65 test cases in `calibrate.py` (3 held back from tuning), and the self-tests.
 - **Why plain Python.** The flow is fixed, so a framework adds little. The website function needs no extra packages, and every step can be read in one file. If the flow later needs many branches or many parallel workers, LangGraph would be worth adding.
 
-### How each run's diagram is made
+### How each run's view is made
 
-`agent/run_flow.py` is plain code with no model. At the end of every run, edit and sandbox, it reads that run's `probe3.json` and fills the same template. Steps the run did not reach are grey and dashed. The same run always gives the same diagram. The template and its cases are in `.claude/skills/run-architecture/SKILL.md`.
+The facts of a run are saved once, in its run file (`probe3.json`). When someone opens the run, plain code with no model draws the diagram from that file (`agent/run_flow.py`) and builds the question list. Steps the run did not reach are grey and dashed. The same run always gives the same view. So when we improve the code, every old run is updated with no new model call. The story is the one part a model writes. It is written once per run, and again after an edit or sandbox. Code checks it and saves it. Old runs show the exact question wording they were asked. It comes from the run file, or from the v1 or v2 archive and the page's buyer checklist, and it is labelled as such. The diagram template and its cases are in `.claude/skills/run-architecture/SKILL.md`.
 
 ## 7. Models
 

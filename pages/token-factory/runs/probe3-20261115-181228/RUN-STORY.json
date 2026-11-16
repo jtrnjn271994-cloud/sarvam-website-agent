@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the token-factory page with no buyer or goal specified. In the hero (the saved copy from 2026-11-15), question A4-cta failed because the main button does not tell the reader what happens when clicked. The writer tried three angles: Variant A focused on an India-served data path, Variant B on enterprise uptime, and Variant C on one key. Both Jev and Judge 2 rated Variant A better than the saved hero, but held it for a person to check. Variant B and Variant C failed Gate 2 because other question scores dropped, though Variant C was a near miss.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.01251,
+ "at": "2026-11-16T11:58:21",
+ "facts_hash": "c04ad69ad74ea74b8d2d5c79de90d732748704d06a990090dd1921b3708cdf82",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

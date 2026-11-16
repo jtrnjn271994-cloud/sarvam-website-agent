@@ -14,6 +14,7 @@ Draft, 13 Nov 2026. One line per skill, with its pipeline step. Steps: rules, co
 - [jev-decision-test](jev-decision-test/SKILL.md): assess. Narrow yes/no checks.
 - [page-design-ux](page-design-ux/SKILL.md): design. Design brief and review loop.
 - [sandbox-ab-report](sandbox-ab-report/SKILL.md): test and report. Synthetic A/B report.
+- [run-story](run-story/SKILL.md): report. Short checked story of one run.
 
 ## Copied, personal (no export)
 

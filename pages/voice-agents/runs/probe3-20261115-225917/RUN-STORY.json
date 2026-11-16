@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the voice-agents page for a collections business owner in banks and lenders who wants more visitors to start building. In the hero (the saved copy from 2026-11-15), questions A3-proof and A4-cta failed because the copy lacks proof and a clear button action. The writer tried three angles: Variant A stressed speed to live, Variant B stressed system connection, and Variant C stressed trust and control. Jev and Judge 2 decided that Variant B passed because both judges found it better than the saved hero. Variant C was held because the judges disagreed, while Variant A failed Gate 2 because its gains were too low.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.01386,
+ "at": "2026-11-16T12:02:41",
+ "facts_hash": "af6b13fcc4fef9408584a10e5e051c4675e385334b534d6a3cd5e8a0e66cc3ea",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

@@ -9,7 +9,7 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 TITLE = "Sarvam website agent: architecture"
-VERSION = "v13, 16 Nov 2026, as built"
+VERSION = "v14, 16 Nov 2026, as built"
 
 ROLES = {  # key: (label, hex fill, hex stroke)
     "person": ("Person", "#FFF4D6", "#C9A227"),
@@ -65,7 +65,9 @@ FLOW = """flowchart TD
     AP -- approve --> SP["10 SANDBOX PLAN, built for this run<br/>visitor groups: this buyer plus the other roles in the industry<br/>reaction strength: how well the goal fits each role<br/>lift: 0.5 x the judges' average gain, at least 2%, at most 50%<br/>visitors per arm: the sample a real test needs<br/>Gemini explains the set-up; code checks every number"]
     SP --> SB["Simulate and check (no model)<br/>Test 1: the expected lift, enough visitors<br/>Test 2: the same lift, too few visitors<br/>Test 3: the page against itself (A/A)<br/>owner's machine: 20 browser sessions per arm on the saved page, outside requests blocked<br/>website: one HTML check per arm, no browser"]
     SB --> FD["11 FINDINGS, built from the data<br/>plain words first, then the set-up<br/>rates with intervals, the sample a real test needs, the limits<br/>all SYNTHETIC<br/>status line: NOT rolled out, rollout needs approval"]
-    FD --> DOC["12 Submission and docs, in the console<br/>README, this architecture, the Jev note,<br/>a flow diagram of the run, the tick list for the assignment"]
+    FD --> RD["Redraw this run's diagram<br/>code, no model<br/>after every run, edit and sandbox"]:::rules
+    RD --> RS["Write the run story<br/>Gemini, run-story skill<br/>code checks every number, question and variant<br/>2 retries, else no story"]:::reasoning
+    RS --> DOC["12 Submission and docs, in the console<br/>README, this architecture, the Jev note,<br/>a flow diagram of the run, the tick list for the assignment"]
     classDef gate stroke-width:3px
 """
 FLOW = FLOW.replace("    classDef gate stroke-width:3px\n", CLASSES)
@@ -136,7 +138,8 @@ SKILLS_DIAGRAM = """flowchart TB
     S3["Writer draft<br/>(Opus)"]:::writer --> K3["copywriting-marketingskills<br/>cro<br/>page-copy-draft"]
     S4["Writer edit<br/>(Opus)"]:::writer --> K4["copy-editing<br/>no-ai-slop<br/>marketing-plain-writing"]
     S5["Findings<br/>(Gemini)"]:::reasoning --> K5["sandbox-ab-report<br/>marketing-plain-writing<br/>no-ai-slop"]
-    S6["Jev and Judge 2"]:::jev --> K6["no skills:<br/>fixed questions only"]
+    S6["Run story<br/>(Gemini)"]:::reasoning --> K6["run-story<br/>marketing-plain-writing"]
+    S7["Jev and Judge 2"]:::jev --> K7["no skills:<br/>fixed questions only"]
 """ + CLASSES
 
 DEPLOY = """flowchart TB
@@ -321,9 +324,12 @@ SKILL_CONTROLS = [
 ]
 SKILL_NOTE = "`marketing-psychology` is left out of the writer on purpose. It pushes urgency, numbers and comparisons that the claims rules forbid."
 
-RUN_DIAGRAM_TEXT = ("`agent/run_flow.py` is plain code with no model. At the end of every run, edit and sandbox, it reads that run's `probe3.json` and fills the same template. "
-                    "Steps the run did not reach are grey and dashed. The same run always gives the same diagram. "
-                    "The template and its cases are in `.claude/skills/run-architecture/SKILL.md`.")
+RUN_DIAGRAM_TEXT = ("The facts of a run are saved once, in its run file (`probe3.json`). When someone opens the run, plain code with no model draws the diagram from that file (`agent/run_flow.py`) and builds the question list. "
+                    "Steps the run did not reach are grey and dashed. The same run always gives the same view. "
+                    "So when we improve the code, every old run is updated with no new model call. "
+                    "The story is the one part a model writes. It is written once per run, and again after an edit or sandbox. Code checks it and saves it. "
+                    "Old runs show the exact question wording they were asked. It comes from the run file, or from the v1 or v2 archive and the page's buyer checklist, and it is labelled as such. "
+                    "The diagram template and its cases are in `.claude/skills/run-architecture/SKILL.md`.")
 
 MODEL_BULLETS = [
     "**Reasoning model, Google `gemini-3.8-flash`:** page setup drafts, the dossier, the sandbox explanation. It never decides pass or fail.",
@@ -553,7 +559,7 @@ def build_md():
     o += ["### Which skills each step uses\n", SKILLS_INTRO + "\n", "```mermaid\n" + SKILLS_DIAGRAM + "```\n"] + ["- " + x for x in SKILL_CONTROLS] + ["", SKILL_NOTE + "\n"]
     o += ["### The five practices\n", md_table(FLEET_HEAD, FLEET_ROWS), ""]
     o += ["### LangGraph and LangSmith\n", "We did not use them. The agent is plain Python, and each job those tools do has a part here:\n"] + ["- " + x for x in LANGGRAPH] + [""]
-    o += ["### How each run's diagram is made\n", RUN_DIAGRAM_TEXT + "\n"]
+    o += ["### How each run's view is made\n", RUN_DIAGRAM_TEXT + "\n"]
     o += ["## 7. Models\n"] + ["- " + b for b in MODEL_BULLETS] + [""]
     o += ["## 8. Limits\n"] + ["- " + x for x in LIMITS_LIST] + [""]
     o += ["## 9. Next (not built)\n"] + ["- " + x for x in NEXT]
@@ -621,7 +627,7 @@ def build_html():
          "<h3>Which skills each step uses</h3>", "<p>%s</p>" % inline(SKILLS_INTRO), mm(SKILLS_DIAGRAM), ul(SKILL_CONTROLS), "<p>%s</p>" % inline(SKILL_NOTE),
          "<h3>The five practices</h3>", html_table(FLEET_HEAD, [[inline(c) for c in r] for r in FLEET_ROWS], "fleet"),
          "<h3>LangGraph and LangSmith</h3>", "<p>We did not use them. The agent is plain Python, and each job those tools do has a part here:</p>", ul(LANGGRAPH),
-         "<h3>How each run's diagram is made</h3>", "<p>%s</p>" % inline(RUN_DIAGRAM_TEXT),
+         "<h3>How each run's view is made</h3>", "<p>%s</p>" % inline(RUN_DIAGRAM_TEXT),
          "<h2>7. Models</h2>", ul(MODEL_BULLETS),
          "<h2>8. Limits</h2>", ul(LIMITS_LIST),
          "<h2>9. Next (not built)</h2>", ul(NEXT),

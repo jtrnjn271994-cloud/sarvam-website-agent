@@ -1,0 +1,21 @@
+{
+ "text": "This run checked the token-factory page using the hero (the saved copy from 2026-11-15). The audit found three gaps: A4-cta, A2-value, and A3-proof, which means the hero does not yet show clear button action, product value, or proof. The writer tried three angles: Variant A stressed an OpenAI-compatible API, Variant B stressed inference location and security standards, and Variant C stressed a single catalogue key. Jev and Judge 2 passed Variant A because both judges decided it improved on the gaps. Variant B was held for a person after Jev flagged a phrase, while Variant C was a near miss that failed Gate 2.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.02591,
+ "at": "2026-11-16T11:59:55",
+ "facts_hash": "7bc05985e22a2ce137a0663e4145812231f39bb71d16138b3058fc52cec9d085",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

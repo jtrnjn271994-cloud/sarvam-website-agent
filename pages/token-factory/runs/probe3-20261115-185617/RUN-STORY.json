@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the token-factory page without a set buyer or goal. In the hero (the saved copy from 2026-11-15), A4-cta failed because the button does not do its job, while A1-audience, A2-value, and A3-proof were held. The writer tried three angles: Variant A used familiar API access, Variant B offered contract assurance, and Variant C provided one model catalogue key. Both Jev and Judge 2 called Variant A better, but held it for a person after Jev flagged a phrase. The judges disagreed on Variant B, leaving it held, and both judges rejected Variant C at Gate 2.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.03515,
+ "at": "2026-11-16T12:01:20",
+ "facts_hash": "50b6814af4662d6e020116a7e4ba449eb4da4fdbbd28d538647285ba53c0cda2",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

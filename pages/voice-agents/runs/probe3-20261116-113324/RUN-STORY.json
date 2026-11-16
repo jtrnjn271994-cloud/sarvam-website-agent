@@ -1,0 +1,21 @@
+{
+ "text": "This run evaluated the voice-agents page for business owners in banks and lenders who want more visitors to start building. In the hero (saved copy from 2026-11-15), questions A3-proof and A4-cta failed because the hero does not do those jobs yet. The writer created variant A to emphasize speed, variant B for compliance proof, and variant C for tool-connected calls. Jev and Judge 2 held variants A and C because both beat the hero on the targeted gaps, but had a flagged phrase. Variant B was a near miss and failed Gate 2 because scores on other questions fell. A person edited variant A into A-edit1, and the judges held this edit as well.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.01136,
+ "at": "2026-11-16T12:02:57",
+ "facts_hash": "8cdc1c06419aa3e23a8289a4ecb5d186ec4343058ec863021e605b8ec0018d0f",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}

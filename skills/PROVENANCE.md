@@ -31,6 +31,7 @@ Draft, 13 Nov 2026. Origins are paths relative to the Marketing folder, or URLs.
 | buyer-profile-validation | written for this project | Claude, for the user | personal, project use | yes | yes | |
 | jev-decision-test | written for this project | Claude, for the user | personal, project use | yes | yes | |
 | sandbox-ab-report | written for this project | Claude, for the user | personal, project use | yes | yes | |
+| run-story | written for this project, 16 Nov 2026 | Claude, for the user | personal, project use | yes | yes | |
 | page-readiness | written for this project | Claude, for the user | personal, project use | yes | yes | |
 | competitor-page-analysis | written for this project (another builder) | Claude, for the user | personal, project use | yes | yes | Not edited here. |
 

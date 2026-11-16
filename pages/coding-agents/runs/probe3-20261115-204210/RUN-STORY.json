@@ -1,0 +1,21 @@
+{
+ "text": "This run looked at the coding-agents page for technical evaluators in GCCs and IT services who want more developers to open the API docs. The hero (the saved copy from 2026-11-15) had gaps on A1-audience, A2-value, A3-proof, and A4-cta, which means it does not do those jobs yet. The writer tried three angles: Variant A focused on Indian jurisdiction, Variant B on live control, and Variant C on recovery and routing. Both Jev and Judge 2 placed variants A, B, and C into failed Gate 2 as near misses. Each variant improved the audit gaps, but both judges decided they did not pass because A7-checklist-item-1 fell.",
+ "model": "google/gemini-3.8-flash",
+ "cost_usd": 0.02639,
+ "at": "2026-11-16T11:57:06",
+ "facts_hash": "738a27c41d3a8896759a32eb99dc7aeccb7b3537e0dff948099aa5909e873244",
+ "checked": true,
+ "tries": 1,
+ "skills": [
+  {
+   "skill": "run-story",
+   "sha256": "a659cc3a53f642d9",
+   "chars": 3806
+  },
+  {
+   "skill": "marketing-plain-writing",
+   "sha256": "8347ff7b098959a8",
+   "chars": 3550
+  }
+ ]
+}
